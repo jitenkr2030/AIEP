@@ -181,3 +181,137 @@ cima:{name:"CIMA (UK)",cat:"professional",icon:"&#127468;&#127463;",tag:"CIMA",t
 };
 
 })();
+
+// ============================================================
+// CA EXAMS
+// ============================================================
+EXAMS["ca_foundation"] = {
+  name: "CA Foundation",
+  desc: "Chartered Accountancy Foundation Course",
+  icon: "\ud83d\udcd6",
+  cat: "professional",
+  tag: "PROFESSIONAL",
+  tc: "tc-purple",
+  papers: {
+    accounting: {
+      title: "Accounting",
+      qs: [],
+      dur: 120,
+      free: true,
+      level: "Foundation"
+    },
+    business_laws: {
+      title: "Business Laws",
+      qs: [],
+      dur: 120,
+      free: true,
+      level: "Foundation"
+    },
+    quantitative_aptitude: {
+      title: "Quantitative Aptitude",
+      qs: [],
+      dur: 120,
+      free: false,
+      level: "Foundation"
+    },
+    business_economics: {
+      title: "Business Economics",
+      qs: [],
+      dur: 120,
+      free: false,
+      level: "Foundation"
+    }
+  }
+};
+
+EXAMS["ca_inter"] = {
+  name: "CA Intermediate",
+  desc: "Chartered Accountancy Intermediate Course",
+  icon: "\ud83d\udcda",
+  cat: "professional",
+  tag: "PROFESSIONAL",
+  tc: "tc-purple",
+  papers: {
+    accounting: {
+      title: "Accounting",
+      qs: [],
+      dur: 180,
+      free: false,
+      level: "Intermediate"
+    },
+    corporate_laws: {
+      title: "Corporate & Other Laws",
+      qs: [],
+      dur: 180,
+      free: false,
+      level: "Intermediate"
+    },
+    cost_accounting: {
+      title: "Cost & Management Accounting",
+      qs: [],
+      dur: 180,
+      free: false,
+      level: "Intermediate"
+    },
+    taxation: {
+      title: "Taxation",
+      qs: [],
+      dur: 180,
+      free: false,
+      level: "Intermediate"
+    },
+    advanced_accounting: {
+      title: "Advanced Accounting",
+      qs: [],
+      dur: 180,
+      free: false,
+      level: "Intermediate"
+    }
+  }
+};
+
+EXAMS["ca_final"] = {
+  name: "CA Final",
+  desc: "Chartered Accountancy Final Course",
+  icon: "\ud83c\udf93",
+  cat: "professional",
+  tag: "PROFESSIONAL",
+  tc: "tc-purple",
+  papers: {
+    financial_reporting: {
+      title: "Financial Reporting",
+      qs: [],
+      dur: 180,
+      free: false,
+      level: "Final"
+    },
+    sfm: {
+      title: "Strategic Financial Management",
+      qs: [],
+      dur: 180,
+      free: false,
+      level: "Final"
+    },
+    advanced_auditing: {
+      title: "Advanced Auditing",
+      qs: [],
+      dur: 180,
+      free: false,
+      level: "Final"
+    },
+    corporate_economic_laws: {
+      title: "Corporate & Economic Laws",
+      qs: [],
+      dur: 180,
+      free: false,
+      level: "Final"
+    },
+    strategic_cost_management: {
+      title: "Strategic Cost Management",
+      qs: [],
+      dur: 180,
+      free: false,
+      level: "Final"
+    }
+  }
+};

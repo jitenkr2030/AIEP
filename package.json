@@ -3,6 +3,6 @@
   "version": "11.0.0",
   "private": true,
   "dependencies": {
-    "@instantdb/admin": "latest"
+    "@instantdb/admin": "^1.0.63"
   }
 }

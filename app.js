@@ -210,12 +210,61 @@ document.getElementById("BTN_HOME2").onclick=goHome;
 document.getElementById("PRICING_CARDS").addEventListener("click",function(e){var btn=e.target.closest("button[data-tier]");if(!btn)return;var tier=btn.getAttribute("data-tier");if(tier==="free"){AIEP.setTier("free");toast("Free plan!","ok");showPricing();return}var code=prompt("Enter voucher for "+(TIERS[tier]||{}).name+":");if(!code)return;code=code.trim().toUpperCase();var res=AIEP.useVoucher(code);if(res.ok){AIEP.setTier(res.tier||tier);toast("Activated!","ok");showPricing()}else{toast(res.msg,"error")}})}
 
 // ---- INIT ----
+
+function injectAllFacultyQ(){
+    var fq = AIEP.getFacultyQ();
+    var keys = Object.keys(fq);
+    for(var k = 0; k < keys.length; k++){
+        var key = keys[k];
+        var parts = key.split("_");
+        // Find the exam key and paper key
+        // Keys are like: ca_foundation_accounting, ca_inter_accounting, etc.
+        var examKey = null, paperKey = null;
+        var exKeys = Object.keys(EX);
+        for(var e = 0; e < exKeys.length; e++){
+            if(key.startsWith(exKeys[e] + "_")){
+                examKey = exKeys[e];
+                paperKey = key.substring(exKeys[e].length + 1);
+                break;
+            }
+        }
+        if(!examKey || !EX[examKey] || !EX[examKey].papers[paperKey]) continue;
+
+        var qs = fq[key];
+        var enc = function(s){return btoa(unescape(encodeURIComponent(s)))};
+        var newQs = [];
+        for(var i = 0; i < qs.length; i++){
+            newQs.push({
+                id: qs[i].id,
+                t: enc(qs[i].q),
+                o: {A: enc(qs[i].opts.A), B: enc(qs[i].opts.B), C: enc(qs[i].opts.C||"") , D: enc(qs[i].opts.D||"")},
+                a: enc(qs[i].ans)
+            });
+        }
+        if(newQs.length > 0){
+            EX[examKey].papers[paperKey].qs = newQs;
+            console.log("AIEP: Injected " + newQs.length + " Qs into " + examKey + "." + paperKey);
+        }
+    }
+}
+
 window.onload = function(){
     if(localStorage.getItem("x_theme")==="dark") document.body.classList.add("dark");
     buildCats(); renderCards("all"); checkSavedLogin(); bindEvents(); updateAuthUI(); updateAboutStats();
 
     // Initialize AIEP database
     AIEP.init(function(connected){
+        updateDBBadge();
+        if(connected){
+            AIEP.subscribe();
+            AIEP.on("connected", function(){ updateDBBadge(); });
+            AIEP.on("data", function(){
+                updateAboutStats();
+                injectAllFacultyQ();
+            });
+            // Also inject after a short delay to catch already-loaded data
+            setTimeout(injectAllFacultyQ, 3000);
+        }
         updateDBBadge();
         if(connected){
             AIEP.subscribe();
