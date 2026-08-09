@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All India Examination Portal v10.0</title>
+<title>All India Examination Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -28,8 +28,9 @@ textarea{resize:vertical}
 .btn-outline{background:none;border:2px solid var(--pri);color:var(--pri)}
 .btn-outline:hover{background:var(--pri);color:#fff}
 .topbar{display:flex;justify-content:flex-end;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
-.topbar button{background:none;border:1.5px solid var(--bor);color:var(--txt);padding:6px 14px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;touch-action:manipulation;transition:all .15s}
-.topbar button:hover{border-color:var(--pri);color:var(--pri)}.topbar button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.topbar button,.topbar a.nav-link{background:none;border:1.5px solid var(--bor);color:var(--txt);padding:6px 14px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;touch-action:manipulation;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center}
+.topbar button:hover,.topbar a.nav-link:hover{border-color:var(--pri);color:var(--pri)}
+.topbar button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
 .hero{text-align:center;padding:20px 0 10px}
 .hero h1{font-size:28px;margin-bottom:6px;font-weight:800;background:linear-gradient(135deg,var(--pri),var(--indigo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero p{color:var(--mut);font-size:14px;max-width:600px;margin:0 auto}
@@ -54,8 +55,8 @@ textarea{resize:vertical}
 .info-purple{background:rgba(124,58,237,.07);color:var(--pur)}
 .bread{font-size:12px;color:var(--mut);margin-bottom:12px;font-weight:600}
 .bread span{color:var(--pri);cursor:pointer}.bread span:hover{text-decoration:underline}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-@media(max-width:700px){.two-col,.three-col{grid-template-columns:1fr}}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.two-col{grid-template-columns:1fr}}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:10px;margin-bottom:18px}
 .stat{background:var(--surf);border:1.5px solid var(--bor);border-radius:var(--radius2);padding:14px;text-align:center;transition:transform .15s}
 .stat:hover{transform:translateY(-2px)}.stat .num{font-size:24px;font-weight:800;color:var(--pri);font-family:'JetBrains Mono',monospace}
@@ -78,18 +79,12 @@ body.dark .timer{background:#0F172A;border:1.5px solid var(--bor)}
 .ldot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:3px;vertical-align:middle}
 .pal{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;max-height:320px;overflow-y:auto;padding:2px}
 .pal button{width:38px;height:38px;border-radius:6px;border:1.5px solid var(--bor);background:var(--card);color:var(--txt);font-weight:700;font-size:10px;cursor:pointer;font-family:'JetBrains Mono',monospace;transition:all .1s}
-.pal button:hover{border-color:var(--pri)}.pal button.done{background:var(--grn);color:#fff;border-color:var(--grn)}
-.pal button.mrk{background:var(--pur);color:#fff;border-color:var(--pur)}
-.pal button.cur{border:2.5px solid var(--pri);box-shadow:0 0 8px rgba(29,78,216,.3)}
+.pal button:hover{border-color:var(--pri)}.pal button.done{background:var(--grn);color:#fff;border-color:var(--grn)}.pal button.mrk{background:var(--pur);color:#fff;border-color:var(--pur)}.pal button.cur{border:2.5px solid var(--pri);box-shadow:0 0 8px rgba(29,78,216,.3)}
 .nav-btns{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}.nav-btns .btn{flex:1}
 .submit-zone{margin-top:18px;padding:16px;border:2px dashed var(--bor);border-radius:var(--radius2);text-align:center;background:var(--surf)}
 .submit-zone p{font-size:12px;color:var(--mut);margin-bottom:10px}
 .score-big{font-size:42px;font-weight:800;color:var(--pri);font-family:'JetBrains Mono',monospace;margin:10px 0}
-.tbl{width:100%;border-collapse:collapse;font-size:12px}.tbl th,.tbl td{padding:8px 10px;border-bottom:1px solid var(--bor);text-align:left}
-.tbl th{font-size:10px;color:var(--mut);text-transform:uppercase;font-weight:700;letter-spacing:.4px}
 .badge{display:inline-block;padding:3px 9px;border-radius:10px;font-size:10px;font-weight:700}
-.b-blue{background:rgba(29,78,216,.1);color:var(--pri)}.b-green{background:rgba(5,150,105,.1);color:var(--grn)}
-.b-red{background:rgba(220,38,38,.1);color:var(--red)}.b-gold{background:rgba(217,119,6,.1);color:var(--gold)}
 .sol-tbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:16px;text-align:left}
 .sol-tbl th,.sol-tbl td{border:1px solid var(--bor);padding:8px}
 .sol-tbl th{background:rgba(29,78,216,.06);font-weight:700;font-size:10px;text-transform:uppercase}
@@ -97,14 +92,6 @@ body.dark .timer{background:#0F172A;border:1.5px solid var(--bor)}
 .cert-canvas{border:4px double var(--pri);border-radius:var(--radius3);max-width:100%;margin:16px auto;display:block}
 .footer{text-align:center;padding:16px;font-size:11px;color:var(--mut);border-top:1px solid var(--bor);margin-top:16px;line-height:2}
 .footer a{color:var(--pri);text-decoration:none;font-weight:600}.footer a:hover{text-decoration:underline}
-.del-btn{background:none;border:none;color:var(--red);cursor:pointer;font-size:11px;font-weight:700;padding:4px 8px;border-radius:4px}.del-btn:hover{background:rgba(220,38,38,.08)}
-.tabs{display:flex;gap:2px;margin-bottom:18px;border-bottom:2px solid var(--bor);overflow-x:auto}
-.tabs button{background:none;border:none;padding:10px 14px;cursor:pointer;font-size:11px;font-weight:700;color:var(--mut);border-bottom:2.5px solid transparent;margin-bottom:-2px;white-space:nowrap;font-family:inherit;transition:all .15s;text-transform:uppercase;letter-spacing:.3px}
-.tabs button.on{color:var(--pri);border-bottom-color:var(--pri)}.tabs button:hover{color:var(--pri)}
-.paper-summary{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0;padding:14px 16px;background:var(--surf);border-radius:var(--radius2);border:1.5px solid var(--bor)}
-.paper-summary .ps-item{font-size:11px;font-weight:600;color:var(--mut)}.paper-summary .ps-item strong{color:var(--txt);font-family:'JetBrains Mono',monospace}
-.progress-bar{width:100%;height:6px;background:var(--bor);border-radius:3px;margin:8px 0;overflow:hidden}
-.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--grn),var(--teal));border-radius:3px;transition:width .3s}
 .auth-box{max-width:400px;margin:40px auto;text-align:center}
 .auth-box .auth-icon{width:64px;height:64px;background:rgba(29,78,216,.1);border-radius:50%;margin:0 auto 18px;line-height:64px;font-size:28px}
 .db-status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px}
@@ -121,6 +108,10 @@ body.dark .timer{background:#0F172A;border:1.5px solid var(--bor)}
 .price-features{list-style:none;text-align:left;margin-bottom:20px}
 .price-features li{padding:6px 0;font-size:12px;color:var(--txt);border-bottom:1px solid var(--bor);display:flex;align-items:center;gap:8px}
 .price-features li:last-child{border-bottom:none}.price-features .check{color:var(--grn);font-weight:700;font-size:14px}.price-features .cross{color:var(--red);font-weight:700;font-size:14px}
+.paper-summary{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0;padding:14px 16px;background:var(--surf);border-radius:var(--radius2);border:1.5px solid var(--bor)}
+.paper-summary .ps-item{font-size:11px;font-weight:600;color:var(--mut)}.paper-summary .ps-item strong{color:var(--txt);font-family:'JetBrains Mono',monospace}
+.progress-bar{width:100%;height:6px;background:var(--bor);border-radius:3px;margin:8px 0;overflow:hidden}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--grn),var(--teal));border-radius:3px;transition:width .3s}
 .page-content{max-width:800px;margin:0 auto;line-height:1.8}
 .page-content h2{font-size:22px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--bor)}
 .page-content h3{font-size:16px;margin:20px 0 8px;color:var(--pri)}.page-content p{font-size:13px;color:var(--mut);margin-bottom:12px}
@@ -142,8 +133,17 @@ body.dark .exam-card{background:var(--surf)}body.dark .stat{background:var(--sur
 </head>
 <body>
 
+<!-- HOME -->
 <div class="wrap" id="V_HOME">
-<div class="topbar"><button class="on" id="NAV_HOME">Home</button><button id="NAV_DASH">Dashboard</button><button id="NAV_PRICING">Pricing</button><button id="NAV_AUTH_BTN">Login</button><button id="NAV_ADMIN">Admin</button><button id="NAV_THEME">&#9790; Theme</button><span id="DB_STATUS" class="db-status db-offline">Local</span></div>
+<div class="topbar">
+<button class="on" id="NAV_HOME">Home</button>
+<a href="admin.html" class="nav-link">Admin</a>
+<a href="faculty.html" class="nav-link">Faculty</a>
+<button id="NAV_PRICING">Pricing</button>
+<button id="NAV_AUTH_BTN">Login</button>
+<button id="NAV_THEME">&#9790; Theme</button>
+<span id="DB_STATUS" class="db-status db-offline">Local</span>
+</div>
 <div class="hero"><h1>All India Examination Portal</h1><p>100+ Professional &amp; Competitive Exam Papers | 100 MCQs Per Subject</p></div>
 <div id="CATBAR" class="cat-bar"></div>
 <div id="EXGRD" class="card-grid"></div>
@@ -165,9 +165,11 @@ body.dark .exam-card{background:var(--surf)}body.dark .stat{background:var(--sur
 <div class="info-box info-red">Proctored: Tab switch 3+ times = auto-submit</div>
 <button class="btn btn-full" id="BTN_START">&#9654; Start Exam</button>
 </div>
-<div class="footer">All India Examination Portal v10.0 &#8212; Modular Edition<br><a href="#" id="LNK_PRIV">Privacy</a> | <a href="#" id="LNK_TERM">Terms</a> | <a href="#" id="LNK_DISC">Disclaimer</a> | <a href="#" id="LNK_ABOUT">About</a><br>&copy; 2026 AIEP. For practice only.</div>
+<div class="footer">All India Examination Portal v11.0 &#8212; Modular Edition<br>
+<a href="#" id="LNK_PRIV">Privacy</a> | <a href="#" id="LNK_TERM">Terms</a> | <a href="#" id="LNK_DISC">Disclaimer</a> | <a href="#" id="LNK_ABOUT">About</a><br>&copy; 2026 AIEP. For practice only.</div>
 </div>
 
+<!-- AUTH -->
 <div class="wrap hide" id="V_AUTH">
 <div class="topbar"><button id="NAV_HOME_AU">Home</button><button class="on">Login</button><button id="NAV_THEME_AU">&#9790; Theme</button></div>
 <div class="auth-box">
@@ -184,35 +186,26 @@ body.dark .exam-card{background:var(--surf)}body.dark .stat{background:var(--sur
 </div>
 </div>
 
+<!-- PRICING -->
 <div class="wrap hide" id="V_PRICING">
 <div class="topbar"><button id="NAV_HOME_P">Home</button><button class="on">Pricing</button><button id="NAV_THEME_P">&#9790; Theme</button></div>
 <div style="text-align:center;margin-bottom:24px"><h2>&#128176; Choose Your Plan</h2><p class="sub" style="max-width:500px;margin:4px auto 0">Free papers available without any code.</p><div id="CUR_TIER" class="info-box info-blue" style="display:inline-block;margin:8px auto"></div></div>
 <div class="pricing-grid" id="PRICING_CARDS"></div>
 </div>
 
+<!-- PRIVACY -->
 <div class="wrap hide" id="V_PRIVACY"><div class="topbar"><button id="NAV_HOME_PRIV">Home</button><button id="NAV_THEME_PRIV">&#9790; Theme</button></div><div class="page-content"><h2>&#128274; Privacy Policy</h2><p style="font-style:italic;color:var(--mut)">Last updated: January 2026</p><h3>Information</h3><p>Name, email, phone, roll during registration. Scores during tests.</p><h3>Storage</h3><p>Browser localStorage. Optional cloud sync via InstantDB.</p><h3>Contact</h3><p>privacy@aiep-exam.in</p></div></div>
 
-<div class="wrap hide" id="V_TERMS"><div class="topbar"><button id="NAV_HOME_TERM">Home</button><button id="NAV_THEME_TERM">&#9790; Theme</button></div><div class="page-content"><h2>&#128220; Terms</h2><p>AIEP is a practice platform. NOT affiliated with ICAI, ICSI, ICMAI, ACCA, CFA Institute, NTA, UPSC, or any official body. Provided as-is.</p></div></div>
+<!-- TERMS -->
+<div class="wrap hide" id="V_TERMS"><div class="topbar"><button id="NAV_HOME_TERM">Home</button><button id="NAV_THEME_TERM">&#9790; Theme</button></div><div class="page-content"><h2>&#128220; Terms</h2><p>AIEP is a practice platform. NOT affiliated with ICAI, ICSI, ICMAI, ACCA, CFA Institute, NTA, UPSC, or any official body.</p></div></div>
 
-<div class="wrap hide" id="V_DISCLAIMER"><div class="topbar"><button id="NAV_HOME_DISC">Home</button><button id="NAV_THEME_DISC">&#9790; Theme</button></div><div class="page-content"><h2>&#9888; Disclaimer</h2><p>AIEP certificates are for personal motivation only. NOT valid for employment or admissions. Questions are auto-generated for practice.</p></div></div>
+<!-- DISCLAIMER -->
+<div class="wrap hide" id="V_DISCLAIMER"><div class="topbar"><button id="NAV_HOME_DISC">Home</button><button id="NAV_THEME_DISC">&#9790; Theme</button></div><div class="page-content"><h2>&#9888; Disclaimer</h2><p>AIEP certificates are for personal motivation only. NOT valid for employment or admissions.</p></div></div>
 
+<!-- ABOUT -->
 <div class="wrap hide" id="V_ABOUT"><div class="topbar"><button id="NAV_HOME_AB">Home</button><button id="NAV_PRICING_AB">Pricing</button><button id="NAV_THEME_AB">&#9790; Theme</button></div><div class="page-content"><div class="about-hero"><div class="logo-big">&#128218;</div><h2>All India Examination Portal</h2><p style="color:var(--mut);font-size:14px">Practice platform for professional &amp; competitive exams</p></div><div class="about-stats"><div class="about-stat"><div class="num" id="AB_EXAMS">0</div><div class="lbl">Exams</div></div><div class="about-stat"><div class="num" id="AB_PAPERS">0</div><div class="lbl">Papers</div></div><div class="about-stat"><div class="num" id="AB_MCQS">0</div><div class="lbl">MCQs</div></div><div class="about-stat"><div class="num" id="AB_USERS">0</div><div class="lbl">Users</div></div></div><div class="contact-grid"><div class="contact-card"><div class="c-icon">&#128231;</div><h4>Email</h4><p>info@aiep-exam.in</p></div><div class="contact-card"><div class="c-icon">&#128222;</div><h4>Phone</h4><p>+91 11 4567 8900</p></div></div></div></div>
 
-<div class="wrap hide" id="V_ADMLOGIN"><div class="topbar"><button id="NAV_HOME2">Home</button><button class="on">Admin</button><button id="NAV_THEME2">&#9790; Theme</button></div><div class="auth-box"><div class="auth-icon">&#128274;</div><h2>Admin Login</h2><p class="sub">Authorized only</p><label style="text-align:left">Username</label><input type="text" id="AU" autocomplete="off"><label style="text-align:left">Password</label><input type="password" id="AP" autocomplete="off"><div class="hide" id="AERR" style="color:var(--red);font-size:12px;font-weight:700;padding:9px;background:rgba(220,38,38,.07);border-radius:6px;margin-bottom:10px"></div><button class="btn btn-full" id="BTN_ALOGIN">&#128274; Login</button><p style="font-size:11px;color:var(--mut);margin-top:14px">Default: admin / admin@2026</p></div></div>
-
-<div class="wrap hide" id="V_ADMIN">
-<div class="topbar"><span style="font-size:11px;color:var(--mut);margin-right:auto;padding:6px">Admin: <strong id="ADNM"></strong></span><button id="BTN_ALOGOUT">Logout</button><button id="NAV_THEME3">&#9790; Theme</button></div>
-<h2>&#128202; Admin Dashboard</h2>
-<div class="tabs" id="ATABS"><button class="on" data-tab="TO">Overview</button><button data-tab="TA">Add Q</button><button data-tab="TM">Manage</button><button data-tab="TU">Users</button><button data-tab="TV">Vouchers</button><button data-tab="TH">History</button><button data-tab="TS">Settings</button></div>
-<div id="TO"><div class="stats" id="DST"></div><table class="tbl"><thead><tr><th>Category</th><th>Exams</th><th>Papers</th><th>Questions</th></tr></thead><tbody id="DTB"></tbody></table></div>
-<div id="TA" class="hide"><h3>Add Question</h3><div class="two-col"><div><label>Exam</label><select id="AEX"></select></div><div><label>Paper</label><select id="APA"></select></div></div><label>Question</label><textarea id="ATI" rows="3"></textarea><div class="two-col"><div><label>A</label><input type="text" id="AA"></div><div><label>B</label><input type="text" id="AB"></div><div><label>C</label><input type="text" id="AC"></div><div><label>D</label><input type="text" id="AD"></div></div><label>Answer</label><select id="AAN"><option>A</option><option>B</option><option>C</option><option>D</option></select><button class="btn" id="BTN_ADDQ">Add</button></div>
-<div id="TM" class="hide"><h3>Manage</h3><div class="two-col"><div><label>Exam</label><select id="MEX"></select></div><div><label>Paper</label><select id="MPA"></select></div></div><input type="text" id="MSC" placeholder="Search..."><div style="max-height:350px;overflow-y:auto"><table class="tbl"><thead><tr><th>#</th><th>Question</th><th>Ans</th><th></th></tr></thead><tbody id="MTB"></tbody></table></div></div>
-<div id="TU" class="hide"><h3>Users</h3><table class="tbl"><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Tier</th></tr></thead><tbody id="UTB"></tbody></table></div>
-<div id="TV" class="hide"><h3>Vouchers</h3><div class="three-col"><div><label>Code</label><input type="text" id="VCO"></div><div><label>Description</label><input type="text" id="VDE"></div><div><label>Max Uses</label><input type="text" id="VMX" placeholder="100"></div></div><div class="two-col" style="margin-bottom:12px"><div><label>Tier</label><select id="VTIER"><option value="starter">Starter</option><option value="professional">Professional</option><option value="ultimate">Ultimate</option></select></div><div style="display:flex;align-items:flex-end"><button class="btn btn-green" id="BTN_ADDV" style="margin-bottom:10px;width:100%">Add</button></div></div><table class="tbl"><thead><tr><th>Code</th><th>Desc</th><th>Tier</th><th>Used</th><th>Max</th><th></th></tr></thead><tbody id="VTB"></tbody></table></div>
-<div id="TH" class="hide"><h3>History</h3><div style="display:flex;gap:8px;margin-bottom:12px"><button class="btn btn-green btn-sm" id="BTN_CSV">Export CSV</button><button class="btn btn-red btn-sm" id="BTN_CLRH">Clear</button></div><div style="max-height:400px;overflow-y:auto"><table class="tbl"><thead><tr><th>Date</th><th>Name</th><th>Exam</th><th>Score</th><th>%</th></tr></thead><tbody id="HTB"></tbody></table></div></div>
-<div id="TS" class="hide"><h3>Settings</h3><div class="two-col"><div><label>Username</label><input type="text" id="SU"></div><div><label>Password</label><input type="password" id="SP"></div></div><label>Confirm</label><input type="password" id="SP2"><button class="btn" id="BTN_CREDS">Save</button></div>
-</div>
-
+<!-- EXAM -->
 <div class="wrap hide" id="V_EXAM">
 <div class="exam-head"><h2 id="EXTITLE" style="font-size:15px;color:var(--pri);font-weight:700"></h2><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span id="WLBL" style="font-size:10px;color:var(--red);font-weight:700"></span><span id="QCTR" style="font-size:12px;color:var(--mut);font-weight:700;font-family:'JetBrains Mono',monospace"></span><div class="timer" id="TIMER">180:00</div></div></div>
 <div class="progress-bar"><div class="fill" id="PBAR" style="width:0%"></div></div>
@@ -223,6 +216,7 @@ body.dark .exam-card{background:var(--surf)}body.dark .stat{background:var(--sur
 </div><div class="side"><h4 style="font-size:12px;margin-bottom:6px;font-weight:700">Palette</h4><div class="legend"><span><span class="ldot" style="background:var(--grn)"></span>Answered</span><span><span class="ldot" style="background:var(--pur)"></span>Marked</span></div><div class="pal" id="PAL"></div></div></div>
 </div>
 
+<!-- RESULT -->
 <div class="wrap hide" id="V_RESULT" style="text-align:center">
 <h2>&#127942; Examination Results</h2>
 <p>Candidate: <strong id="RN"></strong> | Roll: <span id="RR"></span></p>
