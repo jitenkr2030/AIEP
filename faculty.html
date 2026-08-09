@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIEP Faculty Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--pri:#1D4ED8;--bg:#F0F2F5;--card:#FFF;--txt:#111827;--mut:#6B7280;--bor:#D1D5DB;--red:#DC2626;--grn:#059669;--pur:#7C3AED;--surf:#F9FAFB;--gold:#D97706;--teal:#0D9488;--shadow:0 2px 16px rgba(0,0,0,.06);--radius:14px;--radius2:10px;--radius3:8px}
+body.dark{--bg:#0B1120;--card:#151E31;--txt:#E8ECF1;--mut:#7B8CA3;--bor:#263045;--surf:#1A2540;--shadow:0 2px 20px rgba(0,0,0,.25)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;line-height:1.6}
+.wrap{max-width:1100px;margin:10px auto;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 26px}
+.hide{display:none!important}
+h2{font-size:20px;font-weight:800;margin-bottom:4px}
+h3{font-size:16px;font-weight:700;margin-bottom:12px}
+.sub{color:var(--mut);font-size:13px;margin-bottom:16px}
+label{font-size:11px;color:var(--mut);font-weight:700;display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+input,select,textarea{width:100%;padding:10px 12px;border:1.5px solid var(--bor);border-radius:var(--radius3);font-size:13px;background:var(--surf);color:var(--txt);font-family:inherit;margin-bottom:10px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(29,78,216,.1)}
+textarea{resize:vertical}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--pri);color:#fff;border:none;padding:10px 18px;font-size:13px;font-weight:700;border-radius:var(--radius3);cursor:pointer;font-family:inherit;transition:all .15s;touch-action:manipulation;white-space:nowrap}
+.btn:hover{filter:brightness(1.1)}.btn:active{transform:scale(.97)}
+.btn-full{width:100%}.btn-sm{padding:7px 13px;font-size:11px;border-radius:6px}
+.btn-green{background:var(--grn)}.btn-red{background:var(--red)}.btn-purple{background:var(--pur)}.btn-orange{background:var(--gold)}.btn-teal{background:var(--teal)}.btn-gray{background:#64748B}
+.btn-outline{background:none;border:2px solid var(--pri);color:var(--pri)}.btn-outline:hover{background:var(--pri);color:#fff}
+.topbar{display:flex;justify-content:flex-end;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+.topbar button{background:none;border:1.5px solid var(--bor);color:var(--txt);padding:6px 14px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;transition:all .15s}
+.topbar button:hover{border-color:var(--pri);color:var(--pri)}.topbar button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.info-box{padding:10px 14px;border-radius:var(--radius3);font-size:12px;font-weight:600;margin-bottom:10px;line-height:1.5}
+.info-blue{background:rgba(29,78,216,.07);color:var(--pri)}.info-green{background:rgba(5,150,105,.07);color:var(--grn)}.info-red{background:rgba(220,38,38,.07);color:var(--red)}.info-teal{background:rgba(13,148,136,.07);color:var(--teal)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:700px){.two-col,.three-col{grid-template-columns:1fr}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:18px}
+.stat{background:var(--surf);border:1.5px solid var(--bor);border-radius:var(--radius2);padding:14px;text-align:center}
+.stat .num{font-size:24px;font-weight:800;color:var(--pri);font-family:'JetBrains Mono',monospace}
+.stat .lbl{font-size:9px;color:var(--mut);text-transform:uppercase;margin-top:3px;font-weight:700}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th,.tbl td{padding:8px 10px;border-bottom:1px solid var(--bor);text-align:left}
+.tbl th{font-size:10px;color:var(--mut);text-transform:uppercase;font-weight:700;letter-spacing:.4px}
+.badge{display:inline-block;padding:3px 9px;border-radius:10px;font-size:10px;font-weight:700}
+.b-blue{background:rgba(29,78,216,.1);color:var(--pri)}.b-green{background:rgba(5,150,105,.1);color:var(--grn)}.b-red{background:rgba(220,38,38,.1);color:var(--red)}.b-gold{background:rgba(217,119,6,.1);color:var(--gold)}
+.tabs{display:flex;gap:2px;margin-bottom:18px;border-bottom:2px solid var(--bor);overflow-x:auto}
+.tabs button{background:none;border:none;padding:10px 14px;cursor:pointer;font-size:11px;font-weight:700;color:var(--mut);border-bottom:2.5px solid transparent;margin-bottom:-2px;white-space:nowrap;font-family:inherit;transition:all .15s;text-transform:uppercase;letter-spacing:.3px}
+.tabs button.on{color:var(--pri);border-bottom-color:var(--pri)}.tabs button:hover{color:var(--pri)}
+.q-preview{border:1.5px solid var(--bor);border-radius:var(--radius2);padding:16px;margin-bottom:10px;background:var(--surf);font-size:13px;line-height:1.7}
+.q-preview .qnum{display:inline-block;background:var(--pri);color:#fff;padding:2px 10px;border-radius:6px;font-size:11px;font-weight:700;margin-right:8px}
+.q-preview .opts{margin-top:8px;display:flex;flex-direction:column;gap:4px}
+.q-preview .opts span{padding:4px 10px;border-radius:6px;font-size:12px;display:block}
+.q-preview .correct-opt{background:rgba(5,150,105,.1);color:var(--grn);font-weight:600}
+.q-preview .wrong-opt{background:var(--surf)}
+.drop-zone{border:2px dashed var(--bor);border-radius:var(--radius2);padding:40px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:14px}
+.drop-zone:hover,.drop-zone.drag-over{border-color:var(--pri);background:rgba(29,78,216,.03)}
+.drop-zone p{font-size:13px;color:var(--mut);font-weight:600}
+.drop-zone .icon{font-size:36px;margin-bottom:8px;display:block}
+.auth-box{max-width:400px;margin:60px auto;text-align:center}
+.auth-box .auth-icon{width:64px;height:64px;background:rgba(29,78,216,.1);border-radius:50%;margin:0 auto 18px;line-height:64px;font-size:28px}
+.footer{text-align:center;padding:16px;font-size:11px;color:var(--mut);border-top:1px solid var(--bor);margin-top:16px}
+.del-btn{background:none;border:none;color:var(--red);cursor:pointer;font-size:11px;font-weight:700;padding:4px 8px;border-radius:4px}.del-btn:hover{background:rgba(220,38,38,.08)}
+.edit-btn{background:none;border:none;color:var(--pri);cursor:pointer;font-size:11px;font-weight:700;padding:4px 8px;border-radius:4px}.edit-btn:hover{background:rgba(29,78,216,.08)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:fadeUp .4s ease forwards}
+@keyframes spin{to{transform:rotate(360deg)}}.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--bor);border-top-color:var(--pri);border-radius:50%;animation:spin .6s linear infinite}
+.db-status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px}
+.db-online{background:rgba(5,150,105,.1);color:var(--grn)}.db-offline{background:rgba(220,38,38,.1);color:var(--red)}
+body.dark .stat,body.dark .q-preview{background:var(--surf)}
+body.dark .drop-zone{background:var(--surf)}
+</style>
+</head>
+<body>
+
+<!-- FACULTY LOGIN -->
+<div class="wrap" id="V_FLOGIN">
+<div class="topbar"><a href="index.html" style="font-size:11px;color:var(--pri);font-weight:700;text-decoration:none;margin-right:auto;padding:6px">&#8592; Student Portal</a><button onclick="document.body.classList.toggle('dark')">&#9790; Theme</button></div>
+<div class="auth-box">
+<div class="auth-icon">&#127891;</div>
+<h2>Faculty Panel</h2>
+<p class="sub">Create and manage exam questions</p>
+<label style="text-align:left">Username</label><input type="text" id="FU" autocomplete="off" placeholder="faculty">
+<label style="text-align:left">Password</label><input type="password" id="FP" autocomplete="off" placeholder="password">
+<div class="hide" id="FERR" style="color:var(--red);font-size:12px;font-weight:700;padding:10px;background:rgba(220,38,38,.07);border-radius:6px;margin-bottom:10px"></div>
+<button class="btn btn-full" id="BTN_FLOGIN">&#127891; Login</button>
+<p style="font-size:11px;color:var(--mut);margin-top:14px">Default: faculty / faculty@2026<br>Change credentials in Settings</p>
+</div>
+</div>
+
+<!-- FACULTY DASHBOARD -->
+<div class="wrap hide" id="V_FDASH">
+<div class="topbar"><a href="index.html" style="font-size:11px;color:var(--pri);font-weight:700;text-decoration:none">Student Portal</a><span id="DB_STAT" class="db-status db-offline" style="margin-right:auto">Local</span><span style="font-size:11px;color:var(--mut);padding:6px">Faculty: <strong id="FNAM"></strong></span><button id="BTN_FLOGOUT">Logout</button><button onclick="document.body.classList.toggle('dark')">&#9790; Theme</button></div>
+<h2>&#127891; Faculty Dashboard</h2>
+<div class="tabs" id="FTABS">
+<button class="on" data-ftab="F_DASH">Dashboard</button>
+<button data-ftab="F_ADD">Add Questions</button>
+<button data-ftab="F_BULK">Bulk Import</button>
+<button data-ftab="F_MANAGE">Manage</button>
+<button data-ftab="F_PREVIEW">Preview</button>
+<button data-ftab="F_EXPORT">Export</button>
+<button data-ftab="F_SETTINGS">Settings</button>
+</div>
+
+<!-- DASHBOARD TAB -->
+<div id="F_DASH">
+<div class="info-box info-teal">Your questions are saved to localStorage. Export regularly as backup. Questions automatically appear in the student portal.</div>
+<div class="stats" id="F_STATS"></div>
+<h3>Questions by Exam</h3>
+<table class="tbl"><thead><tr><th>Exam</th><th>Paper</th><th>Questions</th><th>Correct %</th><th></th></tr></thead><tbody id="F_QSTAT"></tbody></table>
+</div>
+
+<!-- ADD QUESTIONS TAB -->
+<div id="F_ADD" class="hide">
+<h3>Add Question</h3>
+<div class="info-box info-blue">Step 1: Select exam and paper. Step 2: Write question and 4 options. Step 3: Mark correct answer. Step 4: Click Add.</div>
+<div class="three-col">
+<div><label>Exam Category</label><select id="FA_EXAM"></select></div>
+<div><label>Paper</label><select id="FA_PAPER"></select></div>
+<div><label>Difficulty</label><select id="FA_DIFF"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></div>
+</div>
+<label>Question Text</label><textarea id="FA_Q" rows="3" placeholder="Enter the question..."></textarea>
+<label>Topic (optional)</label><input type="text" id="FA_TOPIC" placeholder="e.g. Revenue Recognition">
+<div class="two-col">
+<div><label>Option A</label><input type="text" id="FA_A" placeholder="First option"></div>
+<div><label>Option B</label><input type="text" id="FA_B" placeholder="Second option"></div>
+<div><label>Option C</label><input type="text" id="FA_C" placeholder="Third option"></div>
+<div><label>Option D</label><input type="text" id="FA_D" placeholder="Fourth option"></div>
+</div>
+<label>Correct Answer</label><select id="FA_ANS"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select>
+<label>Explanation (optional)</label><textarea id="FA_EXPLAIN" rows="2" placeholder="Why this answer is correct..."></textarea>
+<div style="display:flex;gap:10px;margin-top:6px">
+<button class="btn btn-green" id="BTN_FA_ADD" style="flex:1">&#10003; Add Question</button>
+<button class="btn btn-gray" id="BTN_FA_CLEAR">Clear</button>
+<button class="btn btn-outline" id="BTN_FA_SAVE_DRAFT">Save Draft</button>
+</div>
+<div id="FA_STATUS" class="hide" style="margin-top:12px"></div>
+</div>
+
+<!-- BULK IMPORT TAB -->
+<div id="F_BULK" class="hide">
+<h3>Bulk Import Questions</h3>
+<div class="info-box info-blue">Paste JSON array of questions or upload a .json file. Each question must have: question, options (A,B,C,D), answer, and optionally: topic, explanation, difficulty.</div>
+<div class="two-col">
+<div><label>Target Exam</label><select id="FB_EXAM"></select></div>
+<div><label>Target Paper</label><select id="FB_PAPER"></select></div>
+</div>
+<label>JSON Data</label>
+<textarea id="FB_JSON" rows="12" placeholder='[
+  {
+    "question": "Which is correct about Revenue Recognition?",
+    "options": {
+      "A": "Recognize when cash received",
+      "B": "Recognize when performance obligation satisfied",
+      "C": "Recognize only on cash basis",
+      "D": "Never recognize before delivery"
+    },
+    "answer": "B",
+    "topic": "Revenue Recognition",
+    "difficulty": "medium",
+    "explanation": "Per Ind AS 115 / IFRS 15, revenue is recognized when performance obligation is satisfied."
+  }
+]'></textarea>
+<div style="display:flex;gap:10px;margin-bottom:14px">
+<button class="btn btn-green" id="BTN_FB_IMPORT">&#10003; Import Questions</button>
+<button class="btn btn-outline" id="BTN_FB_VALIDATE">&#128269; Validate JSON</button>
+<button class="btn btn-gray" id="BTN_FB_TEMPLATE">&#128229; Download Template</button>
+<button class="btn btn-orange" id="BTN_FB_CLEAR">Clear</button>
+</div>
+<div id="FB_STATUS" class="hide" style="margin-bottom:12px"></div>
+<div class="drop-zone" id="DROP_ZONE">
+<span class="icon">&#128228;</span>
+<p>Or drag &amp; drop a .json file here</p>
+<p style="font-size:11px;color:var(--mut);margin-top:4px">Maximum 500 questions per import</p>
+</div>
+</div>
+
+<!-- MANAGE TAB -->
+<div id="F_MANAGE" class="hide">
+<h3>Manage Questions</h3>
+<div class="two-col">
+<div><label>Exam</label><select id="FM_EXAM"></select></div>
+<div><label>Paper</label><select id="FM_PAPER"></select></div>
+</div>
+<input type="text" id="FM_SEARCH" placeholder="Search questions...">
+<div style="display:flex;gap:8px;margin-bottom:12px">
+<button class="btn btn-green btn-sm" id="BTN_FM_EXPORT_SEL">Export Selected Paper</button>
+<button class="btn btn-red btn-sm" id="BTN_FM_DEL_ALL">Delete All in Paper</button>
+</div>
+<div style="max-height:500px;overflow-y:auto">
+<table class="tbl"><thead><tr><th>#</th><th style="width:45%">Question</th><th>Answer</th><th>Difficulty</th><th>Topic</th><th></th></tr></thead><tbody id="FM_TB"></tbody></table>
+</div>
+</div>
+
+<!-- PREVIEW TAB -->
+<div id="F_PREVIEW" class="hide">
+<h3>Preview Questions (Student View)</h3>
+<div class="two-col">
+<div><label>Exam</label><select id="FP_EXAM"></select></div>
+<div><label>Paper</label><select id="FP_PAPER"></select></div>
+</div>
+<button class="btn btn-sm" id="BTN_FP_LOAD" style="margin-bottom:14px">Load Preview</button>
+<div id="FP_AREA"></div>
+</div>
+
+<!-- EXPORT TAB -->
+<div id="F_EXPORT" class="hide">
+<h3>Export Questions</h3>
+<div class="info-box info-green">Export your questions as JSON for backup or sharing with other faculty.</div>
+<div class="two-col">
+<div><label>Exam</label><select id="FE_EXAM"></select></div>
+<div><label>Paper</label><select id="FE_PAPER"></select></div>
+</div>
+<div style="display:flex;gap:10px;margin-bottom:14px">
+<button class="btn btn-green" id="BTN_FE_JSON">&#128229; Export JSON</button>
+<button class="btn btn-teal" id="BTN_FE_CSV">&#128229; Export CSV</button>
+<button class="btn btn-purple" id="BTN_FE_ALL">&#128229; Export All Questions</button>
+</div>
+<label>Export Preview</label><textarea id="FE_OUT" rows="12" readonly placeholder="Exported data appears here..."></textarea>
+</div>
+
+<!-- SETTINGS TAB -->
+<div id="F_SETTINGS" class="hide">
+<h3>Faculty Settings</h3>
+<div class="two-col">
+<div><label>New Username</label><input type="text" id="FS_USER" placeholder="faculty"></div>
+<div><label>New Password</label><input type="password" id="FS_PASS" placeholder="Min 6 chars"></div>
+</div>
+<label>Confirm Password</label><input type="password" id="FS_PASS2">
+<button class="btn" id="BTN_FS_SAVE">Save Credentials</button>
+<h3 style="margin-top:24px">Data Management</h3>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<button class="btn btn-green" id="BTN_FS_BACKUP">&#128229; Full Backup</button>
+<button class="btn btn-orange" id="BTN_FS_RESTORE">&#128228; Restore Backup</button>
+<button class="btn btn-red" id="BTN_FS_RESET">Reset All Faculty Data</button>
+</div>
+</div>
+
+<div class="footer">AIEP Faculty Panel v1.0 &mdash; Questions saved locally. Export as backup. &copy; 2026</div>
+</div>
+
+<script src="topics.js"></script>
+<script src="exams.js"></script>
+<script src="faculty.js"></script>
+</body>
+</html>
