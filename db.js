@@ -9,18 +9,18 @@ function localSet(key,val){try{localStorage.setItem(key,JSON.stringify(val))}cat
 
 function cloudWrite(collection,id,data){
     if(!db||!dbReady){pendingWrites.push({c:collection,i:id,d:data});return}
-    try{db.transact(db.tx[collection][id].update(data));console.log("CLOUD WRITE:",collection,id);}catch(e){console.warn("WRITE FAIL:",collection,e.message);pendingWrites.push({c:collection,i:id,d:data})}
+    try{db.transact(db.tx[collection][id].update(data));console.log("WRITE:",collection,id);}catch(e){console.warn("WRITE FAIL:",collection,e.message);pendingWrites.push({c:collection,i:id,d:data})}
 }
 function cloudDelete(collection,id){if(!db||!dbReady)return;try{db.transact(db.tx[collection][id].delete())}catch(e){}}
 function flushPending(){if(!db||!dbReady||!pendingWrites.length)return;var batch=pendingWrites.splice(0,30);for(var i=0;i<batch.length;i++){try{var w=batch[i];db.transact(db.tx[w.c][w.i].update(w.d));console.log("FLUSH:",w.c,w.i)}catch(e){}}if(pendingWrites.length)setTimeout(flushPending,1000)}
 function notify(event,data){for(var i=0;i<listeners.length;i++){if(listeners[i].event===event)listeners[i].cb(data)}}
 
-function mergeCloudData(cloudData){
+function mergeCloudData(d){
     try{
-        if(cloudData.portalusers){var local=localGet("x_u",[]),emails={};for(var i=0;i<local.length;i++){if(local[i].email)emails[local[i].email.toLowerCase()]=true}for(var k in cloudData.portalusers){var cu=cloudData.portalusers[k];if(cu.email&&!emails[cu.email.toLowerCase()]){local.push({id:k,name:cu.name||"",email:cu.email||"",phone:cu.phone||"",roll:cu.roll||"",tier:cu.tier||"free",joined:cu.joined||""})}}localSet("x_u",local)}
-        if(cloudData.results){var local=localGet("x_h",[]),dates={};for(var i=0;i<local.length;i++){dates[(local[i].date||"")+"_"+(local[i].name||"")]=true}for(var k in cloudData.results){var cr=cloudData.results[k];if(!dates[(cr.date||"")+"_"+(cr.name||"")]){local.push(cr)}}localSet("x_h",local)}
-        if(cloudData.vouchers){var local=localGet("x_v",{});for(var code in cloudData.vouchers){if(!local[code])local[code]=cloudData.vouchers[code];else local[code].used=Math.max(local[code].used||0,cloudData.vouchers[code].used||0)}localSet("x_v",local)}
-        if(cloudData.facultyq){var local=localGet("f_questions",{});for(var k in cloudData.facultyq){var cq=cloudData.facultyq[k];if(cq.paperKey&&cq.questions){try{var parsed=JSON.parse(cq.questions);if(!local[cq.paperKey]||parsed.length>local[cq.paperKey].length){local[cq.paperKey]=parsed}}catch(e){}}}localSet("f_questions",local)}
+        if(d.portalusers){var local=localGet("x_u",[]),emails={};for(var i=0;i<local.length;i++){if(local[i].email)emails[local[i].email.toLowerCase()]=true}for(var k in d.portalusers){var cu=d.portalusers[k];if(cu.email&&!emails[cu.email.toLowerCase()]){local.push({id:k,name:cu.name||"",email:cu.email||"",phone:cu.phone||"",roll:cu.roll||"",tier:cu.tier||"free",joined:cu.joined||""})}}localSet("x_u",local)}
+        if(d.results){var local=localGet("x_h",[]),dates={};for(var i=0;i<local.length;i++){dates[(local[i].date||"")+"_"+(local[i].name||"")]=true}for(var k in d.results){var cr=d.results[k];if(!dates[(cr.date||"")+"_"+(cr.name||"")]){local.push(cr)}}localSet("x_h",local)}
+        if(d.vouchers){var local=localGet("x_v",{});for(var code in d.vouchers){if(!local[code])local[code]=d.vouchers[code];else local[code].used=Math.max(local[code].used||0,d.vouchers[code].used||0)}localSet("x_v",local)}
+        if(d.facultyq){var local=localGet("f_questions",{});for(var k in d.facultyq){var cq=d.facultyq[k];if(cq.paperKey&&cq.questions){try{var parsed=JSON.parse(cq.questions);if(!local[cq.paperKey]||parsed.length>local[cq.paperKey].length){local[cq.paperKey]=parsed}}catch(e){}}}localSet("f_questions",local)}
     }catch(e){console.warn("Merge error:",e)}
 }
 
@@ -31,7 +31,7 @@ window.AIEP = {
 
     init:function(onReady){
         if(!APP_ID||APP_ID==="YOUR_APP_ID"){if(onReady)onReady(false);return}
-        console.log("AIEP: Loading InstantDB...");
+        console.log("AIEP: Loading...");
         var s=document.createElement("script");
         s.src="instant.min.js";
         s.onload=function(){
@@ -39,49 +39,24 @@ window.AIEP = {
             try{
                 db=instant.init({appId:APP_ID});
                 AIEP.db=db;
-                console.log("AIEP: Signing in anonymously...");
-                db.auth.signInAnonymously();
+                console.log("AIEP: Signing in as guest...");
+                db.auth.signInAsGuest();
+                // Give auth 3 seconds then proceed
+                setTimeout(function(){
+                    AIEP.ready=true;dbReady=true;
+                    console.log("AIEP: Ready (guest mode)");
+                    notify("connected",true);
+                    setTimeout(flushPending,500);
+                    if(onReady)onReady(true);
+                },3000);
             }catch(e){
                 console.error("AIEP: Init error:",e);
                 if(onReady)onReady(false);
             }
         };
-        s.onerror=function(){console.error("AIEP: Script load failed");if(onReady)onReady(false)};
+        s.onerror=function(){console.error("AIEP: Script failed");if(onReady)onReady(false)};
         document.head.appendChild(s);
-
-        // Listen for auth state
-        var authCheckDone = false;
-        var checkAuth = setInterval(function(){
-            if(!db)return;
-            try{
-                db.getAuth(function(user){
-                    if(authCheckDone)return;
-                    if(user){
-                        authCheckDone=true;
-                        clearInterval(checkAuth);
-                        AIEP.ready=true;
-                        dbReady=true;
-                        console.log("AIEP: Authenticated as",user.email||"anonymous",user.id);
-                        notify("connected",true);
-                        setTimeout(flushPending,500);
-                        if(onReady)onReady(true);
-                    }
-                });
-            }catch(e){}
-        },500);
-
-        setTimeout(function(){
-            if(!authCheckDone){
-                authCheckDone=true;
-                clearInterval(checkAuth);
-                // Try without auth anyway
-                if(!dbReady){
-                    AIEP.ready=true;dbReady=true;
-                    console.log("AIEP: Timeout, proceeding without auth");
-                    if(onReady)onReady(false);
-                }
-            }
-        },15000);
+        setTimeout(function(){if(!dbReady){console.warn("AIEP: Timeout");if(onReady)onReady(false)}},15000);
     },
 
     on:function(event,cb){listeners.push({event:event,cb:cb})},
@@ -89,13 +64,11 @@ window.AIEP = {
     subscribe:function(){
         if(!db||!dbReady)return;
         console.log("AIEP: Subscribing...");
-        try{
-            db.subscribeQuery({results:{},portalusers:{},vouchers:{},facultyq:{},logs:{},adminconfig:{}},function(resp){
-                if(resp.error){console.error("SUB ERROR:",JSON.stringify(resp.error));return}
-                console.log("AIEP: Got cloud data");
-                if(resp.data){mergeCloudData(resp.data);notify("data",resp.data)}
-            });
-        }catch(e){console.error("Subscribe fail:",e)}
+        try{db.subscribeQuery({results:{},portalusers:{},vouchers:{},facultyq:{},logs:{},adminconfig:{}},function(resp){
+            if(resp.error){console.error("SUB ERROR:",JSON.stringify(resp.error));return}
+            console.log("AIEP: Got cloud data");
+            if(resp.data){mergeCloudData(resp.data);notify("data",resp.data)}
+        })}catch(e){console.error("Subscribe fail:",e)}
     },
 
     syncAllToCloud:function(callback){
