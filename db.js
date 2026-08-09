@@ -1,18 +1,34 @@
 (function(){
 "use strict";
 var APP_ID = "52877744-72cc-404a-b68e-fb01f3e387ac";
-var db = null, dbReady = false, listeners = [], pendingWrites = [];
+var API = "/api";
+var dbReady = false, listeners = [];
 
 function uid(){return Date.now().toString(36)+Math.random().toString(36).substr(2,9)}
 function localGet(key,def){try{var s=localStorage.getItem(key);if(s===null||s==="null")return def;return JSON.parse(s)}catch(e){return def}}
 function localSet(key,val){try{localStorage.setItem(key,JSON.stringify(val))}catch(e){}}
 
-function cloudWrite(collection,id,data){
-    if(!db||!dbReady){pendingWrites.push({c:collection,i:id,d:data});return}
-    try{db.transact(db.tx[collection][id].update(data));console.log("WRITE:",collection,id)}catch(e){console.warn("WRITE FAIL:",e.message)}
+function apiCall(endpoint,data,callback){
+    fetch(API+"/"+endpoint,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(data)
+    }).then(function(r){return r.json()}).then(function(r){
+        if(callback)callback(r);
+    }).catch(function(e){
+        console.warn("API ERROR:",e.message);
+        if(callback)callback({ok:false,error:e.message});
+    });
 }
-function cloudDelete(collection,id){if(!db||!dbReady)return;try{db.transact(db.tx[collection][id].delete())}catch(e){}}
-function flushPending(){if(!db||!dbReady||!pendingWrites.length)return;var batch=pendingWrites.splice(0,30);for(var i=0;i<batch.length;i++){try{var w=batch[i];db.transact(db.tx[w.c][w.i].update(w.d));console.log("FLUSH:",w.c,w.i)}catch(e){}}if(pendingWrites.length)setTimeout(flushPending,1000)}
+
+function cloudWrite(collection,id,data){
+    apiCall("write",{collection:collection,id:id,data:data},function(r){
+        if(r.ok)console.log("WRITE OK:",collection);
+        else console.warn("WRITE FAIL:",r.error);
+    });
+}
+function cloudDelete(collection,id){apiCall("delete",{collection:collection,id:id})}
+
 function notify(event,data){for(var i=0;i<listeners.length;i++){if(listeners[i].event===event)listeners[i].cb(data)}}
 
 function mergeCloudData(d){
@@ -24,67 +40,55 @@ function mergeCloudData(d){
     }catch(e){}
 }
 
+function pollCloud(){
+    apiCall("query",{results:{},portalusers:{},vouchers:{},facultyq:{},logs:{}},function(data){
+        if(data&&!data.error){mergeCloudData(data);notify("data",data)}
+    });
+}
+
 window.AIEP = {
     ready:false, db:null,
     isConnected:function(){return dbReady},
     _uid:uid, _local:localGet, _localSet:localSet,
 
     init:function(onReady){
-        if(!APP_ID||APP_ID==="YOUR_APP_ID"){if(onReady)onReady(false);return}
-        console.log("AIEP: Loading via ESM...");
-
-        // Load as ES module from esm.sh
-        var script = document.createElement("script");
-        script.type = "module";
-        script.textContent = 'import instant from "https://esm.sh/@instantdb/core"; window._instant = instant; document.dispatchEvent(new Event("instant-loaded"));';
-        document.head.appendChild(script);
-
-        document.addEventListener("instant-loaded", function(){
-            console.log("AIEP: ESM loaded");
-            try{
-                db = window._instant.init({appId:APP_ID});
-                AIEP.db = db;
-                AIEP.ready = true;
-                dbReady = true;
-                console.log("AIEP: Ready");
+        console.log("AIEP: Init");
+        apiCall("query",{portalusers:{}},function(data){
+            if(data&&!data.error){
+                dbReady=true;
+                console.log("AIEP: Server connected");
                 notify("connected",true);
-                setTimeout(flushPending,500);
                 if(onReady)onReady(true);
-            }catch(e){
-                console.error("AIEP: Init error:",e);
+            }else{
+                console.warn("AIEP: Server error");
                 if(onReady)onReady(false);
             }
         });
-
-        setTimeout(function(){if(!dbReady){console.warn("AIEP: Timeout");if(onReady)onReady(false)}},20000);
     },
 
     on:function(event,cb){listeners.push({event:event,cb:cb})},
 
     subscribe:function(){
-        if(!db||!dbReady)return;
-        try{db.subscribeQuery({results:{},portalusers:{},vouchers:{},facultyq:{},logs:{},adminconfig:{}},function(resp){
-            if(resp.error){console.error("SUB ERROR:",JSON.stringify(resp.error));return}
-            if(resp.data){mergeCloudData(resp.data);notify("data",resp.data)}
-        })}catch(e){}
+        if(!dbReady)return;
+        pollCloud();
+        setInterval(pollCloud,10000);
     },
 
     syncAllToCloud:function(callback){
-        if(!db||!dbReady){if(callback)callback({ok:false,msg:"Not connected"});return}
         var stats={users:0,results:0,vouchers:0,questions:0,logs:0};
-        try{
-            var users=localGet("x_u",[]);for(var i=0;i<users.length;i++){var u=users[i];if(!u.id)u.id=uid();try{db.transact(db.tx.portalusers[u.id].update({name:u.name||"",email:u.email||"",phone:u.phone||"",roll:u.roll||"",tier:u.tier||"free",joined:u.joined||""}));stats.users++}catch(e){}}
-            var results=localGet("x_h",[]);for(var i=0;i<results.length;i++){var r=results[i];if(!r.id)r.id=uid();try{db.transact(db.tx.results[r.id].update({name:r.name||"",email:r.email||"",roll:r.roll||"",exam:r.exam||"",paper:r.paper||"",score:r.score||0,total:r.total||0,pct:r.pct||0,date:r.date||""}));stats.results++}catch(e){}}
-            var vouchers=localGet("x_v",{});var vKeys=Object.keys(vouchers);for(var i=0;i<vKeys.length;i++){var code=vKeys[i],id=uid();try{db.transact(db.tx.vouchers[id].update({desc:vouchers[code].desc||"",used:vouchers[code].used||0,max:vouchers[code].max||100,tier:vouchers[code].tier||"starter"}));stats.vouchers++}catch(e){}}
-            var fq=localGet("f_questions",{});var fqKeys=Object.keys(fq);for(var i=0;i<fqKeys.length;i++){var key=fqKeys[i];try{db.transact(db.tx.facultyq[key.replace(/[^a-zA-Z0-9_]/g,"_")].update({paperKey:key,count:fq[key].length,questions:JSON.stringify(fq[key]),updated:new Date().toISOString()}));stats.questions+=fq[key].length}catch(e){}}
-            var logs=localGet("x_l",[]);for(var i=Math.max(0,logs.length-50);i<logs.length;i++){try{db.transact(db.tx.logs[uid()].update({action:logs[i].a||"",time:logs[i].t||""}));stats.logs++}catch(e){}}
-        }catch(e){}
+        var users=localGet("x_u",[]);for(var i=0;i<users.length;i++){var u=users[i];if(!u.id)u.id=uid();cloudWrite("portalusers",u.id,{name:u.name||"",email:u.email||"",phone:u.phone||"",roll:u.roll||"",tier:u.tier||"free",joined:u.joined||""});stats.users++}
+        var results=localGet("x_h",[]);for(var i=0;i<results.length;i++){var r=results[i];if(!r.id)r.id=uid();cloudWrite("results",r.id,{name:r.name||"",email:r.email||"",roll:r.roll||"",exam:r.exam||"",paper:r.paper||"",score:r.score||0,total:r.total||0,pct:r.pct||0,date:r.date||""});stats.results++}
+        var vouchers=localGet("x_v",{});var vKeys=Object.keys(vouchers);for(var i=0;i<vKeys.length;i++){var code=vKeys[i],id=uid();cloudWrite("vouchers",id,{desc:vouchers[code].desc||"",used:vouchers[code].used||0,max:vouchers[code].max||100,tier:vouchers[code].tier||"starter"});stats.vouchers++}
+        var fq=localGet("f_questions",{});var fqKeys=Object.keys(fq);for(var i=0;i<fqKeys.length;i++){var key=fqKeys[i];cloudWrite("facultyq",key.replace(/[^a-zA-Z0-9_]/g,"_"),{paperKey:key,count:fq[key].length,questions:JSON.stringify(fq[key]),updated:new Date().toISOString()});stats.questions+=fq[key].length}
+        var logs=localGet("x_l",[]);for(var i=Math.max(0,logs.length-50);i<logs.length;i++){cloudWrite("logs",uid(),{action:logs[i].a||"",time:logs[i].t||""});stats.logs++}
         if(callback)callback({ok:true,stats:stats});
     },
 
     pullAllFromCloud:function(callback){
-        if(!db||!dbReady){if(callback)callback({ok:false,msg:"Not connected"});return}
-        try{db.subscribeQuery({results:{},portalusers:{},vouchers:{},facultyq:{},logs:{}},function(resp){if(resp.error){if(callback)callback({ok:false,msg:JSON.stringify(resp.error)});return}if(resp.data){mergeCloudData(resp.data);if(callback)callback({ok:true})}})}catch(e){if(callback)callback({ok:false,msg:e.message})}
+        apiCall("query",{results:{},portalusers:{},vouchers:{},facultyq:{},logs:{}},function(data){
+            if(data&&!data.error){mergeCloudData(data);if(callback)callback({ok:true})}
+            else{if(callback)callback({ok:false,msg:"Query failed"})}
+        });
     },
 
     getUsers:function(){return localGet("x_u",[])},

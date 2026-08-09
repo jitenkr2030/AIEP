@@ -1,0 +1,5 @@
+node_modules/
+.debug*
+.env
+*.mjs
+instant.min.js
