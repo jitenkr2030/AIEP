@@ -79,6 +79,37 @@ function switchTab(tabId){
     if(tabId==="T_OVERVIEW")refreshOverview();if(tabId==="T_USERS")refreshUsers();if(tabId==="T_VOUCHERS")refreshVouchers();if(tabId==="T_HISTORY")refreshHistory();if(tabId==="T_MANAGE")loadManageQ();
 }
 
+
+// SYNC
+function syncToCloud(){
+    var status=document.getElementById("SYNC_STATUS");
+    status.className="info-box info-blue";status.innerHTML='<span class="spinner"></span> Syncing all data to cloud...';status.classList.remove("hide");
+    AIEP.syncAllToCloud(function(result){
+        if(result.ok){
+            var s=result.stats;
+            status.className="info-box info-green";
+            status.innerHTML="&#10003; <strong>Synced to cloud!</strong><br>Users: "+s.users+" | Results: "+s.results+" | Vouchers: "+s.vouchers+" | Questions: "+s.questions+" | Logs: "+s.logs;
+        }else{
+            status.className="info-box info-red";
+            status.innerHTML="&#10007; Sync failed: "+result.msg;
+        }
+    });
+}
+function pullFromCloud(){
+    var status=document.getElementById("SYNC_STATUS");
+    status.className="info-box info-blue";status.innerHTML='<span class="spinner"></span> Pulling data from cloud...';status.classList.remove("hide");
+    AIEP.pullAllFromCloud(function(result){
+        if(result.ok){
+            status.className="info-box info-green";
+            status.innerHTML="&#10003; <strong>Pulled from cloud!</strong><br>Users: "+AIEP.getUsers().length+" | Results: "+AIEP.getResults().length+" | Vouchers: "+Object.keys(AIEP.getVouchers()).length;
+            refreshOverview();
+        }else{
+            status.className="info-box info-red";
+            status.innerHTML="&#10007; Pull failed: "+result.msg;
+        }
+    });
+}
+
 // EVENTS
 function bindEvents(){
     document.getElementById("BTN_ALOGIN").onclick=doALogin;
@@ -98,6 +129,8 @@ function bindEvents(){
     document.getElementById("BTN_AB_EXP").onclick=exportFullBackup;
     document.getElementById("BTN_AB_IMP").onclick=restoreBackup;
     document.getElementById("BTN_AB_FACULTY").onclick=exportFacultyQ;
+    document.getElementById("BTN_SYNC_UP").onclick=syncToCloud;
+    document.getElementById("BTN_SYNC_DOWN").onclick=pullFromCloud;
 }
 
 // INIT

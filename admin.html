@@ -151,9 +151,12 @@ body.dark .stat{background:var(--surf)}
 <div class="info-box info-green">Export all data as JSON for safekeeping. Restore from a backup file anytime.</div>
 <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
 <button class="btn btn-green" id="BTN_AB_EXP">&#128229; Export Full Backup</button>
+<button class="btn btn-purple" id="BTN_SYNC_UP" style="background:#7C3AED">&#11014; Sync All to Cloud</button>
+<button class="btn btn-teal" id="BTN_SYNC_DOWN">&#11015; Pull from Cloud</button>
 <button class="btn btn-orange" id="BTN_AB_IMP">&#128228; Restore Backup</button>
 <button class="btn btn-purple" id="BTN_AB_FACULTY">&#128229; Export Faculty Questions</button>
 </div>
+<div id="SYNC_STATUS" class="hide" style="margin-bottom:12px"></div>
 <label>Export Preview</label><textarea id="AB_OUT" rows="10" readonly placeholder="Export data appears here..."></textarea>
 </div>
 
