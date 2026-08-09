@@ -1,54 +1,52 @@
-// Docs: https://www.instantdb.com/docs/permissions
-
 import type { InstantRules } from "@instantdb/core";
 
 const rules = {
-  logs: {
+  portalusers: {
     allow: {
       view: "true",
-      create: "true",
-      delete: "true",
-      update: "true",
+      create: "auth.id != null",
+      update: "auth.id != null",
+      delete: "auth.id != null",
     },
   },
   results: {
     allow: {
       view: "true",
-      create: "true",
-      delete: "true",
-      update: "true",
-    },
-  },
-  facultyq: {
-    allow: {
-      view: "true",
-      create: "true",
-      delete: "true",
-      update: "true",
+      create: "auth.id != null",
+      update: "auth.id != null",
+      delete: "auth.id != null",
     },
   },
   vouchers: {
     allow: {
       view: "true",
-      create: "true",
-      delete: "true",
-      update: "true",
+      create: "auth.id != null",
+      update: "auth.id != null",
+      delete: "auth.id != null",
+    },
+  },
+  facultyq: {
+    allow: {
+      view: "true",
+      create: "auth.id != null",
+      update: "auth.id != null",
+      delete: "auth.id != null",
+    },
+  },
+  logs: {
+    allow: {
+      view: "true",
+      create: "auth.id != null",
+      update: "auth.id != null",
+      delete: "auth.id != null",
     },
   },
   adminconfig: {
     allow: {
       view: "true",
-      create: "true",
-      delete: "true",
-      update: "true",
-    },
-  },
-  portalusers: {
-    allow: {
-      view: "true",
-      create: "true",
-      delete: "true",
-      update: "true",
+      create: "auth.id != null",
+      update: "auth.id != null",
+      delete: "auth.id != null",
     },
   },
 } satisfies InstantRules;
