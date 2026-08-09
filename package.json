@@ -1,1 +1,1 @@
-{"name":"aiep","version":"1.0.0","dependencies":{"@instantdb/core":"^1.0.63"}}
+{"name":"aiep","version":"1.0.0","dependencies":{"@instantdb/admin":"^1.0.63","@instantdb/core":"^1.0.63"}}
