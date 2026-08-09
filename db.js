@@ -89,7 +89,7 @@ window.AIEP = {
             return;
         }
         var s = document.createElement("script");
-        s.src = "https://unpkg.com/@instantdb/core";
+        s.src = "instant.min.js";
         s.onload = function(){
             try{
                 db = instant.init({appId: APP_ID});
