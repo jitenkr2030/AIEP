@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All India Examination Portal v9.0</title>
+<title>All India Examination Portal v10.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -29,8 +29,7 @@ textarea{resize:vertical}
 .btn-outline:hover{background:var(--pri);color:#fff}
 .topbar{display:flex;justify-content:flex-end;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
 .topbar button{background:none;border:1.5px solid var(--bor);color:var(--txt);padding:6px 14px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;touch-action:manipulation;transition:all .15s}
-.topbar button:hover{border-color:var(--pri);color:var(--pri)}
-.topbar button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.topbar button:hover{border-color:var(--pri);color:var(--pri)}.topbar button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
 .hero{text-align:center;padding:20px 0 10px}
 .hero h1{font-size:28px;margin-bottom:6px;font-weight:800;background:linear-gradient(135deg,var(--pri),var(--indigo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero p{color:var(--mut);font-size:14px;max-width:600px;margin:0 auto}
@@ -41,24 +40,21 @@ textarea{resize:vertical}
 .exam-card{border:1.5px solid var(--bor);border-radius:var(--radius2);padding:18px;cursor:pointer;transition:all .25s;background:var(--card);position:relative;overflow:hidden}
 .exam-card:hover{border-color:var(--pri);transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,.08)}
 .exam-card .icon{font-size:30px;margin-bottom:8px;display:block}
-.exam-card h4{font-size:14px;margin-bottom:5px;font-weight:700}
-.exam-card p{font-size:11px;color:var(--mut);line-height:1.5}
+.exam-card h4{font-size:14px;margin-bottom:5px;font-weight:700}.exam-card p{font-size:11px;color:var(--mut);line-height:1.5}
 .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:9px;font-weight:700;margin-top:8px;text-transform:uppercase;letter-spacing:.3px}
 .tag-med{background:rgba(5,150,105,.1);color:var(--grn)}.tag-eng{background:rgba(29,78,216,.1);color:var(--pri)}
 .tag-gov{background:rgba(234,88,12,.1);color:var(--org)}.tag-law{background:rgba(124,58,237,.1);color:var(--pur)}
 .tag-def{background:rgba(13,148,136,.1);color:var(--teal)}.tag-mgmt{background:rgba(219,39,119,.1);color:var(--rose)}
-.tag-prof{background:rgba(13,148,136,.12);color:var(--teal)}.tag-profa{background:rgba(217,119,6,.12);color:var(--gold)}
-.tag-fina{background:rgba(79,70,229,.12);color:var(--indigo)}
+.tag-prof{background:rgba(13,148,136,.12);color:var(--teal)}.tag-fina{background:rgba(79,70,229,.12);color:var(--indigo)}
 .free-badge{position:absolute;top:12px;right:12px;background:var(--grn);color:#fff;padding:3px 9px;border-radius:10px;font-size:9px;font-weight:700;text-transform:uppercase}
 .prem-badge{position:absolute;top:12px;right:12px;background:var(--gold);color:#fff;padding:3px 9px;border-radius:10px;font-size:9px;font-weight:700;text-transform:uppercase}
 .info-box{padding:10px 14px;border-radius:var(--radius3);font-size:12px;font-weight:600;margin-bottom:10px;line-height:1.5}
 .info-blue{background:rgba(29,78,216,.07);color:var(--pri)}.info-red{background:rgba(220,38,38,.07);color:var(--red)}
 .info-green{background:rgba(5,150,105,.07);color:var(--grn)}.info-teal{background:rgba(13,148,136,.07);color:var(--teal)}
-.info-purple{background:rgba(124,58,237,.07);color:var(--pur)}.info-orange{background:rgba(234,88,12,.07);color:var(--org)}
+.info-purple{background:rgba(124,58,237,.07);color:var(--pur)}
 .bread{font-size:12px;color:var(--mut);margin-bottom:12px;font-weight:600}
 .bread span{color:var(--pri);cursor:pointer}.bread span:hover{text-decoration:underline}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 @media(max-width:700px){.two-col,.three-col{grid-template-columns:1fr}}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:10px;margin-bottom:18px}
 .stat{background:var(--surf);border:1.5px solid var(--bor);border-radius:var(--radius2);padding:14px;text-align:center;transition:transform .15s}
@@ -74,8 +70,7 @@ body.dark .timer{background:#0F172A;border:1.5px solid var(--bor)}
 .q-title .qnum{display:inline-block;background:var(--pri);color:#fff;padding:2px 10px;border-radius:6px;font-size:11px;font-weight:700;margin-right:8px}
 .opts{display:flex;flex-direction:column;gap:8px}
 .opt{display:flex;align-items:flex-start;padding:11px 14px;border:1.5px solid var(--bor);border-radius:var(--radius3);cursor:pointer;font-size:13px;transition:all .15s;line-height:1.5}
-.opt:hover{border-color:var(--pri);background:rgba(29,78,216,.03)}
-.opt.selected{border-color:var(--pri);background:rgba(29,78,216,.06);box-shadow:0 0 0 2px rgba(29,78,216,.12)}
+.opt:hover{border-color:var(--pri);background:rgba(29,78,216,.03)}.opt.selected{border-color:var(--pri);background:rgba(29,78,216,.06);box-shadow:0 0 0 2px rgba(29,78,216,.12)}
 .opt input{margin-right:10px;transform:scale(1.2);accent-color:var(--pri);margin-top:2px;flex-shrink:0}
 .side{border-left:2px solid var(--bor);padding-left:16px}
 @media(max-width:768px){.side{border-left:none;border-top:2px solid var(--bor);padding-left:0;padding-top:14px}}
@@ -90,8 +85,7 @@ body.dark .timer{background:#0F172A;border:1.5px solid var(--bor)}
 .submit-zone{margin-top:18px;padding:16px;border:2px dashed var(--bor);border-radius:var(--radius2);text-align:center;background:var(--surf)}
 .submit-zone p{font-size:12px;color:var(--mut);margin-bottom:10px}
 .score-big{font-size:42px;font-weight:800;color:var(--pri);font-family:'JetBrains Mono',monospace;margin:10px 0}
-.tbl{width:100%;border-collapse:collapse;font-size:12px}
-.tbl th,.tbl td{padding:8px 10px;border-bottom:1px solid var(--bor);text-align:left}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}.tbl th,.tbl td{padding:8px 10px;border-bottom:1px solid var(--bor);text-align:left}
 .tbl th{font-size:10px;color:var(--mut);text-transform:uppercase;font-weight:700;letter-spacing:.4px}
 .badge{display:inline-block;padding:3px 9px;border-radius:10px;font-size:10px;font-weight:700}
 .b-blue{background:rgba(29,78,216,.1);color:var(--pri)}.b-green{background:rgba(5,150,105,.1);color:var(--grn)}
@@ -111,31 +105,25 @@ body.dark .timer{background:#0F172A;border:1.5px solid var(--bor)}
 .paper-summary .ps-item{font-size:11px;font-weight:600;color:var(--mut)}.paper-summary .ps-item strong{color:var(--txt);font-family:'JetBrains Mono',monospace}
 .progress-bar{width:100%;height:6px;background:var(--bor);border-radius:3px;margin:8px 0;overflow:hidden}
 .progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--grn),var(--teal));border-radius:3px;transition:width .3s}
+.auth-box{max-width:400px;margin:40px auto;text-align:center}
+.auth-box .auth-icon{width:64px;height:64px;background:rgba(29,78,216,.1);border-radius:50%;margin:0 auto 18px;line-height:64px;font-size:28px}
+.db-status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px}
+.db-online{background:rgba(5,150,105,.1);color:var(--grn)}.db-offline{background:rgba(220,38,38,.1);color:var(--red)}
 .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin:20px 0}
 .price-card{border:2px solid var(--bor);border-radius:16px;padding:28px 24px;text-align:center;background:var(--card);transition:all .3s;position:relative}
 .price-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.1)}
 .price-card.featured{border-color:var(--pri);box-shadow:0 0 0 3px rgba(29,78,216,.15)}
 .price-card.featured::before{content:"MOST POPULAR";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--pri);color:#fff;padding:4px 16px;border-radius:20px;font-size:9px;font-weight:800;letter-spacing:1px}
 .price-card .plan-icon{font-size:36px;margin-bottom:12px}
-.price-card h3{font-size:18px;margin-bottom:4px;font-weight:800}
-.price-card .plan-desc{font-size:12px;color:var(--mut);margin-bottom:16px}
+.price-card h3{font-size:18px;margin-bottom:4px;font-weight:800}.price-card .plan-desc{font-size:12px;color:var(--mut);margin-bottom:16px}
 .price-card .price{font-size:36px;font-weight:800;color:var(--pri);font-family:'JetBrains Mono',monospace;margin-bottom:4px}
 .price-card .price span{font-size:14px;color:var(--mut);font-weight:400}
 .price-features{list-style:none;text-align:left;margin-bottom:20px}
 .price-features li{padding:6px 0;font-size:12px;color:var(--txt);border-bottom:1px solid var(--bor);display:flex;align-items:center;gap:8px}
-.price-features li:last-child{border-bottom:none}
-.price-features .check{color:var(--grn);font-weight:700;font-size:14px}
-.price-features .cross{color:var(--red);font-weight:700;font-size:14px}
-.auth-box{max-width:400px;margin:40px auto;text-align:center}
-.auth-box .auth-icon{width:64px;height:64px;background:rgba(29,78,216,.1);border-radius:50%;margin:0 auto 18px;line-height:64px;font-size:28px}
-.db-status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px}
-.db-online{background:rgba(5,150,105,.1);color:var(--grn)}.db-offline{background:rgba(220,38,38,.1);color:var(--red)}
+.price-features li:last-child{border-bottom:none}.price-features .check{color:var(--grn);font-weight:700;font-size:14px}.price-features .cross{color:var(--red);font-weight:700;font-size:14px}
 .page-content{max-width:800px;margin:0 auto;line-height:1.8}
 .page-content h2{font-size:22px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--bor)}
-.page-content h3{font-size:16px;margin:20px 0 8px;color:var(--pri)}
-.page-content p{font-size:13px;color:var(--mut);margin-bottom:12px}
-.page-content ul{margin:0 0 12px 20px;font-size:13px;color:var(--mut)}
-.page-content ul li{margin-bottom:6px}
+.page-content h3{font-size:16px;margin:20px 0 8px;color:var(--pri)}.page-content p{font-size:13px;color:var(--mut);margin-bottom:12px}
 .about-hero{text-align:center;padding:30px 0 20px}
 .about-hero .logo-big{width:80px;height:80px;background:linear-gradient(135deg,var(--pri),var(--indigo));border-radius:50%;margin:0 auto 16px;line-height:80px;font-size:36px;color:#fff}
 .about-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}
@@ -145,29 +133,17 @@ body.dark .timer{background:#0F172A;border:1.5px solid var(--bor)}
 .about-stat .lbl{font-size:10px;color:var(--mut);text-transform:uppercase;font-weight:700;margin-top:2px}
 .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:16px 0}
 .contact-card{background:var(--surf);border:1.5px solid var(--bor);border-radius:var(--radius2);padding:20px;text-align:center}
-.contact-card .c-icon{font-size:28px;margin-bottom:8px}
-.contact-card h4{font-size:14px;margin-bottom:4px;font-weight:700}
-.contact-card p{font-size:12px;color:var(--mut)}
+.contact-card .c-icon{font-size:28px;margin-bottom:8px}.contact-card h4{font-size:14px;margin-bottom:4px;font-weight:700}.contact-card p{font-size:12px;color:var(--mut)}
 .empty-state{text-align:center;padding:40px 20px;color:var(--mut)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.fade-in{animation:fadeUp .4s ease forwards}
-@keyframes spin{to{transform:rotate(360deg)}}
-.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--bor);border-top-color:var(--pri);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:fadeUp .4s ease forwards}
+@keyframes spin{to{transform:rotate(360deg)}}.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--bor);border-top-color:var(--pri);border-radius:50%;animation:spin .6s linear infinite}
 body.dark .exam-card{background:var(--surf)}body.dark .stat{background:var(--surf)}body.dark .pal button{background:var(--card)}
 </style>
 </head>
 <body>
 
 <div class="wrap" id="V_HOME">
-<div class="topbar">
-<button class="on" id="NAV_HOME">Home</button>
-<button id="NAV_DASH">Dashboard</button>
-<button id="NAV_PRICING">Pricing</button>
-<button id="NAV_AUTH_BTN">Login</button>
-<button id="NAV_ADMIN">Admin</button>
-<button id="NAV_THEME">&#9790; Theme</button>
-<span id="DB_STATUS" class="db-status db-offline">Local</span>
-</div>
+<div class="topbar"><button class="on" id="NAV_HOME">Home</button><button id="NAV_DASH">Dashboard</button><button id="NAV_PRICING">Pricing</button><button id="NAV_AUTH_BTN">Login</button><button id="NAV_ADMIN">Admin</button><button id="NAV_THEME">&#9790; Theme</button><span id="DB_STATUS" class="db-status db-offline">Local</span></div>
 <div class="hero"><h1>All India Examination Portal</h1><p>100+ Professional &amp; Competitive Exam Papers | 100 MCQs Per Subject</p></div>
 <div id="CATBAR" class="cat-bar"></div>
 <div id="EXGRD" class="card-grid"></div>
@@ -189,8 +165,7 @@ body.dark .exam-card{background:var(--surf)}body.dark .stat{background:var(--sur
 <div class="info-box info-red">Proctored: Tab switch 3+ times = auto-submit</div>
 <button class="btn btn-full" id="BTN_START">&#9654; Start Exam</button>
 </div>
-<div class="footer">All India Examination Portal v9.0<br>
-<a href="#" id="LNK_PRIV">Privacy</a> | <a href="#" id="LNK_TERM">Terms</a> | <a href="#" id="LNK_DISC">Disclaimer</a> | <a href="#" id="LNK_ABOUT">About</a><br>&copy; 2026 AIEP. For practice only.</div>
+<div class="footer">All India Examination Portal v10.0 &#8212; Modular Edition<br><a href="#" id="LNK_PRIV">Privacy</a> | <a href="#" id="LNK_TERM">Terms</a> | <a href="#" id="LNK_DISC">Disclaimer</a> | <a href="#" id="LNK_ABOUT">About</a><br>&copy; 2026 AIEP. For practice only.</div>
 </div>
 
 <div class="wrap hide" id="V_AUTH">
@@ -198,17 +173,14 @@ body.dark .exam-card{background:var(--surf)}body.dark .stat{background:var(--sur
 <div class="auth-box">
 <div class="auth-icon">&#128274;</div>
 <h2 id="AUTH_TITLE">Login to Your Account</h2>
-<p class="sub">Access your exam history from any device</p>
-<div style="display:flex;gap:4px;margin-bottom:18px;justify-content:center">
-<button class="btn btn-sm btn-outline" id="TAB_LOGIN">Login</button>
-<button class="btn btn-sm btn-gray" id="TAB_SIGNUP">Sign Up</button>
-</div>
+<p class="sub">Access your exam history</p>
+<div style="display:flex;gap:4px;margin-bottom:18px;justify-content:center"><button class="btn btn-sm btn-outline" id="TAB_LOGIN">Login</button><button class="btn btn-sm btn-gray" id="TAB_SIGNUP">Sign Up</button></div>
 <div id="AUTH_NAME_WRAP" class="hide"><label>Full Name</label><input type="text" id="AUTH_NAME" placeholder="Your name"></div>
 <label>Email</label><input type="email" id="AUTH_EMAIL" placeholder="you@email.com">
 <label>Password</label><input type="password" id="AUTH_PASS" placeholder="Min 6 characters">
 <div class="hide" id="AUTH_ERR" style="color:var(--red);font-size:12px;font-weight:700;padding:10px;background:rgba(220,38,38,.07);border-radius:6px;margin-bottom:10px"></div>
 <button class="btn btn-full" id="BTN_AUTH_SUBMIT">&#128274; Login</button>
-<p style="font-size:11px;color:var(--mut);margin-top:16px;line-height:1.8">No account needed for free papers.<br>Sign up to save results across devices.</p>
+<p style="font-size:11px;color:var(--mut);margin-top:16px;line-height:1.8">No account needed for free papers.<br>Sign up to save results.</p>
 </div>
 </div>
 
@@ -218,15 +190,15 @@ body.dark .exam-card{background:var(--surf)}body.dark .stat{background:var(--sur
 <div class="pricing-grid" id="PRICING_CARDS"></div>
 </div>
 
-<div class="wrap hide" id="V_PRIVACY"><div class="topbar"><button id="NAV_HOME_PRIV">Home</button><button id="NAV_THEME_PRIV">&#9790; Theme</button></div><div class="page-content"><h2>&#128274; Privacy Policy</h2><p style="font-style:italic;color:var(--mut)">Last updated: January 2026</p><h3>Information We Collect</h3><p>Name, email, phone, roll number during registration. Exam answers, scores, and performance data during tests.</p><h3>Data Storage</h3><p>Data stored in browser localStorage. Optional cloud sync via InstantDB when configured.</p><h3>Contact</h3><p>privacy@aiep-exam.in</p></div></div>
+<div class="wrap hide" id="V_PRIVACY"><div class="topbar"><button id="NAV_HOME_PRIV">Home</button><button id="NAV_THEME_PRIV">&#9790; Theme</button></div><div class="page-content"><h2>&#128274; Privacy Policy</h2><p style="font-style:italic;color:var(--mut)">Last updated: January 2026</p><h3>Information</h3><p>Name, email, phone, roll during registration. Scores during tests.</p><h3>Storage</h3><p>Browser localStorage. Optional cloud sync via InstantDB.</p><h3>Contact</h3><p>privacy@aiep-exam.in</p></div></div>
 
-<div class="wrap hide" id="V_TERMS"><div class="topbar"><button id="NAV_HOME_TERM">Home</button><button id="NAV_THEME_TERM">&#9790; Theme</button></div><div class="page-content"><h2>&#128220; Terms of Service</h2><p style="font-style:italic;color:var(--mut)">Last updated: January 2026</p><h3>Service</h3><p>AIEP is a practice platform. NOT affiliated with ICAI, ICSI, ICMAI, ACCA, CFA Institute, NTA, UPSC, or any official body.</p><h3>Limitation</h3><p>Provided as-is. No guarantee of exam success. Always refer to official sources.</p></div></div>
+<div class="wrap hide" id="V_TERMS"><div class="topbar"><button id="NAV_HOME_TERM">Home</button><button id="NAV_THEME_TERM">&#9790; Theme</button></div><div class="page-content"><h2>&#128220; Terms</h2><p>AIEP is a practice platform. NOT affiliated with ICAI, ICSI, ICMAI, ACCA, CFA Institute, NTA, UPSC, or any official body. Provided as-is.</p></div></div>
 
-<div class="wrap hide" id="V_DISCLAIMER"><div class="topbar"><button id="NAV_HOME_DISC">Home</button><button id="NAV_THEME_DISC">&#9790; Theme</button></div><div class="page-content"><h2>&#9888; Disclaimer</h2><p>AIEP certificates are for personal motivation only. NOT valid for employment, admissions, or official purposes. Questions are auto-generated for practice.</p></div></div>
+<div class="wrap hide" id="V_DISCLAIMER"><div class="topbar"><button id="NAV_HOME_DISC">Home</button><button id="NAV_THEME_DISC">&#9790; Theme</button></div><div class="page-content"><h2>&#9888; Disclaimer</h2><p>AIEP certificates are for personal motivation only. NOT valid for employment or admissions. Questions are auto-generated for practice.</p></div></div>
 
 <div class="wrap hide" id="V_ABOUT"><div class="topbar"><button id="NAV_HOME_AB">Home</button><button id="NAV_PRICING_AB">Pricing</button><button id="NAV_THEME_AB">&#9790; Theme</button></div><div class="page-content"><div class="about-hero"><div class="logo-big">&#128218;</div><h2>All India Examination Portal</h2><p style="color:var(--mut);font-size:14px">Practice platform for professional &amp; competitive exams</p></div><div class="about-stats"><div class="about-stat"><div class="num" id="AB_EXAMS">0</div><div class="lbl">Exams</div></div><div class="about-stat"><div class="num" id="AB_PAPERS">0</div><div class="lbl">Papers</div></div><div class="about-stat"><div class="num" id="AB_MCQS">0</div><div class="lbl">MCQs</div></div><div class="about-stat"><div class="num" id="AB_USERS">0</div><div class="lbl">Users</div></div></div><div class="contact-grid"><div class="contact-card"><div class="c-icon">&#128231;</div><h4>Email</h4><p>info@aiep-exam.in</p></div><div class="contact-card"><div class="c-icon">&#128222;</div><h4>Phone</h4><p>+91 11 4567 8900</p></div></div></div></div>
 
-<div class="wrap hide" id="V_ADMLOGIN"><div class="topbar"><button id="NAV_HOME2">Home</button><button class="on">Admin</button><button id="NAV_THEME2">&#9790; Theme</button></div><div class="auth-box"><div class="auth-icon">&#128274;</div><h2>Admin Login</h2><p class="sub">Authorized personnel only</p><label style="text-align:left">Username</label><input type="text" id="AU" autocomplete="off"><label style="text-align:left">Password</label><input type="password" id="AP" autocomplete="off"><div class="hide" id="AERR" style="color:var(--red);font-size:12px;font-weight:700;padding:9px;background:rgba(220,38,38,.07);border-radius:6px;margin-bottom:10px"></div><button class="btn btn-full" id="BTN_ALOGIN">&#128274; Login</button><p style="font-size:11px;color:var(--mut);margin-top:14px">Default: admin / admin@2026</p></div></div>
+<div class="wrap hide" id="V_ADMLOGIN"><div class="topbar"><button id="NAV_HOME2">Home</button><button class="on">Admin</button><button id="NAV_THEME2">&#9790; Theme</button></div><div class="auth-box"><div class="auth-icon">&#128274;</div><h2>Admin Login</h2><p class="sub">Authorized only</p><label style="text-align:left">Username</label><input type="text" id="AU" autocomplete="off"><label style="text-align:left">Password</label><input type="password" id="AP" autocomplete="off"><div class="hide" id="AERR" style="color:var(--red);font-size:12px;font-weight:700;padding:9px;background:rgba(220,38,38,.07);border-radius:6px;margin-bottom:10px"></div><button class="btn btn-full" id="BTN_ALOGIN">&#128274; Login</button><p style="font-size:11px;color:var(--mut);margin-top:14px">Default: admin / admin@2026</p></div></div>
 
 <div class="wrap hide" id="V_ADMIN">
 <div class="topbar"><span style="font-size:11px;color:var(--mut);margin-right:auto;padding:6px">Admin: <strong id="ADNM"></strong></span><button id="BTN_ALOGOUT">Logout</button><button id="NAV_THEME3">&#9790; Theme</button></div>
@@ -273,458 +245,8 @@ body.dark .exam-card{background:var(--surf)}body.dark .stat{background:var(--sur
 <div id="SBOX" class="hide" style="text-align:left;margin-top:20px"><h3>Solutions</h3><div style="max-height:500px;overflow-y:auto"><table class="sol-tbl"><thead><tr><th>#</th><th>Q</th><th>You</th><th>Ans</th></tr></thead><tbody id="STB"></tbody></table></div></div>
 </div>
 
-<script>
-(function(){
-"use strict";
-
-// =========================================================
-// CONFIG — Replace with your InstantDB App ID when ready
-// =========================================================
-var APP_ID="52877744-72cc-404a-b68e-fb01f3e387ac";
-
-// =========================================================
-// CORE STATE
-// =========================================================
-var db=null,dbOK=false,loggedInUser=null;
-var bank=null,ans={},marks={},idx=0,tmr=null;
-var sScore=0,sPct=0,sTotal=0,sWrong=0,sSkip=0;
-var sName="",sRoll="",sEmail="",sPhone="";
-var catName="",paperTitle="",examKey="",paperKey="";
-var tabWarn=0,isAdmin=false,submitState=0,authMode="login";
-
-// =========================================================
-// HELPERS
-// =========================================================
-function enc(s){return btoa(unescape(encodeURIComponent(s)))}
-function dec(s){try{return decodeURIComponent(escape(atob(s)))}catch(e){return s}}
-function G(k,d){try{var s=localStorage.getItem(k);return s?JSON.parse(s):d}catch(e){return d}}
-function S(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-function uid(){return Date.now().toString(36)+Math.random().toString(36).substr(2,9)}
-function getCreds(){return G("x_c",{u:"admin",p:"admin@2026"})}
-function setCreds(u,p){S("x_c",{u:u,p:p})}
-function getTier(){return loggedInUser?(loggedInUser.tier||"free"):G("x_tier","free")}
-function setTier(t){S("x_tier",t);if(loggedInUser)loggedInUser.tier=t}
-
-function toast(m,t){
-var d=document.createElement("div");
-d.style.cssText="position:fixed;top:18px;right:18px;padding:11px 20px;border-radius:10px;font-size:12px;font-weight:700;z-index:99999;color:#fff;box-shadow:0 4px 20px rgba(0,0,0,.2);max-width:320px;transition:opacity .3s,transform .3s";
-d.style.background=t==="error"?"#DC2626":t==="ok"?"#059669":"#1D4ED8";
-d.textContent=m;document.body.appendChild(d);
-setTimeout(function(){d.style.opacity="0";d.style.transform="translateY(-10px)"},2800);
-setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d)},3200);
-}
-
-function dbBadge(){
-var el=document.getElementById("DB_STATUS");
-if(!el)return;
-if(dbOK){el.className="db-status db-online";el.textContent="Cloud"}
-else{el.className="db-status db-offline";el.textContent="Local"}
-}
-
-// =========================================================
-// LOCAL STORAGE
-// =========================================================
-function getUsers(){return G("x_u",[])}
-function saveUsers(u){S("x_u",u)}
-function getHist(){return G("x_h",[])}
-function saveHist(h){S("x_h",h)}
-function getV(){return G("x_v",{"FREE2026":{desc:"Free Access",used:0,max:9999,tier:"ultimate"},"LAUNCH50":{desc:"Launch Promo",used:0,max:9999,tier:"starter"}})}
-function saveV(v){S("x_v",v)}
-function addLog(a){var arr=G("x_l",[]);arr.push({a:a,t:new Date().toLocaleString()});if(arr.length>300)arr=arr.slice(-300);S("x_l",arr)}
-
-// =========================================================
-// INSTANTDB — Load dynamically (non-blocking)
-// =========================================================
-function loadInstantDB(){
-if(!APP_ID||APP_ID==="YOUR_APP_ID")return;
-var s=document.createElement("script");
-s.src="https://unpkg.com/@instantdb/core";
-s.onload=function(){
-try{
-db=instant.init({appId:APP_ID});
-dbOK=true;dbBadge();
-db.subscribeQuery({results:{},portalusers:{},vouchers:{}},function(r){
-if(r.error){dbOK=false;dbBadge();return}
-dbOK=true;dbBadge();
-if(isAdmin)refreshAdmin();
-updateAboutStats();
-});
-}catch(e){dbOK=false;dbBadge()}
-};
-s.onerror=function(){dbOK=false;dbBadge()};
-document.head.appendChild(s);
-}
-
-function cloudSaveResult(d){
-if(!db||!dbOK)return;
-try{db.transact(db.tx.results[uid()].update({name:d.name,email:d.email||"",exam:d.exam,paper:d.paper,score:d.score,total:d.total,pct:d.pct,date:new Date().toISOString()}))}catch(e){}
-}
-function cloudSaveUser(d){
-if(!db||!dbOK)return;
-try{db.transact(db.tx.portalusers[uid()].update({name:d.name,email:d.email,tier:d.tier||"free",joined:new Date().toISOString()}))}catch(e){}
-}
-
-// =========================================================
-// AUTH — localStorage based, works immediately
-// =========================================================
-function doSignup(){
-var name=document.getElementById("AUTH_NAME").value.trim();
-var email=document.getElementById("AUTH_EMAIL").value.trim();
-var pass=document.getElementById("AUTH_PASS").value.trim();
-var err=document.getElementById("AUTH_ERR");
-err.classList.add("hide");
-
-if(!name){err.textContent="Enter your name.";err.classList.remove("hide");return}
-if(!email||email.indexOf("@")===-1){err.textContent="Enter a valid email.";err.classList.remove("hide");return}
-if(!pass||pass.length<6){err.textContent="Password must be at least 6 characters.";err.classList.remove("hide");return}
-
-var users=getUsers();
-for(var i=0;i<users.length;i++){
-if(users[i].email.toLowerCase()===email.toLowerCase()){
-err.textContent="This email is already registered. Try logging in.";err.classList.remove("hide");return;
-}
-}
-
-var newUser={id:uid(),name:name,email:email,pass:pass,phone:"",roll:"",tier:"free",joined:new Date().toLocaleString()};
-users.push(newUser);
-saveUsers(users);
-cloudSaveUser(newUser);
-
-loggedInUser={name:name,email:email,tier:"free",id:newUser.id};
-S("x_cur",loggedInUser);
-addLog("Signup: "+name+" ("+email+")");
-toast("Account created! Welcome, "+name+"!","ok");
-goHome();
-}
-
-function doLogin(){
-var email=document.getElementById("AUTH_EMAIL").value.trim();
-var pass=document.getElementById("AUTH_PASS").value.trim();
-var err=document.getElementById("AUTH_ERR");
-err.classList.add("hide");
-
-if(!email||!pass){err.textContent="Enter email and password.";err.classList.remove("hide");return}
-
-var users=getUsers();
-for(var i=0;i<users.length;i++){
-if(users[i].email.toLowerCase()===email.toLowerCase()&&users[i].pass===pass){
-loggedInUser={name:users[i].name,email:users[i].email,tier:users[i].tier||"free",id:users[i].id};
-S("x_cur",loggedInUser);
-addLog("Login: "+users[i].name);
-toast("Welcome back, "+users[i].name+"!","ok");
-goHome();
-return;
-}
-}
-
-err.textContent="Invalid email or password. Don't have an account? Click Sign Up.";
-err.classList.remove("hide");
-}
-
-function doLogout(){
-loggedInUser=null;
-S("x_cur",null);
-toast("Logged out","ok");
-goHome();
-}
-
-function checkSavedLogin(){
-var saved=G("x_cur",null);
-if(saved&&saved.email)loggedInUser=saved;
-}
-
-function updateAuthUI(){
-var btn=document.getElementById("NAV_AUTH_BTN");
-var status=document.getElementById("AUTH_STATUS");
-
-if(loggedInUser&&loggedInUser.email){
-var nm=loggedInUser.name||loggedInUser.email.split("@")[0];
-btn.textContent=nm;
-btn.style.background="var(--grn)";btn.style.color="#fff";btn.style.borderColor="var(--grn)";
-btn.onclick=doLogout;
-if(status){
-status.innerHTML='<div class="info-box info-green">&#10003; Logged in as <strong>'+loggedInUser.email+'</strong> | '+getTierBadge(loggedInUser.tier||"free")+' | <span id="DO_LOGOUT" style="cursor:pointer;text-decoration:underline;color:var(--pri)">Logout</span></div>';
-status.classList.remove("hide");
-setTimeout(function(){var lo=document.getElementById("DO_LOGOUT");if(lo)lo.onclick=doLogout},50);
-}
-if(loggedInUser.name)document.getElementById("F_NAME").value=loggedInUser.name;
-if(loggedInUser.email)document.getElementById("F_EMAIL").value=loggedInUser.email;
-}else{
-btn.textContent="Login";
-btn.style.background="none";btn.style.color="var(--txt)";btn.style.borderColor="var(--bor)";
-btn.onclick=function(){showV("V_AUTH")};
-if(status){
-status.innerHTML='<div class="info-box info-blue">Save your results? <a href="#" id="GOTO_AUTH" style="color:var(--pri);font-weight:700">Login or Sign Up</a></div>';
-status.classList.remove("hide");
-setTimeout(function(){var ga=document.getElementById("GOTO_AUTH");if(ga)ga.onclick=function(e){e.preventDefault();showV("V_AUTH")}},50);
-}
-}
-}
-
-// =========================================================
-// TIERS
-// =========================================================
-var TIERS={free:{name:"Free",color:"#6B7280"},starter:{name:"Starter",color:"#059669"},professional:{name:"Professional",color:"#1D4ED8"},ultimate:{name:"Ultimate",color:"#7C3AED"}};
-function getTierBadge(t){var r=TIERS[t]||TIERS.free;return '<span class="badge" style="background:'+r.color+'20;color:'+r.color+'">'+r.name+'</span>'}
-
-// =========================================================
-// TOPIC POOLS
-// =========================================================
-var TP={
-accounting:["Revenue Recognition","Depreciation","Inventory Valuation","Financial Statements","Cash Flow","Consolidation","Lease Accounting","Foreign Currency","Intangible Assets","Provisions","Investment Property","Borrowing Costs","Related Parties","Accounting Estimates","Fair Value","Business Combinations","Employee Benefits","Financial Instruments","Share-based Payments","Segment Reporting"],
-law:["Contract Act","Sale of Goods","Partnership Act","Companies Act 2013","LLP Act","Negotiable Instruments","Consumer Protection","Arbitration Act","SEBI Regulations","Competition Act","IBC 2016","RTI Act","IT Act 2000","IP Laws","Environmental Laws","Labour Code","Industrial Relations","Social Security","Stamp Act","Registration Act"],
-tax:["Income Salary","House Property","Business Profession","Capital Gains","Other Sources","Deductions 80C-80U","TDS","TCS","Advance Tax","Assessment","Appeals","Penalties","International Tax","Transfer Pricing","DTAA","GAAR","GST Levy","GST ITC","GST Registration","GST Composition"],
-audit:["Audit Planning","Audit Evidence","Internal Controls","Audit Sampling","Fraud Detection","Going Concern","Company Audit","Tax Audit","GST Audit","Internal Audit","Audit Reports","Professional Ethics","Quality Control","Peer Review","CARO 2020","Documentation","Substantive Procedures","Compliance Audit","Performance Audit","Forensic Audit"],
-cost:["Material Costing","Labour Costing","Overhead Allocation","Process Costing","Job Costing","Contract Costing","Standard Costing","Marginal Costing","ABC Costing","Budgetary Control","Variance Analysis","CVP Analysis","Transfer Pricing","Target Costing","Life Cycle","Kaizen Costing","Throughput","Joint Products","Service Costing","Operating Costing"],
-finmgmt:["Time Value Money","Capital Budgeting","Cost of Capital","Capital Structure","Working Capital","Dividend Policy","Ratio Analysis","Leverage","Portfolio Mgmt","Derivatives","Mergers Acquisitions","Corporate Valuation","Lease vs Buy","Treasury Mgmt","Financial Planning","Credit Analysis","Bond Valuation","Equity Valuation","Risk Return","Restructuring"],
-economics:["Demand Supply","Elasticity","Consumer Surplus","Production Function","Cost Curves","Perfect Competition","Monopoly Oligopoly","National Income","Inflation","Monetary Policy","Fiscal Policy","Balance Payments","Trade Theory","Exchange Rates","Money Supply","Business Cycles","Public Finance","Welfare Economics","Game Theory","Behavioral Econ"],
-it:["MIS","Database Mgmt","Computer Networks","Cyber Security","Cloud Computing","ERP","Business Analytics","Blockchain","AI & ML","IT Governance","Data Privacy","SDLC","IT Audit","Digital Signatures","E-Commerce","Operating Systems","Data Warehousing","ITIL","Emerging Tech","Network Security"],
-strategy:["Strategic Planning","SWOT","PESTEL","Porter Five Forces","Value Chain","Core Competencies","Corporate Strategy","Business Strategy","Balanced Scorecard","BCG Matrix","Ansoff Matrix","Blue Ocean","Corporate Governance","ERM","Change Mgmt","Stakeholders","Competitive Advantage","Alliances","Diversification","Benchmarking"],
-ethics:["Ethics Principles","Code of Conduct","Independence","Objectivity","Due Care","Confidentiality","Professional Behavior","Conflict Resolution","CSR","Whistleblower","Insider Trading","AML","Governance","Fiduciary Duties","Compliance","Sustainability","Ethics Framework","Decision Models","Professional Scepticism","Integrity"],
-fm:["Planning","Organizing","Staffing","Directing","Controlling","Leadership","Motivation","Communication","Decision Making","Org Structure","HR Practices","Marketing 4Ps","Operations","TQM","Project Mgmt","Supply Chain","Innovation","Conflict Resolution","Team Development","Corporate Culture"],
-advacc:["Ind AS Framework","IFRS","Ind AS 109","Revenue","Leases","Ind AS 19","Ind AS 12","Ind AS 41","Ind AS 104","Ind AS 101","Consolidation","Ind AS 111","Ind AS 28","Ind AS 34","Ind AS 33","Ind AS 36","Post Balance Events","Policy Changes","Ind AS 113","Hyperinflation"],
-corplaw:["Incorporation","MOA","AOA","Share Capital","Charges","Management","Dividends","Accounts Audit","Winding Up","NCLT NCLAT","Oppression","LLP Compliance","Producer Companies","Govt Companies","Foreign Company","Restructuring","XBRL","Board Meetings","Annual Filing","DIN DSC"],
-risk:["Risk Identification","Risk Assessment","VaR","Market Risk","Credit Risk","Operational Risk","Liquidity Risk","Interest Rate Risk","FX Risk","Commodity Risk","Cyber Risk","Model Risk","Reputational Risk","Legal Risk","Systemic Risk","Mitigation","Hedging","Insurance","Risk Reporting","Basel"],
-quant:["Permutations","Probability","Descriptive Stats","Distributions","Hypothesis Testing","Regression","Time Series","Linear Programming","Transportation","Assignment","Game Theory","Queuing Theory","Decision Theory","Sampling","Index Numbers","Logic","Sequences","Matrices","Calculus","Financial Maths"],
-invest:["Equity Markets","Bond Markets","Mutual Funds","ETF","Portfolio Theory","CAPM","APT","EMH","Technical Analysis","Fundamental Analysis","Alt Investments","Real Estate","Private Equity","Hedge Funds","Commodity","Forex","Fixed Income","Credit Ratings","Derivatives","Investment Banking"]
-};
-
-// =========================================================
-// QUESTION GENERATORS
-// =========================================================
-function genQ(name,n){var a=[];for(var i=1;i<=n;i++){var ci=(i*3+1)%4,cl="ABCD"[ci],opts={};for(var j=0;j<4;j++){var lk="ABCD"[j];if(j===ci)opts[lk]=enc("Correct: Concept "+((i%20)+1)+" under "+name+".");else opts[lk]=enc("Option "+lk+": Topic "+((i+j*3)%15+1)+" — incorrect.");}a.push({id:"q"+i,t:enc("Q"+i+". ["+name+"] Topic "+((i%20)+1)+": Which statement is correct?"),o:opts,a:enc(cl)})}return a}
-
-function genProQ(name,n,tp){
-var qT=["Which correctly describes TOPIC under NAME?","The principle governing TOPIC in NAME:","Correct statement about TOPIC per NAME:","Recognition of TOPIC under NAME requires:","Key requirement for TOPIC under NAME?","Which applies to TOPIC per NAME?","Concept of TOPIC in NAME involves:","Provision about TOPIC under NAME:","TRUE statement about TOPIC in NAME:","Correct treatment of TOPIC per NAME:"];
-var rO=["Proper classification per framework","Recognition when probable benefits flow","Systematic allocation over useful life","Substance over form principle","Matching entries in period incurred","Prudence with neutrality","Accrual basis with adjustments","Fair value measurement techniques","Disclosure with comparative info","Audit verification and completeness"];
-var wO=["Contradicts fundamental principles","Not recognized under standards","Incorrect interpretation","Superseded by amendments","Different category not covered","Oversimplification","Lacks required disclosure","Conflicts with objective","Mixes different frameworks","Common misconception"];
-var a=[];for(var i=0;i<n;i++){var topic=tp[i%tp.length],ci=(i*3+1)%4,cl="ABCD"[ci],opts={};for(var j=0;j<4;j++){var lk="ABCD"[j];if(j===ci)opts[lk]=enc(rO[i%rO.length]);else opts[lk]=enc(wO[(i*7+j*13)%wO.length])}var qt=qT[i%qT.length].replace(/TOPIC/g,topic).replace(/NAME/g,name);a.push({id:"q"+(i+1),t:enc("Q"+(i+1)+". "+qt),o:opts,a:enc(cl)})}return a}
-
-function profP(pre,ex,lvls,dur){var papers={};for(var l=0;l<lvls.length;l++){var lv=lvls[l];for(var s=0;s<lv.subjects.length;s++){var sub=lv.subjects[s];papers[pre+"_"+l+"_"+s]={title:lv.name+" \u2014 "+sub.name,level:lv.name,dur:sub.dur||dur||180,qs:genProQ(ex+" "+sub.name,100,sub.topics),free:sub.free||false}}}return papers}
-
-// =========================================================
-// EXAMS — All 26 categories
-// =========================================================
-var EX={
-neet:{name:"NEET (UG)",cat:"medical",icon:"&#129657;",tag:"Medical",tc:"tag-med",desc:"Medical entrance.",papers:{full:{title:"NEET Full",dur:180,qs:genQ("NEET",50)},phy:{title:"Physics",dur:90,qs:genQ("NEET Phy",50)},bio:{title:"Biology",dur:90,qs:genQ("NEET Bio",50),free:true}}},
-jee:{name:"JEE Main",cat:"engineering",icon:"&#128300;",tag:"Engineering",tc:"tag-eng",desc:"Engineering entrance.",papers:{full:{title:"JEE Full",dur:180,qs:genQ("JEE",50)},math:{title:"Maths",dur:60,qs:genQ("JEE Math",50),free:true}}},
-upsc:{name:"UPSC CSE",cat:"civil",icon:"&#127963;",tag:"Civil",tc:"tag-gov",desc:"Civil Services.",papers:{gs1:{title:"GS Paper I",dur:120,qs:genQ("UPSC GS1",50)},gs2:{title:"CSAT",dur:120,qs:genQ("UPSC CSAT",50)}}},
-ssc:{name:"SSC CGL",cat:"ssc",icon:"&#128188;",tag:"SSC",tc:"tag-gov",desc:"Staff Selection.",papers:{gk:{title:"GK",dur:60,qs:genQ("SSC GK",50),free:true},quant:{title:"Quant",dur:60,qs:genQ("SSC Quant",50)}}},
-bank:{name:"Banking",cat:"banking",icon:"&#127974;",tag:"Banking",tc:"tag-eng",desc:"Bank PO/Clerk.",papers:{po:{title:"Bank PO",dur:180,qs:genQ("Bank PO",50)},reason:{title:"Reasoning",dur:45,qs:genQ("Bank Reasoning",50),free:true}}},
-clat:{name:"CLAT",cat:"law",icon:"&#9878;",tag:"Law",tc:"tag-law",desc:"Law admission.",papers:{full:{title:"CLAT UG",dur:120,qs:genQ("CLAT",50)}}},
-nda:{name:"NDA",cat:"defence",icon:"&#9876;",tag:"Defence",tc:"tag-def",desc:"Defence academy.",papers:{math:{title:"NDA Math",dur:150,qs:genQ("NDA",50)},gat:{title:"NDA GAT",dur:150,qs:genQ("NDA GAT",50),free:true}}},
-cat:{name:"CAT",cat:"management",icon:"&#128188;",tag:"MBA",tc:"tag-mgmt",desc:"MBA entrance.",papers:{full:{title:"CAT Full",dur:120,qs:genQ("CAT",50)}}},
-ctet:{name:"CTET",cat:"teaching",icon:"&#128218;",tag:"Teach",tc:"tag-law",desc:"Teacher eligibility.",papers:{p1:{title:"CTET P1",dur:150,qs:genQ("CTET",50)},p2:{title:"CTET P2",dur:150,qs:genQ("CTET P2",50)}}},
-gate:{name:"GATE",cat:"gate",icon:"&#127891;",tag:"GATE",tc:"tag-eng",desc:"Engg aptitude.",papers:{cse:{title:"GATE CSE",dur:180,qs:genQ("GATE",50),free:true},ee:{title:"GATE EE",dur:180,qs:genQ("GATE EE",50)},me:{title:"GATE ME",dur:180,qs:genQ("GATE ME",50)}}},
-rbi:{name:"RBI Grade B",cat:"banking",icon:"&#127974;",tag:"RBI",tc:"tag-eng",desc:"RBI Officer.",papers:{p1:{title:"Phase I",dur:120,qs:genQ("RBI",50)},p2:{title:"Phase II",dur:180,qs:genQ("RBI P2",50)}}},
-cuet:{name:"CUET",cat:"entrance",icon:"&#127891;",tag:"CUET",tc:"tag-eng",desc:"Common Univ Entrance.",papers:{gk:{title:"General Test",dur:75,qs:genQ("CUET",50),free:true}}},
-ntpc:{name:"RRB NTPC",cat:"ssc",icon:"&#128188;",tag:"Railway",tc:"tag-gov",desc:"Railway.",papers:{full:{title:"NTPC",dur:90,qs:genQ("NTPC",50),free:true}}},
-ugcnet:{name:"UGC NET",cat:"teaching",icon:"&#128218;",tag:"UGC",tc:"tag-law",desc:"NET.",papers:{p1:{title:"Paper I",dur:120,qs:genQ("UGC",50),free:true}}},
-
-ca:{name:"CA (ICAI)",cat:"professional",icon:"&#128179;",tag:"CA",tc:"tag-prof",desc:"Chartered Accountant.",papers:profP("ca","CA",[{name:"Foundation",subjects:[{name:"Accounting",topics:TP.accounting,free:true},{name:"Business Laws",topics:TP.law},{name:"Quant",topics:TP.quant},{name:"Economics",topics:TP.economics}]},{name:"Inter Grp I",subjects:[{name:"Accounting",topics:TP.accounting},{name:"Corp Laws",topics:TP.corplaw},{name:"Cost Accounting",topics:TP.cost},{name:"Taxation",topics:TP.tax}]},{name:"Inter Grp II",subjects:[{name:"Adv Accounting",topics:TP.advacc},{name:"Auditing",topics:TP.audit},{name:"EIS & SM",topics:TP.it},{name:"FM",topics:TP.finmgmt}]},{name:"Final Grp I",subjects:[{name:"Financial Reporting",topics:TP.advacc},{name:"SFM",topics:TP.finmgmt},{name:"Adv Auditing",topics:TP.audit},{name:"Corp & Econ Laws",topics:TP.corplaw}]},{name:"Final Grp II",subjects:[{name:"Strategic Cost",topics:TP.cost},{name:"Direct Tax",topics:TP.tax},{name:"Indirect Tax",topics:TP.tax},{name:"IBS",topics:TP.strategy}]}],180)},
-
-cs:{name:"CS (ICSI)",cat:"professional",icon:"&#128196;",tag:"CS",tc:"tag-prof",desc:"Company Secretary.",papers:profP("cs","CS",[{name:"Foundation",subjects:[{name:"Bus Env & Law",topics:TP.law,free:true},{name:"Mgmt & Ethics",topics:TP.fm},{name:"Economics",topics:TP.economics},{name:"Accounting",topics:TP.accounting}]},{name:"Executive",subjects:[{name:"General Laws",topics:TP.law},{name:"Company Law",topics:TP.corplaw},{name:"Tax Laws",topics:TP.tax},{name:"Securities",topics:TP.invest}]},{name:"Professional",subjects:[{name:"Governance",topics:TP.ethics},{name:"Adv Tax",topics:TP.tax},{name:"Drafting",topics:TP.law},{name:"Corp Funding",topics:TP.invest}]}],180)},
-
-cma:{name:"CMA (ICMAI)",cat:"professional",icon:"&#128200;",tag:"CMA",tc:"tag-prof",desc:"Cost & Mgmt Accountant.",papers:profP("cma","CMA",[{name:"Foundation",subjects:[{name:"Eco & Mgmt",topics:TP.economics,free:true},{name:"Accounting",topics:TP.accounting},{name:"Laws",topics:TP.law},{name:"Maths",topics:TP.quant}]},{name:"Inter",subjects:[{name:"Fin Accounting",topics:TP.accounting},{name:"Cost Accounting",topics:TP.cost},{name:"Direct Tax",topics:TP.tax},{name:"FM",topics:TP.finmgmt}]},{name:"Final",subjects:[{name:"Corp Laws",topics:TP.corplaw},{name:"SFM",topics:TP.finmgmt},{name:"Strategic Cost",topics:TP.cost},{name:"Indirect Tax",topics:TP.tax}]}],180)},
-
-acca:{name:"ACCA (UK)",cat:"professional",icon:"&#127468;&#127463;",tag:"ACCA",tc:"tag-fina",desc:"ACCA.",papers:profP("acca","ACCA",[{name:"Knowledge",subjects:[{name:"BT",topics:TP.it,free:true},{name:"MA",topics:TP.cost},{name:"FA",topics:TP.accounting}]},{name:"Skills",subjects:[{name:"LW",topics:TP.law},{name:"PM",topics:TP.cost},{name:"TX",topics:TP.tax},{name:"FR",topics:TP.advacc},{name:"AA",topics:TP.audit},{name:"FM",topics:TP.finmgmt}]},{name:"Strategic",subjects:[{name:"SBL",topics:TP.strategy},{name:"SBR",topics:TP.advacc},{name:"AFM",topics:TP.finmgmt},{name:"APM",topics:TP.cost}]}],180)},
-
-uscma:{name:"US CMA (IMA)",cat:"professional",icon:"&#127482;&#127480;",tag:"US CMA",tc:"tag-fina",desc:"IMA CMA.",papers:profP("uscma","US CMA",[{name:"Part 1",subjects:[{name:"Reporting",topics:TP.accounting},{name:"Planning",topics:TP.cost},{name:"Performance",topics:TP.cost},{name:"Cost Mgmt",topics:TP.cost},{name:"Controls",topics:TP.audit},{name:"Technology",topics:TP.it}]},{name:"Part 2",subjects:[{name:"Analysis",topics:TP.advacc},{name:"Corp Finance",topics:TP.finmgmt},{name:"Decision",topics:TP.finmgmt},{name:"Risk",topics:TP.risk},{name:"Investment",topics:TP.invest},{name:"Ethics",topics:TP.ethics}]}],240)},
-
-cfa:{name:"CFA",cat:"professional",icon:"&#128176;",tag:"CFA",tc:"tag-fina",desc:"CFA Level I, II, III.",papers:profP("cfa","CFA",[{name:"Level I",subjects:[{name:"Ethics",topics:TP.ethics,free:true},{name:"Quant",topics:TP.quant},{name:"Economics",topics:TP.economics},{name:"FRA",topics:TP.advacc},{name:"Equity",topics:TP.invest},{name:"Fixed Income",topics:TP.invest},{name:"Portfolio",topics:TP.invest}]},{name:"Level II",subjects:[{name:"Ethics",topics:TP.ethics},{name:"Quant",topics:TP.quant},{name:"FRA",topics:TP.advacc},{name:"Equity",topics:TP.invest},{name:"FI",topics:TP.invest},{name:"Derivatives",topics:TP.invest},{name:"Portfolio",topics:TP.invest}]},{name:"Level III",subjects:[{name:"Ethics",topics:TP.ethics},{name:"Private Wealth",topics:TP.invest},{name:"Institutional",topics:TP.invest},{name:"Deriv & Risk",topics:TP.risk},{name:"Trading",topics:TP.invest},{name:"Performance",topics:TP.invest}]}],180)},
-
-frm:{name:"FRM (GARP)",cat:"professional",icon:"&#127919;",tag:"FRM",tc:"tag-fina",desc:"Financial Risk Manager.",papers:profP("frm","FRM",[{name:"Part 1",subjects:[{name:"Risk Foundations",topics:TP.risk,free:true},{name:"Quant",topics:TP.quant},{name:"Markets",topics:TP.invest},{name:"Valuation",topics:TP.risk}]},{name:"Part 2",subjects:[{name:"Market Risk",topics:TP.risk},{name:"Credit Risk",topics:TP.risk},{name:"Operational",topics:TP.risk},{name:"Liquidity",topics:TP.risk},{name:"Risk & Invest",topics:TP.invest},{name:"Current Issues",topics:TP.invest}]}],240)},
-
-cpa:{name:"US CPA (AICPA)",cat:"professional",icon:"&#127482;&#127480;",tag:"US CPA",tc:"tag-fina",desc:"AICPA CPA.",papers:profP("cpa","US CPA",[{name:"AUD",subjects:[{name:"Responsibilities",topics:TP.ethics},{name:"Risk",topics:TP.audit},{name:"Evidence",topics:TP.audit},{name:"Reporting",topics:TP.audit}]},{name:"FAR",subjects:[{name:"Framework",topics:TP.advacc},{name:"Accounts",topics:TP.accounting},{name:"Transactions",topics:TP.advacc},{name:"Govt",topics:TP.accounting}]},{name:"REG",subjects:[{name:"Ethics",topics:TP.ethics},{name:"Business Law",topics:TP.law},{name:"Individual Tax",topics:TP.tax},{name:"Entity Tax",topics:TP.tax}]},{name:"BEC",subjects:[{name:"Governance",topics:TP.strategy},{name:"Economics",topics:TP.economics},{name:"FM",topics:TP.finmgmt},{name:"IT",topics:TP.it}]}],240)},
-
-ea:{name:"EA (IRS)",cat:"professional",icon:"&#127919;",tag:"EA",tc:"tag-fina",desc:"Enrolled Agent.",papers:profP("ea","EA",[{name:"Part 1",subjects:[{name:"Individuals",topics:TP.tax.concat(TP.economics),free:true}]},{name:"Part 2",subjects:[{name:"Businesses",topics:TP.tax.concat(TP.accounting)}]},{name:"Part 3",subjects:[{name:"Representation",topics:TP.tax.concat(TP.law)}]}],240)},
-
-icfai:{name:"ICFAI CFA",cat:"professional",icon:"&#127891;",tag:"ICFAI",tc:"tag-prof",desc:"ICFAI CFA Program.",papers:profP("icfai","ICFAI",[{name:"Foundation",subjects:[{name:"Accounting",topics:TP.accounting,free:true},{name:"Economics",topics:TP.economics},{name:"Quant",topics:TP.quant},{name:"Finance",topics:TP.invest}]},{name:"Intermediate",subjects:[{name:"FRA",topics:TP.advacc},{name:"Corp Finance",topics:TP.finmgmt},{name:"Analysis",topics:TP.invest},{name:"Portfolio",topics:TP.invest}]},{name:"Final",subjects:[{name:"Adv FRA",topics:TP.advacc},{name:"Adv Portfolio",topics:TP.invest},{name:"Deriv & Risk",topics:TP.risk},{name:"Ethics",topics:TP.ethics}]}],180)},
-
-actuarial:{name:"Actuarial (IAI)",cat:"professional",icon:"&#128202;",tag:"Actuarial",tc:"tag-prof",desc:"IAI Actuarial.",papers:profP("actuarial","Actuarial",[{name:"CT Series",subjects:[{name:"CT1 Fin Maths",topics:TP.finmgmt.concat(TP.quant),free:true},{name:"CT2 Finance",topics:TP.accounting},{name:"CT3 Probability",topics:TP.quant},{name:"CT4 Models",topics:TP.quant},{name:"CT5 Insurance",topics:TP.risk},{name:"CT6 Statistics",topics:TP.quant},{name:"CT7 Economics",topics:TP.economics},{name:"CT8 Fin Economics",topics:TP.invest}]}],180)},
-
-cima:{name:"CIMA (UK)",cat:"professional",icon:"&#127468;&#127463;",tag:"CIMA",tc:"tag-fina",desc:"CIMA Management Accounting.",papers:profP("cima","CIMA",[{name:"Operational",subjects:[{name:"E1",topics:TP.strategy},{name:"P1",topics:TP.cost},{name:"F1",topics:TP.accounting}]},{name:"Management",subjects:[{name:"E2",topics:TP.strategy},{name:"P2",topics:TP.cost},{name:"F2",topics:TP.finmgmt}]},{name:"Strategic",subjects:[{name:"E3",topics:TP.strategy},{name:"P3",topics:TP.cost},{name:"F3",topics:TP.finmgmt}]}],180)}
-};
-
-// =========================================================
-// VIEW SYSTEM
-// =========================================================
-var VIEWS=["V_HOME","V_ADMLOGIN","V_ADMIN","V_EXAM","V_RESULT","V_PRICING","V_PRIVACY","V_TERMS","V_DISCLAIMER","V_ABOUT","V_AUTH"];
-function hideAll(){for(var i=0;i<VIEWS.length;i++){var el=document.getElementById(VIEWS[i]);if(el)el.classList.add("hide")}}
-function showV(id){hideAll();document.getElementById(id).classList.remove("hide")}
-function goHome(){showV("V_HOME");document.getElementById("REGFORM").classList.add("hide");document.getElementById("EXGRD").classList.remove("hide");document.getElementById("CATBAR").classList.remove("hide");renderCards("all");updateAuthUI()}
-function togTheme(){document.body.classList.toggle("dark");localStorage.setItem("x_theme",document.body.classList.contains("dark")?"dark":"light")}
-
-// =========================================================
-// CARDS & PRICING
-// =========================================================
-function buildCats(){var bar=document.getElementById("CATBAR");var cats=["all","professional","medical","engineering","civil","ssc","banking","law","defence","management","teaching","gate","entrance"];var labels=["All","Professional","Medical","Engineering","Civil","SSC/Railway","Banking","Law","Defence","Management","Teaching","GATE","Entrance"];bar.innerHTML="";for(var i=0;i<cats.length;i++){var b=document.createElement("button");b.className="cat-btn"+(cats[i]==="all"?" on":"");b.textContent=labels[i];b.setAttribute("data-cat",cats[i]);bar.appendChild(b)}}
-
-function renderCards(cat){var grid=document.getElementById("EXGRD");grid.innerHTML="";var keys=Object.keys(EX);var count=0;for(var i=0;i<keys.length;i++){var k=keys[i],ex=EX[k];if(cat!=="all"&&ex.cat!==cat)continue;count++;var np=Object.keys(ex.papers).length,hasFree=false,pks=Object.keys(ex.papers);for(var j=0;j<pks.length;j++)if(ex.papers[pks[j]].free)hasFree=true;var totalQ=0;for(var j=0;j<pks.length;j++)totalQ+=ex.papers[pks[j]].qs.length;var card=document.createElement("div");card.className="exam-card fade-in";card.style.animationDelay=(count*0.02)+"s";card.innerHTML=(hasFree?'<div class="free-badge">FREE</div>':'<div class="prem-badge">PREMIUM</div>')+'<span class="icon">'+ex.icon+'</span><h4>'+ex.name+'</h4><p>'+ex.desc+'</p><span class="tag '+ex.tc+'">'+ex.tag+' \u00b7 '+np+' \u00b7 '+totalQ+'Q</span>';card.setAttribute("data-exam",k);grid.appendChild(card)}if(!count)grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><p>No exams found.</p></div>'}
-
-function selectExam(k){examKey=k;var ex=EX[k];document.getElementById("SELTIT").textContent=ex.name;document.getElementById("SELDES").textContent=ex.desc;document.getElementById("BEXAM").textContent=ex.name;var pks=Object.keys(ex.papers),totalQ=0,freeCount=0;for(var i=0;i<pks.length;i++){totalQ+=ex.papers[pks[i]].qs.length;if(ex.papers[pks[i]].free)freeCount++}document.getElementById("PAPERSUM").innerHTML='<span class="ps-item"><strong>'+pks.length+'</strong> Papers</span><span class="ps-item"><strong>'+totalQ+'</strong> MCQs</span><span class="ps-item"><strong>'+freeCount+'</strong> Free</span>';document.getElementById("PAPERSUM").classList.remove("hide");var tier=getTier(),tierEl=document.getElementById("TIERMSG");if(tier==="free"&&freeCount===0){tierEl.innerHTML='<div class="info-box info-purple">Requires paid plan. <a href="#" id="GOTO_PRICING" style="color:var(--pri);font-weight:700">View Plans</a></div>';tierEl.classList.remove("hide")}else if(tier==="free"&&freeCount<pks.length){tierEl.innerHTML='<div class="info-box info-purple">'+freeCount+'/'+pks.length+' free. <a href="#" id="GOTO_PRICING" style="color:var(--pri);font-weight:700">Upgrade</a></div>';tierEl.classList.remove("hide")}else{tierEl.classList.add("hide")}var sel=document.getElementById("F_PAPER");sel.innerHTML="";var hasLevels=false;for(var i=0;i<pks.length;i++){if(ex.papers[pks[i]].level){hasLevels=true;break}}if(hasLevels){var lo=[],lm={};for(var i=0;i<pks.length;i++){var p=ex.papers[pks[i]],lvl=p.level||"General";if(!lm[lvl]){lm[lvl]=[];lo.push(lvl)}lm[lvl].push({key:pks[i],paper:p})}for(var l=0;l<lo.length;l++){var grp=document.createElement("optgroup");grp.label=lo[l];var pp=lm[lo[l]];for(var j=0;j<pp.length;j++){var opt=document.createElement("option");opt.value=pp[j].key;opt.textContent=pp[j].paper.title+" ("+pp[j].paper.qs.length+"Q, "+pp[j].paper.dur+"min)"+(pp[j].paper.free?" \u2014 FREE":"");grp.appendChild(opt)}sel.appendChild(grp)}}else{for(var i=0;i<pks.length;i++){var pk=pks[i],p=ex.papers[pk],opt=document.createElement("option");opt.value=pk;opt.textContent=p.title+" ("+p.qs.length+"Q, "+p.dur+"min)"+(p.free?" \u2014 FREE":"");sel.appendChild(opt)}}document.getElementById("EXGRD").classList.add("hide");document.getElementById("CATBAR").classList.add("hide");document.getElementById("REGFORM").classList.remove("hide");updateAuthUI();setTimeout(function(){var pl=document.getElementById("GOTO_PRICING");if(pl)pl.onclick=function(e){e.preventDefault();showPricing()}},100)}
-
-function showPricing(){var tier=getTier();document.getElementById("CUR_TIER").innerHTML="Current: <strong>"+(TIERS[tier]||TIERS.free).name+"</strong> "+getTierBadge(tier);var grid=document.getElementById("PRICING_CARDS");var plans=[{key:"free",icon:"&#127873;",name:"Free",price:"\u20B90",period:"forever",desc:"Start practicing",f:false,feat:[["Free papers","&#10003;"],["100 MCQs/paper","&#10003;"],["Instant scoring","&#10003;"],["Solutions review","&#10003;"],["Premium papers","&#10007;"],["Certificate","&#10007;"]]},{key:"starter",icon:"&#128640;",name:"Starter",price:"\u20B9499",period:"one-time",desc:"Competitive exams",f:false,feat:[["Everything Free","&#10003;"],["All competitive papers","&#10003;"],["Certificate","&#10003;"],["Analytics","&#10003;"],["Professional exams","&#10007;"],["Priority support","&#10007;"]]},{key:"professional",icon:"&#127942;",name:"Professional",price:"\u20B91,499",period:"one-time",desc:"Full access",f:true,feat:[["Everything Starter","&#10003;"],["All professional exams","&#10003;"],["CA CS CMA ACCA CFA","&#10003;"],["100+ papers","&#10003;"],["CSV export","&#10003;"],["Priority support","&#10003;"]]},{key:"ultimate",icon:"&#128142;",name:"Ultimate",price:"\u20B92,999",period:"one-time",desc:"Institutional",f:false,feat:[["Everything Pro","&#10003;"],["Bulk access","&#10003;"],["Custom vouchers","&#10003;"],["WhatsApp support","&#10003;"],["Early access","&#10003;"],["White-label","&#10003;"]]}];grid.innerHTML="";for(var i=0;i<plans.length;i++){var p=plans[i],isActive=(tier===p.key),card=document.createElement("div");card.className="price-card fade-in"+(p.f?" featured":"");card.style.animationDelay=(i*0.1)+"s";var fh="";for(var f=0;f<p.feat.length;f++){var isC=p.feat[f][1]==="&#10003;";fh+='<li>'+(isC?'<span class="check">&#10003;</span>':'<span class="cross">&#10007;</span>')+p.feat[f][0]+'</li>'}card.innerHTML='<div class="plan-icon">'+p.icon+'</div><h3>'+p.name+'</h3><div class="plan-desc">'+p.desc+'</div><div class="price">'+p.price+'<span>/'+p.period+'</span></div><ul class="price-features">'+fh+'</ul>'+(isActive?'<button class="btn btn-full btn-green" disabled>&#10003; Current</button>':'<button class="btn btn-full btn-outline" data-tier="'+p.key+'">'+(p.key==="free"?"Start Free":"Activate")+'</button>');grid.appendChild(card)}showV("V_PRICING")}
-
-// =========================================================
-// EXAM ENGINE
-// =========================================================
-function doStartExam(){
-sName=document.getElementById("F_NAME").value.trim();sRoll=document.getElementById("F_ROLL").value.trim();sEmail=document.getElementById("F_EMAIL").value.trim();sPhone=document.getElementById("F_PHONE").value.trim();paperKey=document.getElementById("F_PAPER").value;
-if(!sName||!sRoll||!sEmail){toast("Fill name, roll, email","error");return}
-if(!EX[examKey]||!EX[examKey].papers[paperKey]){toast("Select a paper","error");return}
-var paper=EX[examKey].papers[paperKey];
-var users=getUsers(),exists=false;for(var i=0;i<users.length;i++){if(users[i].email===sEmail)exists=true}
-if(!exists&&!loggedInUser){users.push({id:uid(),name:sName,email:sEmail,pass:"",phone:sPhone,roll:sRoll,tier:"free",joined:new Date().toLocaleString()});saveUsers(users)}
-addLog("Exam: "+sName+" - "+EX[examKey].name);
-var tier=getTier();
-if(!paper.free){
-if(tier==="professional"||tier==="ultimate"){}
-else{var vc=document.getElementById("F_VOUCHER").value.trim().toUpperCase();if(!vc){toast("Enter voucher or upgrade","error");return}var v=getV();if(v[vc]&&v[vc].used<v[vc].max){v[vc].used++;saveV(v);setTier(v[vc].tier||"starter");toast("Voucher: "+v[vc].desc,"ok")}else if(v[vc]){toast("Limit reached","error");return}else{toast("Invalid code","error");return}}
-}
-bank=paper;catName=EX[examKey].name;paperTitle=paper.title;ans={};marks={};idx=0;sTotal=paper.qs.length;tabWarn=0;submitState=0;
-document.getElementById("EXTITLE").textContent=catName+" \u2014 "+paperTitle;document.getElementById("WLBL").textContent="";
-showV("V_EXAM");buildPal();loadQ(0);startTmr(paper.dur*60);
-}
-
-function buildPal(){var g=document.getElementById("PAL");g.innerHTML="";for(var i=0;i<bank.qs.length;i++){var b=document.createElement("button");b.textContent=i+1;b.id="PB"+i;b.setAttribute("data-idx",i);g.appendChild(b)}}
-function loadQ(i){idx=i;var q=bank.qs[i],sel=ans[q.id]||"";document.getElementById("QCTR").textContent="Q"+(i+1)+"/"+bank.qs.length;document.getElementById("PBAR").style.width=Math.round(((i+1)/bank.qs.length)*100)+"%";var html='<div class="q-title"><span class="qnum">Q'+(i+1)+'</span> of '+bank.qs.length+'<br><br>'+dec(q.t)+'</div><div class="opts">';var opts=["A","B","C","D"];for(var j=0;j<4;j++){var o=opts[j],chk=sel===o?" checked":"",cls=sel===o?" selected":"";html+='<label class="opt'+cls+'"><input type="radio" name="OPT" value="'+o+'"'+chk+'> <strong>'+o+')</strong> '+dec(q.o[o])+'</label>'}html+='</div>';document.getElementById("QBOX").innerHTML=html;var radios=document.querySelectorAll('#QBOX input[type="radio"]');for(var r=0;r<radios.length;r++){radios[r].addEventListener("change",function(){ans[bank.qs[idx].id]=this.value;var aa=document.querySelectorAll('#QBOX .opt');for(var o=0;o<aa.length;o++)aa[o].classList.remove("selected");this.parentElement.classList.add("selected");updatePal()})}updatePal();resetSubmitBtn()}
-function updatePal(){for(var i=0;i<bank.qs.length;i++){var b=document.getElementById("PB"+i);if(!b)continue;b.className="";if(ans[bank.qs[i].id])b.className="done";if(marks[bank.qs[i].id])b.className+=" mrk";if(i===idx)b.className+=" cur"}var a=0;for(var i=0;i<bank.qs.length;i++){if(ans[bank.qs[i].id])a++}document.getElementById("SUB_INFO").textContent="Answered: "+a+"/"+bank.qs.length+" | Remaining: "+(bank.qs.length-a)}
-function startTmr(sec){if(tmr)clearInterval(tmr);var el=document.getElementById("TIMER"),rem=sec;tmr=setInterval(function(){if(rem<0)return;var m=Math.floor(rem/60),s=rem%60;el.textContent=(m<10?"0":"")+m+":"+(s<10?"0":"")+s;el.style.background=rem<=60?"#DC2626":rem<=300?"#D97706":"#111827";rem--;if(rem<0){clearInterval(tmr);tmr=null;doSubmit()}},1000)}
-function resetSubmitBtn(){submitState=0;var btn=document.getElementById("BTN_SUBMIT");btn.innerHTML="&#10003; Final Submit";btn.style.background="var(--red)";btn.style.fontSize="15px";btn.style.padding="14px 20px"}
-function handleSubmit(){if(submitState===0){submitState=1;var btn=document.getElementById("BTN_SUBMIT"),a=0;for(var i=0;i<bank.qs.length;i++){if(ans[bank.qs[i].id])a++}btn.innerHTML="CONFIRM ("+a+"/"+bank.qs.length+") \u2014 Tap Again";btn.style.background="#F59E0B";btn.style.fontSize="13px";setTimeout(function(){if(submitState===1)resetSubmitBtn()},6000)}else{submitState=0;doSubmit()}}
-function doSubmit(){try{if(tmr){clearInterval(tmr);tmr=null}sTotal=bank.qs.length;sScore=0;sWrong=0;sSkip=0;for(var i=0;i<sTotal;i++){var ua=ans[bank.qs[i].id]||"",ca=dec(bank.qs[i].a);if(ua==="")sSkip++;else if(ua===ca)sScore++;else sWrong++}sPct=sTotal>0?Math.round((sScore/sTotal)*100):0;var attempted=sTotal-sSkip,accuracy=attempted>0?Math.round((sScore/attempted)*100):0;var rd={date:new Date().toLocaleString(),name:sName,roll:sRoll,email:sEmail,exam:catName,paper:paperTitle,score:sScore,total:sTotal,pct:sPct};var hist=getHist();hist.push(rd);saveHist(hist);cloudSaveResult(rd);addLog("Result: "+sName+"="+sPct+"%");showV("V_RESULT");document.getElementById("RN").textContent=sName;document.getElementById("RR").textContent=sRoll;document.getElementById("RE").textContent=catName;document.getElementById("RP").textContent=paperTitle;document.getElementById("RSCORE").textContent=sScore+"/"+sTotal+" ("+sPct+"%)";document.getElementById("RCOR").textContent=sScore;document.getElementById("RWRO").textContent=sWrong;document.getElementById("RSKP").textContent=sSkip;document.getElementById("RACC").textContent=accuracy+"%";var rm=document.getElementById("RREM");if(sPct>=80){rm.textContent="Outstanding!";rm.style.color="var(--grn)"}else if(sPct>=60){rm.textContent="Good! Qualified.";rm.style.color="var(--pri)"}else if(sPct>=40){rm.textContent="Average.";rm.style.color="var(--gold)"}else{rm.textContent="Below passing.";rm.style.color="var(--red)"}document.getElementById("CCV").classList.add("hide");document.getElementById("SBOX").classList.add("hide");buildSols()}catch(e){showV("V_RESULT");document.getElementById("RSCORE").textContent="Error: "+e.message}}
-function buildSols(){var tb=document.getElementById("STB");tb.innerHTML="";for(var i=0;i<bank.qs.length;i++){var q=bank.qs[i],ua=ans[q.id]||"Skipped",ca=dec(q.a),ok=(ua===ca);var tr=document.createElement("tr");tr.innerHTML="<td>"+(i+1)+"</td><td style='max-width:400px'>"+dec(q.t)+"</td><td class='"+(ok?"sol-correct":"sol-wrong")+"'>"+ua+"</td><td class='sol-correct'>"+ca+"</td>";tb.appendChild(tr)}}
-
-function dlCert(){if(sPct<40){toast("Need 40%+","error");return}var cv=document.getElementById("CCV"),ctx=cv.getContext("2d"),W=1056,H=816;cv.width=W;cv.height=H;ctx.fillStyle="#FFFDF7";ctx.fillRect(0,0,W,H);ctx.strokeStyle="#1D4ED8";ctx.lineWidth=6;ctx.strokeRect(15,15,W-30,H-30);ctx.strokeStyle="#3B82F6";ctx.lineWidth=2;ctx.strokeRect(25,25,W-50,H-50);ctx.textAlign="center";ctx.fillStyle="#1D4ED8";ctx.font="bold 13px sans-serif";ctx.fillText("ALL INDIA EXAMINATION AUTHORITY",W/2,68);ctx.fillStyle="#111827";ctx.font="bold 30px sans-serif";ctx.fillText("CERTIFICATE OF ACHIEVEMENT",W/2,140);ctx.fillStyle="#6B7280";ctx.font="italic 15px sans-serif";ctx.fillText("This is to certify that",W/2,210);ctx.fillStyle="#1D4ED8";ctx.font="bold 38px sans-serif";ctx.fillText(sName.toUpperCase(),W/2,280);ctx.fillStyle="#374151";ctx.font="15px sans-serif";ctx.fillText("has successfully completed",W/2,340);ctx.fillStyle="#1D4ED8";ctx.font="bold 20px sans-serif";ctx.fillText(catName,W/2,380);ctx.font="bold 16px sans-serif";ctx.fillText(paperTitle,W/2,410);ctx.fillStyle="#F0F7FF";ctx.fillRect(W/2-140,435,280,80);ctx.strokeStyle="#1D4ED8";ctx.lineWidth=2;ctx.strokeRect(W/2-140,435,280,80);ctx.fillStyle="#1D4ED8";ctx.font="bold 13px sans-serif";ctx.fillText("SCORE",W/2,460);ctx.font="bold 26px monospace";ctx.fillText(sScore+"/"+sTotal+" ("+sPct+"%)",W/2,498);var grade=sPct>=80?"DISTINCTION":sPct>=60?"FIRST CLASS":sPct>=40?"PASS":"NEEDS IMPROVEMENT";ctx.fillStyle=sPct>=80?"#059669":sPct>=60?"#1D4ED8":sPct>=40?"#D97706":"#DC2626";ctx.font="bold 18px sans-serif";ctx.fillText("Grade: "+grade,W/2,555);ctx.fillStyle="#6B7280";ctx.font="12px sans-serif";ctx.fillText("Roll: "+sRoll+" | Date: "+new Date().toLocaleDateString("en-IN"),W/2,595);cv.classList.remove("hide");var a=document.createElement("a");a.download="Certificate_"+sRoll+".png";a.href=cv.toDataURL("image/png");document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Certificate downloaded!","ok")}
-
-function dlCSV(){var csv="Q.No,Question,Your Answer,Correct,Status\n";for(var i=0;i<bank.qs.length;i++){var ua=ans[bank.qs[i].id]||"Skipped",ca=dec(bank.qs[i].a);csv+=(i+1)+',"'+dec(bank.qs[i].t).replace(/"/g,'""')+'",'+ua+","+ca+","+(ua===ca?"Correct":"Incorrect")+"\n"}var a=document.createElement("a");a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);a.download="Results_"+sRoll+".csv";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("CSV downloaded","ok")}
-
-// =========================================================
-// ADMIN
-// =========================================================
-function admLogin(){var u=document.getElementById("AU").value.trim(),p=document.getElementById("AP").value.trim(),err=document.getElementById("AERR");err.classList.add("hide");if(!u||!p){err.textContent="Enter both.";err.classList.remove("hide");return}var c=getCreds();if(u===c.u&&p===c.p){isAdmin=true;addLog("Admin login");document.getElementById("AU").value="";document.getElementById("AP").value="";document.getElementById("ADNM").textContent=c.u;toast("Welcome!","ok");showV("V_ADMIN");refreshAdmin()}else{err.textContent="Invalid.";err.classList.remove("hide")}}
-function admLogout(){isAdmin=false;goHome()}
-function refreshAdmin(){var keys=Object.keys(EX),te=keys.length,tp2=0,tq=0,catR={};for(var i=0;i<keys.length;i++){var ex=EX[keys[i]],pks=Object.keys(ex.papers);for(var j=0;j<pks.length;j++){tp2++;tq+=ex.papers[pks[j]].qs.length}var ck=ex.cat||"other";if(!catR[ck])catR[ck]={e:0,p:0,q:0};catR[ck].e++;for(var m=0;m<pks.length;m++){catR[ck].p++;catR[ck].q+=ex.papers[pks[m]].qs.length}}document.getElementById("DST").innerHTML='<div class="stat"><div class="num">'+te+'</div><div class="lbl">Exams</div></div><div class="stat"><div class="num">'+tp2+'</div><div class="lbl">Papers</div></div><div class="stat"><div class="num">'+tq.toLocaleString()+'</div><div class="lbl">Questions</div></div><div class="stat"><div class="num">'+getUsers().length+'</div><div class="lbl">Users</div></div><div class="stat"><div class="num">'+getHist().length+'</div><div class="lbl">Attempts</div></div>';var tb=document.getElementById("DTB");tb.innerHTML="";var ck=Object.keys(catR).sort();for(var c=0;c<ck.length;c++){var r=catR[ck[c]],tr=document.createElement("tr");tr.innerHTML='<td style="text-transform:capitalize;font-weight:700">'+ck[c]+'</td><td>'+r.e+'</td><td>'+r.p+'</td><td><span class="badge b-blue">'+r.q.toLocaleString()+'</span></td>';tb.appendChild(tr)}}
-
-function fillES(id){var sel=document.getElementById(id);sel.innerHTML="";var keys=Object.keys(EX);for(var i=0;i<keys.length;i++){var opt=document.createElement("option");opt.value=keys[i];opt.textContent=EX[keys[i]].name;sel.appendChild(opt)}}
-function updPS(e,p){var ev=document.getElementById(e).value,ps=document.getElementById(p);ps.innerHTML="";if(!EX[ev])return;var pks=Object.keys(EX[ev].papers);for(var i=0;i<pks.length;i++){var opt=document.createElement("option");opt.value=pks[i];opt.textContent=EX[ev].papers[pks[i]].title;ps.appendChild(opt)}}
-function addQ(){var ev=document.getElementById("AEX").value,pv=document.getElementById("APA").value,t=document.getElementById("ATI").value.trim(),a=document.getElementById("AA").value.trim(),b=document.getElementById("AB").value.trim(),c=document.getElementById("AC").value.trim(),d=document.getElementById("AD").value.trim(),an=document.getElementById("AAN").value;if(!t||!a||!b){toast("Fill Q, A, B","error");return}EX[ev].papers[pv].qs.push({id:"q"+Date.now(),t:enc(t),o:{A:enc(a),B:enc(b),C:enc(c),D:enc(d)},a:enc(an)});toast("Added!","ok")}
-function rdrMng(){var ev=document.getElementById("MEX").value,pv=document.getElementById("MPA").value,sch=document.getElementById("MSC").value.toLowerCase(),tb=document.getElementById("MTB");tb.innerHTML="";if(!EX[ev]||!EX[ev].papers[pv])return;var qs=EX[ev].papers[pv].qs;for(var i=0;i<qs.length;i++){var txt=dec(qs[i].t);if(sch&&txt.toLowerCase().indexOf(sch)===-1)continue;var tr=document.createElement("tr");tr.innerHTML="<td>"+(i+1)+"</td><td style='max-width:350px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap'>"+txt+"</td><td><span class='badge b-green'>"+dec(qs[i].a)+"</span></td><td><button class='del-btn' data-ev='"+ev+"' data-pv='"+pv+"' data-idx='"+i+"'>Del</button></td>";tb.appendChild(tr)}}
-function delQ(ev,pv,i){if(!confirm("Delete?"))return;EX[ev].papers[pv].qs.splice(i,1);toast("Deleted","ok");rdrMng()}
-function rdrVch(){var v=getV(),tb=document.getElementById("VTB");tb.innerHTML="";var keys=Object.keys(v);for(var i=0;i<keys.length;i++){var k=keys[i],tr=document.createElement("tr");tr.innerHTML="<td><code style='font-weight:700'>"+k+"</code></td><td>"+(v[k].desc||"")+"</td><td>"+getTierBadge(v[k].tier||"starter")+"</td><td><span class='badge b-gold'>"+(v[k].used||0)+"</span></td><td>"+(v[k].max||100)+"</td><td><button class='del-btn' data-vk='"+k+"'>Del</button></td>";tb.appendChild(tr)}}
-function addV(){var code=document.getElementById("VCO").value.trim().toUpperCase(),desc=document.getElementById("VDE").value.trim(),max=parseInt(document.getElementById("VMX").value)||100,tier=document.getElementById("VTIER").value;if(!code){toast("Enter code","error");return}var v=getV();v[code]={desc:desc||"Voucher",used:0,max:max,tier:tier};saveV(v);rdrVch();toast("Created!","ok");document.getElementById("VCO").value="";document.getElementById("VDE").value="";document.getElementById("VMX").value=""}
-function delV(k){var v=getV();delete v[k];saveV(v);rdrVch();toast("Deleted","ok")}
-function rdrHist(){var hist=getHist(),tb=document.getElementById("HTB");tb.innerHTML="";if(!hist.length){tb.innerHTML="<tr><td colspan='5' style='text-align:center;color:var(--mut);padding:20px'>No history.</td></tr>";return}var sorted=hist.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)});for(var i=0;i<Math.min(sorted.length,200);i++){var h=sorted[i],tr=document.createElement("tr");tr.innerHTML='<td style="font-size:11px">'+h.date+'</td><td>'+h.name+'</td><td>'+h.exam+'</td><td style="font-family:monospace">'+h.score+'/'+h.total+'</td><td><span class="badge '+(h.pct>=50?"b-green":"b-red")+'">'+h.pct+'%</span></td>';tb.appendChild(tr)}}
-function rdrUsers(){var users=getUsers(),tb=document.getElementById("UTB");tb.innerHTML="";if(!users.length){tb.innerHTML="<tr><td colspan='4' style='text-align:center;color:var(--mut);padding:20px'>No users.</td></tr>";return}for(var i=0;i<Math.min(users.length,200);i++){var u=users[i],tr=document.createElement("tr");tr.innerHTML='<td>'+u.name+'</td><td>'+u.email+'</td><td>'+(u.phone||'-')+'</td><td>'+getTierBadge(u.tier||'free')+'</td>';tb.appendChild(tr)}}
-function saveCreds(){var u=document.getElementById("SU").value.trim(),p=document.getElementById("SP").value.trim(),p2=document.getElementById("SP2").value.trim();if(!u||!p){toast("Enter credentials","error");return}if(p!==p2){toast("Passwords differ","error");return}if(p.length<6){toast("Min 6 chars","error");return}setCreds(u,p);toast("Saved!","ok")}
-function expCSV(){var h=getHist();if(!h.length){toast("No history","error");return}var csv="Date,Name,Roll,Email,Exam,Paper,Score,Total,Percentage\n";for(var i=0;i<h.length;i++){csv+='"'+h[i].date+'","'+h[i].name+'","'+h[i].roll+'","'+(h[i].email||'')+'","'+h[i].exam+'","'+h[i].paper+'",'+h[i].score+','+h[i].total+','+h[i].pct+'\n'}var a=document.createElement("a");a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);a.download="AIEP_History.csv";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Exported!","ok")}
-
-function updateAboutStats(){var keys=Object.keys(EX),tp2=0;for(var i=0;i<keys.length;i++){var pks=Object.keys(EX[keys[i]].papers);for(var j=0;j<pks.length;j++)tp2+=EX[keys[i]].papers[pks[j]].qs.length}var e1=document.getElementById("AB_EXAMS");if(e1)e1.textContent=keys.length;var e2=document.getElementById("AB_PAPERS");if(e2)e2.textContent=Object.keys(EX).reduce(function(a,k){return a+Object.keys(EX[k].papers).length},0);var e3=document.getElementById("AB_MCQS");if(e3)e3.textContent=tp2.toLocaleString();var e4=document.getElementById("AB_USERS");if(e4)e4.textContent=getUsers().length}
-
-// SECURITY
-document.addEventListener("contextmenu",function(e){e.preventDefault()});
-document.addEventListener("visibilitychange",function(){if(document.hidden&&!document.getElementById("V_EXAM").classList.contains("hide")){tabWarn++;document.getElementById("WLBL").textContent="Tab Switch: "+tabWarn+"/3";if(tabWarn>=3){toast("Auto-submitting!","error");doSubmit()}else{toast("Warning "+tabWarn+"/3","error")}}});
-
-// =========================================================
-// BIND EVENTS
-// =========================================================
-function bindEvents(){
-document.getElementById("NAV_HOME").onclick=goHome;
-document.getElementById("NAV_DASH").onclick=function(){showV("V_HOME")};
-document.getElementById("NAV_PRICING").onclick=showPricing;
-document.getElementById("NAV_AUTH_BTN").onclick=function(){if(loggedInUser)doLogout();else showV("V_AUTH")};
-document.getElementById("NAV_ADMIN").onclick=function(){if(isAdmin){showV("V_ADMIN");refreshAdmin()}else{showV("V_ADMLOGIN");setTimeout(function(){document.getElementById("AU").focus()},100)}};
-document.getElementById("NAV_THEME").onclick=togTheme;
-
-// AUTH
-document.getElementById("TAB_LOGIN").onclick=function(){
-authMode="login";
-document.getElementById("AUTH_TITLE").textContent="Login to Your Account";
-document.getElementById("AUTH_NAME_WRAP").classList.add("hide");
-document.getElementById("BTN_AUTH_SUBMIT").innerHTML="&#128274; Login";
-document.getElementById("TAB_LOGIN").className="btn btn-sm btn-outline";
-document.getElementById("TAB_SIGNUP").className="btn btn-sm btn-gray";
-document.getElementById("AUTH_ERR").classList.add("hide");
-document.getElementById("AUTH_NAME").value="";
-};
-document.getElementById("TAB_SIGNUP").onclick=function(){
-authMode="signup";
-document.getElementById("AUTH_TITLE").textContent="Create Account";
-document.getElementById("AUTH_NAME_WRAP").classList.remove("hide");
-document.getElementById("BTN_AUTH_SUBMIT").innerHTML="&#10003; Create Account";
-document.getElementById("TAB_SIGNUP").className="btn btn-sm btn-outline";
-document.getElementById("TAB_LOGIN").className="btn btn-sm btn-gray";
-document.getElementById("AUTH_ERR").classList.add("hide");
-};
-document.getElementById("BTN_AUTH_SUBMIT").onclick=function(){if(authMode==="signup")doSignup();else doLogin()};
-document.getElementById("AUTH_PASS").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();if(authMode==="signup")doSignup();else doLogin()}});
-document.getElementById("AUTH_EMAIL").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();document.getElementById("AUTH_PASS").focus()}});
-
-// NAV HELPERS
-["NAV_HOME_AU","NAV_HOME_P","NAV_HOME_PRIV","NAV_HOME_TERM","NAV_HOME_DISC","NAV_HOME_AB","NAV_HOME2"].forEach(function(id){var el=document.getElementById(id);if(el)el.onclick=goHome});
-["NAV_THEME_AU","NAV_THEME_P","NAV_THEME_PRIV","NAV_THEME_TERM","NAV_THEME_DISC","NAV_THEME_AB","NAV_THEME2","NAV_THEME3"].forEach(function(id){var el=document.getElementById(id);if(el)el.onclick=togTheme});
-var pp=document.getElementById("NAV_PRICING_AB");if(pp)pp.onclick=showPricing;
-
-document.getElementById("LNK_PRIV").onclick=function(e){e.preventDefault();showV("V_PRIVACY")};
-document.getElementById("LNK_TERM").onclick=function(e){e.preventDefault();showV("V_TERMS")};
-document.getElementById("LNK_DISC").onclick=function(e){e.preventDefault();showV("V_DISCLAIMER")};
-document.getElementById("LNK_ABOUT").onclick=function(e){e.preventDefault();updateAboutStats();showV("V_ABOUT")};
-
-document.getElementById("BACK_BTN").onclick=function(){document.getElementById("REGFORM").classList.add("hide");document.getElementById("PAPERSUM").classList.add("hide");document.getElementById("TIERMSG").classList.add("hide");document.getElementById("AUTH_STATUS").classList.add("hide");document.getElementById("EXGRD").classList.remove("hide");document.getElementById("CATBAR").classList.remove("hide")};
-
-document.getElementById("CATBAR").addEventListener("click",function(e){var btn=e.target.closest(".cat-btn");if(!btn)return;var cat=btn.getAttribute("data-cat");var btns=document.querySelectorAll("#CATBAR .cat-btn");for(var i=0;i<btns.length;i++)btns[i].classList.toggle("on",btns[i]===btn);renderCards(cat)});
-document.getElementById("EXGRD").addEventListener("click",function(e){var card=e.target.closest(".exam-card");if(!card)return;selectExam(card.getAttribute("data-exam"))});
-document.getElementById("BTN_START").onclick=doStartExam;
-document.getElementById("F_PAPER").onchange=function(){if(!examKey)return;var pv=this.value,p=EX[examKey].papers[pv];document.getElementById("F_VOUCHER").placeholder=(p&&p.free)?"Free paper":"Enter voucher code";if(p&&p.free)document.getElementById("F_VOUCHER").value=""};
-
-document.getElementById("BTN_PREV").onclick=function(){if(idx>0)loadQ(idx-1)};
-document.getElementById("BTN_NEXT").onclick=function(){if(idx<bank.qs.length-1)loadQ(idx+1)};
-document.getElementById("BTN_MARK").onclick=function(){var qid=bank.qs[idx].id;marks[qid]=!marks[qid];updatePal();toast(marks[qid]?"Marked":"Unmarked","ok")};
-document.getElementById("BTN_SUBMIT").addEventListener("click",function(e){e.preventDefault();e.stopPropagation();handleSubmit()});
-document.getElementById("PAL").addEventListener("click",function(e){var btn=e.target.closest("button[data-idx]");if(!btn)return;loadQ(parseInt(btn.getAttribute("data-idx")))});
-document.getElementById("BTN_CERT").onclick=dlCert;
-document.getElementById("BTN_CSV2").onclick=dlCSV;
-document.getElementById("BTN_SOL").onclick=function(){document.getElementById("SBOX").classList.toggle("hide")};
-document.getElementById("BTN_HOME2").onclick=goHome;
-
-document.getElementById("BTN_ALOGIN").onclick=admLogin;
-document.getElementById("BTN_ALOGOUT").onclick=admLogout;
-document.getElementById("AP").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();admLogin()}});
-document.getElementById("AU").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();document.getElementById("AP").focus()}});
-
-document.getElementById("ATABS").addEventListener("click",function(e){var btn=e.target.closest("button[data-tab]");if(!btn)return;var tid=btn.getAttribute("data-tab"),tabs=["TO","TA","TM","TU","TV","TH","TS"];for(var i=0;i<tabs.length;i++)document.getElementById(tabs[i]).classList.add("hide");document.getElementById(tid).classList.remove("hide");var allBtns=document.querySelectorAll("#ATABS button");for(var j=0;j<allBtns.length;j++)allBtns[j].classList.toggle("on",allBtns[j]===btn);if(tid==="TO")refreshAdmin();if(tid==="TM")rdrMng();if(tid==="TV")rdrVch();if(tid==="TH")rdrHist();if(tid==="TU")rdrUsers()});
-
-fillES("AEX");updPS("AEX","APA");document.getElementById("AEX").onchange=function(){updPS("AEX","APA")};
-fillES("MEX");updPS("MEX","MPA");document.getElementById("MEX").onchange=function(){updPS("MEX","MPA");rdrMng()};document.getElementById("MPA").onchange=function(){rdrMng()};document.getElementById("MSC").oninput=function(){rdrMng()};
-document.getElementById("BTN_ADDQ").onclick=addQ;document.getElementById("BTN_ADDV").onclick=addV;document.getElementById("BTN_CREDS").onclick=saveCreds;
-document.getElementById("BTN_CSV").onclick=expCSV;document.getElementById("BTN_CLRH").onclick=function(){if(!confirm("Clear all history?"))return;saveHist([]);rdrHist();toast("Cleared","ok")};
-document.getElementById("MTB").addEventListener("click",function(e){var btn=e.target.closest(".del-btn");if(!btn)return;delQ(btn.getAttribute("data-ev"),btn.getAttribute("data-pv"),parseInt(btn.getAttribute("data-idx")))});
-document.getElementById("VTB").addEventListener("click",function(e){var btn=e.target.closest(".del-btn");if(!btn)return;delV(btn.getAttribute("data-vk"))});
-
-document.getElementById("PRICING_CARDS").addEventListener("click",function(e){
-var btn=e.target.closest("button[data-tier]");if(!btn)return;
-var tier=btn.getAttribute("data-tier");
-if(tier==="free"){setTier("free");toast("Free plan!","ok");showPricing();return}
-var code=prompt("Enter voucher code for "+(TIERS[tier]||{}).name+":");if(!code)return;
-code=code.trim().toUpperCase();
-var v=getV();
-if(v[code]&&v[code].used<v[code].max){v[code].used++;saveV(v);setTier(v[code].tier||tier);toast("Activated: "+(TIERS[tier]||{}).name+"!","ok");showPricing()}
-else if(v[code]){toast("Limit reached","error")}
-else{toast("Invalid code","error")}
-});
-}
-
-// =========================================================
-// INIT
-// =========================================================
-window.onload=function(){
-if(G("x_theme","light")==="dark")document.body.classList.add("dark");
-buildCats();renderCards("all");checkSavedLogin();bindEvents();updateAuthUI();dbBadge();loadInstantDB();updateAboutStats();
-var keys=Object.keys(EX),tp2=0;for(var i=0;i<keys.length;i++){var pks=Object.keys(EX[keys[i]].papers);for(var j=0;j<pks.length;j++)tp2+=EX[keys[i]].papers[pks[j]].qs.length}
-console.log("AIEP v9.0: "+keys.length+" exams, "+Object.keys(EX).reduce(function(a,k){return a+Object.keys(EX[k].papers).length},0)+" papers, "+tp2+" MCQs");
-};
-})();
-</script>
+<script src="topics.js"></script>
+<script src="exams.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
