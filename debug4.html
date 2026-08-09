@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIEP Test</title>
+<style>
+body{font-family:monospace;background:#111;color:#0f0;padding:16px;font-size:13px;line-height:2}
+button{background:#1D4ED8;color:#fff;border:none;padding:10px 16px;font-size:13px;font-weight:700;border-radius:8px;margin:4px;width:100%}
+.pass{color:#0f0}.fail{color:#f00}
+</style>
+</head>
+<body>
+<h2 style="color:#fff">AIEP Local Test</h2>
+<button onclick="run()">Run Test</button>
+<div id="OUT"></div>
+<script src="instant.min.js"></script>
+<script>
+var out=document.getElementById("OUT");
+function log(m,c){var d=document.createElement("div");d.className=c||"";d.textContent=m;out.appendChild(d)}
+
+function run(){
+    out.innerHTML="";
+    log("1. Checking instant.min.js loaded locally...");
+    if(typeof instant==="undefined"){log("  FAIL: instant not found","fail");return}
+    log("  PASS: instant loaded","pass");
+
+    log("2. Connecting to InstantDB...");
+    try{
+        var db=instant.init({appId:"52877744-72cc-404a-b68e-fb01f3e387ac"});
+        log("  PASS: Connected","pass");
+
+        log("3. Writing test data...");
+        db.transact(db.tx.portalusers["test_"+Date.now()].update({
+            name:"Debug4 Test",
+            email:"debug4@test.com",
+            phone:"",
+            roll:"",
+            tier:"free",
+            joined:new Date().toISOString()
+        }));
+        log("  PASS: Write sent!","pass");
+
+        log("4. Writing to results...");
+        db.transact(db.tx.results["test_"+Date.now()].update({
+            name:"Debug4",
+            email:"debug4@test.com",
+            roll:"R001",
+            exam:"Test Exam",
+            paper:"Paper 1",
+            score:80,
+            total:100,
+            pct:80,
+            date:new Date().toISOString()
+        }));
+        log("  PASS: Result written!","pass");
+
+        log("5. Check InstantDB Explorer now","pass");
+    }catch(e){
+        log("  FAIL: "+e.message,"fail");
+    }
+}
+</script>
+</body>
+</html>
