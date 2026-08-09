@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All India Examination Portal — Professional & Competitive Exams</title>
+<style>
+:root{--pri:#1D4ED8;--bg:#F0F2F5;--card:#FFF;--txt:#111827;--mut:#6B7280;--bor:#D1D5DB;--red:#DC2626;--grn:#059669;--pur:#7C3AED;--surf:#F9FAFB;--org:#EA580C;--gold:#D97706;--teal:#0D9488;--rose:#DB2777}
+body.dark{--bg:#0F172A;--card:#1E293B;--txt:#F1F5F9;--mut:#94A3B8;--bor:#334155;--surf:#1E293B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;transition:background .3s,color .3s}
+.wrap{max-width:1200px;margin:12px auto;background:var(--card);border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.06);padding:24px}
+.hide{display:none!important}
+h2{font-size:20px;margin-bottom:4px}
+.sub{color:var(--mut);font-size:13px;margin-bottom:16px}
+label{font-size:12px;color:var(--mut);font-weight:700;display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--bor);border-radius:8px;font-size:14px;background:var(--surf);color:var(--txt);font-family:inherit;margin-bottom:12px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(29,78,216,.1)}
+textarea{resize:vertical}
+select optgroup{font-weight:700;color:var(--pri);font-size:13px;background:var(--surf)}
+select option{font-weight:400;color:var(--txt);padding:4px}
+.btn{display:inline-block;background:var(--pri);color:#fff;border:none;padding:11px 20px;font-size:13px;font-weight:700;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .15s;text-align:center;touch-action:manipulation}
+.btn:hover{opacity:.88}.btn:active{transform:scale(.97)}
+.btn-full{width:100%}.btn-sm{padding:8px 14px;font-size:12px}
+.btn-gray{background:var(--mut)}.btn-green{background:var(--grn)}.btn-red{background:var(--red)}
+.btn-purple{background:var(--pur)}.btn-orange{background:var(--org)}.btn-gold{background:var(--gold)}
+.btn-teal{background:var(--teal)}.btn-rose{background:var(--rose)}
+.btn-outline{background:none;border:2px solid var(--pri);color:var(--pri)}
+.topbar{display:flex;justify-content:flex-end;gap:7px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
+.topbar button{background:none;border:1px solid var(--bor);color:var(--txt);padding:6px 14px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:600;font-family:inherit;touch-action:manipulation}
+.topbar button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.hero{text-align:center;padding:16px 0 8px}
+.hero h1{font-size:26px;margin-bottom:4px}
+.hero p{color:var(--mut);font-size:14px}
+.cat-bar{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.cat-btn{padding:7px 14px;border:1px solid var(--bor);border-radius:20px;background:var(--card);color:var(--txt);cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;touch-action:manipulation}
+.cat-btn.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:20px}
+.exam-card{border:1px solid var(--bor);border-radius:12px;padding:18px;cursor:pointer;transition:all .2s;background:var(--card);position:relative;overflow:hidden}
+.exam-card:hover{border-color:var(--pri);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.exam-card .icon{font-size:32px;margin-bottom:8px}
+.exam-card h4{font-size:14px;margin-bottom:4px}
+.exam-card p{font-size:12px;color:var(--mut);line-height:1.4}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;margin-top:8px}
+.tag-med{background:rgba(5,150,105,.1);color:var(--grn)}
+.tag-eng{background:rgba(29,78,216,.1);color:var(--pri)}
+.tag-gov{background:rgba(234,88,12,.1);color:var(--org)}
+.tag-law{background:rgba(124,58,237,.1);color:var(--pur)}
+.tag-def{background:rgba(13,148,136,.1);color:var(--teal)}
+.tag-mgmt{background:rgba(219,39,119,.1);color:var(--rose)}
+.tag-prof{background:rgba(13,148,136,.12);color:var(--teal)}
+.tag-profa{background:rgba(217,119,6,.12);color:var(--gold)}
+.free-badge{position:absolute;top:12px;right:12px;background:var(--grn);color:#fff;padding:2px 8px;border-radius:10px;font-size:9px;font-weight:700}
+.prem-badge{position:absolute;top:12px;right:12px;background:var(--gold);color:#fff;padding:2px 8px;border-radius:10px;font-size:9px;font-weight:700}
+.info-box{padding:11px 14px;border-radius:8px;font-size:12px;font-weight:600;margin-bottom:12px}
+.info-blue{background:rgba(29,78,216,.07);color:var(--pri)}
+.info-red{background:rgba(220,38,38,.07);color:var(--red)}
+.info-green{background:rgba(5,150,105,.07);color:var(--grn)}
+.info-teal{background:rgba(13,148,136,.07);color:var(--teal)}
+.bread{font-size:12px;color:var(--mut);margin-bottom:12px}
+.bread span{color:var(--pri);cursor:pointer}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.two-col{grid-template-columns:1fr}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:20px}
+.stat{background:var(--surf);border:1px solid var(--bor);border-radius:10px;padding:14px;text-align:center}
+.stat .num{font-size:26px;font-weight:700;color:var(--pri);font-family:monospace}
+.stat .lbl{font-size:10px;color:var(--mut);text-transform:uppercase;margin-top:2px}
+.exam-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--bor);padding-bottom:12px;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.timer{background:#1F2937;color:#fff;padding:7px 14px;border-radius:8px;font-weight:700;font-size:15px;font-family:monospace}
+.exam-grid{display:grid;grid-template-columns:1fr 260px;gap:16px}
+@media(max-width:768px){.exam-grid{grid-template-columns:1fr}}
+.q-card{border:1px solid var(--bor);border-radius:10px;padding:20px}
+.q-title{font-size:14px;font-weight:600;margin-bottom:14px;line-height:1.6}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;padding:10px 13px;border:1px solid var(--bor);border-radius:8px;cursor:pointer;font-size:13px;touch-action:manipulation;transition:border-color .15s}
+.opt:hover{border-color:var(--pri)}
+.opt input{margin-right:10px;transform:scale(1.2);accent-color:var(--pri)}
+.side{border-left:2px solid var(--bor);padding-left:16px}
+@media(max-width:768px){.side{border-left:none;border-top:2px solid var(--bor);padding-left:0;padding-top:12px}}
+.legend{font-size:10px;display:grid;grid-template-columns:1fr 1fr;gap:3px;color:var(--mut);margin-bottom:6px}
+.ldot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:3px;vertical-align:middle}
+.pal{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;max-height:300px;overflow-y:auto}
+.pal button{width:36px;height:36px;border-radius:5px;border:1px solid var(--bor);background:var(--card);color:var(--txt);font-weight:700;font-size:10px;cursor:pointer;font-family:monospace;touch-action:manipulation;transition:all .1s}
+.pal button.done{background:var(--grn);color:#fff;border-color:var(--grn)}
+.pal button.mrk{background:var(--pur);color:#fff;border-color:var(--pur)}
+.pal button.cur{border:2px solid var(--pri);box-shadow:0 0 6px rgba(29,78,216,.25)}
+.nav-btns{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.nav-btns .btn{flex:1}
+.submit-zone{margin-top:16px;padding:16px;border:2px dashed var(--bor);border-radius:10px;text-align:center;background:var(--surf)}
+.submit-zone p{font-size:12px;color:var(--mut);margin-bottom:10px}
+.score-big{font-size:38px;font-weight:700;color:var(--pri);font-family:monospace;margin:8px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th,.tbl td{padding:8px 10px;border-bottom:1px solid var(--bor);text-align:left}
+.tbl th{font-size:10px;color:var(--mut);text-transform:uppercase;font-weight:700}
+.badge{display:inline-block;padding:3px 9px;border-radius:10px;font-size:10px;font-weight:700}
+.b-blue{background:rgba(29,78,216,.1);color:var(--pri)}
+.b-green{background:rgba(5,150,105,.1);color:var(--grn)}
+.b-red{background:rgba(220,38,38,.1);color:var(--red)}
+.b-gold{background:rgba(217,119,6,.1);color:var(--gold)}
+.b-teal{background:rgba(13,148,136,.1);color:var(--teal)}
+.sol-tbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:16px;text-align:left}
+.sol-tbl th,.sol-tbl td{border:1px solid var(--bor);padding:8px}
+.sol-tbl th{background:rgba(29,78,216,.06);font-weight:600;font-size:11px}
+.cert-canvas{border:4px double var(--pri);border-radius:8px;max-width:100%;margin:16px auto;display:block}
+.footer{text-align:center;padding:16px;font-size:11px;color:var(--mut);border-top:1px solid var(--bor);margin-top:16px;line-height:1.8}
+.footer a{color:var(--pri);text-decoration:none}
+.del-btn{background:none;border:none;color:var(--red);cursor:pointer;font-size:11px;font-weight:700;padding:3px 7px;border-radius:4px}
+.log-box{max-height:200px;overflow-y:auto;background:var(--surf);border:1px solid var(--bor);border-radius:8px;padding:10px;font-size:11px;font-family:monospace;color:var(--mut)}
+.tabs{display:flex;gap:2px;margin-bottom:18px;border-bottom:2px solid var(--bor);overflow-x:auto}
+.tabs button{background:none;border:none;padding:10px 14px;cursor:pointer;font-size:12px;font-weight:700;color:var(--mut);border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;font-family:inherit}
+.tabs button.on{color:var(--pri);border-bottom-color:var(--pri)}
+.paper-summary{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0;padding:12px;background:var(--surf);border-radius:8px;border:1px solid var(--bor)}
+.paper-summary .ps-item{font-size:11px;font-weight:600;color:var(--mut)}
+.paper-summary .ps-item strong{color:var(--txt)}
+</style>
+</head>
+<body>
+
+<!-- ======== HOME ======== -->
+<div class="wrap" id="V_HOME">
+<div class="topbar">
+<button class="on" id="NAV_HOME">Home</button>
+<button id="NAV_DASH">Dashboard</button>
+<button id="NAV_ADMIN">Admin</button>
+<button id="NAV_THEME">Theme</button>
+</div>
+<div class="hero">
+<h1>All India Examination Portal</h1>
+<p>100+ Exam Papers | Professional, Competitive &amp; Entrance Exams | 100 MCQs Per Subject</p>
+</div>
+<div id="CATBAR" class="cat-bar"></div>
+<div id="EXGRD" class="card-grid"></div>
+<div id="REGFORM" class="hide">
+<div class="bread"><span id="BACK_BTN">&#8592; All Exams</span> &rsaquo; <span id="BEXAM"></span></div>
+<h2 id="SELTIT"></h2>
+<p class="sub" id="SELDES"></p>
+<div id="PAPERSUM" class="paper-summary hide"></div>
+<div id="WBACK" class="hide"><div class="info-box info-green">Welcome back, <strong id="WBNM"></strong>! <span id="CLRUSR" style="cursor:pointer;color:var(--pri);text-decoration:underline">Not you?</span></div></div>
+<div class="two-col">
+<div><label>Full Name *</label><input type="text" id="F_NAME" placeholder="Your name"></div>
+<div><label>Roll No *</label><input type="text" id="F_ROLL" placeholder="ROLL2026001"></div>
+<div><label>Email *</label><input type="email" id="F_EMAIL" placeholder="you@email.com"></div>
+<div><label>Mobile *</label><input type="tel" id="F_PHONE" placeholder="10-digit mobile"></div>
+</div>
+<label>Select Paper / Subject</label>
+<select id="F_PAPER"></select>
+<label>Voucher Code (Optional)</label>
+<input type="text" id="F_VOUCHER" placeholder="Use LAUNCH50 for free access">
+<div class="info-box info-blue">Use voucher <strong>LAUNCH50</strong> for free access to all papers</div>
+<div class="info-box info-teal">Each subject has <strong>100 MCQs</strong> with detailed solutions</div>
+<div class="info-box info-red">Proctored: Tab switch 3+ times = auto submit</div>
+<button class="btn btn-full" id="BTN_START">Start Exam</button>
+</div>
+<div class="footer">All India Examination Portal v6.0 — Professional Edition<br>
+<a href="#" id="LNK_PRIV">Privacy</a> | <a href="#" id="LNK_TERM">Terms</a> | <a href="#" id="LNK_DISC">Disclaimer</a><br>
+&copy; 2026 All India Examination Authority. For practice only.</div>
+</div>
+
+<!-- ======== ADMIN LOGIN ======== -->
+<div class="wrap hide" id="V_ADMLOGIN">
+<div class="topbar"><button id="NAV_HOME2">Home</button><button class="on">Admin</button><button id="NAV_THEME2">Theme</button></div>
+<div style="max-width:400px;margin:50px auto;text-align:center">
+<div style="width:60px;height:60px;background:rgba(29,78,216,.1);border-radius:50%;margin:0 auto 16px;line-height:60px;font-size:26px">&#128274;</div>
+<h2>Admin Login</h2>
+<p class="sub">Authorized personnel only.</p>
+<label style="text-align:left">Username</label><input type="text" id="AU" autocomplete="off" placeholder="Username">
+<label style="text-align:left">Password</label><input type="password" id="AP" autocomplete="off" placeholder="Password">
+<div class="hide" id="AERR" style="color:var(--red);font-size:12px;font-weight:700;padding:9px;background:rgba(220,38,38,.07);border-radius:6px;margin-bottom:10px"></div>
+<button class="btn btn-full" id="BTN_ALOGIN">Login</button>
+<p style="font-size:11px;color:var(--mut);margin-top:14px">Default: admin / admin@2026</p>
+</div>
+</div>
+
+<!-- ======== ADMIN DASHBOARD ======== -->
+<div class="wrap hide" id="V_ADMIN">
+<div class="topbar"><span style="font-size:12px;color:var(--mut);margin-right:auto;padding:6px">Admin: <strong id="ADNM"></strong></span><button id="BTN_ALOGOUT">Logout</button><button id="NAV_THEME3">Theme</button></div>
+<h2>Admin Dashboard</h2>
+<div class="tabs" id="ATABS">
+<button class="on" data-tab="TO">Overview</button>
+<button data-tab="TA">Add Question</button>
+<button data-tab="TM">Manage</button>
+<button data-tab="TU">Users</button>
+<button data-tab="TV">Vouchers</button>
+<button data-tab="TH">History</button>
+<button data-tab="TS">Settings</button>
+<button data-tab="TB">Backup</button>
+</div>
+<div id="TO"><div class="stats" id="DST"></div><table class="tbl"><thead><tr><th>Category</th><th>Exams</th><th>Papers</th><th>Questions</th></tr></thead><tbody id="DTB"></tbody></table></div>
+<div id="TA" class="hide"><h3>Add Question</h3><div class="two-col"><div><label>Exam</label><select id="AEX"></select></div><div><label>Paper</label><select id="APA"></select></div></div><label>Question</label><textarea id="ATI" rows="3"></textarea><div class="two-col"><div><label>A</label><input type="text" id="AA"></div><div><label>B</label><input type="text" id="AB"></div><div><label>C</label><input type="text" id="AC"></div><div><label>D</label><input type="text" id="AD"></div></div><label>Answer</label><select id="AAN"><option>A</option><option>B</option><option>C</option><option>D</option></select><button class="btn" id="BTN_ADDQ">Add Question</button></div>
+<div id="TM" class="hide"><h3>Manage</h3><div class="two-col"><div><label>Exam</label><select id="MEX"></select></div><div><label>Paper</label><select id="MPA"></select></div></div><input type="text" id="MSC" placeholder="Search..."><div style="max-height:340px;overflow-y:auto"><table class="tbl"><thead><tr><th>#</th><th>Question</th><th>Ans</th><th></th></tr></thead><tbody id="MTB"></tbody></table></div></div>
+<div id="TU" class="hide"><h3>Users</h3><table class="tbl"><thead><tr><th>Name</th><th>Email</th><th>Phone</th></tr></thead><tbody id="UTB"></tbody></table></div>
+<div id="TV" class="hide"><h3>Vouchers</h3><div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end"><div><label>Code</label><input type="text" id="VCO"></div><div><label>Desc</label><input type="text" id="VDE"></div><div><label>Max</label><input type="text" id="VMX" placeholder="100"></div><div><button class="btn btn-green" id="BTN_ADDV" style="margin-bottom:12px">Add</button></div></div><table class="tbl"><thead><tr><th>Code</th><th>Desc</th><th>Used</th><th>Max</th><th></th></tr></thead><tbody id="VTB"></tbody></table></div>
+<div id="TH" class="hide"><h3>History</h3><div style="display:flex;gap:8px;margin-bottom:12px"><button class="btn btn-green btn-sm" id="BTN_CSV">Export CSV</button><button class="btn btn-red btn-sm" id="BTN_CLRH">Clear</button></div><div style="max-height:400px;overflow-y:auto"><table class="tbl"><thead><tr><th>Date</th><th>Name</th><th>Exam</th><th>Score</th><th>%</th></tr></thead><tbody id="HTB"></tbody></table></div></div>
+<div id="TS" class="hide"><h3>Settings</h3><div class="two-col"><div><label>New Username</label><input type="text" id="SU"></div><div><label>New Password</label><input type="password" id="SP"></div></div><label>Confirm</label><input type="password" id="SP2"><button class="btn" id="BTN_CREDS">Save</button></div>
+<div id="TB" class="hide"><h3>Backup</h3><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-green" id="BTN_EXP">Export All</button><button class="btn btn-orange" id="BTN_IMP">Import</button><button class="btn btn-red" id="BTN_RST">Factory Reset</button></div></div>
+</div>
+
+<!-- ======== EXAM ======== -->
+<div class="wrap hide" id="V_EXAM">
+<div class="exam-head">
+<h2 id="EXTITLE" style="font-size:16px;color:var(--pri)"></h2>
+<div style="display:flex;gap:10px;align-items:center">
+<span id="WLBL" style="font-size:11px;color:var(--red);font-weight:700"></span>
+<span id="QCTR" style="font-size:12px;color:var(--mut);font-weight:600"></span>
+<div class="timer" id="TIMER">180:00</div>
+</div>
+</div>
+<div class="exam-grid">
+<div>
+<div class="q-card" id="QBOX"></div>
+<div class="nav-btns">
+<button class="btn btn-gray" id="BTN_PREV">Previous</button>
+<button class="btn btn-purple" id="BTN_MARK">Mark Review</button>
+<button class="btn" id="BTN_NEXT">Save &amp; Next</button>
+</div>
+<div class="submit-zone">
+<p id="SUB_INFO">Answer questions above, then submit below.</p>
+<button class="btn btn-red btn-full" id="BTN_SUBMIT" style="font-size:15px;padding:14px 20px">Final Submit Exam</button>
+</div>
+</div>
+<div class="side">
+<h4 style="font-size:12px;margin-bottom:4px">Palette</h4>
+<div class="legend"><span><span class="ldot" style="background:var(--grn)"></span>Answered</span><span><span class="ldot" style="background:var(--pur)"></span>Marked</span></div>
+<div class="pal" id="PAL"></div>
+</div>
+</div>
+</div>
+
+<!-- ======== RESULT ======== -->
+<div class="wrap hide" id="V_RESULT" style="text-align:center">
+<h2>Examination Results</h2>
+<p>Candidate: <strong id="RN"></strong> | Roll: <span id="RR"></span></p>
+<p>Exam: <strong id="RE"></strong> | Paper: <strong id="RP"></strong></p>
+<div class="score-big" id="RSCORE"></div>
+<p id="RREM" style="font-size:16px;margin:6px 0 16px"></p>
+<div class="stats" style="max-width:500px;margin:0 auto 16px">
+<div class="stat"><div class="num" id="RCOR">0</div><div class="lbl">Correct</div></div>
+<div class="stat"><div class="num" id="RWRO">0</div><div class="lbl">Wrong</div></div>
+<div class="stat"><div class="num" id="RSKP">0</div><div class="lbl">Skipped</div></div>
+<div class="stat"><div class="num" id="RACC">0%</div><div class="lbl">Accuracy</div></div>
+</div>
+<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+<button class="btn" id="BTN_CERT">Certificate</button>
+<button class="btn btn-gray" id="BTN_CSV2">CSV</button>
+<button class="btn btn-purple" id="BTN_SOL">Solutions</button>
+<button class="btn btn-green" id="BTN_HOME2">Home</button>
+</div>
+<canvas id="CCV" class="cert-canvas hide" width="1056" height="816"></canvas>
+<div id="SBOX" class="hide" style="text-align:left;margin-top:20px">
+<h3>Solutions</h3>
+<table class="sol-tbl"><thead><tr><th>#</th><th>Q</th><th>You</th><th>Ans</th></tr></thead><tbody id="STB"></tbody></table>
+</div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// =========================================================
+// STATE
+// =========================================================
+var bank=null, ans={}, marks={}, idx=0, tmr=null;
+var sScore=0, sPct=0, sTotal=0, sWrong=0, sSkip=0;
+var sName="", sRoll="", sEmail="", sPhone="";
+var catName="", paperTitle="", examKey="", paperKey="";
+var tabWarn=0, isAdmin=false, submitState=0;
+
+// =========================================================
+// HELPERS
+// =========================================================
+function enc(s){return btoa(unescape(encodeURIComponent(s)))}
+function dec(s){try{return decodeURIComponent(escape(atob(s)))}catch(e){return s}}
+function G(k,d){try{var s=localStorage.getItem(k);return s?JSON.parse(s):d}catch(e){return d}}
+function S(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function getCreds(){return G("x_c",{u:"admin",p:"admin@2026"})}
+function setCreds(u,p){S("x_c",{u:u,p:p})}
+function getV(){return G("x_v",{"FREE2026":{desc:"Free Access",used:0,max:5000},"LAUNCH50":{desc:"Launch Free",used:0,max:5000}})}
+function saveV(v){S("x_v",v)}
+function getHist(){return G("x_h",[])}
+function saveHist(h){S("x_h",h)}
+function getUsers(){return G("x_u",[])}
+function saveUsers(u){S("x_u",u)}
+function addLog(a){var arr=G("x_l",[]);arr.push({a:a,t:new Date().toLocaleString()});if(arr.length>300)arr=arr.slice(-300);S("x_l",arr)}
+function getCur(){return G("x_cur",null)}
+function setCur(u){S("x_cur",u)}
+
+// =========================================================
+// TOAST
+// =========================================================
+function toast(m,t){
+    var d=document.createElement("div");
+    d.style.cssText="position:fixed;top:18px;right:18px;padding:11px 20px;border-radius:8px;font-size:12px;font-weight:700;z-index:99999;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.2);max-width:300px;transition:opacity .3s";
+    d.style.background=t==="error"?"#DC2626":t==="ok"?"#059669":"#1D4ED8";
+    d.textContent=m;
+    document.body.appendChild(d);
+    setTimeout(function(){d.style.opacity="0"},2500);
+    setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d)},3000);
+}
+
+// =========================================================
+// TOPIC POOLS — shared across professional exams
+// =========================================================
+var TP={
+accounting:["Revenue Recognition","Depreciation Methods","Inventory Valuation","Financial Statements","Cash Flow Statements","Consolidation Accounting","Lease Accounting","Foreign Currency Transactions","Intangible Assets","Provisions and Contingencies","Investment Property","Borrowing Costs","Related Party Disclosures","Accounting Estimates","Fair Value Measurement","Business Combinations","Employee Benefits","Financial Instruments","Share-based Payments","Segment Reporting"],
+law:["Indian Contract Act 1872","Sale of Goods Act 1930","Indian Partnership Act 1932","Companies Act 2013","LLP Act 2008","Negotiable Instruments Act","Consumer Protection Act","Arbitration Act","SEBI Regulations","Competition Act","IBC 2016","RTI Act","IT Act 2000","Intellectual Property Laws","Environmental Laws","Labour Code on Wages","Industrial Relations Code","Social Security Code","Stamp Act","Registration Act"],
+tax:["Income from Salary","Income from House Property","Profits of Business Profession","Capital Gains","Income from Other Sources","Deductions 80C to 80U","TDS Provisions","TCS Provisions","Advance Tax","Assessment Procedures","Appeals and Revision","Penalties and Prosecution","International Taxation","Transfer Pricing","Tax Treaties DTAA","GAAR Provisions","GST Levy and Collection","GST Input Tax Credit","GST Registration and Returns","GST Composition Scheme"],
+audit:["Audit Planning","Audit Evidence","Internal Control Systems","Audit Sampling","Fraud Detection","Going Concern Assessment","Company Audit","Tax Audit u/s 44AB","GST Audit","Internal Audit","Audit Reports and Opinion","Professional Ethics","Quality Control","Peer Review","CARO 2020 Requirements","Audit Documentation","Substantive Procedures","Compliance Audit","Performance Audit","Forensic Audit"],
+cost:["Material Costing","Labour Costing","Overhead Allocation","Process Costing","Job and Batch Costing","Contract Costing","Standard Costing","Marginal Costing","Activity Based Costing","Budgetary Control","Variance Analysis","CVP Analysis","Transfer Pricing","Target Costing","Life Cycle Costing","Kaizen Costing","Throughput Accounting","Joint and By-product Costing","Service Costing","Operating Costing"],
+finmgmt:["Time Value of Money","Capital Budgeting Decisions","Cost of Capital","Capital Structure Theories","Working Capital Management","Dividend Policy","Financial Ratio Analysis","Leverage Analysis","Portfolio Management","Derivatives and Hedging","Mergers and Acquisitions","Corporate Valuation","Lease vs Buy Decision","Treasury Management","Financial Planning","Credit Analysis","Bond Valuation","Equity Valuation","Risk and Return","Financial Restructuring"],
+economics:["Demand and Supply Analysis","Price Elasticity","Consumer Surplus","Production Function","Cost Curves","Perfect Competition","Monopoly and Oligopoly","National Income Accounting","Inflation Measurement","Monetary Policy","Fiscal Policy","Balance of Payments","International Trade Theory","Exchange Rate Determination","Money Supply and Banking","Business Cycles","Public Finance","Welfare Economics","Game Theory Basics","Behavioral Economics"],
+it:["Management Information Systems","Database Management","Computer Networks","Cyber Security Framework","Cloud Computing","ERP Implementation","Business Analytics","Blockchain Technology","AI and Machine Learning","IT Governance COBIT","Data Privacy GDPR","System Development Life Cycle","IT Audit Techniques","Digital Signatures","E-Commerce Systems","Operating Systems","Data Warehousing","IT Service Management ITIL","Emerging Technologies","Network Security"],
+strategy:["Strategic Planning Process","SWOT Analysis","PESTEL Analysis","Porter Five Forces","Value Chain Analysis","Core Competencies","Corporate Level Strategy","Business Level Strategy","Balanced Scorecard","BCG Growth Matrix","Ansoff Growth Matrix","Blue Ocean Strategy","Corporate Governance Codes","Enterprise Risk Management","Change Management","Stakeholder Management","Competitive Advantage","Strategic Alliances","Diversification Strategy","Benchmarking"],
+ethics:["Professional Ethics Principles","Code of Professional Conduct","Independence Requirements","Objectivity Standards","Due Care and Diligence","Confidentiality Obligations","Professional Behavior","Ethical Conflict Resolution","Corporate Social Responsibility","Whistleblower Protection","Insider Trading Regulations","Anti-Money Laundering","Corporate Governance Ethics","Fiduciary Duties","Regulatory Compliance","Sustainability Reporting GRI","Business Ethics Framework","Ethical Decision Models","Professional Scepticism","Integrity in Practice"],
+fm:["Planning Function","Organizing Resources","Staffing Process","Directing and Leading","Controlling Mechanisms","Leadership Styles","Motivation Theories Maslow Herzberg","Communication Channels","Decision Making Models","Organizational Structure","HR Management Practices","Marketing Management 4Ps","Operations Management","Quality Management TQM","Project Management","Supply Chain Management","Innovation Management","Conflict Resolution","Team Development","Corporate Culture"],
+advaccounting:["Ind AS Framework","IFRS Convergence","Financial Instruments Ind AS 109","Revenue Ind AS 116","Leases Ind AS 116","Employee Benefits Ind AS 19","Income Taxes Ind AS 12","Agriculture Ind AS 41","Insurance Contracts Ind AS 104","First-time Adoption Ind AS 101","Consolidation Procedures","Joint Arrangements Ind AS 111","Associates Ind AS 28","Interim Reporting Ind AS 34","Earnings Per Share Ind AS 33","Impairment of Assets Ind AS 36","Events After Reporting Period","Changes in Accounting Policies","Fair Value Ind AS 113","Hyperinflationary Economies"],
+corporateLaw:["Incorporation of Company","Memorandum of Association","Articles of Association","Share Capital and Debentures","Registration of Charges","Management and Administration","Dividends and Reserves","Accounts and Audit","Winding Up of Company","NCLT and NCLAT","Oppression and Mismanagement","LLP Formation and Compliance","Producer Companies","Government Companies","Foreign Company Registration","Corporate Restructuring","XBRL Filing","Board Meetings","Annual Filing Requirements","DIN and DSC"],
+riskmgmt:["Risk Identification","Risk Assessment","Risk Measurement VaR","Market Risk","Credit Risk","Operational Risk","Liquidity Risk","Interest Rate Risk","Foreign Exchange Risk","Commodity Price Risk","Cyber Risk","Model Risk","Reputational Risk","Legal and Compliance Risk","Systemic Risk","Risk Mitigation Strategies","Hedging Techniques","Insurance and Risk Transfer","Risk Reporting","Basel Framework"],
+quant:["Permutations and Combinations","Probability Theory","Descriptive Statistics","Probability Distributions","Hypothesis Testing","Correlation and Regression","Time Series Analysis","Linear Programming","Transportation Problems","Assignment Problems","Game Theory","Queuing Theory","Decision Theory","Sampling Methods","Index Numbers","Mathematical Logic","Sequences and Series","Matrices and Determinants","Calculus Applications","Financial Mathematics"],
+investment:["Equity Markets","Bond Markets","Mutual Funds","ETF and Index Funds","Portfolio Theory","CAPM Model","APT Model","Efficient Market Hypothesis","Technical Analysis","Fundamental Analysis","Alternative Investments","Real Estate Investment","Private Equity","Hedge Funds","Commodity Markets","Forex Markets","Fixed Income Analysis","Credit Ratings","Derivatives Options Futures","Investment Banking"]
+};
+
+// =========================================================
+// QUESTION GENERATORS
+// =========================================================
+
+// Original generator for competitive exams (50 questions)
+function genQ(name,n){
+    var a=[];
+    for(var i=1;i<=n;i++){
+        var ci=(i*3+1)%4;
+        var cl="ABCD"[ci];
+        var opts={};
+        for(var j=0;j<4;j++){
+            var lk="ABCD"[j];
+            if(j===ci)opts[lk]=enc("Correct: The principle of concept "+((i%20)+1)+" under "+name+" as per prescribed syllabus");
+            else opts[lk]=enc("Option "+lk+": Related to "+name+" topic "+((i+j*3)%15+1)+" — incorrect interpretation");
+        }
+        a.push({
+            id:"q"+i,
+            t:enc("Q"+i+". ["+name+"] Question "+i+": Which of the following correctly describes the concept related to topic "+((i%20)+1)+" in "+name+"?"),
+            o:opts,
+            a:enc(cl)
+        });
+    }
+    return a;
+}
+
+// Professional exam generator (100 questions with topic pools)
+function genProQ(name,n,tp){
+    var a=[];
+    var qTemplates=[
+        function(t){return "Which of the following correctly describes the treatment of "+t+" under "+name+"?";},
+        function(t){return "In "+name+", the principle governing "+t+" is based on:";},
+        function(t){return "Identify the correct statement regarding "+t+" as per "+name+":";},
+        function(t){return "Under "+name+", recognition of "+t+" requires:";},
+        function(t){return "What is the key requirement for proper treatment of "+t+" under "+name+"?";},
+        function(t){return "As per "+name+" provisions, which of the following applies to "+t+"?";},
+        function(t){return "The concept of "+t+" under "+name+" primarily involves:";},
+        function(t){return "Which provision relating to "+t+" is correctly stated under "+name+"?";},
+        function(t){return "In the context of "+name+", which statement about "+t+" is TRUE?";},
+        function(t){return "Regarding "+t+" under "+name+", identify the INCORRECT statement:";},
+        function(t){return "As per "+name+" standards, the measurement of "+t+" requires:";},
+        function(t){return "Which of the following is NOT a feature of "+t+" under "+name+"?";},
+        function(t){return "The primary objective of "+t+" under "+name+" is to:";},
+        function(t){return "In "+name+", the disclosure requirements for "+t+" include:";},
+        function(t){return "What distinguishes "+t+" under "+name+" from other frameworks?"}
+    ];
+    var rightOpts=[
+        "Proper classification and faithful representation as per the prescribed framework with adequate disclosure",
+        "Recognition when probable economic benefits flow to the entity and reliable measurement is possible",
+        "Systematic and rational allocation over the useful life reflecting the pattern of expected benefits",
+        "Compliance with substance over form principle ensuring transactions reflect economic reality",
+        "Application of matching principle with corresponding debit and credit entries in the period incurred",
+        "Adherence to prudence concept while maintaining neutrality and completeness of information",
+        "Following accrual basis with appropriate adjustments for estimates and provisions required",
+        "Fair value measurement through active market prices or valuation techniques as prescribed",
+        "Disclosure as per requirements in notes to financial statements with comparative information",
+        "Verification through appropriate audit procedures ensuring completeness and accuracy of records",
+        "Conservative estimation with adequate provisions while avoiding excessive reserves",
+        "Timely recognition in the period to which the transaction or event relates",
+        "Proper documentation and authorization as per the internal control framework prescribed",
+        "Consistent application with adequate disclosure of any changes in treatment or estimates",
+        "Balance sheet classification based on the entity's operating cycle and settlement expectations"
+    ];
+    var wrongOpts=[
+        "This treatment contradicts the fundamental principles established under the applicable framework",
+        "This approach is not recognized under current standards and violates the prescribed guidelines",
+        "This represents an incorrect interpretation of provisions that are no longer applicable",
+        "This treatment was applicable under previous standards but has been superseded by amendments",
+        "This applies only to a different category of transactions not covered under this provision",
+        "This is an oversimplification that ignores the specific technical requirements prescribed",
+        "This treatment lacks the required disclosure and fails the faithful representation criterion",
+        "This approach conflicts with the objective of providing relevant and reliable information",
+        "This option mixes concepts from different frameworks creating an inconsistent treatment",
+        "This represents a common misconception not supported by the technical literature or standards",
+        "This treatment was rejected during the standard-setting process as conceptually deficient",
+        "This approach fails to consider the economic substance and focuses only on legal form",
+        "This represents an exception applicable in limited circumstances and not the general rule",
+        "This treatment applies to a different reporting framework and not the one specified here",
+        "This option incorrectly combines two separate provisions into an inaccurate composite statement"
+    ];
+
+    for(var i=0;i<n;i++){
+        var topic=tp[i%tp.length];
+        var tmpl=qTemplates[i%qTemplates.length](topic);
+        var qText="Q"+(i+1)+". "+tmpl;
+        var ci=(i*3+1)%4;
+        var cl="ABCD"[ci];
+        var ri=i%rightOpts.length;
+        var opts={};
+        for(var j=0;j<4;j++){
+            var lk="ABCD"[j];
+            if(j===ci)opts[lk]=enc(rightOpts[ri]);
+            else{
+                var wi=((i*7+j*13)%wrongOpts.length);
+                opts[lk]=enc(wrongOpts[wi]);
+            }
+        }
+        a.push({id:"q"+(i+1),t:enc(qText),o:opts,a:enc(cl)});
+    }
+    return a;
+}
+
+// =========================================================
+// PROFESSIONAL EXAM PAPER BUILDER
+// =========================================================
+function profPapers(prefix,examName,levels,defaultDur){
+    var papers={};
+    for(var l=0;l<levels.length;l++){
+        var level=levels[l];
+        for(var s=0;s<level.subjects.length;s++){
+            var sub=level.subjects[s];
+            var key=prefix+"_"+l+"_"+s;
+            papers[key]={
+                title:level.name+" — "+sub.name,
+                level:level.name,
+                dur:sub.dur||defaultDur||180,
+                qs:genProQ(examName+" "+sub.name,100,sub.topics),
+                free:sub.free||false
+            };
+        }
+    }
+    return papers;
+}
+
+// =========================================================
+// ALL EXAM DEFINITIONS
+// =========================================================
+var EX={
+// ────── COMPETITIVE EXAMS (existing) ──────
+neet:{name:"NEET (UG)",cat:"medical",icon:"&#129657;",tag:"Medical",tc:"tag-med",desc:"National Eligibility cum Entrance Test for medical admissions.",papers:{full:{title:"NEET Full Syllabus",dur:180,qs:genQ("NEET",50),free:false},phy:{title:"NEET Physics",dur:90,qs:genQ("NEET Physics",50),free:false},bio:{title:"NEET Biology",dur:90,qs:genQ("NEET Biology",50),free:true}}},
+jee:{name:"JEE Main",cat:"engineering",icon:"&#128300;",tag:"Engineering",tc:"tag-eng",desc:"Joint Entrance Examination for engineering admissions.",papers:{full:{title:"JEE Full Paper",dur:180,qs:genQ("JEE",50),free:false},math:{title:"JEE Mathematics",dur:60,qs:genQ("JEE Maths",50),free:true}}},
+upsc:{name:"UPSC CSE",cat:"civil",icon:"&#127963;",tag:"Civil",tc:"tag-gov",desc:"Union Public Service Commission — Civil Services.",papers:{gs1:{title:"GS Prelims Paper I",dur:120,qs:genQ("UPSC GS1",50),free:false},gs2:{title:"CSAT Paper II",dur:120,qs:genQ("UPSC CSAT",50),free:false}}},
+ssc:{name:"SSC CGL",cat:"ssc",icon:"&#128188;",tag:"SSC",tc:"tag-gov",desc:"Staff Selection Commission — Combined Graduate Level.",papers:{gk:{title:"SSC General Awareness",dur:60,qs:genQ("SSC GK",50),free:true},quant:{title:"SSC Quantitative Aptitude",dur:60,qs:genQ("SSC Quant",50),free:false},reason:{title:"SSC Reasoning",dur:60,qs:genQ("SSC Reasoning",50),free:false}}},
+bank:{name:"Banking (IBPS/SBI)",cat:"banking",icon:"&#127974;",tag:"Banking",tc:"tag-eng",desc:"IBPS PO/Clerk and SBI recruitment examinations.",papers:{po:{title:"Bank PO Full",dur:180,qs:genQ("Bank PO",50),free:false},reason:{title:"Bank Reasoning",dur:45,qs:genQ("Bank Reasoning",50),free:true},quant:{title:"Bank Quantitative",dur:45,qs:genQ("Bank Quant",50),free:false}}},
+clat:{name:"CLAT",cat:"law",icon:"&#9878;",tag:"Law",tc:"tag-law",desc:"Common Law Admission Test.",papers:{full:{title:"CLAT UG",dur:120,qs:genQ("CLAT",50),free:false},pg:{title:"CLAT PG",dur:120,qs:genQ("CLAT PG",50),free:false}}},
+nda:{name:"NDA",cat:"defence",icon:"&#9876;",tag:"Defence",tc:"tag-def",desc:"National Defence Academy entrance examination.",papers:{math:{title:"NDA Mathematics",dur:150,qs:genQ("NDA Maths",50),free:false},gat:{title:"NDA General Ability",dur:150,qs:genQ("NDA GAT",50),free:true}}},
+cat:{name:"CAT",cat:"management",icon:"&#128188;",tag:"MBA",tc:"tag-mgmt",desc:"Common Admission Test for IIMs.",papers:{full:{title:"CAT Full Paper",dur:120,qs:genQ("CAT",50),free:false}}},
+ctet:{name:"CTET",cat:"teaching",icon:"&#128218;",tag:"Teach",tc:"tag-law",desc:"Central Teacher Eligibility Test.",papers:{p1:{title:"CTET Paper I",dur:150,qs:genQ("CTET P1",50),free:false},p2:{title:"CTET Paper II",dur:150,qs:genQ("CTET P2",50),free:false}}},
+gate:{name:"GATE",cat:"gate",icon:"&#127891;",tag:"GATE",tc:"tag-eng",desc:"Graduate Aptitude Test in Engineering.",papers:{cse:{title:"GATE Computer Science",dur:180,qs:genQ("GATE CSE",50),free:true},ee:{title:"GATE Electrical",dur:180,qs:genQ("GATE EE",50),free:false},me:{title:"GATE Mechanical",dur:180,qs:genQ("GATE ME",50),free:false},ce:{title:"GATE Civil",dur:180,qs:genQ("GATE CE",50),free:false}}},
+
+// ────── CA — Chartered Accountant (ICAI) ──────
+ca:{name:"CA (Chartered Accountant)",cat:"professional",icon:"&#128179;",tag:"CA — ICAI",tc:"tag-prof",desc:"ICAI Chartered Accountant: Foundation → Intermediate (Grp I & II) → Final (Grp I & II). 100 MCQs per subject.",
+papers:profPapers("ca","CA Intermediate",[
+    {name:"Foundation",subjects:[
+        {name:"Principles & Practice of Accounting",topics:TP.accounting,free:true},
+        {name:"Business Laws & Business Correspondence",topics:TP.law},
+        {name:"Business Mathematics, Logic & Statistics",topics:TP.quant},
+        {name:"Business Economics & Commercial Knowledge",topics:TP.economics}
+    ]},
+    {name:"Intermediate — Group I",subjects:[
+        {name:"Accounting",topics:TP.accounting},
+        {name:"Corporate Laws & Other Laws",topics:TP.corporateLaw},
+        {name:"Cost & Management Accounting",topics:TP.cost},
+        {name:"Taxation (DT + IDT)",topics:TP.tax}
+    ]},
+    {name:"Intermediate — Group II",subjects:[
+        {name:"Advanced Accounting",topics:TP.advaccounting},
+        {name:"Auditing & Assurance",topics:TP.audit},
+        {name:"EIS & Strategic Management",topics:TP.it},
+        {name:"Financial Mgmt & Economics for Finance",topics:TP.finmgmt}
+    ]},
+    {name:"Final — Group I",subjects:[
+        {name:"Financial Reporting",topics:TP.advaccounting},
+        {name:"Strategic Financial Management",topics:TP.finmgmt},
+        {name:"Advanced Auditing & Professional Ethics",topics:TP.audit},
+        {name:"Corporate & Economic Laws",topics:TP.corporateLaw}
+    ]},
+    {name:"Final — Group II",subjects:[
+        {name:"Strategic Cost Management",topics:TP.cost},
+        {name:"Direct Tax Laws & International Tax",topics:TP.tax},
+        {name:"Indirect Tax Laws",topics:TP.tax},
+        {name:"Integrated Business Solutions (Case Study)",topics:TP.strategy}
+    ]}
+],180)},
+
+// ────── CS — Company Secretary (ICSI) ──────
+cs:{name:"CS (Company Secretary)",cat:"professional",icon:"&#128196;",tag:"CS — ICSI",tc:"tag-prof",desc:"ICSI Company Secretary: Foundation → Executive (Mod 1 & 2) → Professional (Mod 1, 2 & 3). 100 MCQs per subject.",
+papers:profPapers("cs","CS Executive",[
+    {name:"Foundation",subjects:[
+        {name:"Business Environment & Law",topics:TP.law,free:true},
+        {name:"Business Management, Ethics & Entrepreneurship",topics:TP.fm},
+        {name:"Business Economics",topics:TP.economics},
+        {name:"Fundamentals of Accounting & Auditing",topics:TP.accounting}
+    ]},
+    {name:"Executive — Module 1",subjects:[
+        {name:"Jurisprudence, Interpretation & General Laws",topics:TP.law},
+        {name:"Company Law",topics:TP.corporateLaw},
+        {name:"Setting up of Business Entities & Closure",topics:TP.corporateLaw},
+        {name:"Tax Laws (DT + IDT)",topics:TP.tax}
+    ]},
+    {name:"Executive — Module 2",subjects:[
+        {name:"Corporate & Management Accounting",topics:TP.accounting},
+        {name:"Securities Laws & Capital Markets",topics:TP.investment},
+        {name:"Economic, Business & Commercial Laws",topics:TP.law},
+        {name:"Financial & Strategic Management",topics:TP.finmgmt}
+    ]},
+    {name:"Professional — Module 1",subjects:[
+        {name:"Governance, Risk, Compliances & Ethics",topics:TP.ethics},
+        {name:"Advanced Tax Laws",topics:TP.tax},
+        {name:"Drafting, Pleadings & Appearances",topics:TP.law}
+    ]},
+    {name:"Professional — Module 2",subjects:[
+        {name:"Secretarial Audit & Due Diligence",topics:TP.audit},
+        {name:"Corporate Restructuring & Insolvency",topics:TP.corporateLaw},
+        {name:"Resolution of Corporate Disputes",topics:TP.corporateLaw}
+    ]},
+    {name:"Professional — Module 3",subjects:[
+        {name:"Corporate Funding & Listings in Stock Exchanges",topics:TP.investment},
+        {name:"Multidisciplinary Case Studies",topics:TP.strategy},
+        {name:"Elective — Banking Law & Practice",topics:TP.law}
+    ]}
+],180)},
+
+// ────── CMA — Cost & Management Accountant (ICMAI) ──────
+cma:{name:"CMA / CWA (Cost & Management Accountant)",cat:"professional",icon:"&#128200;",tag:"CMA — ICMAI",tc:"tag-prof",desc:"ICMAI Cost & Management Accountant: Foundation → Intermediate (Grp I & II) → Final (Grp III & IV). 100 MCQs per subject.",
+papers:profPapers("cma","CMA Intermediate",[
+    {name:"Foundation",subjects:[
+        {name:"Fundamentals of Economics & Management",topics:TP.economics,free:true},
+        {name:"Fundamentals of Accounting",topics:TP.accounting},
+        {name:"Fundamentals of Laws & Ethics",topics:TP.law},
+        {name:"Fundamentals of Business Mathematics & Statistics",topics:TP.quant}
+    ]},
+    {name:"Intermediate — Group I",subjects:[
+        {name:"Financial Accounting",topics:TP.accounting},
+        {name:"Laws & Ethics",topics:TP.ethics},
+        {name:"Direct Taxation",topics:TP.tax},
+        {name:"Cost Accounting",topics:TP.cost}
+    ]},
+    {name:"Intermediate — Group II",subjects:[
+        {name:"Operations Management & Strategic Management",topics:TP.strategy},
+        {name:"Cost & Management Audit",topics:TP.audit},
+        {name:"Financial Management & Economics for Finance",topics:TP.finmgmt},
+        {name:"Management Accounting — Performance Mgmt",topics:TP.cost}
+    ]},
+    {name:"Final — Group III",subjects:[
+        {name:"Corporate Laws & Compliance",topics:TP.corporateLaw},
+        {name:"Strategic Financial Management",topics:TP.finmgmt},
+        {name:"Strategic Cost Management & Decision Making",topics:TP.cost},
+        {name:"Direct Tax Laws & International Taxation",topics:TP.tax}
+    ]},
+    {name:"Final — Group IV",subjects:[
+        {name:"Corporate Financial Reporting",topics:TP.advaccounting},
+        {name:"Indirect Tax Laws & Practice",topics:TP.tax},
+        {name:"Cost & Management Audit (Final)",topics:TP.audit},
+        {name:"Strategic Performance Management & Business Valuation",topics:TP.finmgmt}
+    ]}
+],180)},
+
+// ────── ACCA — Association of Chartered Certified Accountants ──────
+acca:{name:"ACCA (UK)",cat:"professional",icon:"&#127468;&#127463;",tag:"ACCA",tc:"tag-profa",desc:"ACCA Applied Knowledge → Applied Skills → Strategic Professional. 100 MCQs per subject.",
+papers:profPapers("acca","ACCA",[
+    {name:"Applied Knowledge",subjects:[
+        {name:"Business & Technology (BT)",topics:TP.it,free:true},
+        {name:"Management Accounting (MA)",topics:TP.cost},
+        {name:"Financial Accounting (FA)",topics:TP.accounting}
+    ]},
+    {name:"Applied Skills",subjects:[
+        {name:"Corporate & Business Law (LW)",topics:TP.law},
+        {name:"Performance Management (PM)",topics:TP.cost},
+        {name:"Taxation (TX)",topics:TP.tax},
+        {name:"Financial Reporting (FR)",topics:TP.advaccounting},
+        {name:"Audit & Assurance (AA)",topics:TP.audit},
+        {name:"Financial Management (FM)",topics:TP.finmgmt}
+    ]},
+    {name:"Strategic Professional",subjects:[
+        {name:"Strategic Business Leader (SBL)",topics:TP.strategy},
+        {name:"Strategic Business Reporting (SBR)",topics:TP.advaccounting},
+        {name:"Advanced Financial Management (AFM)",topics:TP.finmgmt},
+        {name:"Advanced Performance Management (APM)",topics:TP.cost}
+    ]}
+],180)},
+
+// ────── US CMA — Institute of Management Accountants ──────
+uscma:{name:"US CMA (Certified Management Accountant)",cat:"professional",icon:"&#127482;&#127480;",tag:"US CMA",tc:"tag-profa",desc:"IMA Certified Management Accountant: Part 1 & Part 2. 100 MCQs per part.",
+papers:profPapers("uscma","US CMA",[
+    {name:"Part 1",subjects:[
+        {name:"Financial Planning, Performance & Analytics",topics:TP.cost.concat(TP.finmgmt).concat(TP.accounting)}
+    ]},
+    {name:"Part 2",subjects:[
+        {name:"Strategic Financial Management",topics:TP.finmgmt.concat(TP.investment).concat(TP.strategy)}
+    ]}
+],240)},
+
+// ────── CFA — Chartered Financial Analyst (CFA Institute) ──────
+cfa:{name:"CFA (Chartered Financial Analyst)",cat:"professional",icon:"&#128176;",tag:"CFA",tc:"tag-profa",desc:"CFA Institute — Level I, II & III. 100 MCQs per level.",
+papers:profPapers("cfa","CFA",[
+    {name:"Level I",subjects:[
+        {name:"Ethical & Professional Standards",topics:TP.ethics,free:true},
+        {name:"Quantitative Methods",topics:TP.quant},
+        {name:"Economics",topics:TP.economics},
+        {name:"Financial Reporting & Analysis",topics:TP.advaccounting},
+        {name:"Corporate Issuers",topics:TP.corporateLaw},
+        {name:"Equity Investments",topics:TP.investment},
+        {name:"Fixed Income",topics:TP.investment},
+        {name:"Derivatives",topics:TP.investment},
+        {name:"Alternative Investments",topics:TP.investment},
+        {name:"Portfolio Management",topics:TP.investment}
+    ]},
+    {name:"Level II",subjects:[
+        {name:"Ethics (L2)",topics:TP.ethics},
+        {name:"Quantitative Methods (L2)",topics:TP.quant},
+        {name:"Economics (L2)",topics:TP.economics},
+        {name:"Financial Reporting (L2)",topics:TP.advaccounting},
+        {name:"Corporate Issuers (L2)",topics:TP.corporateLaw},
+        {name:"Equity Valuation (L2)",topics:TP.investment},
+        {name:"Fixed Income (L2)",topics:TP.investment},
+        {name:"Derivatives (L2)",topics:TP.investment},
+        {name:"Alternative Investments (L2)",topics:TP.investment},
+        {name:"Portfolio Management (L2)",topics:TP.investment}
+    ]},
+    {name:"Level III",subjects:[
+        {name:"Ethics (L3)",topics:TP.ethics},
+        {name:"Economics (L3)",topics:TP.economics},
+        {name:"Equity (L3)",topics:TP.investment},
+        {name:"Fixed Income (L3)",topics:TP.investment},
+        {name:"Derivatives & Risk Mgmt (L3)",topics:TP.riskmgmt},
+        {name:"Alternative Investments (L3)",topics:TP.investment},
+        {name:"Private Wealth Management",topics:TP.investment},
+        {name:"Institutional Portfolio Mgmt",topics:TP.investment},
+        {name:"Trading & Rebalancing",topics:TP.investment},
+        {name:"Performance Evaluation",topics:TP.investment}
+    ]}
+],180)},
+
+// ────── FRM — Financial Risk Manager (GARP) ──────
+frm:{name:"FRM (Financial Risk Manager)",cat:"professional",icon:"&#127919;",tag:"FRM — GARP",tc:"tag-profa",desc:"GARP Financial Risk Manager: Part 1 & Part 2. 100 MCQs per part.",
+papers:profPapers("frm","FRM",[
+    {name:"Part 1",subjects:[
+        {name:"Foundations of Risk Management",topics:TP.riskmgmt,free:true},
+        {name:"Quantitative Analysis",topics:TP.quant},
+        {name:"Financial Markets & Products",topics:TP.investment},
+        {name:"Valuation & Risk Models",topics:TP.riskmgmt}
+    ]},
+    {name:"Part 2",subjects:[
+        {name:"Market Risk Measurement",topics:TP.riskmgmt},
+        {name:"Credit Risk Measurement",topics:TP.riskmgmt},
+        {name:"Operational Risk & Resiliency",topics:TP.riskmgmt},
+        {name:"Liquidity & Treasury Risk",topics:TP.riskmgmt},
+        {name:"Risk Management & Investment Mgmt",topics:TP.investment},
+        {name:"Current Issues in Financial Markets",topics:TP.investment}
+    ]}
+],240)},
+
+// ────── EA — Enrolled Agent (IRS / US) ──────
+ea:{name:"EA (Enrolled Agent)",cat:"professional",icon:"&#127919;",tag:"EA — IRS",tc:"tag-profa",desc:"IRS Enrolled Agent: Part 1 (Individuals), Part 2 (Businesses), Part 3 (Representation). 100 MCQs per part.",
+papers:profPapers("ea","EA",[
+    {name:"Part 1",subjects:[
+        {name:"Taxation of Individuals",topics:TP.tax.concat(TP.economics),free:true}
+    ]},
+    {name:"Part 2",subjects:[
+        {name:"Taxation of Businesses",topics:TP.tax.concat(TP.accounting)}
+    ]},
+    {name:"Part 3",subjects:[
+        {name:"Representation, Practices & Procedures",topics:TP.tax.concat(TP.law)}
+    ]}
+],240)},
+
+// ────── ICFAI — CFA (India) ──────
+icfai:{name:"ICFAI CFA (India)",cat:"professional",icon:"&#127891;",tag:"ICFAI",tc:"tag-prof",desc:"ICFAI Foundation → Intermediate → Final CFA Program. 100 MCQs per subject.",
+papers:profPapers("icfai","ICFAI CFA",[
+    {name:"Foundation",subjects:[
+        {name:"Fundamentals of Accounting",topics:TP.accounting,free:true},
+        {name:"Business Economics",topics:TP.economics},
+        {name:"Quantitative Methods",topics:TP.quant},
+        {name:"Business & Financial Environment",topics:TP.investment}
+    ]},
+    {name:"Intermediate",subjects:[
+        {name:"Financial Reporting & Analysis",topics:TP.advaccounting},
+        {name:"Corporate Finance",topics:TP.finmgmt},
+        {name:"Equity & Fixed Income Analysis",topics:TP.investment},
+        {name:"Portfolio Management",topics:TP.investment}
+    ]},
+    {name:"Final",subjects:[
+        {name:"Advanced Financial Reporting",topics:TP.advaccounting},
+        {name:"Advanced Portfolio Management",topics:TP.investment},
+        {name:"Derivatives & Risk Management",topics:TP.riskmgmt},
+        {name:"Ethics & Professional Standards",topics:TP.ethics}
+    ]}
+],180)},
+
+// ────── Additional Professional: CPA (US) ──────
+cpa:{name:"US CPA (Certified Public Accountant)",cat:"professional",icon:"&#127482;&#127480;",tag:"US CPA",tc:"tag-profa",desc:"AICPA CPA Exam: AUD, BEC, FAR, REG. 100 MCQs per section.",
+papers:profPapers("cpa","US CPA",[
+    {name:"AUD — Auditing & Attestation",subjects:[
+        {name:"Professional Responsibilities & Ethics",topics:TP.ethics},
+        {name:"Assessment of Risk",topics:TP.audit},
+        {name:"Performing Procedures & Evidence",topics:TP.audit},
+        {name:"Forming Conclusions & Reporting",topics:TP.audit}
+    ]},
+    {name:"BEC — Business Environment & Concepts",subjects:[
+        {name:"Corporate Governance",topics:TP.strategy},
+        {name:"Economic Concepts & Analysis",topics:TP.economics},
+        {name:"Financial Management",topics:TP.finmgmt},
+        {name:"Information Technology",topics:TP.it},
+        {name:"Operations Management",topics:TP.fm}
+    ]},
+    {name:"FAR — Financial Accounting & Reporting",subjects:[
+        {name:"Conceptual Framework & Standard Setting",topics:TP.advaccounting},
+        {name:"Financial Statement Accounts",topics:TP.accounting},
+        {name:"Specific Transactions & Events",topics:TP.advaccounting},
+        {name:"State & Local Governments",topics:TP.accounting}
+    ]},
+    {name:"REG — Regulation",subjects:[
+        {name:"Ethics & Professional Responsibility",topics:TP.ethics},
+        {name:"Business Law",topics:TP.law},
+        {name:"Federal Taxation — Individuals",topics:TP.tax},
+        {name:"Federal Taxation — Entities",topics:TP.tax}
+    ]}
+],240)},
+
+// ────── Actuarial Science ──────
+actuarial:{name:"Actuarial Exams (IAI)",cat:"professional",icon:"&#128202;",tag:"Actuarial",tc:"tag-prof",desc:"Institute of Actuaries of India — CT Series Papers. 100 MCQs per subject.",
+papers:profPapers("actuarial","Actuarial",[
+    {name:"CT Series — Core Technical",subjects:[
+        {name:"CT1 — Financial Mathematics",topics:TP.finmgmt.concat(TP.quant),free:true},
+        {name:"CT2 — Finance & Financial Reporting",topics:TP.accounting},
+        {name:"CT3 — Probability & Mathematical Statistics",topics:TP.quant},
+        {name:"CT4 — Models",topics:TP.quant},
+        {name:"CT5 — General Insurance",topics:TP.riskmgmt},
+        {name:"CT6 — Statistical Methods",topics:TP.quant},
+        {name:"CT7 — Business Economics",topics:TP.economics},
+        {name:"CT8 — Financial Economics",topics:TP.investment}
+    ]}
+],180)}
+};
+
+// =========================================================
+// VIEW SYSTEM
+// =========================================================
+var VIEWS=["V_HOME","V_ADMLOGIN","V_ADMIN","V_EXAM","V_RESULT"];
+function hideAll(){for(var i=0;i<VIEWS.length;i++){var el=document.getElementById(VIEWS[i]);if(el)el.classList.add("hide")}}
+function showV(id){hideAll();document.getElementById(id).classList.remove("hide")}
+function goHome(){showV("V_HOME");document.getElementById("REGFORM").classList.add("hide");document.getElementById("EXGRD").classList.remove("hide");document.getElementById("CATBAR").classList.remove("hide");renderCards("all");chkUser()}
+function togTheme(){document.body.classList.toggle("dark");try{localStorage.setItem("x_theme",document.body.classList.contains("dark")?"dark":"light")}catch(e){}}
+
+// =========================================================
+// RETURNING USER
+// =========================================================
+function chkUser(){
+    var u=getCur();
+    if(u){
+        document.getElementById("WBACK").classList.remove("hide");
+        document.getElementById("WBNM").textContent=u.name;
+        document.getElementById("F_NAME").value=u.name;
+        document.getElementById("F_ROLL").value=u.roll;
+        document.getElementById("F_EMAIL").value=u.email;
+        document.getElementById("F_PHONE").value=u.phone;
+    }else{
+        document.getElementById("WBACK").classList.add("hide");
+    }
+}
+function clearUser(){
+    S("x_cur",null);
+    document.getElementById("F_NAME").value="";
+    document.getElementById("F_ROLL").value="";
+    document.getElementById("F_EMAIL").value="";
+    document.getElementById("F_PHONE").value="";
+    document.getElementById("WBACK").classList.add("hide");
+    toast("Logged out","ok");
+}
+
+// =========================================================
+// CATEGORY BAR & CARDS
+// =========================================================
+function buildCats(){
+    var bar=document.getElementById("CATBAR");
+    var cats=["all","professional","medical","engineering","civil","ssc","banking","law","defence","management","teaching","gate"];
+    var labels=["All","Professional","Medical","Engineering","Civil","SSC","Banking","Law","Defence","Management","Teaching","GATE"];
+    bar.innerHTML="";
+    for(var i=0;i<cats.length;i++){
+        var b=document.createElement("button");
+        b.className="cat-btn"+(cats[i]==="all"?" on":"");
+        b.textContent=labels[i];
+        b.setAttribute("data-cat",cats[i]);
+        bar.appendChild(b);
+    }
+}
+
+function renderCards(cat){
+    var grid=document.getElementById("EXGRD");
+    grid.innerHTML="";
+    var keys=Object.keys(EX);
+    for(var i=0;i<keys.length;i++){
+        var k=keys[i],ex=EX[k];
+        if(cat!=="all"&&ex.cat!==cat)continue;
+        var np=Object.keys(ex.papers).length;
+        var hasFree=false;
+        var pks=Object.keys(ex.papers);
+        for(var j=0;j<pks.length;j++)if(ex.papers[pks[j]].free)hasFree=true;
+        var totalQ=0;
+        for(var j=0;j<pks.length;j++)totalQ+=ex.papers[pks[j]].qs.length;
+        var card=document.createElement("div");
+        card.className="exam-card";
+        card.innerHTML=(hasFree?'<div class="free-badge">FREE PAPER</div>':'<div class="prem-badge">VOUCHER</div>')+
+            '<div class="icon">'+ex.icon+'</div><h4>'+ex.name+'</h4><p>'+ex.desc+'</p>'+
+            '<span class="tag '+ex.tc+'">'+ex.tag+' | '+np+' Papers | '+totalQ+'Q</span>';
+        card.setAttribute("data-exam",k);
+        grid.appendChild(card);
+    }
+}
+
+function selectExam(k){
+    examKey=k;
+    var ex=EX[k];
+    document.getElementById("SELTIT").textContent=ex.name;
+    document.getElementById("SELDES").textContent=ex.desc;
+    document.getElementById("BEXAM").textContent=ex.name;
+
+    // Paper summary
+    var pks=Object.keys(ex.papers);
+    var totalQ=0,freeCount=0;
+    for(var i=0;i<pks.length;i++){totalQ+=ex.papers[pks[i]].qs.length;if(ex.papers[pks[i]].free)freeCount++}
+    var sumEl=document.getElementById("PAPERSUM");
+    sumEl.innerHTML='<span class="ps-item"><strong>'+pks.length+'</strong> Papers</span><span class="ps-item"><strong>'+totalQ+'</strong> Total MCQs</span><span class="ps-item"><strong>'+freeCount+'</strong> Free Paper(s)</span><span class="ps-item"><strong>100</strong> MCQs Each</span>';
+    sumEl.classList.remove("hide");
+
+    var sel=document.getElementById("F_PAPER");
+    sel.innerHTML="";
+
+    // Check for level grouping
+    var hasLevels=false;
+    for(var i=0;i<pks.length;i++){if(ex.papers[pks[i]].level){hasLevels=true;break}}
+
+    if(hasLevels){
+        var levelOrder=[],levelMap={};
+        for(var i=0;i<pks.length;i++){
+            var p=ex.papers[pks[i]];
+            var lvl=p.level||"General";
+            if(!levelMap[lvl]){levelMap[lvl]=[];levelOrder.push(lvl)}
+            levelMap[lvl].push({key:pks[i],paper:p});
+        }
+        for(var l=0;l<levelOrder.length;l++){
+            var grp=document.createElement("optgroup");
+            grp.label=levelOrder[l];
+            var papers=levelMap[levelOrder[l]];
+            for(var j=0;j<papers.length;j++){
+                var opt=document.createElement("option");
+                opt.value=papers[j].key;
+                opt.textContent=papers[j].paper.title+" ("+papers[j].paper.qs.length+"Q, "+papers[j].paper.dur+"min)"+(papers[j].paper.free?" — FREE":"");
+                grp.appendChild(opt);
+            }
+            sel.appendChild(grp);
+        }
+    }else{
+        for(var i=0;i<pks.length;i++){
+            var pk=pks[i],p=ex.papers[pk];
+            var opt=document.createElement("option");
+            opt.value=pk;
+            opt.textContent=p.title+" ("+p.qs.length+"Q, "+p.dur+"min)"+(p.free?" — FREE":"");
+            sel.appendChild(opt);
+        }
+    }
+
+    document.getElementById("EXGRD").classList.add("hide");
+    document.getElementById("CATBAR").classList.add("hide");
+    document.getElementById("REGFORM").classList.remove("hide");
+    chkUser();
+}
+
+// =========================================================
+// START EXAM
+// =========================================================
+function doStartExam(){
+    sName=document.getElementById("F_NAME").value.trim();
+    sRoll=document.getElementById("F_ROLL").value.trim();
+    sEmail=document.getElementById("F_EMAIL").value.trim();
+    sPhone=document.getElementById("F_PHONE").value.trim();
+    paperKey=document.getElementById("F_PAPER").value;
+
+    if(!sName||!sRoll||!sEmail){toast("Fill name, roll, email","error");return}
+    if(!EX[examKey]||!EX[examKey].papers[paperKey]){toast("Select a paper","error");return}
+
+    var paper=EX[examKey].papers[paperKey];
+
+    setCur({name:sName,roll:sRoll,email:sEmail,phone:sPhone});
+    var users=getUsers();
+    var exists=false;
+    for(var i=0;i<users.length;i++){if(users[i].email===sEmail)exists=true}
+    if(!exists){users.push({name:sName,roll:sRoll,email:sEmail,phone:sPhone,joined:new Date().toLocaleString()});saveUsers(users);addLog("New user: "+sName)}
+
+    if(!paper.free){
+        var vc=document.getElementById("F_VOUCHER").value.trim().toUpperCase();
+        if(!vc){toast("Enter voucher code LAUNCH50 for free access","error");return}
+        var v=getV();
+        if(v[vc]&&v[vc].used<v[vc].max){v[vc].used++;saveV(v);toast("Voucher: "+v[vc].desc,"ok")}
+        else if(v[vc]){toast("Voucher limit reached","error");return}
+        else{toast("Invalid voucher","error");return}
+    }
+
+    bank=paper;
+    catName=EX[examKey].name;
+    paperTitle=paper.title;
+    ans={};marks={};idx=0;
+    sScore=0;sPct=0;sTotal=paper.qs.length;sWrong=0;sSkip=0;
+    tabWarn=0;submitState=0;
+
+    document.getElementById("EXTITLE").textContent=catName+" — "+paperTitle;
+    document.getElementById("WLBL").textContent="";
+    showV("V_EXAM");
+    buildPal();
+    loadQ(0);
+    startTmr(paper.dur*60);
+    addLog("Exam started: "+catName+" — "+paperTitle+" by "+sName);
+}
+
+// =========================================================
+// EXAM ENGINE
+// =========================================================
+function buildPal(){
+    var g=document.getElementById("PAL");
+    g.innerHTML="";
+    for(var i=0;i<bank.qs.length;i++){
+        var b=document.createElement("button");
+        b.textContent=i+1;
+        b.id="PB"+i;
+        b.setAttribute("data-idx",i);
+        g.appendChild(b);
+    }
+}
+
+function loadQ(i){
+    idx=i;
+    var q=bank.qs[i];
+    var sel=ans[q.id]||"";
+    document.getElementById("QCTR").textContent="Q "+(i+1)+"/"+bank.qs.length;
+    var html='<div class="q-title">Question '+(i+1)+' of '+bank.qs.length+':<br>'+dec(q.t)+'</div><div class="opts">';
+    var opts=["A","B","C","D"];
+    for(var j=0;j<4;j++){
+        var o=opts[j];
+        var chk=sel===o?" checked":"";
+        html+='<label class="opt"><input type="radio" name="OPT" value="'+o+'"'+chk+'> <strong>'+o+')</strong> '+dec(q.o[o])+'</label>';
+    }
+    html+='</div>';
+    document.getElementById("QBOX").innerHTML=html;
+
+    var radios=document.querySelectorAll('#QBOX input[type="radio"]');
+    for(var r=0;r<radios.length;r++){
+        radios[r].addEventListener("change",function(){
+            ans[bank.qs[idx].id]=this.value;
+            updatePal();
+        });
+    }
+    updatePal();
+    resetSubmitBtn();
+}
+
+function updatePal(){
+    for(var i=0;i<bank.qs.length;i++){
+        var b=document.getElementById("PB"+i);
+        if(!b)continue;
+        b.className="";
+        if(ans[bank.qs[i].id])b.className="done";
+        if(marks[bank.qs[i].id])b.className+=" mrk";
+        if(i===idx)b.className+=" cur";
+    }
+    var answered=0;
+    for(var i=0;i<bank.qs.length;i++){if(ans[bank.qs[i].id])answered++}
+    document.getElementById("SUB_INFO").textContent="Answered: "+answered+"/"+bank.qs.length+" | Unanswered: "+(bank.qs.length-answered);
+}
+
+function startTmr(sec){
+    if(tmr)clearInterval(tmr);
+    var el=document.getElementById("TIMER");
+    var rem=sec;
+    tmr=setInterval(function(){
+        if(rem<0)return;
+        var m=Math.floor(rem/60);
+        var s=rem%60;
+        el.textContent=(m<10?"0":"")+m+":"+(s<10?"0":"")+s;
+        el.style.background=rem<=60?"#DC2626":rem<=300?"#D97706":"#1F2937";
+        rem--;
+        if(rem<0){clearInterval(tmr);tmr=null;doSubmit()}
+    },1000);
+}
+
+// =========================================================
+// SUBMIT — TWO CLICK (NO CONFIRM DIALOG)
+// =========================================================
+function resetSubmitBtn(){
+    submitState=0;
+    var btn=document.getElementById("BTN_SUBMIT");
+    btn.textContent="Final Submit Exam";
+    btn.style.background="var(--red)";
+    btn.style.fontSize="15px";
+    btn.style.padding="14px 20px";
+}
+
+function handleSubmit(){
+    if(submitState===0){
+        submitState=1;
+        var btn=document.getElementById("BTN_SUBMIT");
+        var answered=0;
+        for(var i=0;i<bank.qs.length;i++){if(ans[bank.qs[i].id])answered++}
+        btn.textContent="CONFIRM SUBMIT ("+answered+"/"+bank.qs.length+" answered) — Tap Again";
+        btn.style.background="#F59E0B";
+        btn.style.fontSize="13px";
+        setTimeout(function(){if(submitState===1)resetSubmitBtn()},6000);
+    }else{
+        submitState=0;
+        doSubmit();
+    }
+}
+
+function doSubmit(){
+    try{
+        if(tmr){clearInterval(tmr);tmr=null}
+        sTotal=bank.qs.length;sScore=0;sWrong=0;sSkip=0;
+        for(var i=0;i<sTotal;i++){
+            var qid=bank.qs[i].id;
+            var ua=ans[qid]||"";
+            var ca=dec(bank.qs[i].a);
+            if(ua==="")sSkip++;
+            else if(ua===ca)sScore++;
+            else sWrong++;
+        }
+        sPct=sTotal>0?Math.round((sScore/sTotal)*100):0;
+        var attempted=sTotal-sSkip;
+        var accuracy=attempted>0?Math.round((sScore/attempted)*100):0;
+
+        var hist=getHist();
+        hist.push({date:new Date().toLocaleString(),name:sName,roll:sRoll,email:sEmail,exam:catName,paper:paperTitle,score:sScore,total:sTotal,pct:sPct});
+        saveHist(hist);
+        addLog("Result: "+sName+" "+sPct+"% on "+catName+" — "+paperTitle);
+
+        showV("V_RESULT");
+        document.getElementById("RN").textContent=sName;
+        document.getElementById("RR").textContent=sRoll;
+        document.getElementById("RE").textContent=catName;
+        document.getElementById("RP").textContent=paperTitle;
+        document.getElementById("RSCORE").textContent=sScore+" / "+sTotal+" ("+sPct+"%)";
+        document.getElementById("RCOR").textContent=sScore;
+        document.getElementById("RWRO").textContent=sWrong;
+        document.getElementById("RSKP").textContent=sSkip;
+        document.getElementById("RACC").textContent=accuracy+"%";
+
+        var rm=document.getElementById("RREM");
+        if(sPct>=80){rm.textContent="Outstanding Performance!";rm.style.color="var(--grn)"}
+        else if(sPct>=60){rm.textContent="Good! Qualified for certificate.";rm.style.color="var(--pri)"}
+        else if(sPct>=40){rm.textContent="Average. More practice recommended.";rm.style.color="var(--gold)"}
+        else{rm.textContent="Below passing. Keep practicing.";rm.style.color="var(--red)"}
+
+        document.getElementById("CCV").classList.add("hide");
+        document.getElementById("SBOX").classList.add("hide");
+        buildSolutions();
+    }catch(e){
+        showV("V_RESULT");
+        document.getElementById("RN").textContent=sName||"Unknown";
+        document.getElementById("RSCORE").textContent="Error: "+e.message;
+    }
+}
+
+function buildSolutions(){
+    var tb=document.getElementById("STB");
+    tb.innerHTML="";
+    for(var i=0;i<bank.qs.length;i++){
+        var q=bank.qs[i];
+        var ua=ans[q.id]||"Skipped";
+        var ca=dec(q.a);
+        var ok=(ua===ca);
+        var tr=document.createElement("tr");
+        tr.innerHTML="<td>"+(i+1)+"</td><td style='max-width:400px'>"+dec(q.t)+"</td><td style='color:"+(ok?"var(--grn)":"var(--red)")+"'>"+ua+"</td><td style='color:var(--grn)'>"+ca+"</td>";
+        tb.appendChild(tr);
+    }
+}
+
+// =========================================================
+// CERTIFICATE
+// =========================================================
+function dlCert(){
+    if(sPct<40){toast("Need 40%+ for certificate","error");return}
+    var cv=document.getElementById("CCV"),ctx=cv.getContext("2d");
+    var W=1056,H=816;cv.width=W;cv.height=H;
+
+    // Background
+    ctx.fillStyle="#FFFDF7";ctx.fillRect(0,0,W,H);
+
+    // Decorative border
+    ctx.strokeStyle="#1D4ED8";ctx.lineWidth=6;ctx.strokeRect(15,15,W-30,H-30);
+    ctx.strokeStyle="#3B82F6";ctx.lineWidth=2;ctx.strokeRect(25,25,W-50,H-50);
+
+    // Corner decorations
+    ctx.fillStyle="#1D4ED8";
+    [[30,30],[W-50,30],[30,H-50],[W-50,H-50]].forEach(function(c){ctx.fillRect(c[0],c[1],20,20)});
+
+    ctx.fillStyle="#1D4ED8";ctx.font="bold 13px sans-serif";ctx.textAlign="center";
+    ctx.fillText("ALL INDIA EXAMINATION AUTHORITY",W/2,68);
+    ctx.fillStyle="#94A3B8";ctx.font="11px sans-serif";
+    ctx.fillText("Professional & Competitive Examination Portal",W/2,85);
+
+    ctx.fillStyle="#111827";ctx.font="bold 30px sans-serif";
+    ctx.fillText("CERTIFICATE OF ACHIEVEMENT",W/2,140);
+
+    ctx.fillStyle="#6B7280";ctx.font="italic 15px sans-serif";
+    ctx.fillText("This is to certify that",W/2,210);
+
+    ctx.fillStyle="#1D4ED8";ctx.font="bold 38px sans-serif";
+    ctx.fillText(sName.toUpperCase(),W/2,280);
+
+    ctx.strokeStyle="#D1D5DB";ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(W/2-200,300);ctx.lineTo(W/2+200,300);ctx.stroke();
+
+    ctx.fillStyle="#374151";ctx.font="15px sans-serif";
+    ctx.fillText("has successfully completed the examination",W/2,340);
+
+    ctx.fillStyle="#1D4ED8";ctx.font="bold 20px sans-serif";
+    ctx.fillText(catName,W/2,380);
+
+    ctx.fillStyle="#374151";ctx.font="bold 16px sans-serif";
+    ctx.fillText(paperTitle,W/2,410);
+
+    // Score box
+    ctx.fillStyle="#F0F7FF";
+    ctx.fillRect(W/2-140,435,280,80);
+    ctx.strokeStyle="#1D4ED8";ctx.lineWidth=2;
+    ctx.strokeRect(W/2-140,435,280,80);
+    ctx.fillStyle="#1D4ED8";ctx.font="bold 13px sans-serif";
+    ctx.fillText("SCORE",W/2,460);
+    ctx.font="bold 26px monospace";
+    ctx.fillText(sScore+"/"+sTotal+" ("+sPct+"%)",W/2,498);
+
+    var grade=sPct>=80?"DISTINCTION":sPct>=60?"FIRST CLASS":sPct>=40?"PASS":"NEEDS IMPROVEMENT";
+    ctx.fillStyle=sPct>=80?"#059669":sPct>=60?"#1D4ED8":sPct>=40?"#D97706":"#DC2626";
+    ctx.font="bold 18px sans-serif";
+    ctx.fillText("Grade: "+grade,W/2,555);
+
+    ctx.fillStyle="#6B7280";ctx.font="12px sans-serif";
+    ctx.fillText("Roll No: "+sRoll+" | Date: "+new Date().toLocaleDateString("en-IN"),W/2,595);
+
+    // Footer
+    ctx.textAlign="left";ctx.fillStyle="#94A3B8";ctx.font="11px sans-serif";
+    ctx.fillText("Date: "+new Date().toLocaleDateString("en-IN"),100,H-80);
+    ctx.textAlign="center";ctx.fillText("Certificate ID: AIEP-"+Date.now().toString(36).toUpperCase(),W/2,H-80);
+    ctx.textAlign="right";
+    ctx.fillText("All India Examination Authority",W-100,H-80);
+
+    cv.classList.remove("hide");
+    var a=document.createElement("a");a.download="Certificate_"+sRoll+".png";a.href=cv.toDataURL("image/png");
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    toast("Certificate downloaded!","ok");
+}
+
+function dlCSV(){
+    var csv="Q.No,Question,Your Answer,Correct Answer,Status\n";
+    for(var i=0;i<bank.qs.length;i++){
+        var ua=ans[bank.qs[i].id]||"Skipped",ca=dec(bank.qs[i].a);
+        csv+=(i+1)+',"'+dec(bank.qs[i].t).replace(/"/g,'""')+'",'+ua+","+ca+","+(ua===ca?"Correct":"Incorrect")+"\n";
+    }
+    var a=document.createElement("a");a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);a.download="Results_"+sRoll+".csv";
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    toast("CSV downloaded","ok");
+}
+
+// =========================================================
+// ADMIN
+// =========================================================
+function admLogin(){
+    var u=document.getElementById("AU").value.trim(),p=document.getElementById("AP").value.trim();
+    var err=document.getElementById("AERR");
+    err.classList.add("hide");
+    if(!u||!p){err.textContent="Enter both fields.";err.classList.remove("hide");return}
+    var c=getCreds();
+    if(u===c.u&&p===c.p){
+        isAdmin=true;addLog("Admin Login");
+        document.getElementById("AU").value="";document.getElementById("AP").value="";
+        document.getElementById("ADNM").textContent=c.u;
+        toast("Welcome, Admin!","ok");
+        showV("V_ADMIN");refreshAdmin();
+    }else{err.textContent="Invalid credentials.";err.classList.remove("hide");toast("Failed","error")}
+}
+function admLogout(){isAdmin=false;addLog("Admin Logout");goHome();toast("Logged out","ok")}
+
+function refreshAdmin(){
+    var te=0,tp2=0,tq=0,catR={};
+    var keys=Object.keys(EX);
+    for(var i=0;i<keys.length;i++){
+        var ex=EX[keys[i]];te++;
+        var pks=Object.keys(ex.papers);
+        for(var j=0;j<pks.length;j++){tp2++;tq+=ex.papers[pks[j]].qs.length}
+        var catKey=ex.cat||"other";
+        if(!catR[catKey])catR[catKey]={e:0,p:0,q:0};
+        catR[catKey].e++;
+        for(var m=0;m<pks.length;m++){catR[catKey].p++;catR[catKey].q+=ex.papers[pks[m]].qs.length}
+    }
+    document.getElementById("DST").innerHTML='<div class="stat"><div class="num">'+te+'</div><div class="lbl">Exams</div></div><div class="stat"><div class="num">'+tp2+'</div><div class="lbl">Papers</div></div><div class="stat"><div class="num">'+tq.toLocaleString()+'</div><div class="lbl">Questions</div></div><div class="stat"><div class="num">'+getUsers().length+'</div><div class="lbl">Users</div></div><div class="stat"><div class="num">'+getHist().length+'</div><div class="lbl">Attempts</div></div>';
+    var tb=document.getElementById("DTB");tb.innerHTML="";
+    var ck=Object.keys(catR).sort();
+    for(var c=0;c<ck.length;c++){
+        var r=catR[ck[c]];
+        var tr=document.createElement("tr");
+        tr.innerHTML='<td style="text-transform:capitalize;font-weight:600">'+ck[c]+'</td><td>'+r.e+'</td><td>'+r.p+'</td><td><span class="badge b-blue">'+r.q.toLocaleString()+'</span></td>';
+        tb.appendChild(tr);
+    }
+}
+
+function fillES(id){var sel=document.getElementById(id);sel.innerHTML="";var keys=Object.keys(EX);for(var i=0;i<keys.length;i++){var opt=document.createElement("option");opt.value=keys[i];opt.textContent=EX[keys[i]].name;sel.appendChild(opt)}}
+function updPS(e,p){var ev=document.getElementById(e).value,ps=document.getElementById(p);ps.innerHTML="";if(!EX[ev])return;var pks=Object.keys(EX[ev].papers);for(var i=0;i<pks.length;i++){var opt=document.createElement("option");opt.value=pks[i];opt.textContent=EX[ev].papers[pks[i]].title;ps.appendChild(opt)}}
+
+function addQ(){
+    var ev=document.getElementById("AEX").value,pv=document.getElementById("APA").value,t=document.getElementById("ATI").value.trim(),a=document.getElementById("AA").value.trim(),b=document.getElementById("AB").value.trim(),c=document.getElementById("AC").value.trim(),d=document.getElementById("AD").value.trim(),ans2=document.getElementById("AAN").value;
+    if(!t||!a||!b){toast("Fill question and options A, B","error");return}
+    EX[ev].papers[pv].qs.push({id:"q"+(EX[ev].papers[pv].qs.length+1)+"_"+Date.now(),t:enc(t),o:{A:enc(a),B:enc(b),C:enc(c),D:enc(d)},a:enc(ans2)});
+    toast("Added! Total: "+EX[ev].papers[pv].qs.length,"ok");
+    document.getElementById("ATI").value="";document.getElementById("AA").value="";document.getElementById("AB").value="";document.getElementById("AC").value="";document.getElementById("AD").value="";
+}
+
+function rdrMng(){
+    var ev=document.getElementById("MEX").value,pv=document.getElementById("MPA").value,sch=document.getElementById("MSC").value.toLowerCase();
+    var tb=document.getElementById("MTB");tb.innerHTML="";
+    if(!EX[ev]||!EX[ev].papers[pv])return;
+    var qs=EX[ev].papers[pv].qs;
+    for(var i=0;i<qs.length;i++){
+        var txt=dec(qs[i].t);
+        if(sch&&txt.toLowerCase().indexOf(sch)===-1)continue;
+        var tr=document.createElement("tr");
+        tr.innerHTML="<td style='font-family:monospace'>"+(i+1)+"</td><td style='max-width:350px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap'>"+txt+"</td><td><span class='badge b-green'>"+dec(qs[i].a)+"</span></td><td><button class='del-btn' data-ev='"+ev+"' data-pv='"+pv+"' data-idx='"+i+"'>Del</button></td>";
+        tb.appendChild(tr);
+    }
+}
+function delQ(ev,pv,i){if(!confirm("Delete question?"))return;EX[ev].papers[pv].qs.splice(i,1);toast("Deleted","ok");rdrMng()}
+
+function rdrVch(){var v=getV(),tb=document.getElementById("VTB");tb.innerHTML="";var keys=Object.keys(v);for(var i=0;i<keys.length;i++){var k=keys[i];var tr=document.createElement("tr");tr.innerHTML="<td><code>"+k+"</code></td><td>"+v[k].desc+"</td><td>"+v[k].used+"</td><td>"+v[k].max+"</td><td><button class='del-btn' data-vk='"+k+"'>Del</button></td>";tb.appendChild(tr)}}
+function addV(){var code=document.getElementById("VCO").value.trim().toUpperCase(),desc=document.getElementById("VDE").value.trim(),max=parseInt(document.getElementById("VMX").value)||100;if(!code){toast("Enter code","error");return}var v=getV();v[code]={desc:desc||"Voucher",used:0,max:max};saveV(v);rdrVch();toast("Created!","ok");document.getElementById("VCO").value="";document.getElementById("VDE").value="";document.getElementById("VMX").value=""}
+function delV(k){var v=getV();delete v[k];saveV(v);rdrVch();toast("Deleted","ok")}
+
+function rdrHist(){var hist=getHist(),tb=document.getElementById("HTB");tb.innerHTML="";if(!hist.length){tb.innerHTML="<tr><td colspan='5' style='text-align:center;color:var(--mut);padding:16px'>No history yet.</td></tr>";return}for(var i=hist.length-1;i>=0;i--){var h=hist[i];var tr=document.createElement("tr");tr.innerHTML='<td style="font-size:11px">'+h.date+'</td><td>'+h.name+'</td><td>'+h.exam+'</td><td>'+h.score+'/'+h.total+'</td><td><span class="badge '+(h.pct>=50?"b-green":"b-red")+'">'+h.pct+'%</span></td>';tb.appendChild(tr)}}
+function rdrUsers(){var users=getUsers(),tb=document.getElementById("UTB");tb.innerHTML="";if(!users.length){tb.innerHTML="<tr><td colspan='3' style='text-align:center;color:var(--mut);padding:16px'>No users yet.</td></tr>";return}for(var i=users.length-1;i>=0;i--){var u=users[i];var tr=document.createElement("tr");tr.innerHTML='<td>'+u.name+'</td><td>'+u.email+'</td><td>'+u.phone+'</td>';tb.appendChild(tr)}}
+
+function saveCreds(){var u=document.getElementById("SU").value.trim(),p=document.getElementById("SP").value.trim(),p2=document.getElementById("SP2").value.trim();if(!u||!p){toast("Enter credentials","error");return}if(p!==p2){toast("Passwords differ","error");return}if(p.length<6){toast("Min 6 chars","error");return}setCreds(u,p);toast("Saved!","ok");document.getElementById("SU").value="";document.getElementById("SP").value="";document.getElementById("SP2").value=""}
+
+function expCSV(){var h=getHist();if(!h.length){toast("No history","error");return}var csv="Date,Name,Roll,Email,Exam,Paper,Score,Total,Percentage\n";for(var i=0;i<h.length;i++){csv+='"'+h[i].date+'","'+h[i].name+'","'+h[i].roll+'","'+(h[i].email||'')+'","'+h[i].exam+'","'+h[i].paper+'",'+h[i].score+','+h[i].total+','+h[i].pct+'\n'}var a=document.createElement("a");a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);a.download="History.csv";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Exported!","ok")}
+
+function expAll(){var d={v:"6.0",creds:getCreds(),vouchers:getV(),history:getHist(),users:getUsers(),logs:G("x_l",[])};var b=new Blob([JSON.stringify(d,null,2)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="AIEP_Backup.json";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Exported!","ok")}
+
+function impAll(){var inp=document.createElement("input");inp.type="file";inp.accept=".json";inp.onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){try{var d=JSON.parse(ev.target.result);if(d.creds)setCreds(d.creds.u,d.creds.p);if(d.vouchers)saveV(d.vouchers);if(d.history)saveHist(d.history);if(d.users)saveUsers(d.users);if(d.logs)S("x_l",d.logs);toast("Imported!","ok")}catch(err){toast("Invalid file","error")}};r.readAsText(f)};inp.click()}
+
+function facReset(){if(!confirm("DELETE ALL DATA? This cannot be undone."))return;localStorage.clear();toast("Reset complete","ok");setTimeout(function(){location.reload()},1000)}
+
+// =========================================================
+// SECURITY
+// =========================================================
+document.addEventListener("contextmenu",function(e){e.preventDefault()});
+document.addEventListener("visibilitychange",function(){
+    if(document.hidden&&!document.getElementById("V_EXAM").classList.contains("hide")){
+        tabWarn++;
+        document.getElementById("WLBL").textContent="Tab Switch: "+tabWarn+"/3";
+        if(tabWarn>=3){toast("Auto-submitting due to violations!","error");doSubmit()}
+        else{toast("Warning "+tabWarn+"/3 — Do not switch tabs!","error")}
+    }
+});
+
+// =========================================================
+// BIND ALL EVENTS
+// =========================================================
+function bindEvents(){
+    // Nav
+    document.getElementById("NAV_HOME").onclick=goHome;
+    var nh2=document.getElementById("NAV_HOME2");if(nh2)nh2.onclick=goHome;
+    document.getElementById("NAV_DASH").onclick=function(){var u=getCur();if(!u){toast("Take an exam first","info");return}showV("V_RESULT")};
+    document.getElementById("NAV_ADMIN").onclick=function(){if(isAdmin){showV("V_ADMIN");refreshAdmin()}else{showV("V_ADMLOGIN");setTimeout(function(){document.getElementById("AU").focus()},100)}};
+    document.getElementById("NAV_THEME").onclick=togTheme;
+    var t2=document.getElementById("NAV_THEME2");if(t2)t2.onclick=togTheme;
+    var t3=document.getElementById("NAV_THEME3");if(t3)t3.onclick=togTheme;
+
+    document.getElementById("BACK_BTN").onclick=function(){document.getElementById("REGFORM").classList.add("hide");document.getElementById("PAPERSUM").classList.add("hide");document.getElementById("EXGRD").classList.remove("hide");document.getElementById("CATBAR").classList.remove("hide")};
+    document.getElementById("CLRUSR").onclick=clearUser;
+
+    // Category bar
+    document.getElementById("CATBAR").addEventListener("click",function(e){
+        var btn=e.target.closest(".cat-btn");
+        if(!btn)return;
+        var cat=btn.getAttribute("data-cat");
+        var btns=document.querySelectorAll("#CATBAR .cat-btn");
+        for(var i=0;i<btns.length;i++)btns[i].classList.toggle("on",btns[i]===btn);
+        renderCards(cat);
+    });
+
+    // Exam cards
+    document.getElementById("EXGRD").addEventListener("click",function(e){
+        var card=e.target.closest(".exam-card");
+        if(!card)return;
+        selectExam(card.getAttribute("data-exam"));
+    });
+
+    document.getElementById("BTN_START").onclick=doStartExam;
+
+    document.getElementById("F_PAPER").onchange=function(){
+        if(!examKey)return;
+        var pv=this.value,p=EX[examKey].papers[pv];
+        if(p&&p.free){document.getElementById("F_VOUCHER").value="";document.getElementById("F_VOUCHER").placeholder="Free paper — no voucher needed"}
+        else{document.getElementById("F_VOUCHER").placeholder="Use LAUNCH50 for free access"}
+    };
+
+    // Exam nav
+    document.getElementById("BTN_PREV").onclick=function(){if(idx>0)loadQ(idx-1)};
+    document.getElementById("BTN_NEXT").onclick=function(){if(idx<bank.qs.length-1)loadQ(idx+1)};
+    document.getElementById("BTN_MARK").onclick=function(){var qid=bank.qs[idx].id;marks[qid]=!marks[qid];updatePal();toast(marks[qid]?"Marked for review":"Unmarked","ok")};
+
+    document.getElementById("BTN_SUBMIT").addEventListener("click",function(e){e.preventDefault();e.stopPropagation();handleSubmit()});
+
+    document.getElementById("PAL").addEventListener("click",function(e){
+        var btn=e.target.closest("button[data-idx]");
+        if(!btn)return;
+        loadQ(parseInt(btn.getAttribute("data-idx")));
+    });
+
+    // Results
+    document.getElementById("BTN_CERT").onclick=dlCert;
+    document.getElementById("BTN_CSV2").onclick=dlCSV;
+    document.getElementById("BTN_SOL").onclick=function(){document.getElementById("SBOX").classList.toggle("hide")};
+    document.getElementById("BTN_HOME2").onclick=goHome;
+
+    // Admin
+    document.getElementById("BTN_ALOGIN").onclick=admLogin;
+    document.getElementById("BTN_ALOGOUT").onclick=admLogout;
+    document.getElementById("AP").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();admLogin()}});
+    document.getElementById("AU").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();document.getElementById("AP").focus()}});
+
+    document.getElementById("ATABS").addEventListener("click",function(e){
+        var btn=e.target.closest("button[data-tab]");
+        if(!btn)return;
+        var tid=btn.getAttribute("data-tab");
+        var tabs=["TO","TA","TM","TU","TV","TH","TS","TB"];
+        for(var i=0;i<tabs.length;i++)document.getElementById(tabs[i]).classList.add("hide");
+        document.getElementById(tid).classList.remove("hide");
+        var allBtns=document.querySelectorAll("#ATABS button");
+        for(var j=0;j<allBtns.length;j++)allBtns[j].classList.toggle("on",allBtns[j]===btn);
+        if(tid==="TO")refreshAdmin();
+        if(tid==="TM")rdrMng();
+        if(tid==="TV")rdrVch();
+        if(tid==="TH")rdrHist();
+        if(tid==="TU")rdrUsers();
+    });
+
+    fillES("AEX");updPS("AEX","APA");
+    document.getElementById("AEX").onchange=function(){updPS("AEX","APA")};
+    fillES("MEX");updPS("MEX","MPA");
+    document.getElementById("MEX").onchange=function(){updPS("MEX","MPA");rdrMng()};
+    document.getElementById("MPA").onchange=function(){rdrMng()};
+    document.getElementById("MSC").oninput=function(){rdrMng()};
+
+    document.getElementById("BTN_ADDQ").onclick=addQ;
+    document.getElementById("BTN_ADDV").onclick=addV;
+    document.getElementById("BTN_CREDS").onclick=saveCreds;
+    document.getElementById("BTN_CSV").onclick=expCSV;
+    document.getElementById("BTN_CLRH").onclick=function(){if(!confirm("Clear all history?"))return;saveHist([]);rdrHist();toast("Cleared","ok")};
+    document.getElementById("BTN_EXP").onclick=expAll;
+    document.getElementById("BTN_IMP").onclick=impAll;
+    document.getElementById("BTN_RST").onclick=facReset;
+
+    document.getElementById("MTB").addEventListener("click",function(e){
+        var btn=e.target.closest(".del-btn");
+        if(!btn)return;
+        delQ(btn.getAttribute("data-ev"),btn.getAttribute("data-pv"),parseInt(btn.getAttribute("data-idx")));
+    });
+    document.getElementById("VTB").addEventListener("click",function(e){
+        var btn=e.target.closest(".del-btn");
+        if(!btn)return;
+        delV(btn.getAttribute("data-vk"));
+    });
+}
+
+// =========================================================
+// INIT
+// =========================================================
+window.onload=function(){
+    if(G("x_theme","light")==="dark")document.body.classList.add("dark");
+    buildCats();
+    renderCards("all");
+    bindEvents();
+    chkUser();
+
+    // Log stats
+    var keys=Object.keys(EX);var tp2=0;for(var i=0;i<keys.length;i++){var pks=Object.keys(EX[keys[i]].papers);for(var j=0;j<pks.length;j++)tp2+=EX[keys[i]].papers[pks[j]].qs.length}
+    console.log("AIEP v6.0 — "+keys.length+" exams, "+Object.keys(EX).reduce(function(a,k){return a+Object.keys(EX[k].papers).length},0)+" papers, "+tp2.toLocaleString()+" MCQs loaded");
+};
+
+})();
+</script>
+</body>
+</html>
