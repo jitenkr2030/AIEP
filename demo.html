@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIEP Demo Data</title>
+<style>
+body{font-family:monospace;background:#111;color:#0f0;padding:16px;font-size:13px;line-height:2}
+h2{color:#fff}
+button{background:#7C3AED;color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:700;border-radius:8px;margin:4px;width:100%}
+button.red{background:#DC2626}
+.pass{color:#0f0}.fail{color:#f00}.warn{color:#ff0}.info{color:#0ff}
+</style>
+</head>
+<body>
+<h2>AIEP Demo Data Loader</h2>
+<button onclick="loadDemo()">Load All Demo Data</button>
+<button class="red" onclick="clearAll()">Clear All Data</button>
+<div id="OUT" style="margin-top:16px"></div>
+
+<script src="instant.min.js"></script>
+<script src="db.js"></script>
+<script src="topics.js"></script>
+<script src="exams.js"></script>
+<script>
+var out=document.getElementById("OUT");
+function log(m,c){var d=document.createElement("div");d.className=c||"";d.textContent=m;out.appendChild(d)}
+
+var uid=function(){return Date.now().toString(36)+Math.random().toString(36).substr(2,9)};
+
+function clearAll(){
+    localStorage.clear();
+    location.reload();
+}
+
+function loadDemo(){
+    out.innerHTML="";
+
+    // --- 1. DEMO USERS ---
+    log("1. Creating demo users...");
+    var users=[
+        {name:"Rahul Sharma",email:"rahul@demo.com",phone:"9876543210",roll:"CS2024001",tier:"professional",joined:"2024-12-15 10:30"},
+        {name:"Priya Patel",email:"priya@demo.com",phone:"9876543211",roll:"CS2024002",tier:"starter",joined:"2024-12-20 14:15"},
+        {name:"Amit Kumar",email:"amit@demo.com",phone:"9876543212",roll:"CS2024003",tier:"free",joined:"2025-01-05 09:00"},
+        {name:"Sneha Gupta",email:"sneha@demo.com",phone:"9876543213",roll:"CA2024001",tier:"ultimate",joined:"2025-01-10 11:30"},
+        {name:"Vikram Singh",email:"vikram@demo.com",phone:"9876543214",roll:"MED2024001",tier:"professional",joined:"2025-01-15 16:45"},
+        {name:"Anjali Verma",email:"anjali@demo.com",phone:"9876543215",roll:"CSE2024001",tier:"starter",joined:"2025-02-01 08:20"},
+        {name:"Rohit Mehra",email:"rohit@demo.com",phone:"9876543216",roll:"CL2024001",tier:"free",joined:"2025-02-10 13:50"},
+        {name:"Deepika Nair",email:"deepika@demo.com",phone:"9876543217",roll:"DEF2024001",tier:"professional",joined:"2025-02-15 10:10"},
+        {name:"Suresh Yadav",email:"suresh@demo.com",phone:"9876543218",roll:"GATE2024001",tier:"starter",joined:"2025-03-01 15:30"},
+        {name:"Kavita Joshi",email:"kavita@demo.com",phone:"9876543219",roll:"MBA2024001",tier:"ultimate",joined:"2025-03-05 09:45"}
+    ];
+    for(var i=0;i<users.length;i++){
+        users[i].id=uid();
+        users[i].pass="demo123";
+        AIEP.saveUser(users[i]);
+    }
+    log("  Created "+users.length+" users","pass");
+
+    // --- 2. DEMO RESULTS ---
+    log("2. Creating demo results...");
+    var examKeys=Object.keys(EXAMS);
+    var names=["Rahul Sharma","Priya Patel","Amit Kumar","Sneha Gupta","Vikram Singh","Anjali Verma","Rohit Mehra","Deepika Nair","Suresh Yadav","Kavita Joshi"];
+    var emails=["rahul@demo.com","priya@demo.com","amit@demo.com","sneha@demo.com","vikram@demo.com","anjali@demo.com","rohit@demo.com","deepika@demo.com","suresh@demo.com","kavita@demo.com"];
+    var resultCount=0;
+    for(var i=0;i<25;i++){
+        var ek=examKeys[Math.floor(Math.random()*examKeys.length)];
+        var ex=EXAMS[ek];
+        var pks=Object.keys(ex.papers);
+        var pk=pks[Math.floor(Math.random()*pks.length)];
+        var paper=ex.papers[pk];
+        var score=Math.floor(Math.random()*paper.qs.length);
+        var total=paper.qs.length;
+        var pct=Math.round((score/total)*100);
+        var ni=Math.floor(Math.random()*names.length);
+        AIEP.saveResult({
+            name:names[ni],
+            email:emails[ni],
+            roll:"R"+String(100+i),
+            exam:ex.name,
+            paper:paper.title,
+            score:score,
+            total:total,
+            pct:pct,
+            date:new Date(2025,Math.floor(Math.random()*8),Math.floor(Math.random()*28)+1,Math.floor(Math.random()*12),Math.floor(Math.random()*60)).toLocaleString()
+        });
+        resultCount++;
+    }
+    log("  Created "+resultCount+" results","pass");
+
+    // --- 3. DEMO VOUCHERS ---
+    log("3. Creating demo vouchers...");
+    var vouchers={
+        "FREE2026":{desc:"Free Access",used:12,max:9999,tier:"ultimate"},
+        "LAUNCH50":{desc:"Launch Promo",used:8,max:9999,tier:"starter"},
+        "PREMIUM100":{desc:"Premium Discount",used:3,max:100,tier:"professional"},
+        "STUDENT25":{desc:"Student Special",used:5,max:50,tier:"starter"},
+        "EARLYBIRD":{desc:"Early Bird Offer",used:2,max:200,tier:"ultimate"}
+    };
+    AIEP.saveVouchers(vouchers);
+    log("  Created "+Object.keys(vouchers).length+" vouchers","pass");
+
+    // --- 4. DEMO FACULTY QUESTIONS ---
+    log("4. Creating demo faculty questions...");
+    if(examKeys.length>0){
+        var ek1=examKeys[0];
+        var ek2=examKeys.length>1?examKeys[1]:examKeys[0];
+        var pks1=Object.keys(EXAMS[ek1].papers);
+        var pks2=Object.keys(EXAMS[ek2].papers);
+
+        var demoQ1=[
+            {id:"fq_demo1",q:"What is the full form of CPU?",opts:{A:"Central Processing Unit",B:"Computer Processing Unit",C:"Central Program Unit",D:"Computer Program Unit"},ans:"A",diff:"easy",topic:"Computer Science",explain:"CPU stands for Central Processing Unit."},
+            {id:"fq_demo2",q:"Which is not a programming language?",opts:{A:"Python",B:"Java",C:"HTML",D:"C++"},ans:"C",diff:"easy",topic:"Programming",explain:"HTML is a markup language, not a programming language."},
+            {id:"fq_demo3",q:"What does RAM stand for?",opts:{A:"Random Access Memory",B:"Read Access Memory",C:"Random All Memory",D:"Read All Memory"},ans:"A",diff:"easy",topic:"Hardware",explain:"RAM stands for Random Access Memory."},
+            {id:"fq_demo4",q:"Which data structure uses FIFO?",opts:{A:"Stack",B:"Queue",C:"Tree",D:"Graph"},ans:"B",diff:"medium",topic:"Data Structures",explain:"Queue uses First In First Out (FIFO) principle."},
+            {id:"fq_demo5",q:"Time complexity of binary search?",opts:{A:"O(n)",B:"O(log n)",C:"O(n log n)",D:"O(1)"},ans:"B",diff:"medium",topic:"Algorithms",explain:"Binary search halves the search space each step."}
+        ];
+
+        var demoQ2=[
+            {id:"fq_demo6",q:"Newton's first law is also known as?",opts:{A:"Law of Acceleration",B:"Law of Inertia",C:"Law of Action-Reaction",D:"Law of Gravity"},ans:"B",diff:"easy",topic:"Physics",explain:"Newton's first law is the law of inertia."},
+            {id:"fq_demo7",q:"Unit of electric current?",opts:{A:"Volt",B:"Watt",C:"Ampere",D:"Ohm"},ans:"C",diff:"easy",topic:"Physics",explain:"The SI unit of electric current is Ampere."},
+            {id:"fq_demo8",q:"Which acid is found in vinegar?",opts:{A:"HCl",B:"H2SO4",C:"CH3COOH",D:"HNO3"},ans:"C",diff:"medium",topic:"Chemistry",explain:"Vinegar contains acetic acid (CH3COOH)."}
+        ];
+
+        var allQ=AIEP.getFacultyQ();
+        allQ[ek1+"_"+pks1[0]]=demoQ1;
+        if(pks2.length>0) allQ[ek2+"_"+pks2[0]]=demoQ2;
+        AIEP.saveFacultyQ(allQ);
+        log("  Created "+(demoQ1.length+demoQ2.length)+" questions","pass");
+    }
+
+    // --- 5. DEMO LOGS ---
+    log("5. Creating demo activity logs...");
+    var actions=["User Login: Rahul Sharma","Exam Started: CA Foundation","Result: 85%","Voucher Used: FREE2026","User Signup: New Student","Faculty Added 5 Questions","Admin Backup Exported","Voucher Created: SPECIAL50","User Login: Priya Patel","Exam Started: NEET UG"];
+    for(var i=0;i<actions.length;i++){
+        AIEP.log(actions[i]);
+    }
+    log("  Created "+actions.length+" log entries","pass");
+
+    // --- 6. SYNC TO CLOUD ---
+    log("6. Syncing to InstantDB...");
+    AIEP.init(function(ok){
+        if(!ok){log("  FAIL: Cloud not connected","fail");return}
+        log("  Connected to cloud","info");
+        AIEP.syncAllToCloud(function(result){
+            if(result.ok){
+                var s=result.stats;
+                log("  PASS: Synced!","pass");
+                log("    Users: "+s.users,"info");
+                log("    Results: "+s.results,"info");
+                log("    Vouchers: "+s.vouchers,"info");
+                log("    Questions: "+s.questions,"info");
+                log("    Logs: "+s.logs,"info");
+                log("","");
+                log("ALL DONE! Go test the platform:","pass");
+                log("  Student: yourdomain.com/index.html","warn");
+                log("  Faculty: yourdomain.com/faculty.html","warn");
+                log("  Admin:   yourdomain.com/admin.html","warn");
+            }else{
+                log("  FAIL: "+result.msg,"fail");
+            }
+        });
+    });
+}
+</script>
+</body>
+</html>
