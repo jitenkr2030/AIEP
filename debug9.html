@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auth Debug</title>
+<style>
+body{font-family:monospace;background:#111;color:#0f0;padding:16px;font-size:12px;line-height:2}
+button{background:#7C3AED;color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:700;border-radius:8px;margin:4px;width:100%}
+.pass{color:#0f0}.fail{color:#f00}.warn{color:#ff0}
+pre{background:#000;padding:8px;border-radius:8px;white-space:pre-wrap;word-break:break-all;max-height:300px;overflow-y:auto;color:#0ff;font-size:11px}
+</style>
+</head>
+<body>
+<h2 style="color:#fff">Auth Debug</h2>
+<button onclick="doTest()">Test</button>
+<div id="OUT"></div>
+
+<script src="instant.min.js"></script>
+<script>
+var out=document.getElementById("OUT");
+function log(m,c){var d=document.createElement("div");d.className=c||"";d.textContent=m;out.appendChild(d)}
+function show(label,data){var d=document.createElement("div");d.innerHTML="<b>"+label+"</b><pre>"+JSON.stringify(data,null,2)+"</pre>";out.appendChild(d)}
+
+function doTest(){
+    out.innerHTML="";
+    var db=instant.init({appId:"52877744-72cc-404a-b68e-fb01f3e387ac"});
+    log("1. Init OK","pass");
+
+    // Check auth before
+    log("2. Checking auth state...");
+    var authBefore = db.getAuth ? "has getAuth" : "no getAuth";
+    log("   db.getAuth: "+authBefore);
+
+    try {
+        var userBefore = db.getAuth();
+        show("Auth before signIn", userBefore);
+    } catch(e) {
+        log("   getAuth error: "+e.message, "warn");
+    }
+
+    // Sign in
+    log("3. Calling signInAsGuest...");
+    try {
+        var result = db.auth.signInAsGuest();
+        show("signInAsGuest result", result);
+    } catch(e) {
+        log("   signIn error: "+e.message, "fail");
+    }
+
+    // Check auth every second
+    var checks = 0;
+    var checker = setInterval(function(){
+        checks++;
+        try {
+            var user = db.getAuth ? db.getAuth() : "no getAuth";
+            log("4."+checks+" Auth check: "+(user ? JSON.stringify(user) : "null"));
+            if(user && user.id) {
+                clearInterval(checker);
+                log("   AUTHENTICATED!","pass");
+
+                // Now try write
+                log("5. Writing test data...");
+                var id = "authcheck_"+Date.now();
+                var promise = db.transact(db.tx.portalusers[id].update({
+                    name:"Auth Check User",
+                    email:"authcheck@test.com",
+                    phone:"",
+                    roll:"",
+                    tier:"free",
+                    joined:new Date().toISOString()
+                }));
+                show("Write promise", promise);
+
+                // Check after 3 seconds
+                setTimeout(function(){
+                    log("6. Reading back...");
+                    db.subscribeQuery({portalusers:{}}, function(resp){
+                        if(resp.error){
+                            log("   READ ERROR:","fail");
+                            show("Error", resp.error);
+                            return;
+                        }
+                        var count = Object.keys(resp.data.portalusers||{}).length;
+                        log("   portalusers: "+count, count > 10 ? "pass" : "warn");
+                        show("Data", resp.data);
+                    });
+                }, 3000);
+            }
+        } catch(e) {
+            log("4."+checks+" Error: "+e.message, "fail");
+        }
+        if(checks > 10) {
+            clearInterval(checker);
+            log("   AUTH TIMEOUT - signInAsGuest did not work","fail");
+            log("   Trying to write without auth...");
+            var id = "noauth_"+Date.now();
+            try {
+                db.transact(db.tx.portalusers[id].update({name:"No Auth",email:"no@auth.com",phone:"",roll:"",tier:"free",joined:new Date().toISOString()}));
+                log("   Write sent (no auth)","warn");
+            } catch(e) {
+                log("   Write failed: "+e.message,"fail");
+            }
+        }
+    }, 1000);
+}
+</script>
+</body>
+</html>
