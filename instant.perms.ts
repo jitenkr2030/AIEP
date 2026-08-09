@@ -4,49 +4,49 @@ const rules = {
   portalusers: {
     allow: {
       view: "true",
-      create: "auth.id != null",
-      update: "auth.id != null",
-      delete: "auth.id != null",
+      create: "true",
+      update: "true",
+      delete: "true",
     },
   },
   results: {
     allow: {
       view: "true",
-      create: "auth.id != null",
-      update: "auth.id != null",
-      delete: "auth.id != null",
+      create: "true",
+      update: "true",
+      delete: "true",
     },
   },
   vouchers: {
     allow: {
       view: "true",
-      create: "auth.id != null",
-      update: "auth.id != null",
-      delete: "auth.id != null",
+      create: "true",
+      update: "true",
+      delete: "true",
     },
   },
   facultyq: {
     allow: {
       view: "true",
-      create: "auth.id != null",
-      update: "auth.id != null",
-      delete: "auth.id != null",
+      create: "true",
+      update: "true",
+      delete: "true",
     },
   },
   logs: {
     allow: {
       view: "true",
-      create: "auth.id != null",
-      update: "auth.id != null",
-      delete: "auth.id != null",
+      create: "true",
+      update: "true",
+      delete: "true",
     },
   },
   adminconfig: {
     allow: {
       view: "true",
-      create: "auth.id != null",
-      update: "auth.id != null",
-      delete: "auth.id != null",
+      create: "true",
+      update: "true",
+      delete: "true",
     },
   },
 } satisfies InstantRules;
