@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debug 6</title>
+<style>
+body{font-family:monospace;background:#111;color:#0f0;padding:16px;font-size:12px;line-height:2}
+button{background:#7C3AED;color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:700;border-radius:8px;margin:4px;width:100%}
+.pass{color:#0f0}.fail{color:#f00}.warn{color:#ff0}
+pre{background:#000;padding:8px;border-radius:8px;white-space:pre-wrap;word-break:break-all;max-height:300px;overflow-y:auto;color:#0ff;font-size:11px}
+</style>
+</head>
+<body>
+<h2 style="color:#fff">Debug 6</h2>
+<button onclick="doTest()">Run</button>
+<div id="OUT"></div>
+
+<script src="instant.min.js"></script>
+<script>
+var out=document.getElementById("OUT");
+function log(m,c){var d=document.createElement("div");d.className=c||"";d.textContent=m;out.appendChild(d)}
+function show(label,data){var d=document.createElement("div");d.innerHTML="<b>"+label+"</b><pre>"+JSON.stringify(data,null,2)+"</pre>";out.appendChild(d)}
+
+function doTest(){
+    out.innerHTML="";
+    var APP_ID="52877744-72cc-404a-b68e-fb01f3e387ac";
+
+    log("1. Init...");
+    var db=instant.init({appId:APP_ID});
+    log("   OK","pass");
+
+    log("2. Subscribe with error handler...");
+    var gotData=false;
+    db.subscribeQuery({portalusers:{}},function(resp){
+        if(resp.error){
+            log("   QUERY ERROR:","fail");
+            show("Error",resp.error);
+            return;
+        }
+        var count=Object.keys(resp.data.portalusers||{}).length;
+        log("   Got "+count+" portalusers","pass");
+        if(count>0) show("Data",resp.data);
+        gotData=true;
+    });
+
+    log("3. Transact with .then/.catch...");
+    var id="test_"+Date.now();
+    var promise=db.transact(
+        db.tx.portalusers[id].update({
+            name:"Test",
+            email:"test@test.com",
+            phone:"",
+            roll:"",
+            tier:"free",
+            joined:new Date().toISOString()
+        })
+    );
+
+    if(promise&&promise.then){
+        promise.then(function(result){
+            log("   THEN: ","pass");
+            show("Result",result);
+        }).catch(function(err){
+            log("   CATCH: ","fail");
+            show("Error",err);
+        });
+    }else{
+        log("   No promise returned","warn");
+    }
+
+    // Check after 3 seconds
+    setTimeout(function(){
+        log("4. After 3 seconds...");
+        db.subscribeQuery({portalusers:{}},function(resp){
+            if(resp.error){
+                log("   ERROR:","fail");
+                show("Error",resp.error);
+                return;
+            }
+            var keys=Object.keys(resp.data.portalusers||{});
+            log("   portalusers count: "+keys.length, keys.length>0?"pass":"fail");
+            if(keys.length>0) show("Data",resp.data);
+        });
+    },3000);
+
+    // Check after 5 seconds
+    setTimeout(function(){
+        log("5. Checking all collections...");
+        db.subscribeQuery({portalusers:{},results:{},vouchers:{},logs:{},facultyq:{}},function(resp){
+            if(resp.error){
+                log("   ERROR:","fail");
+                show("Error",resp.error);
+                return;
+            }
+            show("All Cloud Data",resp.data);
+        });
+    },5000);
+}
+</script>
+</body>
+</html>
