@@ -137,28 +137,33 @@ function showPricing(){
 
 // ---- EXAM ENGINE ----
 function doStartExam(){
-    injectAllFacultyQ(); // ensure questions are injected before starting
-
     sName=document.getElementById("F_NAME").value.trim();sRoll=document.getElementById("F_ROLL").value.trim();sEmail=document.getElementById("F_EMAIL").value.trim();sPhone=document.getElementById("F_PHONE").value.trim();paperKey=document.getElementById("F_PAPER").value;
     if(!sName||!sRoll||!sEmail){toast("Fill name, roll, email","error");return}
     if(!EX[examKey]||!EX[examKey].papers[paperKey]){toast("Select paper","error");return}
-    var paper=EX[examKey].papers[paperKey];
-    // Ensure questions are loaded
+    // Inject questions from cloud
     injectAllFacultyQ();
+    var paper=EX[examKey].papers[paperKey];
     if(paper.qs.length===0){
-        // Retry injection once
-        injectAllFacultyQ();
-        paper=EX[examKey].papers[paperKey];
-    }
-    if(paper.qs.length===0){
-        toast("Loading questions, please wait...","error");
-        setTimeout(function(){injectAllFacultyQ()},2000);
-        setTimeout(function(){
+        // Show loading and keep trying
+        toast("Loading questions... please wait","ok");
+        var btn=document.getElementById("BTN_START");
+        btn.disabled=true;btn.textContent="Loading questions...";
+        var tries=0;
+        var retry=setInterval(function(){
             injectAllFacultyQ();
-            var p=EX[examKey].papers[paperKey];
-            if(p.qs.length>0) toast("Questions ready! Click Start again","ok");
-            else toast("No questions found for this paper","error");
-        },5000);
+            paper=EX[examKey].papers[paperKey];
+            tries++;
+            if(paper.qs.length>0||tries>10){
+                clearInterval(retry);
+                btn.disabled=false;btn.textContent="\u25b6 Start Exam";
+                if(paper.qs.length>0){
+                    toast("Questions loaded! Starting exam...","ok");
+                    doStartExam(); // call itself now that questions are loaded
+                }else{
+                    toast("No questions available for this paper","error");
+                }
+            }
+        },1000);
         return;
     }
     AIEP.saveUser({name:sName,email:sEmail,phone:sPhone,roll:sRoll});
