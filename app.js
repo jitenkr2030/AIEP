@@ -137,6 +137,8 @@ function showPricing(){
 
 // ---- EXAM ENGINE ----
 function doStartExam(){
+    injectAllFacultyQ(); // ensure questions are injected before starting
+
     sName=document.getElementById("F_NAME").value.trim();sRoll=document.getElementById("F_ROLL").value.trim();sEmail=document.getElementById("F_EMAIL").value.trim();sPhone=document.getElementById("F_PHONE").value.trim();paperKey=document.getElementById("F_PAPER").value;
     if(!sName||!sRoll||!sEmail){toast("Fill name, roll, email","error");return}
     if(!EX[examKey]||!EX[examKey].papers[paperKey]){toast("Select paper","error");return}
@@ -251,7 +253,7 @@ function injectAllFacultyQ(){
 
 window.onload = function(){
     if(localStorage.getItem("x_theme")==="dark") document.body.classList.add("dark");
-    buildCats(); renderCards("all"); checkSavedLogin(); bindEvents(); updateAuthUI(); updateAboutStats();
+    buildCats(); renderCards("all"); checkSavedLogin(); bindEvents(); updateAuthUI(); updateAboutStats(); injectAllFacultyQ();
 
     // Initialize AIEP database
     AIEP.init(function(connected){

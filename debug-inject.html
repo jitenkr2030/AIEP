@@ -11,7 +11,7 @@ pre{background:#000;padding:8px;border-radius:8px;white-space:pre-wrap;word-brea
 </style>
 </head>
 <body>
-<h2 style="color:#fff">Debug: FacultyQ Injection</h2>
+<h2 style="color:#fff">Debug: FacultyQ Injection (v2)</h2>
 <div id="OUT"></div>
 <script src="db.js"></script>
 <script src="topics.js"></script>
@@ -19,78 +19,60 @@ pre{background:#000;padding:8px;border-radius:8px;white-space:pre-wrap;word-brea
 <script>
 var out=document.getElementById("OUT");
 function log(m,c){var d=document.createElement("div");d.className=c||"";d.textContent=new Date().toLocaleTimeString()+" | "+m;out.appendChild(d)}
-function show(d){var p=document.createElement("pre");p.textContent=typeof d==="string"?d:JSON.stringify(d,null,2);out.appendChild(p)}
 
 var EX=window.EXAMS||{};
+log("EXAMS loaded: "+Object.keys(EX).length+" exams");
 
-log("EXAMS loaded, keys: "+Object.keys(EX).join(", "));
-log("CA Foundation papers: "+(EX.ca_foundation?Object.keys(EX.ca_foundation.papers).join(", "):"NOT FOUND"));
+// Sort exam keys longest first - same as fixed app.js
+var exKeys=Object.keys(EX).sort(function(a,b){return b.length - a.length});
+log("Sorted keys (first 10): "+exKeys.slice(0,10).join(", "));
 
 AIEP.init(function(connected){
-    log("AIEP.init done, connected: "+connected, connected?"ok":"err");
+    log("Connected: "+connected, connected?"ok":"err");
+    if(connected) AIEP.subscribe();
 
-    if(connected){
-        AIEP.subscribe();
-
-        // Check immediately
-        var fq1=AIEP.getFacultyQ();
-        log("getFacultyQ() immediately: "+Object.keys(fq1).length+" keys","warn");
-        if(Object.keys(fq1).length>0){
-            log("Keys: "+Object.keys(fq1).join(", "),"ok");
-        }
-
-        // Check after 2 seconds
+    // Check at 2s, 4s, 6s
+    [2000,4000,6000].forEach(function(delay){
         setTimeout(function(){
-            var fq2=AIEP.getFacultyQ();
-            log("getFacultyQ() at 2s: "+Object.keys(fq2).length+" keys","warn");
-            var keys=Object.keys(fq2);
-            for(var i=0;i<keys.length;i++){
-                var k=keys[i];
-                var qs=fq2[k];
-                log("  "+k+": "+qs.length+" questions");
-                if(qs.length>0){
-                    log("    First Q: "+qs[0].q.substring(0,60)+"...");
-                    log("    opts keys: "+Object.keys(qs[0].opts).join(","));
-                    log("    ans: "+qs[0].ans);
-                }
-            }
+            var fq=AIEP.getFacultyQ();
+            var keys=Object.keys(fq);
+            log("--- Check at "+(delay/1000)+"s: "+keys.length+" keys ---","warn");
 
-            // Try injection
-            var exKeys=Object.keys(EX);
+            var injected=0, skipped=0;
             for(var k=0;k<keys.length;k++){
                 var key=keys[k];
-                var examKey=null,paperKey=null;
+                var examKey=null, paperKey=null;
                 for(var e=0;e<exKeys.length;e++){
-                    if(key===exKeys[e]){
-                        examKey=exKeys[e];paperKey=null;break;
-                    }
-                    if(key.startsWith(exKeys[e]+"_")){
+                    if(key.indexOf(exKeys[e]+"_")===0){
                         examKey=exKeys[e];
                         paperKey=key.substring(exKeys[e].length+1);
                         break;
                     }
                 }
-                log("Key '"+key+"' -> examKey="+examKey+", paperKey="+paperKey, examKey?"ok":"err");
-                if(examKey&&paperKey&&EX[examKey]&&EX[examKey].papers[paperKey]){
-                    var qs=fq2[key];
-                    log("  Injecting "+qs.length+" questions into "+examKey+"."+paperKey,"ok");
-                    EX[examKey].papers[paperKey].qs=qs;
-                    log("  EX["+examKey+"].papers["+paperKey+"].qs.length = "+EX[examKey].papers[paperKey].qs.length,"ok");
+                if(examKey && paperKey && EX[examKey] && EX[examKey].papers[paperKey]){
+                    var qs=fq[key];
+                    // Actually inject
+                    var enc=function(s){return btoa(unescape(encodeURIComponent(s)))};
+                    var newQs=[];
+                    for(var i=0;i<qs.length;i++){
+                        newQs.push({id:qs[i].id,t:enc(qs[i].q),o:{A:enc(qs[i].opts.A),B:enc(qs[i].opts.B),C:enc(qs[i].opts.C||""),D:enc(qs[i].opts.D||"")},a:enc(qs[i].ans)});
+                    }
+                    EX[examKey].papers[paperKey].qs=newQs;
+                    log("INJECTED "+newQs.length+" into "+examKey+"."+paperKey,"ok");
+                    injected++;
                 }else{
-                    log("  SKIP: examKey="+examKey+" paperKey="+paperKey+" exists="+(examKey&&EX[examKey]&&EX[examKey].papers[paperKey]),"err");
+                    log("SKIP "+key+" -> exam="+examKey+" paper="+paperKey,"err");
+                    skipped++;
                 }
             }
-        },2000);
+            log("Summary: "+injected+" injected, "+skipped+" skipped","warn");
 
-        // Check after 5 seconds
-        setTimeout(function(){
-            var fq3=AIEP.getFacultyQ();
-            log("getFacultyQ() at 5s: "+Object.keys(fq3).length+" keys","warn");
-            if(EX.ca_foundation&&EX.ca_foundation.papers.accounting){
-                log("CA Foundation Accounting qs.length: "+EX.ca_foundation.papers.accounting.qs.length, EX.ca_foundation.papers.accounting.qs.length>0?"ok":"err");
+            // Verify
+            if(EX.ca_foundation && EX.ca_foundation.papers.accounting){
+                log("VERIFY: ca_foundation.accounting has "+EX.ca_foundation.papers.accounting.qs.length+" questions", EX.ca_foundation.papers.accounting.qs.length>0?"ok":"err");
             }
-        },5000);
-    }
+        },delay);
+    });
 });
 </script>
 </body>
