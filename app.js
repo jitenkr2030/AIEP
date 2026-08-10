@@ -214,21 +214,22 @@ document.getElementById("PRICING_CARDS").addEventListener("click",function(e){va
 function injectAllFacultyQ(){
     var fq = AIEP.getFacultyQ();
     var keys = Object.keys(fq);
+    // Sort exam keys longest first so ca_foundation matches before ca
+    var exKeys = Object.keys(EX).sort(function(a,b){return b.length - a.length});
     for(var k = 0; k < keys.length; k++){
         var key = keys[k];
-        var parts = key.split("_");
-        // Find the exam key and paper key
-        // Keys are like: ca_foundation_accounting, ca_inter_accounting, etc.
         var examKey = null, paperKey = null;
-        var exKeys = Object.keys(EX);
         for(var e = 0; e < exKeys.length; e++){
-            if(key.startsWith(exKeys[e] + "_")){
+            if(key === exKeys[e]){
+                examKey = exKeys[e]; paperKey = null; break;
+            }
+            if(key.indexOf(exKeys[e] + "_") === 0){
                 examKey = exKeys[e];
                 paperKey = key.substring(exKeys[e].length + 1);
                 break;
             }
         }
-        if(!examKey || !EX[examKey] || !EX[examKey].papers[paperKey]) continue;
+        if(!examKey || !paperKey || !EX[examKey] || !EX[examKey].papers[paperKey]) continue;
 
         var qs = fq[key];
         var enc = function(s){return btoa(unescape(encodeURIComponent(s)))};
