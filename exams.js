@@ -96,15 +96,6 @@ ugcnet:{name:"UGC NET",cat:"teaching",icon:"&#128218;",tag:"UGC",tc:"tag-law",de
     papers:{p1:{title:"Paper I",dur:120,qs:genQ("UGC",50),free:true}}},
 
 // ---- PROFESSIONAL EXAMS ----
-ca:{name:"CA (ICAI)",cat:"professional",icon:"&#128179;",tag:"CA",tc:"tag-prof",desc:"Chartered Accountant — ICAI.",
-    papers:profP("ca","CA",[
-        {name:"Foundation",subjects:[{name:"Accounting",topics:TP.accounting,free:true},{name:"Business Laws",topics:TP.law},{name:"Quant",topics:TP.quant},{name:"Economics",topics:TP.economics}]},
-        {name:"Inter Grp I",subjects:[{name:"Accounting",topics:TP.accounting},{name:"Corp Laws",topics:TP.corplaw},{name:"Cost Accounting",topics:TP.cost},{name:"Taxation",topics:TP.tax}]},
-        {name:"Inter Grp II",subjects:[{name:"Adv Accounting",topics:TP.advacc},{name:"Auditing",topics:TP.audit},{name:"EIS & SM",topics:TP.it},{name:"FM",topics:TP.finmgmt}]},
-        {name:"Final Grp I",subjects:[{name:"Financial Reporting",topics:TP.advacc},{name:"SFM",topics:TP.finmgmt},{name:"Adv Auditing",topics:TP.audit},{name:"Corp & Econ Laws",topics:TP.corplaw}]},
-        {name:"Final Grp II",subjects:[{name:"Strategic Cost",topics:TP.cost},{name:"Direct Tax",topics:TP.tax},{name:"Indirect Tax",topics:TP.tax},{name:"IBS",topics:TP.strategy}]}
-    ],180)},
-
 cs:{name:"CS (ICSI)",cat:"professional",icon:"&#128196;",tag:"CS",tc:"tag-prof",desc:"Company Secretary — ICSI.",
     papers:profP("cs","CS",[
         {name:"Foundation",subjects:[{name:"Bus Env & Law",topics:TP.law,free:true},{name:"Mgmt & Ethics",topics:TP.fm},{name:"Economics",topics:TP.economics},{name:"Accounting",topics:TP.accounting}]},
@@ -191,7 +182,7 @@ EXAMS["ca_foundation"] = {
   icon: "\ud83d\udcd6",
   cat: "professional",
   tag: "PROFESSIONAL",
-  tc: "tc-purple",
+  tc: "tag-prof",
   papers: {
     accounting: {
       title: "Accounting",
@@ -230,7 +221,7 @@ EXAMS["ca_inter"] = {
   icon: "\ud83d\udcda",
   cat: "professional",
   tag: "PROFESSIONAL",
-  tc: "tc-purple",
+  tc: "tag-prof",
   papers: {
     accounting: {
       title: "Accounting",
@@ -276,7 +267,7 @@ EXAMS["ca_final"] = {
   icon: "\ud83c\udf93",
   cat: "professional",
   tag: "PROFESSIONAL",
-  tc: "tc-purple",
+  tc: "tag-prof",
   papers: {
     financial_reporting: {
       title: "Financial Reporting",

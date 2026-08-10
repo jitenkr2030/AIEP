@@ -143,6 +143,24 @@ function doStartExam(){
     if(!sName||!sRoll||!sEmail){toast("Fill name, roll, email","error");return}
     if(!EX[examKey]||!EX[examKey].papers[paperKey]){toast("Select paper","error");return}
     var paper=EX[examKey].papers[paperKey];
+    // Ensure questions are loaded
+    injectAllFacultyQ();
+    if(paper.qs.length===0){
+        // Retry injection once
+        injectAllFacultyQ();
+        paper=EX[examKey].papers[paperKey];
+    }
+    if(paper.qs.length===0){
+        toast("Loading questions, please wait...","error");
+        setTimeout(function(){injectAllFacultyQ()},2000);
+        setTimeout(function(){
+            injectAllFacultyQ();
+            var p=EX[examKey].papers[paperKey];
+            if(p.qs.length>0) toast("Questions ready! Click Start again","ok");
+            else toast("No questions found for this paper","error");
+        },5000);
+        return;
+    }
     AIEP.saveUser({name:sName,email:sEmail,phone:sPhone,roll:sRoll});
     AIEP.log("Exam: "+sName+" - "+EX[examKey].name);
     var tier=AIEP.getTier();
@@ -265,7 +283,9 @@ window.onload = function(){
                 updateAboutStats();
                 injectAllFacultyQ();
             });
-            setTimeout(injectAllFacultyQ, 3000);
+            setTimeout(injectAllFacultyQ, 2000);
+            setTimeout(injectAllFacultyQ, 5000);
+            setTimeout(injectAllFacultyQ, 8000);
         }
     });
 
