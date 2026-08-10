@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Test</title>
+<style>
+body{font-family:monospace;background:#111;color:#0f0;padding:16px;font-size:12px;line-height:1.8}
+pre{background:#000;padding:8px;border-radius:8px;white-space:pre-wrap;word-break:break-all;max-height:600px;overflow-y:auto;color:#0ff;font-size:11px}
+.err{color:#f44}.ok{color:#0f0}.warn{color:#ff0}
+h2{color:#fff;margin:12px 0 6px}
+hr{border:1px solid #333;margin:10px 0}
+.btn{background:#1D4ED8;color:#fff;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;margin:4px}
+.qtest{background:#1a1a2e;border:1px solid #333;border-radius:10px;padding:16px;margin:10px 0;font-size:13px;line-height:1.8}
+.qtest .opts label{display:block;padding:8px 12px;margin:6px 0;border:1px solid #444;border-radius:8px;cursor:pointer}
+.qtest .opts label:hover{border-color:#3B82F6;background:rgba(59,130,246,.1)}
+</style>
+</head>
+<body>
+<h1 style="color:#fff">Exam Flow Test</h1>
+<div id="OUT"></div>
+<hr>
+<button class="btn" onclick="runTest()">Run Full Test</button>
+<div id="QDISPLAY"></div>
+
+<script src="db.js"></script>
+<script src="topics.js"></script>
+<script src="exams.js"></script>
+<script>
+var out=document.getElementById("OUT");
+var EX=window.EXAMS||{};
+
+function log(m,c){var d=document.createElement("div");d.className=c||"";d.textContent="["+new Date().toLocaleTimeString()+"] "+m;out.appendChild(d);out.scrollTop=99999}
+
+function dec(s){try{return decodeURIComponent(escape(atob(s)))}catch(e){return s}}
+function enc(s){return btoa(unescape(encodeURIComponent(s)))}
+
+function runTest(){
+    out.innerHTML="";
+    document.getElementById("QDISPLAY").innerHTML="";
+
+    // Step 1: Check EXAMS
+    log("Step 1: Checking EXAMS object...","warn");
+    log("Total exams: "+Object.keys(EX).length);
+    if(!EX.ca_foundation){log("ERROR: ca_foundation not found!","err");return}
+    log("ca_foundation found: "+EX.ca_foundation.name,"ok");
+
+    var acct=EX.ca_foundation.papers.accounting;
+    if(!acct){log("ERROR: accounting paper not found!","err");return}
+    log("Accounting paper found: "+acct.title+" | dur="+acct.dur+" | qs.length="+acct.qs.length,"ok");
+
+    // Step 2: Load questions from cloud
+    log("\nStep 2: Loading from cloud...","warn");
+    AIEP.init(function(connected){
+        log("Connected: "+connected,connected?"ok":"err");
+        if(!connected){log("ERROR: Not connected to cloud","err");return}
+        AIEP.subscribe();
+
+        // Step 3: Wait and inject
+        log("Waiting 4 seconds for data to load...","warn");
+        setTimeout(function(){
+            var fq=AIEP.getFacultyQ();
+            var keys=Object.keys(fq);
+            log("FacultyQ keys: "+keys.length,"warn");
+
+            // Inject manually
+            var exKeys=Object.keys(EX).sort(function(a,b){return b.length-a.length});
+            for(var k=0;k<keys.length;k++){
+                var key=keys[k];
+                var examKey=null,paperKey=null;
+                for(var e=0;e<exKeys.length;e++){
+                    if(key.indexOf(exKeys[e]+"_")===0){
+                        examKey=exKeys[e];
+                        paperKey=key.substring(exKeys[e].length+1);
+                        break;
+                    }
+                }
+                if(examKey&&paperKey&&EX[examKey]&&EX[examKey].papers[paperKey]){
+                    var qs=fq[key];
+                    var newQs=[];
+                    for(var i=0;i<qs.length;i++){
+                        newQs.push({id:qs[i].id,t:enc(qs[i].q),o:{A:enc(qs[i].opts.A),B:enc(qs[i].opts.B),C:enc(qs[i].opts.C||""),D:enc(qs[i].opts.D||"")},a:enc(qs[i].ans)});
+                    }
+                    EX[examKey].papers[paperKey].qs=newQs;
+                }
+            }
+
+            // Step 4: Check injection result
+            var acct2=EX.ca_foundation.papers.accounting;
+            log("After injection - Accounting qs.length: "+acct2.qs.length,acct2.qs.length>0?"ok":"err");
+
+            if(acct2.qs.length===0){log("ERROR: No questions after injection!","err");return}
+
+            // Step 5: Show first question decoded
+            var q=acct2.qs[0];
+            log("\nStep 5: First question data:","warn");
+            log("  id: "+q.id);
+            log("  t (raw): "+q.t.substring(0,50)+"...");
+            log("  t (decoded): "+dec(q.t));
+            log("  a (decoded): "+dec(q.a));
+
+            try{
+                var qText=dec(q.t);
+                var optA=dec(q.o.A);
+                var optB=dec(q.o.B);
+                var optC=dec(q.o.C||"");
+                var optD=dec(q.o.D||"");
+                var ans=dec(q.a);
+
+                log("\nStep 6: Rendering question...","warn");
+
+                // Actually render it
+                var html='<div class="qtest">';
+                html+='<strong style="color:#3B82F6">Q1 of '+acct2.qs.length+'</strong><br><br>';
+                html+='<div style="font-size:14px;font-weight:600;line-height:1.8">'+qText+'</div><br>';
+                html+='<div class="opts">';
+                if(optA)html+='<label><input type="radio" name="test" value="A"> <strong>A)</strong> '+optA+'</label>';
+                if(optB)html+='<label><input type="radio" name="test" value="B"> <strong>B)</strong> '+optB+'</label>';
+                if(optC)html+='<label><input type="radio" name="test" value="C"> <strong>C)</strong> '+optC+'</label>';
+                if(optD)html+='<label><input type="radio" name="test" value="D"> <strong>D)</strong> '+optD+'</label>';
+                html+='</div>';
+                html+='<br><strong style="color:#22c55e">Correct Answer: '+ans+'</strong>';
+                html+='</div>';
+
+                document.getElementById("QDISPLAY").innerHTML=html;
+                log("SUCCESS: Question rendered!","ok");
+
+            }catch(e){
+                log("ERROR rendering: "+e.message,"err");
+            }
+
+        },4000);
+    });
+}
+</script>
+</body>
+</html>
