@@ -61,27 +61,27 @@ textarea{resize:vertical}
 .stat{background:var(--surf);border:1.5px solid var(--bor);border-radius:var(--radius2);padding:14px;text-align:center;transition:transform .15s}
 .stat:hover{transform:translateY(-2px)}.stat .num{font-size:24px;font-weight:800;color:var(--pri);font-family:'JetBrains Mono',monospace}
 .stat .lbl{font-size:9px;color:var(--mut);text-transform:uppercase;margin-top:3px;letter-spacing:.4px;font-weight:700}
-.exam-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--bor);padding-bottom:12px;margin-bottom:16px;flex-wrap:wrap;gap:8px}
-.timer{background:#111827;color:#6EE7B7;padding:7px 16px;border-radius:var(--radius3);font-weight:700;font-size:15px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;min-width:85px;text-align:center}
+.exam-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--bor);padding-bottom:10px;margin-bottom:12px;flex-wrap:wrap;gap:6px}
+.timer{background:#111827;color:#6EE7B7;padding:6px 12px;border-radius:var(--radius3);font-weight:700;font-size:14px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;min-width:72px;text-align:center}
 body.dark .timer{background:#0F172A;border:1.5px solid var(--bor)}
-.exam-grid{display:grid;grid-template-columns:1fr 250px;gap:16px}
-@media(max-width:768px){.exam-grid{grid-template-columns:1fr}}
-.q-card{border:1.5px solid var(--bor);border-radius:var(--radius2);padding:20px;min-height:200px}
-.q-title{font-size:14px;font-weight:600;margin-bottom:16px;line-height:1.7}
+.exam-grid{display:flex;flex-direction:column;gap:12px}
+.q-card{border:1.5px solid var(--bor);border-radius:var(--radius2);padding:16px;background:var(--card)}
+.q-title{font-size:14px;font-weight:600;margin-bottom:14px;line-height:1.8;word-wrap:break-word;overflow-wrap:break-word}
 .q-title .qnum{display:inline-block;background:var(--pri);color:#fff;padding:2px 10px;border-radius:6px;font-size:11px;font-weight:700;margin-right:8px}
-.opts{display:flex;flex-direction:column;gap:8px}
-.opt{display:flex;align-items:flex-start;padding:11px 14px;border:1.5px solid var(--bor);border-radius:var(--radius3);cursor:pointer;font-size:13px;transition:all .15s;line-height:1.5}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--bor);border-radius:var(--radius3);cursor:pointer;font-size:13px;transition:all .15s;line-height:1.6;word-wrap:break-word;-webkit-tap-highlight-color:transparent}
 .opt:hover{border-color:var(--pri);background:rgba(29,78,216,.03)}.opt.selected{border-color:var(--pri);background:rgba(29,78,216,.06);box-shadow:0 0 0 2px rgba(29,78,216,.12)}
 .opt input{margin-right:10px;transform:scale(1.2);accent-color:var(--pri);margin-top:2px;flex-shrink:0}
-.side{border-left:2px solid var(--bor);padding-left:16px}
-@media(max-width:768px){.side{border-left:none;border-top:2px solid var(--bor);padding-left:0;padding-top:14px}}
+.side{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:10px 0;border-top:1.5px solid var(--bor);margin-top:10px}
+.side h4{font-size:11px;margin-bottom:0;font-weight:700;width:100%}
+@media(min-width:800px){.exam-grid{flex-direction:row}.exam-grid>div:first-child{flex:1;min-width:0}.side{flex-direction:column;align-items:stretch;width:220px;border-top:none;border-left:2px solid var(--bor);padding-left:14px;padding-top:0;margin-top:0}}
 .legend{font-size:10px;display:grid;grid-template-columns:1fr 1fr;gap:4px;color:var(--mut);margin-bottom:8px;font-weight:600}
 .ldot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:3px;vertical-align:middle}
-.pal{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;max-height:320px;overflow-y:auto;padding:2px}
-.pal button{width:38px;height:38px;border-radius:6px;border:1.5px solid var(--bor);background:var(--card);color:var(--txt);font-weight:700;font-size:10px;cursor:pointer;font-family:'JetBrains Mono',monospace;transition:all .1s}
+.pal{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;max-height:220px;overflow-y:auto;padding:2px}
+.pal button{width:34px;height:34px;border-radius:6px;border:1.5px solid var(--bor);background:var(--card);color:var(--txt);font-weight:700;font-size:10px;cursor:pointer;font-family:'JetBrains Mono',monospace;transition:all .1s}
 .pal button:hover{border-color:var(--pri)}.pal button.done{background:var(--grn);color:#fff;border-color:var(--grn)}.pal button.mrk{background:var(--pur);color:#fff;border-color:var(--pur)}.pal button.cur{border:2.5px solid var(--pri);box-shadow:0 0 8px rgba(29,78,216,.3)}
-.nav-btns{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}.nav-btns .btn{flex:1}
-.submit-zone{margin-top:18px;padding:16px;border:2px dashed var(--bor);border-radius:var(--radius2);text-align:center;background:var(--surf)}
+.nav-btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.nav-btns .btn{flex:1;min-width:70px;font-size:12px;padding:10px 12px}
+.submit-zone{margin-top:12px;padding:14px;border:2px dashed var(--bor);border-radius:var(--radius2);text-align:center;background:var(--surf)}
 .submit-zone p{font-size:12px;color:var(--mut);margin-bottom:10px}
 .score-big{font-size:42px;font-weight:800;color:var(--pri);font-family:'JetBrains Mono',monospace;margin:10px 0}
 .badge{display:inline-block;padding:3px 9px;border-radius:10px;font-size:10px;font-weight:700}
@@ -207,11 +207,28 @@ body.dark .exam-card{background:var(--surf)}body.dark .stat{background:var(--sur
 <div class="wrap hide" id="V_EXAM">
 <div class="exam-head"><h2 id="EXTITLE" style="font-size:15px;color:var(--pri);font-weight:700"></h2><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span id="WLBL" style="font-size:10px;color:var(--red);font-weight:700"></span><span id="QCTR" style="font-size:12px;color:var(--mut);font-weight:700;font-family:'JetBrains Mono',monospace"></span><div class="timer" id="TIMER">180:00</div></div></div>
 <div class="progress-bar"><div class="fill" id="PBAR" style="width:0%"></div></div>
-<div class="exam-grid"><div>
+<div class="exam-grid">
+<div>
 <div class="q-card" id="QBOX"></div>
-<div class="nav-btns"><button class="btn btn-gray" id="BTN_PREV">&#8592; Prev</button><button class="btn btn-purple" id="BTN_MARK">&#9733; Mark</button><button class="btn" id="BTN_NEXT">Save &amp; Next &#8594;</button></div>
-<div class="submit-zone"><p id="SUB_INFO"></p><button class="btn btn-red btn-full" id="BTN_SUBMIT" style="font-size:15px;padding:14px 20px">&#10003; Final Submit</button></div>
-</div><div class="side"><h4 style="font-size:12px;margin-bottom:6px;font-weight:700">Palette</h4><div class="legend"><span><span class="ldot" style="background:var(--grn)"></span>Answered</span><span><span class="ldot" style="background:var(--pur)"></span>Marked</span></div><div class="pal" id="PAL"></div></div></div>
+<div class="nav-btns">
+<button class="btn btn-gray" id="BTN_PREV">&#8592; Prev</button>
+<button class="btn btn-purple" id="BTN_MARK">&#9733; Mark</button>
+<button class="btn" id="BTN_NEXT">Next &#8594;</button>
+</div>
+<div class="submit-zone">
+<p id="SUB_INFO"></p>
+<button class="btn btn-red btn-full" id="BTN_SUBMIT" style="font-size:14px;padding:12px 16px">&#10003; Final Submit</button>
+</div>
+</div>
+<div class="side">
+<h4 style="font-size:12px;font-weight:700">Palette</h4>
+<div class="legend">
+<span><span class="ldot" style="background:var(--grn)"></span> Answered</span>
+<span><span class="ldot" style="background:var(--pur)"></span> Marked</span>
+</div>
+<div class="pal" id="PAL"></div>
+</div>
+</div>
 </div>
 
 <!-- RESULT -->
