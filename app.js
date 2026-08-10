@@ -154,7 +154,7 @@ function doStartExam(){
 }
 
 function buildPal(){var g=document.getElementById("PAL");g.innerHTML="";for(var i=0;i<bank.qs.length;i++){var b=document.createElement("button");b.textContent=i+1;b.id="PB"+i;b.setAttribute("data-idx",i);g.appendChild(b)}}
-function loadQ(i){idx=i;var q=bank.qs[i],sel=ans[q.id]||"";document.getElementById("QCTR").textContent="Q"+(i+1)+"/"+bank.qs.length;document.getElementById("PBAR").style.width=Math.round(((i+1)/bank.qs.length)*100)+"%";var html='<div class="q-title"><span class="qnum">Q'+(i+1)+'</span> of '+bank.qs.length+'<br><br>'+dec(q.t)+'</div><div class="opts">';var opts=["A","B","C","D"];for(var j=0;j<4;j++){var o=opts[j],chk=sel===o?" checked":"",cls=sel===o?" selected":"";html+='<label class="opt'+cls+'"><input type="radio" name="OPT" value="'+o+'"'+chk+'> <strong>'+o+')</strong> '+dec(q.o[o])+'</label>'}html+='</div>';document.getElementById("QBOX").innerHTML=html;var radios=document.querySelectorAll('#QBOX input[type="radio"]');for(var r=0;r<radios.length;r++){radios[r].addEventListener("change",function(){ans[bank.qs[idx].id]=this.value;var aa=document.querySelectorAll('#QBOX .opt');for(var o=0;o<aa.length;o++)aa[o].classList.remove("selected");this.parentElement.classList.add("selected");updatePal()})}updatePal();resetSubmitBtn()}
+function loadQ(i){idx=i;var q=bank.qs[i],sel=ans[q.id]||"";document.getElementById("QCTR").textContent="Q"+(i+1)+"/"+bank.qs.length;document.getElementById("PBAR").style.width=Math.round(((i+1)/bank.qs.length)*100)+"%";var html='<div class="q-title"><span class="qnum">Q'+(i+1)+'</span> of '+bank.qs.length+'<br><br>'+dec(q.t)+'</div><div class="opts">';var opts=["A","B","C","D"];for(var j=0;j<4;j++){var o=opts[j],txt=dec(q.o[o]||"");if(!txt)continue;var chk=sel===o?" checked":"",cls=sel===o?" selected":"";html+='<label class="opt'+cls+'"><input type="radio" name="OPT" value="'+o+'"'+chk+'> <strong>'+o+')</strong> '+txt+'</label>'}html+='</div>';document.getElementById("QBOX").innerHTML=html;var radios=document.querySelectorAll('#QBOX input[type="radio"]');for(var r=0;r<radios.length;r++){radios[r].addEventListener("change",function(){ans[bank.qs[idx].id]=this.value;var aa=document.querySelectorAll('#QBOX .opt');for(var o=0;o<aa.length;o++)aa[o].classList.remove("selected");this.parentElement.classList.add("selected");updatePal()})}updatePal();resetSubmitBtn()}
 function updatePal(){for(var i=0;i<bank.qs.length;i++){var b=document.getElementById("PB"+i);if(!b)continue;b.className="";if(ans[bank.qs[i].id])b.className="done";if(marks[bank.qs[i].id])b.className+=" mrk";if(i===idx)b.className+=" cur"}var a=0;for(var i=0;i<bank.qs.length;i++){if(ans[bank.qs[i].id])a++}document.getElementById("SUB_INFO").textContent="Answered: "+a+"/"+bank.qs.length+" | Remaining: "+(bank.qs.length-a)}
 function startTmr(sec){if(tmr)clearInterval(tmr);var el=document.getElementById("TIMER"),rem=sec;tmr=setInterval(function(){if(rem<0)return;var m=Math.floor(rem/60),s=rem%60;el.textContent=(m<10?"0":"")+m+":"+(s<10?"0":"")+s;el.style.background=rem<=60?"#DC2626":rem<=300?"#D97706":"#111827";rem--;if(rem<0){clearInterval(tmr);tmr=null;doSubmit()}},1000)}
 function resetSubmitBtn(){submitState=0;var btn=document.getElementById("BTN_SUBMIT");btn.innerHTML="&#10003; Final Submit";btn.style.background="var(--red)";btn.style.fontSize="15px";btn.style.padding="14px 20px"}
@@ -262,15 +262,7 @@ window.onload = function(){
                 updateAboutStats();
                 injectAllFacultyQ();
             });
-            // Also inject after a short delay to catch already-loaded data
             setTimeout(injectAllFacultyQ, 3000);
-        }
-        updateDBBadge();
-        if(connected){
-            AIEP.subscribe();
-            // Listen for real-time updates
-            AIEP.on("connected", function(){ updateDBBadge(); });
-            AIEP.on("data", function(){ updateAboutStats(); });
         }
     });
 
