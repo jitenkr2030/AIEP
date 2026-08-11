@@ -137,91 +137,43 @@ function showPricing(){
 
 // ---- EXAM ENGINE ----
 function doStartExam(){
-    // First try to inject from localStorage
-    injectAllFacultyQ();
-
-    sName=document.getElementById("F_NAME").value.trim();
-    sRoll=document.getElementById("F_ROLL").value.trim();
-    sEmail=document.getElementById("F_EMAIL").value.trim();
-    sPhone=document.getElementById("F_PHONE").value.trim();
-    paperKey=document.getElementById("F_PAPER").value;
-
+    // DEBUG: show what we have
+    var _dbg = document.getElementById("AUTH_STATUS");
+    if(_dbg){
+        _dbg.classList.remove("hide");
+        _dbg.innerHTML = '<div class="info-box info-blue">examKey: '+examKey+' | paperKey: '+document.getElementById("F_PAPER").value+' | EX exists: '+(!!EX[examKey])+' | Paper exists: '+(EX[examKey]&&EX[examKey].papers[document.getElementById("F_PAPER").value] ? "YES" : "NO")+' | Qs: '+(EX[examKey]&&EX[examKey].papers[document.getElementById("F_PAPER").value] ? EX[examKey].papers[document.getElementById("F_PAPER").value].qs.length : "N/A")+'</div>';
+    }
+    sName=document.getElementById("F_NAME").value.trim();sRoll=document.getElementById("F_ROLL").value.trim();sEmail=document.getElementById("F_EMAIL").value.trim();sPhone=document.getElementById("F_PHONE").value.trim();paperKey=document.getElementById("F_PAPER").value;
     if(!sName||!sRoll||!sEmail){toast("Fill name, roll, email","error");return}
-    if(!examKey||!EX[examKey]||!EX[examKey].papers[paperKey]){toast("Select paper","error");return}
-
+    if(!EX[examKey]||!EX[examKey].papers[paperKey]){toast("Select paper","error");return}
+    // Inject questions from cloud
+    injectAllFacultyQ();
     var paper=EX[examKey].papers[paperKey];
-
-    // If questions already loaded, start immediately
-    if(paper.qs.length>0){
-        startExamNow();
+    if(paper.qs.length===0){
+        // Show loading and keep trying
+        toast("Loading questions... please wait","ok");
+        var btn=document.getElementById("BTN_START");
+        btn.disabled=true;btn.textContent="Loading questions...";
+        var tries=0;
+        var retry=setInterval(function(){
+            injectAllFacultyQ();
+            paper=EX[examKey].papers[paperKey];
+            tries++;
+            if(paper.qs.length>0||tries>10){
+                clearInterval(retry);
+                btn.disabled=false;btn.textContent="\u25b6 Start Exam";
+                if(paper.qs.length>0){
+                    toast("Questions loaded! Starting exam...","ok");
+                    doStartExam(); // call itself now that questions are loaded
+                }else{
+                    toast("No questions available for this paper","error");
+                }
+            }
+        },1000);
         return;
     }
-
-    // Otherwise fetch from API directly
-    toast("Loading questions...","ok");
-    var btn=document.getElementById("BTN_START");
-    if(btn){btn.disabled=true;btn.textContent="Loading...";}
-
-    fetch("/api/query",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({facultyq:{}})})
-    .then(function(r){return r.json()})
-    .then(function(data){
-        if(data.facultyq){
-            var local={};
-            var arr=Array.isArray(data.facultyq)?data.facultyq:[];
-            for(var i=0;i<arr.length;i++){
-                var item=arr[i];
-                if(item.paperKey&&item.questions){
-                    try{local[item.paperKey]=JSON.parse(item.questions)}catch(e){}
-                }
-            }
-            // Save to localStorage
-            try{localStorage.setItem("f_questions",JSON.stringify(local))}catch(e){}
-            // Inject into EX
-            var enc=function(s){return btoa(unescape(encodeURIComponent(s)))};
-            var exKeys=Object.keys(EX).sort(function(a,b){return b.length-a.length});
-            var keys=Object.keys(local);
-            for(var k=0;k<keys.length;k++){
-                var key=keys[k];
-                for(var e=0;e<exKeys.length;e++){
-                    if(key.indexOf(exKeys[e]+"_")===0){
-                        var ek=exKeys[e];
-                        var pk=key.substring(exKeys[e].length+1);
-                        if(EX[ek]&&EX[ek].papers[pk]){
-                            var qs=local[key];
-                            var newQs=[];
-                            for(var j=0;j<qs.length;j++){
-                                newQs.push({id:qs[j].id,t:enc(qs[j].q),o:{A:enc(qs[j].opts.A),B:enc(qs[j].opts.B),C:enc(qs[j].opts.C||""),D:enc(qs[j].opts.D||"")},a:enc(qs[j].ans)});
-                            }
-                            EX[ek].papers[pk].qs=newQs;
-                        }
-                        break;
-                    }
-                }
-            }
-            paper=EX[examKey].papers[paperKey];
-            if(paper.qs.length>0){
-                toast("Loaded! Starting...","ok");
-                startExamNow();
-            }else{
-                if(btn){btn.disabled=false;btn.textContent="Start Exam";}
-                toast("No questions found for this paper","error");
-            }
-        }
-    })
-    .catch(function(e){
-        if(btn){btn.disabled=false;btn.textContent="Start Exam";}
-        toast("Error loading: "+e.message,"error");
-    });
-}
-
-function startExamNow(){
-    sName=document.getElementById("F_NAME").value.trim();
-    sRoll=document.getElementById("F_ROLL").value.trim();
-    sEmail=document.getElementById("F_EMAIL").value.trim();
-    sPhone=document.getElementById("F_PHONE").value.trim();
-    paperKey=document.getElementById("F_PAPER").value;
-
-    AIEP.saveUser({name:sName,email:sEmail,phone:sPhone,roll:sRoll});    AIEP.log("Exam: "+sName+" - "+EX[examKey].name);
+    AIEP.saveUser({name:sName,email:sEmail,phone:sPhone,roll:sRoll});
+    AIEP.log("Exam: "+sName+" - "+EX[examKey].name);
     var tier=AIEP.getTier();
     if(!paper.free){
         if(tier==="professional"||tier==="ultimate"){}
@@ -351,4 +303,3 @@ window.onload = function(){
     console.log("AIEP Student v11.0: "+Object.keys(EX).length+" exams");
 };
 })();
-// stable v11.1
