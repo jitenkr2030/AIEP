@@ -66,8 +66,6 @@ function profP(pre,ex,lvls,dur){
 window.EXAMS = {
 
 // ---- COMPETITIVE EXAMS ----
-neet:{name:"NEET (UG)",cat:"medical",icon:"&#129657;",tag:"Medical",tc:"tag-med",desc:"Medical entrance examination.",
-    papers:{full:{title:"NEET Full",dur:180,qs:genQ("NEET",50)},phy:{title:"Physics",dur:90,qs:genQ("NEET Phy",50)},bio:{title:"Biology",dur:90,qs:genQ("NEET Bio",50),free:true}}},
 jee:{name:"JEE Main",cat:"engineering",icon:"&#128300;",tag:"Engineering",tc:"tag-eng",desc:"Engineering entrance examination.",
     papers:{full:{title:"JEE Full",dur:180,qs:genQ("JEE",50)},math:{title:"Maths",dur:60,qs:genQ("JEE Math",50),free:true}}},
 upsc:{name:"UPSC CSE",cat:"civil",icon:"&#127963;",tag:"Civil",tc:"tag-gov",desc:"Civil Services Examination.",
@@ -96,12 +94,6 @@ ugcnet:{name:"UGC NET",cat:"teaching",icon:"&#128218;",tag:"UGC",tc:"tag-law",de
     papers:{p1:{title:"Paper I",dur:120,qs:genQ("UGC",50),free:true}}},
 
 // ---- PROFESSIONAL EXAMS ----
-cs:{name:"CS (ICSI)",cat:"professional",icon:"&#128196;",tag:"CS",tc:"tag-prof",desc:"Company Secretary — ICSI.",
-    papers:profP("cs","CS",[
-        {name:"Foundation",subjects:[{name:"Bus Env & Law",topics:TP.law,free:true},{name:"Mgmt & Ethics",topics:TP.fm},{name:"Economics",topics:TP.economics},{name:"Accounting",topics:TP.accounting}]},
-        {name:"Executive",subjects:[{name:"General Laws",topics:TP.law},{name:"Company Law",topics:TP.corplaw},{name:"Tax Laws",topics:TP.tax},{name:"Securities",topics:TP.invest}]},
-        {name:"Professional",subjects:[{name:"Governance",topics:TP.ethics},{name:"Adv Tax",topics:TP.tax},{name:"Drafting",topics:TP.law},{name:"Corp Funding",topics:TP.invest}]}
-    ],180)},
 
 
 acca:{name:"ACCA (UK)",cat:"professional",icon:"&#127468;&#127463;",tag:"ACCA",tc:"tag-fina",desc:"ACCA — Knowledge to Strategic.",
@@ -354,5 +346,78 @@ EXAMS["ca_final"] = {
       free: false,
       level: "Final"
     }
+  }
+};
+
+// ============================================================
+// NEET EXAMS
+// ============================================================
+EXAMS["neet"] = {
+  name: "NEET (UG)",
+  desc: "National Eligibility cum Entrance Test — Medical Entrance",
+  icon: "\ud83e\ude7a",
+  cat: "medical",
+  tag: "MEDICAL",
+  tc: "tag-med",
+  papers: {
+    physics: { title: "Physics", qs: [], dur: 90, free: true, level: "NEET" },
+    chemistry: { title: "Chemistry", qs: [], dur: 90, free: true, level: "NEET" },
+    biology: { title: "Biology (Botany + Zoology)", qs: [], dur: 90, free: true, level: "NEET" }
+  }
+};
+
+// ============================================================
+// ICSI (COMPANY SECRETARY) EXAMS
+// ============================================================
+EXAMS["icsi_cseet"] = {
+  name: "CSEET",
+  desc: "Company Secretary Executive Entrance Test — ICSI",
+  icon: "\ud83c\udfdb\ufe0f",
+  cat: "professional",
+  tag: "PROFESSIONAL",
+  tc: "tag-prof",
+  papers: {
+    business_communication: { title: "Business Communication", qs: [], dur: 120, free: true, level: "CSEET" },
+    legal_aptitude: { title: "Legal Aptitude and Logical Reasoning", qs: [], dur: 120, free: true, level: "CSEET" },
+    economic_environment: { title: "Economic and Business Environment", qs: [], dur: 120, free: false, level: "CSEET" },
+    current_affairs: { title: "Current Affairs and Quantitative Aptitude", qs: [], dur: 120, free: false, level: "CSEET" }
+  }
+};
+
+EXAMS["icsi_executive"] = {
+  name: "ICSI Executive",
+  desc: "Company Secretary Executive Programme — Module I & II",
+  icon: "\ud83d\udcda",
+  cat: "professional",
+  tag: "PROFESSIONAL",
+  tc: "tag-prof",
+  papers: {
+    jurisprudence: { title: "Jurisprudence, Interpretation and General Laws", qs: [], dur: 180, free: false, level: "Module I" },
+    company_law: { title: "Company Law", qs: [], dur: 180, free: false, level: "Module I" },
+    business_entities: { title: "Setting up of Business Entities and Closure", qs: [], dur: 180, free: false, level: "Module I" },
+    tax_laws: { title: "Tax Laws", qs: [], dur: 180, free: false, level: "Module I" },
+    corporate_accounting: { title: "Corporate and Management Accounting", qs: [], dur: 180, free: false, level: "Module II" },
+    securities_laws: { title: "Securities Laws and Capital Markets", qs: [], dur: 180, free: false, level: "Module II" },
+    economic_commercial: { title: "Economic, Business and Commercial Laws", qs: [], dur: 180, free: false, level: "Module II" },
+    financial_mgmt: { title: "Financial and Strategic Management", qs: [], dur: 180, free: false, level: "Module II" }
+  }
+};
+
+EXAMS["icsi_professional"] = {
+  name: "ICSI Professional",
+  desc: "Company Secretary Professional Programme — Module I, II & III",
+  icon: "\ud83c\udf93",
+  cat: "professional",
+  tag: "PROFESSIONAL",
+  tc: "tag-prof",
+  papers: {
+    governance_ethics: { title: "Governance, Risk Management, Compliances and Ethics", qs: [], dur: 180, free: false, level: "Module I" },
+    advanced_tax: { title: "Advanced Tax Laws", qs: [], dur: 180, free: false, level: "Module I" },
+    drafting_pleadings: { title: "Drafting, Pleadings and Appearances", qs: [], dur: 180, free: false, level: "Module I" },
+    secretarial_audit: { title: "Secretarial Audit, Due Diligence and Compliance Management", qs: [], dur: 180, free: false, level: "Module II" },
+    corporate_restructuring: { title: "Corporate Restructuring, Insolvency, Liquidation and Winding-up", qs: [], dur: 180, free: false, level: "Module II" },
+    resolution_disputes: { title: "Resolution of Corporate Disputes", qs: [], dur: 180, free: false, level: "Module II" },
+    corporate_funding: { title: "Corporate Funding and Listings in Stock Exchanges", qs: [], dur: 180, free: false, level: "Module III" },
+    multidisciplinary: { title: "Multidisciplinary Case Studies", qs: [], dur: 180, free: false, level: "Module III" }
   }
 };
