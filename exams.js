@@ -103,12 +103,6 @@ cs:{name:"CS (ICSI)",cat:"professional",icon:"&#128196;",tag:"CS",tc:"tag-prof",
         {name:"Professional",subjects:[{name:"Governance",topics:TP.ethics},{name:"Adv Tax",topics:TP.tax},{name:"Drafting",topics:TP.law},{name:"Corp Funding",topics:TP.invest}]}
     ],180)},
 
-cma:{name:"CMA (ICMAI)",cat:"professional",icon:"&#128200;",tag:"CMA",tc:"tag-prof",desc:"Cost & Management Accountant — ICMAI.",
-    papers:profP("cma","CMA",[
-        {name:"Foundation",subjects:[{name:"Eco & Mgmt",topics:TP.economics,free:true},{name:"Accounting",topics:TP.accounting},{name:"Laws",topics:TP.law},{name:"Maths",topics:TP.quant}]},
-        {name:"Inter",subjects:[{name:"Fin Accounting",topics:TP.accounting},{name:"Cost Accounting",topics:TP.cost},{name:"Direct Tax",topics:TP.tax},{name:"FM",topics:TP.finmgmt}]},
-        {name:"Final",subjects:[{name:"Corp Laws",topics:TP.corplaw},{name:"SFM",topics:TP.finmgmt},{name:"Strategic Cost",topics:TP.cost},{name:"Indirect Tax",topics:TP.tax}]}
-    ],180)},
 
 acca:{name:"ACCA (UK)",cat:"professional",icon:"&#127468;&#127463;",tag:"ACCA",tc:"tag-fina",desc:"ACCA — Knowledge to Strategic.",
     papers:profP("acca","ACCA",[
@@ -172,6 +166,62 @@ cima:{name:"CIMA (UK)",cat:"professional",icon:"&#127468;&#127463;",tag:"CIMA",t
 };
 
 })();
+
+// ============================================================
+// CMA (ICWAI) EXAMS
+// ============================================================
+EXAMS["cma_foundation"] = {
+  name: "CMA Foundation",
+  desc: "ICMAI Foundation Course - Cost & Management Accounting",
+  icon: "\ud83d\udcca",
+  cat: "professional",
+  tag: "PROFESSIONAL",
+  tc: "tag-prof",
+  papers: {
+    economics_management: { title: "Fundamentals of Economics & Management", qs: [], dur: 120, free: true, level: "Foundation" },
+    accounting: { title: "Fundamentals of Accounting", qs: [], dur: 120, free: true, level: "Foundation" },
+    laws_ethics: { title: "Fundamentals of Laws & Ethics", qs: [], dur: 120, free: false, level: "Foundation" },
+    maths_statistics: { title: "Fundamentals of Business Maths & Statistics", qs: [], dur: 120, free: false, level: "Foundation" }
+  }
+};
+
+EXAMS["cma_inter"] = {
+  name: "CMA Intermediate",
+  desc: "ICMAI Intermediate Course - Groups I & II",
+  icon: "\ud83d\udcda",
+  cat: "professional",
+  tag: "PROFESSIONAL",
+  tc: "tag-prof",
+  papers: {
+    financial_accounting: { title: "Financial Accounting", qs: [], dur: 180, free: false, level: "Intermediate" },
+    laws_ethics: { title: "Laws & Ethics", qs: [], dur: 180, free: false, level: "Intermediate" },
+    direct_taxation: { title: "Direct Taxation", qs: [], dur: 180, free: false, level: "Intermediate" },
+    cost_accounting: { title: "Cost Accounting", qs: [], dur: 180, free: false, level: "Intermediate" },
+    operations_management: { title: "Operations Management & Strategic Management", qs: [], dur: 180, free: false, level: "Intermediate" },
+    cost_mgmt_financial: { title: "Cost & Management Accounting and Financial Management", qs: [], dur: 180, free: false, level: "Intermediate" },
+    indirect_taxation: { title: "Indirect Taxation", qs: [], dur: 180, free: false, level: "Intermediate" },
+    company_accounts_audit: { title: "Company Accounts & Audit", qs: [], dur: 180, free: false, level: "Intermediate" }
+  }
+};
+
+EXAMS["cma_final"] = {
+  name: "CMA Final",
+  desc: "ICMAI Final Course - Groups III & IV",
+  icon: "\ud83c\udf93",
+  cat: "professional",
+  tag: "PROFESSIONAL",
+  tc: "tag-prof",
+  papers: {
+    corporate_laws: { title: "Corporate Laws & Compliance", qs: [], dur: 180, free: false, level: "Final" },
+    strategic_financial_mgmt: { title: "Strategic Financial Management", qs: [], dur: 180, free: false, level: "Final" },
+    strategic_cost_mgmt: { title: "Strategic Cost Management - Decision Making", qs: [], dur: 180, free: false, level: "Final" },
+    direct_tax_international: { title: "Direct Tax Laws & International Taxation", qs: [], dur: 180, free: false, level: "Final" },
+    corporate_financial_reporting: { title: "Corporate Financial Reporting", qs: [], dur: 180, free: false, level: "Final" },
+    indirect_tax_laws: { title: "Indirect Tax Laws & Practice", qs: [], dur: 180, free: false, level: "Final" },
+    cost_mgmt_audit: { title: "Cost & Management Audit", qs: [], dur: 180, free: false, level: "Final" },
+    performance_valuation: { title: "Strategic Performance Management & Business Valuation", qs: [], dur: 180, free: false, level: "Final" }
+  }
+};
 
 // ============================================================
 // CA EXAMS

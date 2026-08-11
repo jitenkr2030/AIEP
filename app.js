@@ -137,12 +137,6 @@ function showPricing(){
 
 // ---- EXAM ENGINE ----
 function doStartExam(){
-    // DEBUG: show what we have
-    var _dbg = document.getElementById("AUTH_STATUS");
-    if(_dbg){
-        _dbg.classList.remove("hide");
-        _dbg.innerHTML = '<div class="info-box info-blue">examKey: '+examKey+' | paperKey: '+document.getElementById("F_PAPER").value+' | EX exists: '+(!!EX[examKey])+' | Paper exists: '+(EX[examKey]&&EX[examKey].papers[document.getElementById("F_PAPER").value] ? "YES" : "NO")+' | Qs: '+(EX[examKey]&&EX[examKey].papers[document.getElementById("F_PAPER").value] ? EX[examKey].papers[document.getElementById("F_PAPER").value].qs.length : "N/A")+'</div>';
-    }
     sName=document.getElementById("F_NAME").value.trim();sRoll=document.getElementById("F_ROLL").value.trim();sEmail=document.getElementById("F_EMAIL").value.trim();sPhone=document.getElementById("F_PHONE").value.trim();paperKey=document.getElementById("F_PAPER").value;
     if(!sName||!sRoll||!sEmail){toast("Fill name, roll, email","error");return}
     if(!EX[examKey]||!EX[examKey].papers[paperKey]){toast("Select paper","error");return}
