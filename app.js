@@ -291,6 +291,9 @@ window.onload = function(){
             setTimeout(injectAllFacultyQ, 2000);
             setTimeout(injectAllFacultyQ, 5000);
             setTimeout(injectAllFacultyQ, 8000);
+            setTimeout(injectAllFacultyQ, 15000);
+            setTimeout(injectAllFacultyQ, 25000);
+            setTimeout(injectAllFacultyQ, 35000);
         }
     });
 
