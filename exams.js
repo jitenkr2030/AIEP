@@ -130,7 +130,7 @@ frm:{name:"FRM (GARP)",cat:"professional",icon:"&#127919;",tag:"FRM",tc:"tag-fin
 
 cpa:{name:"US CPA (AICPA)",cat:"professional",icon:"&#127482;&#127480;",tag:"US CPA",tc:"tag-fina",desc:"AICPA CPA Examination.",
     papers:profP("cpa","US CPA",[
-        {name:"AUD",subjects:[{name:"Responsibilities",topics:TP.ethics},{name:"Risk",topics:TP.audit},{name:"Evidence",topics:TP.audit},{name:"Reporting",topics:TP.audit}]},
+        {name:"AUD",subjects:[{name:"Responsibilities",topics:TP.ethics,free:true},{name:"Risk",topics:TP.audit},{name:"Evidence",topics:TP.audit},{name:"Reporting",topics:TP.audit}]},
         {name:"FAR",subjects:[{name:"Framework",topics:TP.advacc},{name:"Accounts",topics:TP.accounting},{name:"Transactions",topics:TP.advacc},{name:"Govt",topics:TP.accounting}]},
         {name:"REG",subjects:[{name:"Ethics",topics:TP.ethics},{name:"Business Law",topics:TP.law},{name:"Individual Tax",topics:TP.tax},{name:"Entity Tax",topics:TP.tax}]},
         {name:"BEC",subjects:[{name:"Governance",topics:TP.strategy},{name:"Economics",topics:TP.economics},{name:"FM",topics:TP.finmgmt},{name:"IT",topics:TP.it}]}
