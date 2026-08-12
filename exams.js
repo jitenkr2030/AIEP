@@ -174,196 +174,59 @@ icsi_executive:{name:"ICSI Executive",cat:"professional",icon:"&#128196;",tag:"C
 icsi_professional:{name:"ICSI Professional",cat:"professional",icon:"&#128196;",tag:"CS",tc:"tag-prof",desc:"Company Secretary Professional Programme.",
     papers:{governance_ethics:{title:"Governance Ethics",dur:180,qs:genProQ("Professional Governance",50,["Corporate Governance","Independent Directors","Audit Committee","ESG","CSR","Risk Management","Whistle Blower","NRC","Stakeholder","Code of Conduct"])},advanced_tax:{title:"Advanced Tax",dur:180,qs:genProQ("Professional Advanced Tax",50,["DTAA","Transfer Pricing","GAAR","Black Money","POEM","TDS","Assessment","Search Seizure","Equalization","CbCR"])},drafting_pleadings:{title:"Drafting Pleadings",dur:180,qs:genProQ("Professional Drafting",50,["Drafting","Plaint","Written Statement","Affidavit","Legal Notice","Power of Attorney","Bail Application","MOU","Writ Petition","Caveat"])},secretarial_audit:{title:"Secretarial Audit",dur:180,qs:genProQ("Professional Secretarial Audit",50,["Secretarial Audit","Secretarial Standards","Compliance","Due Diligence","Annual Return","MR-3","PCS","Event-based","Calendar","CMS"])},corporate_restructuring:{title:"Corp Restructuring",dur:180,qs:genProQ("Professional Restructuring",50,["Amalgamation","IBC","CIRP","Resolution Professional","Buyback","Slump Sale","NCLT","Demerger","Winding Up","Valuation"])},resolution_disputes:{title:"Resolution Disputes",dur:180,qs:genProQ("Professional Disputes",50,["Civil Procedure","ADR","Arbitration","Mediation","NCLT","Consumer Forum","Limitation","Injunction","Mandamus","Review"])},corporate_funding:{title:"Corp Funding",dur:180,qs:genProQ("Professional Funding",50,["Equity Shares","Preference Shares","Debentures","Venture Capital","ADR","GDR","ESOP","Commercial Paper","Rights Issue","FCCB"])},multidisciplinary:{title:"Multidisciplinary",dur:180,qs:genProQ("Professional Multidisciplinary",50,["Merger Process","SEBI Enforcement","Company Law","Director Duties","CSR","Tax Disputes","Compliance Audit","Integrated Framework","Whistleblower","Corporate Governance"])}}}
 
+,
+
+// ---- CMA (ICWAI) EXAMS ----
+cma_foundation:{name:"CMA Foundation",cat:"professional",icon:"&#128202;",tag:"CMA",tc:"tag-prof",desc:"ICMAI Foundation Course.",
+    papers:{economics_management:{title:"Economics & Management",dur:120,qs:genProQ("CMA Foundation Economics",50,["Economics","Management","Microeconomics","Macroeconomics","Planning","Organizing","Demand Supply","National Income","Money Banking","Trade"]),free:true},
+    accounting:{title:"Fundamentals of Accounting",dur:120,qs:genProQ("CMA Foundation Accounting",50,["Accounting","Journal","Ledger","Trial Balance","Depreciation","Inventory","BRS","Consignment","Joint Ventures","Partnership"]),free:true},
+    laws_ethics:{title:"Laws & Ethics",dur:120,qs:genProQ("CMA Foundation Laws",50,["Contract Act","Sale of Goods","Companies Act","Ethics","Negotiable Instruments","Partnership Act","LLP Act","Consumer Protection","IT Act","RTI"])},
+    maths_statistics:{title:"Business Maths & Statistics",dur:120,qs:genProQ("CMA Foundation Maths",50,["Ratio","Proportion","Interest","Statistics","Probability","Algebra","Calculus","Matrices","Correlation","Regression"])}}},
+cma_inter:{name:"CMA Intermediate",cat:"professional",icon:"&#128196;",tag:"CMA",tc:"tag-prof",desc:"ICMAI Intermediate Course.",
+    papers:{financial_accounting:{title:"Financial Accounting",dur:180,qs:genProQ("CMA Inter FA",50,["Accounting Standards","Ind AS","Consolidation","Amalgamation","Accounting","Financial Statements","Leases","Revenue","Goodwill","Investments"])},
+    laws_ethics:{title:"Laws & Ethics",dur:180,qs:genProQ("CMA Inter Laws",50,["Company Law","Contract Act","Negotiable Instruments","Industrial Law","Consumer Protection","Competition Law","Ethics","SEBI","FEMA","IPR"])},
+    direct_taxation:{title:"Direct Taxation",dur:180,qs:genProQ("CMA Inter DT",50,["Income Tax","Capital Gains","TDS","Assessment","Business Income","Salary","House Property","Deductions","Residential Status","Advance Tax"])},
+    cost_accounting:{title:"Cost Accounting",dur:180,qs:genProQ("CMA Inter Cost",50,["Cost Sheet","Material Cost","Labour Cost","Overheads","Process Costing","Standard Costing","Marginal Costing","Budget","Variance","ABC"])},
+    operations_management:{title:"Operations & Strategic Mgmt",dur:180,qs:genProQ("CMA Inter OM",50,["Operations","Strategy","Supply Chain","Quality","Production","Inventory","Linear Programming","PERT","CPM","TQM"])},
+    cost_mgmt_financial:{title:"Cost & Financial Mgmt",dur:180,qs:genProQ("CMA Inter CMFM",50,["Cost Audit","Financial Management","Working Capital","Capital Budgeting","Ratio Analysis","Costing","Budgetary Control","Transfer Pricing","Dividend","Leverage"])},
+    indirect_taxation:{title:"Indirect Taxation",dur:180,qs:genProQ("CMA Inter IDT",50,["GST","Input Tax Credit","Registration","Returns","Customs","Valuation","Composition","E-way Bill","Anti-profiteering","IGST"])},
+    company_accounts_audit:{title:"Company Accounts & Audit",dur:180,qs:genProQ("CMA Inter Audit",50,["Company Accounts","Audit","Secretarial Audit","CARO","Internal Audit","Financial Statements","Cash Flow","Accounting Standards","NBFC","Banking"])}}},
+cma_final:{name:"CMA Final",cat:"professional",icon:"&#127891;",tag:"CMA",tc:"tag-prof",desc:"ICMAI Final Course.",
+    papers:{corporate_laws:{title:"Corporate Laws & Compliance",dur:180,qs:genProQ("CMA Final Laws",50,["Companies Act","SEBI","Competition Law","IBC","NCLT","CSR","Governance","Compliance","LODR","DIN"])},
+    strategic_financial_mgmt:{title:"Strategic Financial Mgmt",dur:180,qs:genProQ("CMA Final SFM",50,["Derivatives","Portfolio","Forex","Mergers","Valuation","Risk Management","Hedging","Mutual Funds","Bond Markets","PE"])},
+    strategic_cost_mgmt:{title:"Strategic Cost Mgmt",dur:180,qs:genProQ("CMA Final SCM",50,["Target Costing","Kaizen","Life Cycle","BSC","Value Chain","Benchmarking","ABM","TQM","BPR","Lean"])},
+    direct_tax_international:{title:"Direct Tax & Intl Tax",dur:180,qs:genProQ("CMA Final DT",50,["Transfer Pricing","DTAA","GAAR","BEPS","POEM","Anti Avoidance","CbCR","International Tax","Tax Planning","Tax Audit"])},
+    corporate_financial_reporting:{title:"Corporate Financial Reporting",dur:180,qs:genProQ("CMA Final CFR",50,["Ind AS","Consolidation","Financial Instruments","Revenue Recognition","Fair Value","Impairment","Segment Reporting","Related Parties","First Time Adoption","Hedge Accounting"])},
+    indirect_tax_laws:{title:"Indirect Tax Laws",dur:180,qs:genProQ("CMA Final IDT",50,["GST Law","Customs","Foreign Trade","Anti Dumping","SAFTA","IGST","Place of Supply","Time of Supply","Valuation","Penalties"])},
+    cost_mgmt_audit:{title:"Cost & Management Audit",dur:180,qs:genProQ("CMA Final CMA",50,["Cost Audit","Management Audit","Performance Audit","Systems Audit","Audit Planning","Audit Evidence","Audit Report","Internal Control","Risk Assessment","Compliance Audit"])},
+    performance_valuation:{title:"Performance & Valuation",dur:180,qs:genProQ("CMA Final PV",50,["Business Valuation","Performance Measurement","EVA","MVA","Goodwill","DCF","Asset Based","Market Based","Intellectual Capital","Intangibles"])}}},
+
+// ---- CA EXAMS ----
+ca_foundation:{name:"CA Foundation",cat:"professional",icon:"&#128176;",tag:"CA",tc:"tag-prof",desc:"ICAI Foundation Course.",
+    papers:profP("ca_f","CA Foundation",[
+        {name:"Paper 1",subjects:[{name:"Accounting",topics:TP.accounting,free:true},{name:"Partnership",topics:TP.accounting}]},
+        {name:"Paper 2",subjects:[{name:"Business Laws",topics:TP.law},{name:"Business Correspondence",topics:TP.law}]},
+        {name:"Paper 3",subjects:[{name:"Quantitative Aptitude",topics:TP.quant},{name:"Logical Reasoning",topics:TP.quant},{name:"Statistics",topics:TP.quant}]},
+        {name:"Paper 4",subjects:[{name:"Business Economics",topics:TP.economics},{name:"Business Finance",topics:TP.finmgmt}]}
+    ],180)},
+ca_inter:{name:"CA Intermediate",cat:"professional",icon:"&#128218;",tag:"CA",tc:"tag-prof",desc:"ICAI Intermediate Course.",
+    papers:profP("ca_i","CA Intermediate",[
+        {name:"Group I - Paper 1",subjects:[{name:"Advanced Accounting",topics:TP.advacc,free:true}]},
+        {name:"Group I - Paper 2",subjects:[{name:"Corporate Laws",topics:TP.corplaw},{name:"Other Laws",topics:TP.law}]},
+        {name:"Group I - Paper 3",subjects:[{name:"Taxation - Income Tax",topics:TP.tax}]},
+        {name:"Group II - Paper 4",subjects:[{name:"Cost & Management Accounting",topics:TP.cost}]},
+        {name:"Group II - Paper 5",subjects:[{name:"Auditing",topics:TP.audit}]},
+        {name:"Group II - Paper 6",subjects:[{name:"FM & SM",topics:TP.finmgmt},{name:"Economics",topics:TP.economics}]}
+    ],180)},
+ca_final:{name:"CA Final",cat:"professional",icon:"&#127942;",tag:"CA",tc:"tag-prof",desc:"ICAI Final Course.",
+    papers:profP("ca_fin","CA Final",[
+        {name:"Group I - Paper 1",subjects:[{name:"Financial Reporting",topics:TP.advacc,free:true}]},
+        {name:"Group I - Paper 2",subjects:[{name:"Strategic FM",topics:TP.finmgmt},{name:"Corporate Finance",topics:TP.invest}]},
+        {name:"Group I - Paper 3",subjects:[{name:"Advanced Auditing",topics:TP.audit},{name:"Professional Ethics",topics:TP.ethics}]},
+        {name:"Group II - Paper 4",subjects:[{name:"Direct Tax",topics:TP.tax},{name:"International Tax",topics:TP.tax}]},
+        {name:"Group II - Paper 5",subjects:[{name:"Indirect Tax Laws",topics:TP.tax}]},
+        {name:"Group II - Paper 6",subjects:[{name:"Integrated Business Solutions",topics:TP.strategy},{name:"Multi-disciplinary",topics:TP.strategy}]}
+    ],180)}
 };
 
 })();
-
-// ============================================================
-// CMA (ICWAI) EXAMS
-// ============================================================
-EXAMS["cma_foundation"] = {
-  name: "CMA Foundation",
-  desc: "ICMAI Foundation Course - Cost & Management Accounting",
-  icon: "\ud83d\udcca",
-  cat: "professional",
-  tag: "PROFESSIONAL",
-  tc: "tag-prof",
-  papers: {
-    economics_management: { title: "Fundamentals of Economics & Management", qs: [], dur: 120, free: true, level: "Foundation" },
-    accounting: { title: "Fundamentals of Accounting", qs: [], dur: 120, free: true, level: "Foundation" },
-    laws_ethics: { title: "Fundamentals of Laws & Ethics", qs: [], dur: 120, free: false, level: "Foundation" },
-    maths_statistics: { title: "Fundamentals of Business Maths & Statistics", qs: [], dur: 120, free: false, level: "Foundation" }
-  }
-};
-
-EXAMS["cma_inter"] = {
-  name: "CMA Intermediate",
-  desc: "ICMAI Intermediate Course - Groups I & II",
-  icon: "\ud83d\udcda",
-  cat: "professional",
-  tag: "PROFESSIONAL",
-  tc: "tag-prof",
-  papers: {
-    financial_accounting: { title: "Financial Accounting", qs: [], dur: 180, free: false, level: "Intermediate" },
-    laws_ethics: { title: "Laws & Ethics", qs: [], dur: 180, free: false, level: "Intermediate" },
-    direct_taxation: { title: "Direct Taxation", qs: [], dur: 180, free: false, level: "Intermediate" },
-    cost_accounting: { title: "Cost Accounting", qs: [], dur: 180, free: false, level: "Intermediate" },
-    operations_management: { title: "Operations Management & Strategic Management", qs: [], dur: 180, free: false, level: "Intermediate" },
-    cost_mgmt_financial: { title: "Cost & Management Accounting and Financial Management", qs: [], dur: 180, free: false, level: "Intermediate" },
-    indirect_taxation: { title: "Indirect Taxation", qs: [], dur: 180, free: false, level: "Intermediate" },
-    company_accounts_audit: { title: "Company Accounts & Audit", qs: [], dur: 180, free: false, level: "Intermediate" }
-  }
-};
-
-EXAMS["cma_final"] = {
-  name: "CMA Final",
-  desc: "ICMAI Final Course - Groups III & IV",
-  icon: "\ud83c\udf93",
-  cat: "professional",
-  tag: "PROFESSIONAL",
-  tc: "tag-prof",
-  papers: {
-    corporate_laws: { title: "Corporate Laws & Compliance", qs: [], dur: 180, free: false, level: "Final" },
-    strategic_financial_mgmt: { title: "Strategic Financial Management", qs: [], dur: 180, free: false, level: "Final" },
-    strategic_cost_mgmt: { title: "Strategic Cost Management - Decision Making", qs: [], dur: 180, free: false, level: "Final" },
-    direct_tax_international: { title: "Direct Tax Laws & International Taxation", qs: [], dur: 180, free: false, level: "Final" },
-    corporate_financial_reporting: { title: "Corporate Financial Reporting", qs: [], dur: 180, free: false, level: "Final" },
-    indirect_tax_laws: { title: "Indirect Tax Laws & Practice", qs: [], dur: 180, free: false, level: "Final" },
-    cost_mgmt_audit: { title: "Cost & Management Audit", qs: [], dur: 180, free: false, level: "Final" },
-    performance_valuation: { title: "Strategic Performance Management & Business Valuation", qs: [], dur: 180, free: false, level: "Final" }
-  }
-};
-
-// ============================================================
-// CA EXAMS
-// ============================================================
-EXAMS["ca_foundation"] = {
-  name: "CA Foundation",
-  desc: "Chartered Accountancy Foundation Course",
-  icon: "\ud83d\udcd6",
-  cat: "professional",
-  tag: "PROFESSIONAL",
-  tc: "tag-prof",
-  papers: {
-    accounting: {
-      title: "Accounting",
-      qs: [],
-      dur: 120,
-      free: true,
-      level: "Foundation"
-    },
-    business_laws: {
-      title: "Business Laws",
-      qs: [],
-      dur: 120,
-      free: true,
-      level: "Foundation"
-    },
-    quantitative_aptitude: {
-      title: "Quantitative Aptitude",
-      qs: [],
-      dur: 120,
-      free: false,
-      level: "Foundation"
-    },
-    business_economics: {
-      title: "Business Economics",
-      qs: [],
-      dur: 120,
-      free: false,
-      level: "Foundation"
-    }
-  }
-};
-
-EXAMS["ca_inter"] = {
-  name: "CA Intermediate",
-  desc: "Chartered Accountancy Intermediate Course",
-  icon: "\ud83d\udcda",
-  cat: "professional",
-  tag: "PROFESSIONAL",
-  tc: "tag-prof",
-  papers: {
-    accounting: {
-      title: "Accounting",
-      qs: [],
-      dur: 180,
-      free: false,
-      level: "Intermediate"
-    },
-    corporate_laws: {
-      title: "Corporate & Other Laws",
-      qs: [],
-      dur: 180,
-      free: false,
-      level: "Intermediate"
-    },
-    cost_accounting: {
-      title: "Cost & Management Accounting",
-      qs: [],
-      dur: 180,
-      free: false,
-      level: "Intermediate"
-    },
-    taxation: {
-      title: "Taxation",
-      qs: [],
-      dur: 180,
-      free: false,
-      level: "Intermediate"
-    },
-    advanced_accounting: {
-      title: "Advanced Accounting",
-      qs: [],
-      dur: 180,
-      free: false,
-      level: "Intermediate"
-    }
-  }
-};
-
-EXAMS["ca_final"] = {
-  name: "CA Final",
-  desc: "Chartered Accountancy Final Course",
-  icon: "\ud83c\udf93",
-  cat: "professional",
-  tag: "PROFESSIONAL",
-  tc: "tag-prof",
-  papers: {
-    financial_reporting: {
-      title: "Financial Reporting",
-      qs: [],
-      dur: 180,
-      free: false,
-      level: "Final"
-    },
-    sfm: {
-      title: "Strategic Financial Management",
-      qs: [],
-      dur: 180,
-      free: false,
-      level: "Final"
-    },
-    advanced_auditing: {
-      title: "Advanced Auditing",
-      qs: [],
-      dur: 180,
-      free: false,
-      level: "Final"
-    },
-    corporate_economic_laws: {
-      title: "Corporate & Economic Laws",
-      qs: [],
-      dur: 180,
-      free: false,
-      level: "Final"
-    },
-    strategic_cost_management: {
-      title: "Strategic Cost Management",
-      qs: [],
-      dur: 180,
-      free: false,
-      level: "Final"
-    }
-  }
-};
