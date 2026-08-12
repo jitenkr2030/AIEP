@@ -111,7 +111,7 @@ acca:{name:"ACCA (UK)",cat:"professional",icon:"&#127468;&#127463;",tag:"ACCA",t
 
 uscma:{name:"US CMA (IMA)",cat:"professional",icon:"&#127482;&#127480;",tag:"US CMA",tc:"tag-fina",desc:"IMA Certified Management Accountant.",
     papers:profP("uscma","US CMA",[
-        {name:"Part 1",subjects:[{name:"Reporting",topics:TP.accounting},{name:"Planning",topics:TP.cost},{name:"Performance",topics:TP.cost},{name:"Cost Mgmt",topics:TP.cost},{name:"Controls",topics:TP.audit},{name:"Technology",topics:TP.it}]},
+        {name:"Part 1",subjects:[{name:"Reporting",topics:TP.accounting,free:true},{name:"Planning",topics:TP.cost},{name:"Performance",topics:TP.cost},{name:"Cost Mgmt",topics:TP.cost},{name:"Controls",topics:TP.audit},{name:"Technology",topics:TP.it}]},
         {name:"Part 2",subjects:[{name:"Analysis",topics:TP.advacc},{name:"Corp Finance",topics:TP.finmgmt},{name:"Decision",topics:TP.finmgmt},{name:"Risk",topics:TP.risk},{name:"Investment",topics:TP.invest},{name:"Ethics",topics:TP.ethics}]}
     ],240)},
 
