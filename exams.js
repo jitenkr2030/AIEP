@@ -69,7 +69,7 @@ window.EXAMS = {
 jee:{name:"JEE Main",cat:"engineering",icon:"&#128300;",tag:"Engineering",tc:"tag-eng",desc:"Engineering entrance examination.",
     papers:{full:{title:"JEE Full",dur:180,qs:genQ("JEE",50)},math:{title:"Maths",dur:60,qs:genQ("JEE Math",50),free:true}}},
 upsc:{name:"UPSC CSE",cat:"civil",icon:"&#127963;",tag:"Civil",tc:"tag-gov",desc:"Civil Services Examination.",
-    papers:{gs1:{title:"GS Paper I",dur:120,qs:genQ("UPSC GS1",50),free:true},gs2:{title:"CSAT",dur:120,qs:genQ("UPSC CSAT",50)}}},
+    papers:{gs1:{title:"GS Paper I",dur:120,qs:genProQ("UPSC GS1",50,["Indian History","Indian Geography","Indian Polity","Indian Economy","Environment","Science","Art Culture","World History","Indian Society","Governance"]),free:true},gs2:{title:"CSAT",dur:120,qs:genProQ("UPSC CSAT",50,["Comprehension","Reasoning","Decision Making","Data Interpretation","Ethics","Logical Thinking","Problem Solving","Numerical Ability","Communication","Analytical Skills"])}}},
 ssc:{name:"SSC CGL",cat:"ssc",icon:"&#128188;",tag:"SSC",tc:"tag-gov",desc:"Staff Selection Commission.",
     papers:{gk:{title:"GK",dur:60,qs:genQ("SSC GK",50),free:true},quant:{title:"Quant",dur:60,qs:genQ("SSC Quant",50)}}},
 bank:{name:"Banking",cat:"banking",icon:"&#127974;",tag:"Banking",tc:"tag-eng",desc:"Bank PO/Clerk examinations.",
