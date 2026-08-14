@@ -4,3 +4,4 @@ node_modules/
 *.mjs
 instant.min.js
 *.backup
+*.backup
