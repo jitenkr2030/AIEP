@@ -80,7 +80,7 @@ window.AIEP = {
         for(var i=0;i<users.length;i++){if(users[i].email&&users[i].email.toLowerCase()===email.toLowerCase()){
             if(updates.name!==undefined)users[i].name=updates.name;
             if(updates.phone!==undefined)users[i].phone=updates.phone;
-            if(updates.roll!==undefined)users[i].roll=updates.roll;
+            if(updates.roll!==undefined)users[i].roll=updates.roll;if(updates.tier!==undefined)users[i].tier=updates.tier;
             localSet("x_u",users);
             cloudWrite("portalusers",users[i].id||uid(),{name:users[i].name,email:users[i].email,phone:users[i].phone||"",roll:users[i].roll||"",tier:users[i].tier||"free",joined:users[i].joined||""});
             return users[i];
@@ -110,6 +110,7 @@ window.AIEP = {
     deleteVoucher:function(code){var v=this.getVouchers();delete v[code];localSet("x_v",v);cloudDelete("vouchers",code)},
     getTier:function(){return localGet("x_tier","free")},setTier:function(t){localSet("x_tier",t)},
     getCurrentUser:function(){return localGet("x_cur",null)},setCurrentUser:function(u){localSet("x_cur",u)},clearCurrentUser:function(){localStorage.removeItem("x_cur")},
+    deleteUser:function(email){var all=this.getUsers();var filtered=[];for(var i=0;i<all.length;i++){if(all[i].email&&all[i].email.toLowerCase()!==email.toLowerCase())filtered.push(all[i])}localSet("x_u",filtered);cloudWrite("portalusers",email,{_deleted:true})},
     getAdminCreds:function(){return localGet("x_c",{u:"admin",p:"admin@2026"})},setAdminCreds:function(u,p){localSet("x_c",{u:u,p:p});cloudWrite("adminconfig","admincreds",{username:u,updated:new Date().toISOString()})},
     getFacultyCreds:function(){return localGet("f_creds",{u:"faculty",p:"faculty@2026"})},setFacultyCreds:function(u,p){localSet("f_creds",{u:u,p:p});cloudWrite("adminconfig","facultycreds",{username:u,updated:new Date().toISOString()})},
 

@@ -149,10 +149,22 @@ body.dark .stat,body.dark .q-preview{background:var(--surf)}
 <!-- USERS -->
 <div id="T_USERS" class="hide">
 <h3>Registered Users <span id="U_COUNT" style="color:var(--mut);font-weight:400"></span></h3>
-<table class="tbl"><thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Roll</th><th>Tier</th><th>Joined</th></tr></thead><tbody id="AUSTB"></tbody></table>
+<div class="info-box info-blue">Add, edit, or remove student accounts.</div>
+<h3 style="margin-top:16px">Add / Update Student</h3>
+<div class="three-col">
+<div><label>Name</label><input type="text" id="AS_NAME" placeholder="Student Name"></div>
+<div><label>Email</label><input type="email" id="AS_EMAIL" placeholder="student@email.com"></div>
+<div><label>Password</label><input type="password" id="AS_PASS" placeholder="Min 6 chars"></div>
 </div>
-
-<!-- VOUCHERS -->
+<div class="three-col">
+<div><label>Phone</label><input type="text" id="AS_PHONE" placeholder="+91..."></div>
+<div><label>Roll No</label><input type="text" id="AS_ROLL" placeholder="Roll number"></div>
+<div><label>Tier</label><select id="AS_TIER"><option value="free">Free</option><option value="starter">Starter</option><option value="professional">Professional</option><option value="ultimate">Ultimate</option></select></div>
+</div>
+<button class="btn btn-green" id="BTN_AS_ADD">&#10003; Add / Update Student</button>
+<h3 style="margin-top:24px">Student List</h3>
+<table class="tbl"><thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Roll</th><th>Tier</th><th>Joined</th><th></th></tr></thead><tbody id="AUSTB"></tbody></table>
+</div>
 <div id="T_VOUCHERS" class="hide">
 <h3>Voucher Codes</h3>
 <div class="info-box info-blue">Vouchers give users access tiers. Share codes with students.</div>

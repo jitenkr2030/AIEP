@@ -128,13 +128,37 @@ window.viewPaperQs=function(ek,pk){
 
 // ========== EXISTING: USERS ==========
 function refreshUsers(){
-    var users=AIEP.getUsers(),tb=document.getElementById("AUSTB");document.getElementById("U_COUNT").textContent="("+users.length+")";tb.innerHTML="";
-    if(!users.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--mut);padding:20px">No users.</td></tr>';return}
+    var users=AIEP.getUsers(),tb=document.getElementById("AUSTB");
+    document.getElementById("U_COUNT").textContent="("+users.length+")";
+    tb.innerHTML="";
+    if(!users.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--mut);padding:20px">No users.</td></tr>';return}
     var sorted=users.slice().sort(function(a,b){return new Date(b.joined||0)-new Date(a.joined||0)});
-    for(var i=0;i<sorted.length;i++){var u=sorted[i],tr=document.createElement("tr");tr.innerHTML='<td>'+(i+1)+'</td><td>'+u.name+'</td><td>'+u.email+'</td><td>'+(u.phone||'-')+'</td><td>'+(u.roll||'-')+'</td><td>'+getTierBadge(u.tier||'free')+'</td><td style="font-size:10px">'+(u.joined||'-')+'</td>';tb.appendChild(tr)}
+    for(var i=0;i<sorted.length;i++){
+        var u=sorted[i],tr=document.createElement("tr");
+        tr.innerHTML='<td>'+(i+1)+'</td><td>'+u.name+'</td><td>'+u.email+'</td><td>'+(u.phone||'-')+'</td><td>'+(u.roll||'-')+'</td><td>'+getTierBadge(u.tier||'free')+'</td><td style="font-size:10px">'+(u.joined||'-')+'</td><td><button class="edit-btn" data-email="'+u.email+'">Edit</button> <button class="del-btn" data-email="'+u.email+'">Del</button></td>';
+        tb.appendChild(tr);
+    }
+    tb.querySelectorAll(".edit-btn").forEach(function(btn){btn.onclick=function(){
+        var em=this.getAttribute("data-email"),usr=AIEP.getUserByEmail(em);
+        if(!usr)return;
+        document.getElementById("AS_NAME").value=usr.name||"";
+        document.getElementById("AS_EMAIL").value=usr.email||"";
+        document.getElementById("AS_PASS").value="";
+        document.getElementById("AS_PHONE").value=usr.phone||"";
+        document.getElementById("AS_ROLL").value=usr.roll||"";
+        document.getElementById("AS_TIER").value=usr.tier||"free";
+        toast("Editing: "+em+". Modify and click Add/Update.","ok");
+    }});
+    tb.querySelectorAll(".del-btn").forEach(function(btn){btn.onclick=function(){
+        var em=this.getAttribute("data-email");
+        if(!confirm("Delete user: "+em+"?"))return;
+        AIEP.deleteUser(em);
+        refreshUsers();
+        toast("Deleted","ok");
+    }});
 }
-
 // ========== VOUCHERS ==========
+function addOrUpdateStudent(){var name=document.getElementById("AS_NAME").value.trim();var email=document.getElementById("AS_EMAIL").value.trim();var pass=document.getElementById("AS_PASS").value.trim();var phone=document.getElementById("AS_PHONE").value.trim();var roll=document.getElementById("AS_ROLL").value.trim();var tier=document.getElementById("AS_TIER").value;if(!name||!email){toast("Name and Email required","error");return}if(email.indexOf("@")===-1){toast("Valid email required","error");return}var existing=AIEP.getUserByEmail(email);if(existing){AIEP.updateUserProfile(email,{name:name,phone:phone,roll:roll});AIEP.saveUser({name:name,email:email,tier:tier,phone:phone,roll:roll});toast("Updated: "+email,"ok")}else{if(!pass||pass.length<6){toast("Password min 6 chars for new user","error");return}AIEP.saveUser({name:name,email:email,pass:pass,phone:phone,roll:roll,tier:tier});toast("Added: "+email,"ok")}refreshUsers();["AS_NAME","AS_EMAIL","AS_PASS","AS_PHONE","AS_ROLL"].forEach(function(id){document.getElementById(id).value=""});document.getElementById("AS_TIER").value="free"}
 function refreshVouchers(){
     var v=AIEP.getVouchers(),tb=document.getElementById("AVTB");tb.innerHTML="";var keys=Object.keys(v);
     if(!keys.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--mut);padding:20px">No vouchers.</td></tr>';return}
@@ -181,6 +205,7 @@ function bindEvents(){
     document.getElementById("BTN_ALOGOUT").onclick=doALogout;
     document.getElementById("ATABS").addEventListener("click",function(e){var btn=e.target.closest("button[data-tab]");if(btn)switchTab(btn.getAttribute("data-tab"))});
     document.getElementById("BTN_AF_ADD").onclick=addFaculty;
+    if(document.getElementById("BTN_AS_ADD"))document.getElementById("BTN_AS_ADD").onclick=addOrUpdateStudent;
     document.getElementById("BTN_AV_ADD").onclick=addVoucher;
     document.getElementById("BTN_AH_CSV").onclick=exportHistCSV;
     document.getElementById("AH_SEARCH").oninput=refreshHistory;
