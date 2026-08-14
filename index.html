@@ -204,6 +204,40 @@ body.dark .exam-card{background:var(--surf)}body.dark .stat{background:var(--sur
 <div class="wrap hide" id="V_ABOUT"><div class="topbar"><button id="NAV_HOME_AB">Home</button><button id="NAV_PRICING_AB">Pricing</button><button id="NAV_THEME_AB">&#9790; Theme</button></div><div class="page-content"><div class="about-hero"><div class="logo-big">&#128218;</div><h2>All India Examination Portal</h2><p style="color:var(--mut);font-size:14px">Practice platform for professional &amp; competitive exams</p></div><div class="about-stats"><div class="about-stat"><div class="num" id="AB_EXAMS">0</div><div class="lbl">Exams</div></div><div class="about-stat"><div class="num" id="AB_PAPERS">0</div><div class="lbl">Papers</div></div><div class="about-stat"><div class="num" id="AB_MCQS">0</div><div class="lbl">MCQs</div></div><div class="about-stat"><div class="num" id="AB_USERS">0</div><div class="lbl">Users</div></div></div><div class="contact-grid"><div class="contact-card"><div class="c-icon">&#128231;</div><h4>Email</h4><p>info@aiep-exam.in</p></div><div class="contact-card"><div class="c-icon">&#128222;</div><h4>Phone</h4><p>+91 11 4567 8900</p></div></div></div></div>
 
 <!-- EXAM -->
+
+<!-- USER PROFILE DASHBOARD -->
+<div class="wrap hide" id="V_PROFILE">
+<div class="topbar"><button id="NAV_HOME_PROF">Home</button><button id="NAV_THEME_PROF">&#9790; Theme</button></div>
+<h2>&#128100; My Profile</h2>
+<p class="sub">View your details and exam history</p>
+<div class="stats" id="PROF_STATS"></div>
+<div class="two-col">
+<div>
+<h3>Personal Details</h3>
+<label>Name</label><input type="text" id="PROF_NAME" placeholder="Your name">
+<label>Email</label><input type="text" id="PROF_EMAIL" readonly style="opacity:.6">
+<label>Phone</label><input type="text" id="PROF_PHONE" placeholder="+91...">
+<label>Roll / Registration</label><input type="text" id="PROF_ROLL" placeholder="Roll number">
+<div style="display:flex;gap:8px;margin-top:6px">
+<button class="btn btn-green" id="BTN_PROF_SAVE">&#10003; Save Changes</button>
+<button class="btn btn-red btn-sm" id="BTN_PROF_LOGOUT" style="margin-left:auto">Logout</button>
+</div>
+</div>
+<div>
+<h3>Subscription</h3>
+<div id="PROF_TIER" style="margin-bottom:14px"></div>
+<h3>Quick Stats</h3>
+<div id="PROF_SUMMARY" style="font-size:13px;color:var(--mut)"></div>
+</div>
+</div>
+<h3 style="margin-top:24px">Exam History</h3>
+<table class="tbl"><thead><tr><th>#</th><th>Date</th><th>Exam</th><th>Paper</th><th>Score</th><th>%</th></tr></thead><tbody id="PROF_HIST"></tbody></table>
+<div style="margin-top:14px;display:flex;gap:8px">
+<button class="btn btn-outline btn-sm" id="BTN_PROF_CLEAR_HIST">Clear History</button>
+<button class="btn btn-outline btn-sm" id="BTN_PROF_EXPORT_HIST">Export History</button>
+</div>
+</div>
+
 <div class="wrap hide" id="V_EXAM">
 <div class="exam-head"><h2 id="EXTITLE" style="font-size:15px;color:var(--pri);font-weight:700"></h2><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span id="WLBL" style="font-size:10px;color:var(--red);font-weight:700"></span><span id="QCTR" style="font-size:12px;color:var(--mut);font-weight:700;font-family:'JetBrains Mono',monospace"></span><div class="timer" id="TIMER">180:00</div></div></div>
 <div class="progress-bar"><div class="fill" id="PBAR" style="width:0%"></div></div>

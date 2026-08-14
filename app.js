@@ -100,9 +100,53 @@ function updateAuthUI(){
 }
 
 // ---- VIEWS ----
-var VIEWS=["V_HOME","V_AUTH","V_PRICING","V_PRIVACY","V_TERMS","V_DISCLAIMER","V_ABOUT","V_EXAM","V_RESULT"];
+var VIEWS=["V_HOME","V_AUTH","V_PRICING","V_PRIVACY","V_TERMS","V_DISCLAIMER","V_ABOUT","V_EXAM","V_RESULT","V_PROFILE"];
 function hideAll(){for(var i=0;i<VIEWS.length;i++){var el=document.getElementById(VIEWS[i]);if(el)el.classList.add("hide")}}
 function showV(id){hideAll();document.getElementById(id).classList.remove("hide")}
+
+
+function showProfile(){
+    if(!loggedInUser){showV("V_AUTH");return}
+    showV("V_PROFILE");
+    // Fill details
+    var u=AIEP.getUserByEmail(loggedInUser.email)||loggedInUser;
+    document.getElementById("PROF_NAME").value=u.name||"";
+    document.getElementById("PROF_EMAIL").value=u.email||"";
+    document.getElementById("PROF_PHONE").value=u.phone||"";
+    document.getElementById("PROF_ROLL").value=u.roll||"";
+    // Tier
+    var tier=AIEP.getTier();
+    document.getElementById("PROF_TIER").innerHTML="<strong>Current Plan:</strong> "+getTierBadge(tier);
+    // Stats
+    var results=AIEP.getResultsByEmail(loggedInUser.email);
+    var totalTests=results.length,bestPct=0,avgPct=0,totalQ=0;
+    for(var i=0;i<results.length;i++){
+        totalQ+=results[i].total||0;
+        if(results[i].pct>bestPct)bestPct=results[i].pct;
+        avgPct+=results[i].pct||0;
+    }
+    avgPct=totalTests?Math.round(avgPct/totalTests):0;
+    document.getElementById("PROF_STATS").innerHTML=
+        '<div class="stat"><div class="num">'+totalTests+'</div><div class="lbl">Tests Taken</div></div>'+
+        '<div class="stat"><div class="num">'+bestPct+'%</div><div class="lbl">Best Score</div></div>'+
+        '<div class="stat"><div class="num">'+avgPct+'%</div><div class="lbl">Average</div></div>'+
+        '<div class="stat"><div class="num">'+totalQ+'</div><div class="lbl">Questions Attempted</div></div>';
+    document.getElementById("PROF_SUMMARY").innerHTML=
+        "<p>Total tests: <strong>"+totalTests+"</strong></p>"+
+        "<p>Best score: <strong>"+bestPct+"%</strong></p>"+
+        "<p>Average: <strong>"+avgPct+"%</strong></p>";
+    // History table
+    var tb=document.getElementById("PROF_HIST");tb.innerHTML="";
+    if(!results.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--mut);padding:20px">No exams taken yet.</td></tr>';return}
+    var sorted=results.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)});
+    for(var i=0;i<sorted.length;i++){
+        var r=sorted[i];
+        var tr=document.createElement("tr");
+        tr.innerHTML="<td>"+(i+1)+"</td><td style='font-size:10px'>"+r.date+"</td><td>"+r.exam+"</td><td style='font-size:10px'>"+r.paper+"</td><td style='font-family:monospace'>"+r.score+"/"+r.total+"</td><td><span class='badge "+(r.pct>=50?"b-green":"b-red")+"'>"+r.pct+"%</span></td>";
+        tb.appendChild(tr);
+    }
+}
+
 function goHome(){showV("V_HOME");document.getElementById("REGFORM").classList.add("hide");document.getElementById("EXGRD").classList.remove("hide");document.getElementById("CATBAR").classList.remove("hide");renderCards("all");updateAuthUI()}
 function togTheme(){document.body.classList.toggle("dark");localStorage.setItem("x_theme",document.body.classList.contains("dark")?"dark":"light")}
 
@@ -222,6 +266,54 @@ document.getElementById("LNK_ABOUT").onclick=function(e){e.preventDefault();upda
 document.getElementById("BACK_BTN").onclick=function(){document.getElementById("REGFORM").classList.add("hide");document.getElementById("PAPERSUM").classList.add("hide");document.getElementById("TIERMSG").classList.add("hide");document.getElementById("AUTH_STATUS").classList.add("hide");document.getElementById("EXGRD").classList.remove("hide");document.getElementById("CATBAR").classList.remove("hide")};
 document.getElementById("CATBAR").addEventListener("click",function(e){var btn=e.target.closest(".cat-btn");if(!btn)return;var cat=btn.getAttribute("data-cat");var btns=document.querySelectorAll("#CATBAR .cat-btn");for(var i=0;i<btns.length;i++)btns[i].classList.toggle("on",btns[i]===btn);renderCards(cat)});
 document.getElementById("EXGRD").addEventListener("click",function(e){var card=e.target.closest(".exam-card");if(!card)return;selectExam(card.getAttribute("data-exam"))});
+    // Profile bindings
+    var navHomeProf=document.getElementById("NAV_HOME_PROF");
+    if(navHomeProf)navHomeProf.onclick=goHome;
+    var navThemeProf=document.getElementById("NAV_THEME_PROF");
+    if(navThemeProf)navThemeProf.onclick=function(){document.body.classList.toggle("dark")};
+    var profSave=document.getElementById("BTN_PROF_SAVE");
+    if(profSave)profSave.onclick=function(){
+        if(!loggedInUser)return;
+        var name=document.getElementById("PROF_NAME").value.trim();
+        var phone=document.getElementById("PROF_PHONE").value.trim();
+        var roll=document.getElementById("PROF_ROLL").value.trim();
+        if(!name){toast("Name required","error");return}
+        AIEP.updateUserProfile(loggedInUser.email,{name:name,phone:phone,roll:roll});
+        loggedInUser.name=name;loggedInUser.phone=phone;loggedInUser.roll=roll;
+        AIEP.setCurrentUser(loggedInUser);
+        updateAuthUI();
+        toast("Profile updated!","ok");
+    };
+    var profLogout=document.getElementById("BTN_PROF_LOGOUT");
+    if(profLogout)profLogout.onclick=doLogout;
+    var profClearH=document.getElementById("BTN_PROF_CLEAR_HIST");
+    if(profClearH)profClearH.onclick=function(){
+        if(!loggedInUser)return;
+        if(!confirm("Clear all your exam history?"))return;
+        var all=AIEP.getResults(),filtered=[];
+        for(var i=0;i<all.length;i++){
+            if(all[i].email&&all[i].email.toLowerCase()!==loggedInUser.email.toLowerCase())filtered.push(all[i]);
+        }
+        localStorage.setItem("x_h",JSON.stringify(filtered));
+        showProfile();
+        toast("History cleared","ok");
+    };
+    var profExportH=document.getElementById("BTN_PROF_EXPORT_HIST");
+    if(profExportH)profExportH.onclick=function(){
+        if(!loggedInUser)return;
+        var results=AIEP.getResultsByEmail(loggedInUser.email);
+        if(!results.length){toast("No history","error");return}
+        var csv="Date,Exam,Paper,Score,Total,Percentage\n";
+        for(var i=0;i<results.length;i++){
+            csv+='"'+results[i].date+'","'+results[i].exam+'","'+results[i].paper+'",'+results[i].score+','+results[i].total+','+results[i].pct+'\n';
+        }
+        var a=document.createElement("a");
+        a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);
+        a.download="AIEP_My_Results.csv";
+        document.body.appendChild(a);a.click();document.body.removeChild(a);
+        toast("Exported!","ok");
+    };
+
 document.getElementById("BTN_START").onclick=doStartExam;
 document.getElementById("F_PAPER").onchange=function(){if(!examKey)return;var pv=this.value,p=EX[examKey].papers[pv];document.getElementById("F_VOUCHER").placeholder=(p&&p.free)?"Free paper":"Enter voucher code";if(p&&p.free)document.getElementById("F_VOUCHER").value=""};
 document.getElementById("BTN_PREV").onclick=function(){if(idx>0)loadQ(idx-1)};
@@ -260,6 +352,7 @@ function injectAllFacultyQ(){
         var enc = function(s){return btoa(unescape(encodeURIComponent(s)))};
         var newQs = [];
         for(var i = 0; i < qs.length; i++){
+            if(qs[i].status && qs[i].status !== "approved") continue;
             newQs.push({
                 id: qs[i].id,
                 t: enc(qs[i].q),

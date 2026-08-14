@@ -18,115 +18,19 @@ function doALogin(){
     else{err.textContent="Invalid.";err.classList.remove("hide")}
 }
 function doALogout(){loggedIn=false;document.getElementById("V_ADASH").classList.add("hide");document.getElementById("V_ALOGIN").classList.remove("hide");toast("Logged out","ok")}
+
 function updateDBBadge(){var el=document.getElementById("DB_STAT");if(!el)return;var ok=AIEP.isConnected();el.className="db-status "+(ok?"db-online":"db-offline");el.textContent=ok?"Cloud":"Local"}
 
 // OVERVIEW
 function refreshOverview(){
     var keys=Object.keys(EX),te=keys.length,tp2=0,tq=0,catR={};
     for(var i=0;i<keys.length;i++){var ex=EX[keys[i]],pks=Object.keys(ex.papers);for(var j=0;j<pks.length;j++){tp2++;tq+=ex.papers[pks[j]].qs.length}var ck=ex.cat||"other";if(!catR[ck])catR[ck]={e:0,p:0,q:0};catR[ck].e++;for(var m=0;m<pks.length;m++){catR[ck].p++;catR[ck].q+=ex.papers[pks[m]].qs.length}}
-    var fStats=AIEP.getQStats();
-    var fCount=AIEP.getFacultyAccounts().length;
-    document.getElementById("ASTATS").innerHTML=
-        '<div class="stat"><div class="num">'+te+'</div><div class="lbl">Exams</div></div>'+
-        '<div class="stat"><div class="num">'+tp2+'</div><div class="lbl">Papers</div></div>'+
-        '<div class="stat"><div class="num">'+tq.toLocaleString()+'</div><div class="lbl">Built-in MCQs</div></div>'+
-        '<div class="stat"><div class="num">'+AIEP.getUsers().length+'</div><div class="lbl">Users</div></div>'+
-        '<div class="stat"><div class="num" style="color:#F59E0B">'+fStats.pending+'</div><div class="lbl">Pending Qs</div></div>'+
-        '<div class="stat"><div class="num" style="color:#059669">'+fStats.approved+'</div><div class="lbl">Approved Qs</div></div>'+
-        '<div class="stat"><div class="num">'+fCount+'</div><div class="lbl">Faculty</div></div>'+
-        '<div class="stat"><div class="num">'+AIEP.getResults().length+'</div><div class="lbl">Attempts</div></div>';
+    document.getElementById("ASTATS").innerHTML='<div class="stat"><div class="num">'+te+'</div><div class="lbl">Exams</div></div><div class="stat"><div class="num">'+tp2+'</div><div class="lbl">Papers</div></div><div class="stat"><div class="num">'+tq.toLocaleString()+'</div><div class="lbl">MCQs</div></div><div class="stat"><div class="num">'+AIEP.getUsers().length+'</div><div class="lbl">Users</div></div><div class="stat"><div class="num">'+AIEP.getResults().length+'</div><div class="lbl">Attempts</div></div><div class="stat"><div class="num">'+Object.keys(AIEP.getVouchers()).length+'</div><div class="lbl">Vouchers</div></div>';
     var tb=document.getElementById("ACATTB");tb.innerHTML="";var ck=Object.keys(catR).sort();for(var c=0;c<ck.length;c++){var r=catR[ck[c]],tr=document.createElement("tr");tr.innerHTML='<td style="text-transform:capitalize;font-weight:700">'+ck[c]+'</td><td>'+r.e+'</td><td>'+r.p+'</td><td><span class="badge b-blue">'+r.q.toLocaleString()+'</span></td>';tb.appendChild(tr)}
+    document.getElementById("SI_EXAMS").textContent=te;document.getElementById("SI_PAPERS").textContent=tp2;document.getElementById("SI_MCQS").textContent=tq.toLocaleString();
 }
 
-// ========== FACULTY MANAGEMENT ==========
-function refreshFaculty(){
-    var facs=AIEP.getFacultyAccounts(),tb=document.getElementById("AFTB");tb.innerHTML="";
-    document.getElementById("F_COUNT").textContent="("+facs.length+")";
-    if(!facs.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--mut);padding:20px">No faculty accounts. Create one below.</td></tr>';return}
-    for(var i=0;i<facs.length;i++){
-        var f=facs[i],tr=document.createElement("tr");
-        var statusCls=f.status==="active"?"b-green":"b-red";
-        tr.innerHTML='<td>'+(i+1)+'</td><td><strong>'+f.name+'</strong></td><td><code>'+f.username+'</code></td><td>'+(f.subjects||"-")+'</td><td><span class="badge '+statusCls+'">'+f.status+'</span></td><td><button class="edit-btn" data-user="'+f.username+'">Edit</button> <button class="del-btn" data-user="'+f.username+'">Del</button></td>';
-        tb.appendChild(tr);
-    }
-    tb.querySelectorAll(".del-btn").forEach(function(btn){btn.onclick=function(){if(!confirm("Delete faculty account?"))return;AIEP.deleteFacultyAccount(this.getAttribute("data-user"));refreshFaculty();toast("Deleted","ok")}});
-    tb.querySelectorAll(".edit-btn").forEach(function(btn){btn.onclick=function(){
-        var un=this.getAttribute("data-user"),facs=AIEP.getFacultyAccounts();
-        for(var i=0;i<facs.length;i++){if(facs[i].username===un){
-            document.getElementById("AF_NAME").value=facs[i].name||"";
-            document.getElementById("AF_USER").value=facs[i].username;
-            document.getElementById("AF_PASS").value=facs[i].password||"";
-            document.getElementById("AF_SUBJ").value=facs[i].subjects||"";
-            document.getElementById("AF_PHONE").value=facs[i].phone||"";
-            toast("Editing: "+un+". Modify and click Create/Update.","ok");
-            break;
-        }}
-    }});
-}
-function addFaculty(){
-    var name=document.getElementById("AF_NAME").value.trim(),username=document.getElementById("AF_USER").value.trim(),password=document.getElementById("AF_PASS").value.trim(),subjects=document.getElementById("AF_SUBJ").value.trim(),phone=document.getElementById("AF_PHONE").value.trim();
-    if(!name||!username||!password){toast("Name, Username, Password required","error");return}
-    if(password.length<6){toast("Password min 6 chars","error");return}
-    AIEP.saveFacultyAccount({username:username,name:name,password:password,subjects:subjects,phone:phone,status:"active"});
-    refreshFaculty();toast("Faculty saved! Share credentials: "+username,"ok");
-    ["AF_NAME","AF_USER","AF_PASS","AF_SUBJ","AF_PHONE"].forEach(function(id){document.getElementById(id).value=""});
-}
-
-// ========== REVIEW / APPROVAL ==========
-function refreshReview(){
-    var all=AIEP.getFacultyQ(),tb=document.getElementById("ARTB");tb.innerHTML="";
-    var stats=AIEP.getQStats();
-    document.getElementById("R_STATS").innerHTML=
-        '<div class="stat"><div class="num">'+stats.total+'</div><div class="lbl">Total</div></div>'+
-        '<div class="stat"><div class="num" style="color:#F59E0B">'+stats.pending+'</div><div class="lbl">Pending</div></div>'+
-        '<div class="stat"><div class="num" style="color:#059669">'+stats.approved+'</div><div class="lbl">Approved</div></div>'+
-        '<div class="stat"><div class="num" style="color:#DC2626">'+stats.rejected+'</div><div class="lbl">Rejected</div></div>';
-    var filter=document.getElementById("AR_FILTER").value;
-    var keys=Object.keys(all).sort();
-    for(var k=0;k<keys.length;k++){
-        var qs=all[keys[k]],parts=keys[k].split("_"),ek=parts[0],pk=parts.slice(1).join("_");
-        var exObj=EX[ek],pObj=exObj&&exObj.papers[pk];
-        var p=0,a=0,r=0;
-        for(var i=0;i<qs.length;i++){if(qs[i].status==="approved")a++;else if(qs[i].status==="rejected")r++;else p++}
-        if(filter==="pending"&&p===0)continue;
-        if(filter==="approved"&&a===0)continue;
-        if(filter==="rejected"&&r===0)continue;
-        var tr=document.createElement("tr");
-        tr.innerHTML='<td>'+(exObj?exObj.name:ek)+'</td><td>'+(pObj?pObj.title:pk)+'</td><td><span class="badge b-blue">'+qs.length+'</span></td><td>'+(p?'<span class="badge b-gold">'+p+'</span>':'-')+'</td><td>'+(a?'<span class="badge b-green">'+a+'</span>':'-')+'</td><td>'+(r?'<span class="badge b-red">'+r+'</span>':'-')+'</td><td><button class="btn btn-green btn-sm" data-ek="'+ek+'" data-pk="'+pk+'" data-act="approve">Approve All</button> <button class="btn btn-red btn-sm" data-ek="'+ek+'" data-pk="'+pk+'" data-act="reject">Reject All</button> <button class="edit-btn" data-ek="'+ek+'" data-pk="'+pk+'" data-act="view">View</button></td>';
-        tb.appendChild(tr);
-    }
-    if(!tb.children.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--mut);padding:20px">No questions matching filter.</td></tr>'}
-    tb.querySelectorAll("button").forEach(function(btn){
-        btn.onclick=function(){
-            var ek=this.getAttribute("data-ek"),pk=this.getAttribute("data-pk"),act=this.getAttribute("data-act");
-            if(act==="approve"){if(!confirm("Approve ALL in this paper?"))return;AIEP.approveAllInPaper(ek,pk);refreshReview();toast("Approved!","ok")}
-            else if(act==="reject"){if(!confirm("Reject ALL in this paper?"))return;AIEP.rejectAllInPaper(ek,pk);refreshReview();toast("Rejected","ok")}
-            else if(act==="view"){viewPaperQs(ek,pk)}
-        };
-    });
-}
-
-window.approveSingleQ=function(ek,pk,qid){AIEP.approveQuestion(ek,pk,qid);toast('Approved!','ok');window.viewPaperQs(ek,pk)};
-window.rejectSingleQ=function(ek,pk,qid){AIEP.rejectQuestion(ek,pk,qid);toast('Rejected','ok');window.viewPaperQs(ek,pk)};
-
-window.viewPaperQs=function(ek,pk){
-    var all=AIEP.getFacultyQ(),qs=all[ek+"_"+pk]||[];
-    var area=document.getElementById("AR_DETAIL");area.innerHTML="";
-    document.getElementById("AR_PTITLE").textContent=(EX[ek]?EX[ek].name:ek)+" / "+pk;
-    if(!qs.length){area.innerHTML='<div class="info-box info-blue">No questions.</div>';return}
-    for(var i=0;i<qs.length;i++){
-        var q=qs[i],div=document.createElement("div");
-        div.className="q-preview fade-in";div.style.animationDelay=(i*0.05)+"s";
-        var sBadge=q.status==="approved"?'<span class="badge b-green">Approved</span>':q.status==="rejected"?'<span class="badge b-red">Rejected</span>':'<span class="badge b-gold">Pending</span>';
-        var oh="";var oK=["A","B","C","D"];
-        for(var j=0;j<4;j++){var ok=oK[j]===q.ans;oh+='<span class="'+(ok?"correct-opt":"wrong-opt")+'"><strong>'+oK[j]+')</strong> '+(q.opts[oK[j]]||"(empty)")+'</span>'}
-        div.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span class="qnum">Q'+(i+1)+'</span>'+sBadge+'</div>'+q.q+'<div class="opts">'+oh+'</div>'+(q.explain?'<div style="margin-top:8px;padding:8px;background:rgba(5,150,105,.05);border-radius:6px;font-size:11px;color:var(--grn)"><strong>Explanation:</strong> '+q.explain+'</div>':'')+'<div style="margin-top:10px;display:flex;gap:8px"><button class="btn btn-green btn-sm" onclick="approveSingleQ(\''+ek+'\',\''+pk+'\',\''+q.id+'\')">&#10003; Approve</button><button class="btn btn-red btn-sm" onclick="rejectSingleQ(\''+ek+'\',\''+pk+'\',\''+q.id+'\')">&#10007; Reject</button></div>';
-        area.appendChild(div);
-    }
-    document.getElementById("AR_MODAL").classList.remove("hide");
-}
-
-// ========== EXISTING: USERS ==========
+// USERS
 function refreshUsers(){
     var users=AIEP.getUsers(),tb=document.getElementById("AUSTB");document.getElementById("U_COUNT").textContent="("+users.length+")";tb.innerHTML="";
     if(!users.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--mut);padding:20px">No users.</td></tr>';return}
@@ -134,7 +38,7 @@ function refreshUsers(){
     for(var i=0;i<sorted.length;i++){var u=sorted[i],tr=document.createElement("tr");tr.innerHTML='<td>'+(i+1)+'</td><td>'+u.name+'</td><td>'+u.email+'</td><td>'+(u.phone||'-')+'</td><td>'+(u.roll||'-')+'</td><td>'+getTierBadge(u.tier||'free')+'</td><td style="font-size:10px">'+(u.joined||'-')+'</td>';tb.appendChild(tr)}
 }
 
-// ========== VOUCHERS ==========
+// VOUCHERS
 function refreshVouchers(){
     var v=AIEP.getVouchers(),tb=document.getElementById("AVTB");tb.innerHTML="";var keys=Object.keys(v);
     if(!keys.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--mut);padding:20px">No vouchers.</td></tr>';return}
@@ -143,7 +47,7 @@ function refreshVouchers(){
 }
 function addVoucher(){var code=document.getElementById("AV_CODE").value.trim().toUpperCase(),desc=document.getElementById("AV_DESC").value.trim(),max=parseInt(document.getElementById("AV_MAX").value)||100,tier=document.getElementById("AV_TIER").value;if(!code){toast("Enter code","error");return}AIEP.addVoucher(code,{desc:desc||"Voucher",used:0,max:max,tier:tier});refreshVouchers();toast("Created!","ok");document.getElementById("AV_CODE").value="";document.getElementById("AV_DESC").value="";document.getElementById("AV_MAX").value=""}
 
-// ========== HISTORY ==========
+// HISTORY
 function refreshHistory(){
     var hist=AIEP.getResults(),tb=document.getElementById("AHTB");document.getElementById("H_COUNT").textContent="("+hist.length+")";var sch=(document.getElementById("AH_SEARCH").value||"").toLowerCase();tb.innerHTML="";
     if(!hist.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--mut);padding:20px">No results.</td></tr>';return}
@@ -152,52 +56,90 @@ function refreshHistory(){
     for(var i=0;i<Math.min(sorted.length,300);i++){var h=sorted[i],tr=document.createElement("tr");tr.innerHTML='<td>'+(i+1)+'</td><td style="font-size:10px">'+h.date+'</td><td>'+h.name+'</td><td style="font-size:10px">'+(h.email||'-')+'</td><td>'+h.exam+'</td><td style="font-size:10px">'+h.paper+'</td><td style="font-family:monospace">'+h.score+'/'+h.total+'</td><td><span class="badge '+(h.pct>=50?"b-green":"b-red")+'">'+h.pct+'%</span></td>';tb.appendChild(tr)}
 }
 function exportHistCSV(){var h=AIEP.getResults();if(!h.length){toast("Empty","error");return}var csv="Date,Name,Roll,Email,Exam,Paper,Score,Total,Percentage\n";for(var i=0;i<h.length;i++){csv+='"'+h[i].date+'","'+h[i].name+'","'+(h[i].roll||"")+'","'+(h[i].email||"")+'","'+h[i].exam+'","'+h[i].paper+'",'+h[i].score+','+h[i].total+','+h[i].pct+'\n'}var a=document.createElement("a");a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);a.download="AIEP_Results.csv";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("CSV!","ok")}
+function exportHistJSON(){var h=AIEP.getResults();if(!h.length){toast("Empty","error");return}var blob=new Blob([JSON.stringify(h,null,2)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="AIEP_Results.json";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("JSON!","ok")}
 
-// ========== SETTINGS ==========
+// MANAGE QUESTIONS
+function fillExamSelects(){var sel=document.getElementById("AM_EXAM");sel.innerHTML="";var keys=Object.keys(EX);for(var i=0;i<keys.length;i++){var opt=document.createElement("option");opt.value=keys[i];opt.textContent=EX[keys[i]].name;sel.appendChild(opt)}updatePaperSelect()}
+function updatePaperSelect(){var ev=document.getElementById("AM_EXAM").value,ps=document.getElementById("AM_PAPER");ps.innerHTML="";if(!EX[ev])return;var pks=Object.keys(EX[ev].papers);for(var i=0;i<pks.length;i++){var opt=document.createElement("option");opt.value=pks[i];opt.textContent=EX[ev].papers[pks[i]].title;ps.appendChild(opt)}}
+function loadManageQ(){var ev=document.getElementById("AM_EXAM").value,pv=document.getElementById("AM_PAPER").value;if(!EX[ev]||!EX[ev].papers[pv])return;var qs=EX[ev].papers[pv].qs,sch=(document.getElementById("AM_SEARCH").value||"").toLowerCase(),tb=document.getElementById("AMTB");tb.innerHTML="";var filtered=sch?qs.filter(function(q){try{return dec(q.t).toLowerCase().indexOf(sch)!==-1}catch(e){return false}}):qs;document.getElementById("AM_STATS").innerHTML='<div class="stat"><div class="num">'+qs.length+'</div><div class="lbl">Total</div></div><div class="stat"><div class="num">'+filtered.length+'</div><div class="lbl">Showing</div></div><div class="stat"><div class="num">'+(AIEP.getFacultyQ()[ev+"_"+pv]?AIEP.getFacultyQ()[ev+"_"+pv].length:0)+'</div><div class="lbl">Faculty</div></div>';var show=Math.min(filtered.length,200);for(var i=0;i<show;i++){var q=filtered[i],txt="";try{txt=dec(q.t)}catch(e){txt="(error)"}var ca="";try{ca=dec(q.a)}catch(e){ca="?"}var tr=document.createElement("tr");tr.innerHTML='<td>'+(i+1)+'</td><td style="max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+txt+'</td><td><span class="badge b-green">'+ca+'</span></td><td></td>';tb.appendChild(tr)}if(filtered.length>200){var tr=document.createElement("tr");tr.innerHTML='<td colspan="4" style="text-align:center;color:var(--mut);padding:12px">200 of '+filtered.length+'. Use search.</td>';tb.appendChild(tr)}}
+
+// SETTINGS
 function saveAdminCreds(){var u=document.getElementById("AS_USER").value.trim(),p=document.getElementById("AS_PASS").value.trim(),p2=document.getElementById("AS_PASS2").value.trim();if(!u||!p){toast("Enter both","error");return}if(p!==p2){toast("Differ","error");return}if(p.length<6){toast("Min 6","error");return}AIEP.setAdminCreds(u,p);toast("Saved!","ok");document.getElementById("AS_USER").value="";document.getElementById("AS_PASS").value="";document.getElementById("AS_PASS2").value=""}
 
-// ========== BACKUP ==========
+// BACKUP
 function exportFullBackup(){var data=AIEP.exportAll();data.type="admin_backup";var out=JSON.stringify(data,null,2);document.getElementById("AB_OUT").value=out;var blob=new Blob([out],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="AIEP_Full_Backup.json";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Backup!","ok")}
 function restoreBackup(){var inp=document.createElement("input");inp.type="file";inp.accept=".json";inp.onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){try{var d=JSON.parse(ev.target.result);AIEP.importAll(d);refreshOverview();toast("Restored!","ok")}catch(err){toast("Invalid file","error")}};r.readAsText(f)};inp.click()}
+function exportFacultyQ(){var fq=AIEP.getFacultyQ();var out=JSON.stringify(fq,null,2);document.getElementById("AB_OUT").value=out;var blob=new Blob([out],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="AIEP_Faculty_Questions.json";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Exported!","ok")}
 
-// ========== TABS ==========
+// TABS
 function switchTab(tabId){
-    var tabs=["T_OVERVIEW","T_FACULTY","T_REVIEW","T_USERS","T_VOUCHERS","T_HISTORY","T_SETTINGS","T_BACKUP"];
+    var tabs=["T_OVERVIEW","T_USERS","T_VOUCHERS","T_HISTORY","T_MANAGE","T_SETTINGS","T_BACKUP"];
     for(var i=0;i<tabs.length;i++){var el=document.getElementById(tabs[i]);if(el)el.classList.toggle("hide",tabs[i]!==tabId)}
     var btns=document.querySelectorAll("#ATABS button");for(var j=0;j<btns.length;j++)btns[j].classList.toggle("on",btns[j].getAttribute("data-tab")===tabId);
-    if(tabId==="T_OVERVIEW")refreshOverview();
-    if(tabId==="T_FACULTY")refreshFaculty();
-    if(tabId==="T_REVIEW")refreshReview();
-    if(tabId==="T_USERS")refreshUsers();
-    if(tabId==="T_VOUCHERS")refreshVouchers();
-    if(tabId==="T_HISTORY")refreshHistory();
+    if(tabId==="T_OVERVIEW")refreshOverview();if(tabId==="T_USERS")refreshUsers();if(tabId==="T_VOUCHERS")refreshVouchers();if(tabId==="T_HISTORY")refreshHistory();if(tabId==="T_MANAGE")loadManageQ();
 }
 
-// ========== EVENTS ==========
+
+// SYNC
+function syncToCloud(){
+    var status=document.getElementById("SYNC_STATUS");
+    status.className="info-box info-blue";status.innerHTML='<span class="spinner"></span> Syncing all data to cloud...';status.classList.remove("hide");
+    AIEP.syncAllToCloud(function(result){
+        if(result.ok){
+            var s=result.stats;
+            status.className="info-box info-green";
+            status.innerHTML="&#10003; <strong>Synced to cloud!</strong><br>Users: "+s.users+" | Results: "+s.results+" | Vouchers: "+s.vouchers+" | Questions: "+s.questions+" | Logs: "+s.logs;
+        }else{
+            status.className="info-box info-red";
+            status.innerHTML="&#10007; Sync failed: "+result.msg;
+        }
+    });
+}
+function pullFromCloud(){
+    var status=document.getElementById("SYNC_STATUS");
+    status.className="info-box info-blue";status.innerHTML='<span class="spinner"></span> Pulling data from cloud...';status.classList.remove("hide");
+    AIEP.pullAllFromCloud(function(result){
+        if(result.ok){
+            status.className="info-box info-green";
+            status.innerHTML="&#10003; <strong>Pulled from cloud!</strong><br>Users: "+AIEP.getUsers().length+" | Results: "+AIEP.getResults().length+" | Vouchers: "+Object.keys(AIEP.getVouchers()).length;
+            refreshOverview();
+        }else{
+            status.className="info-box info-red";
+            status.innerHTML="&#10007; Pull failed: "+result.msg;
+        }
+    });
+}
+
+// EVENTS
 function bindEvents(){
     document.getElementById("BTN_ALOGIN").onclick=doALogin;
     document.getElementById("AP").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();doALogin()}});
     document.getElementById("AU").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();document.getElementById("AP").focus()}});
     document.getElementById("BTN_ALOGOUT").onclick=doALogout;
     document.getElementById("ATABS").addEventListener("click",function(e){var btn=e.target.closest("button[data-tab]");if(btn)switchTab(btn.getAttribute("data-tab"))});
-    document.getElementById("BTN_AF_ADD").onclick=addFaculty;
     document.getElementById("BTN_AV_ADD").onclick=addVoucher;
     document.getElementById("BTN_AH_CSV").onclick=exportHistCSV;
+    document.getElementById("BTN_AH_JSON").onclick=exportHistJSON;
+    document.getElementById("BTN_AH_CLEAR").onclick=function(){if(!confirm("Clear all?"))return;AIEP.clearResults();refreshHistory();toast("Cleared","ok")};
     document.getElementById("AH_SEARCH").oninput=refreshHistory;
-    document.getElementById("AR_FILTER").onchange=refreshReview;
-    document.getElementById("AR_CLOSE").onclick=function(){document.getElementById("AR_MODAL").classList.add("hide")};
+    document.getElementById("AM_EXAM").onchange=function(){updatePaperSelect();loadManageQ()};
+    document.getElementById("AM_PAPER").onchange=loadManageQ;
+    document.getElementById("AM_SEARCH").oninput=loadManageQ;
     document.getElementById("BTN_AS_SAVE").onclick=saveAdminCreds;
     document.getElementById("BTN_AB_EXP").onclick=exportFullBackup;
     document.getElementById("BTN_AB_IMP").onclick=restoreBackup;
+    document.getElementById("BTN_AB_FACULTY").onclick=exportFacultyQ;
+    document.getElementById("BTN_SYNC_UP").onclick=syncToCloud;
+    document.getElementById("BTN_SYNC_DOWN").onclick=pullFromCloud;
 }
 
-window.toast=toast;
+// INIT
 window.onload=function(){
     if(localStorage.getItem("x_theme")==="dark")document.body.classList.add("dark");
     AIEP.init(function(ok){updateDBBadge();if(ok)AIEP.subscribe()});
     AIEP.on("connected",function(){updateDBBadge()});
     AIEP.on("data",function(){if(loggedIn)refreshOverview()});
-    bindEvents();
-    console.log("AIEP Admin v12.0");
+    fillExamSelects();bindEvents();
+    console.log("AIEP Admin v11.0");
 };
 })();

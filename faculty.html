@@ -101,10 +101,10 @@ body.dark .drop-zone{background:var(--surf)}
 
 <!-- DASHBOARD TAB -->
 <div id="F_DASH">
-<div class="info-box info-teal">Your questions are saved to localStorage. Export regularly as backup. Questions automatically appear in the student portal.</div>
+<div class="info-box info-teal">Questions are saved to cloud. Admin reviews and approves them. Approved questions appear in the student portal.</div>
 <div class="stats" id="F_STATS"></div>
 <h3>Questions by Exam</h3>
-<table class="tbl"><thead><tr><th>Exam</th><th>Paper</th><th>Questions</th><th>Correct %</th><th></th></tr></thead><tbody id="F_QSTAT"></tbody></table>
+<table class="tbl"><thead><tr><th>Exam</th><th>Paper</th><th>Total</th><th>Pending</th><th>Approved</th><th>Rejected</th></tr></thead><tbody id="F_QSTAT"></tbody></table>
 </div>
 
 <!-- ADD QUESTIONS TAB -->
@@ -219,18 +219,10 @@ body.dark .drop-zone{background:var(--surf)}
 <!-- SETTINGS TAB -->
 <div id="F_SETTINGS" class="hide">
 <h3>Faculty Settings</h3>
-<div class="two-col">
-<div><label>New Username</label><input type="text" id="FS_USER" placeholder="faculty"></div>
-<div><label>New Password</label><input type="password" id="FS_PASS" placeholder="Min 6 chars"></div>
-</div>
+<label>New Password</label><input type="password" id="FS_PASS" placeholder="Min 6 chars">
 <label>Confirm Password</label><input type="password" id="FS_PASS2">
-<button class="btn" id="BTN_FS_SAVE">Save Credentials</button>
-<h3 style="margin-top:24px">Data Management</h3>
-<div style="display:flex;gap:10px;flex-wrap:wrap">
-<button class="btn btn-green" id="BTN_FS_BACKUP">&#128229; Full Backup</button>
-<button class="btn btn-orange" id="BTN_FS_RESTORE">&#128228; Restore Backup</button>
-<button class="btn btn-red" id="BTN_FS_RESET">Reset All Faculty Data</button>
-</div>
+<button class="btn" id="BTN_FS_SAVE">Save Password</button>
+
 </div>
 
 <div class="footer">AIEP Faculty Panel v1.0 &mdash; Questions saved locally. Export as backup. &copy; 2026</div>

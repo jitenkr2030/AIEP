@@ -7,18 +7,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--pri:#1D4ED8;--bg:#F0F2F5;--card:#FFF;--txt:#111827;--mut:#6B7280;--bor:#D1D5DB;--red:#DC2626;--grn:#059669;--pur:#7C3AED;--surf:#F9FAFB;--gold:#D97706;--teal:#0D9488;--indigo:#4F46E5;--shadow:0 2px 16px rgba(0,0,0,.06);--radius:14px;--radius2:10px;--radius3:8px}
+:root{--pri:#1D4ED8;--bg:#F0F2F5;--card:#FFF;--txt:#111827;--mut:#6B7280;--bor:#D1D5DB;--red:#DC2626;--grn:#059669;--pur:#7C3AED;--surf:#F9FAFB;--gold:#D97706;--teal:#0D9488;--shadow:0 2px 16px rgba(0,0,0,.06);--radius:14px;--radius2:10px;--radius3:8px}
 body.dark{--bg:#0B1120;--card:#151E31;--txt:#E8ECF1;--mut:#7B8CA3;--bor:#263045;--surf:#1A2540;--shadow:0 2px 20px rgba(0,0,0,.25)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;line-height:1.6}
-.wrap{max-width:1200px;margin:10px auto;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 26px}
+.wrap{max-width:1100px;margin:10px auto;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 26px}
 .hide{display:none!important}
 h2{font-size:20px;font-weight:800;margin-bottom:4px}
 h3{font-size:16px;font-weight:700;margin-bottom:12px}
 .sub{color:var(--mut);font-size:13px;margin-bottom:16px}
 label{font-size:11px;color:var(--mut);font-weight:700;display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
 input,select,textarea{width:100%;padding:10px 12px;border:1.5px solid var(--bor);border-radius:var(--radius3);font-size:13px;background:var(--surf);color:var(--txt);font-family:inherit;margin-bottom:10px}
-input:focus,select:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(29,78,216,.1)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(29,78,216,.1)}
 textarea{resize:vertical}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--pri);color:#fff;border:none;padding:10px 18px;font-size:13px;font-weight:700;border-radius:var(--radius3);cursor:pointer;font-family:inherit;transition:all .15s;touch-action:manipulation;white-space:nowrap}
 .btn:hover{filter:brightness(1.1)}.btn:active{transform:scale(.97)}
@@ -33,7 +33,7 @@ textarea{resize:vertical}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 @media(max-width:700px){.two-col,.three-col{grid-template-columns:1fr}}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:18px}
 .stat{background:var(--surf);border:1.5px solid var(--bor);border-radius:var(--radius2);padding:14px;text-align:center}
 .stat .num{font-size:24px;font-weight:800;color:var(--pri);font-family:'JetBrains Mono',monospace}
 .stat .lbl{font-size:9px;color:var(--mut);text-transform:uppercase;margin-top:3px;font-weight:700}
@@ -45,122 +45,161 @@ textarea{resize:vertical}
 .tabs{display:flex;gap:2px;margin-bottom:18px;border-bottom:2px solid var(--bor);overflow-x:auto}
 .tabs button{background:none;border:none;padding:10px 14px;cursor:pointer;font-size:11px;font-weight:700;color:var(--mut);border-bottom:2.5px solid transparent;margin-bottom:-2px;white-space:nowrap;font-family:inherit;transition:all .15s;text-transform:uppercase;letter-spacing:.3px}
 .tabs button.on{color:var(--pri);border-bottom-color:var(--pri)}.tabs button:hover{color:var(--pri)}
+.q-preview{border:1.5px solid var(--bor);border-radius:var(--radius2);padding:16px;margin-bottom:10px;background:var(--surf);font-size:13px;line-height:1.7}
+.q-preview .qnum{display:inline-block;background:var(--pri);color:#fff;padding:2px 10px;border-radius:6px;font-size:11px;font-weight:700;margin-right:8px}
+.q-preview .opts{margin-top:8px;display:flex;flex-direction:column;gap:4px}
+.q-preview .opts span{padding:4px 10px;border-radius:6px;font-size:12px;display:block}
+.q-preview .correct-opt{background:rgba(5,150,105,.1);color:var(--grn);font-weight:600}
+.q-preview .wrong-opt{background:var(--surf)}
 .auth-box{max-width:400px;margin:60px auto;text-align:center}
 .auth-box .auth-icon{width:64px;height:64px;background:rgba(29,78,216,.1);border-radius:50%;margin:0 auto 18px;line-height:64px;font-size:28px}
+.footer{text-align:center;padding:16px;font-size:11px;color:var(--mut);border-top:1px solid var(--bor);margin-top:16px}
 .del-btn{background:none;border:none;color:var(--red);cursor:pointer;font-size:11px;font-weight:700;padding:4px 8px;border-radius:4px}.del-btn:hover{background:rgba(220,38,38,.08)}
+.edit-btn{background:none;border:none;color:var(--pri);cursor:pointer;font-size:11px;font-weight:700;padding:4px 8px;border-radius:4px}.edit-btn:hover{background:rgba(29,78,216,.08)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:fadeUp .4s ease forwards}
+@keyframes spin{to{transform:rotate(360deg)}}.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--bor);border-top-color:var(--pri);border-radius:50%;animation:spin .6s linear infinite}
 .db-status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px}
 .db-online{background:rgba(5,150,105,.1);color:var(--grn)}.db-offline{background:rgba(220,38,38,.1);color:var(--red)}
-.footer{text-align:center;padding:16px;font-size:11px;color:var(--mut);border-top:1px solid var(--bor);margin-top:16px}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:fadeUp .4s ease forwards}
-body.dark .stat{background:var(--surf)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-box{background:var(--card);border-radius:var(--radius);padding:24px;max-width:900px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+body.dark .stat,body.dark .q-preview{background:var(--surf)}
 </style>
 </head>
 <body>
 
 <!-- ADMIN LOGIN -->
 <div class="wrap" id="V_ALOGIN">
-<div class="topbar"><a href="index.html" style="font-size:11px;color:var(--pri);font-weight:700;text-decoration:none;margin-right:auto;padding:6px">&#8592; Student Portal</a><a href="faculty.html" style="font-size:11px;color:var(--pri);font-weight:700;text-decoration:none;padding:6px">Faculty Panel</a><button onclick="document.body.classList.toggle('dark')">&#9790; Theme</button></div>
+<div class="topbar"><a href="index.html" style="font-size:11px;color:var(--pri);font-weight:700;text-decoration:none;margin-right:auto;padding:6px">&#8592; Student Portal</a><button onclick="document.body.classList.toggle('dark')">&#9790; Theme</button></div>
 <div class="auth-box">
-<div class="auth-icon">&#128274;</div>
+<div class="auth-icon">&#128081;</div>
 <h2>Admin Panel</h2>
-<p class="sub">Manage exams, users, vouchers &amp; results</p>
+<p class="sub">Manage exams, faculty, and platform</p>
 <label style="text-align:left">Username</label><input type="text" id="AU" autocomplete="off" placeholder="admin">
 <label style="text-align:left">Password</label><input type="password" id="AP" autocomplete="off" placeholder="password">
 <div class="hide" id="AERR" style="color:var(--red);font-size:12px;font-weight:700;padding:10px;background:rgba(220,38,38,.07);border-radius:6px;margin-bottom:10px"></div>
-<button class="btn btn-full" id="BTN_ALOGIN">&#128274; Login</button>
+<button class="btn btn-full" id="BTN_ALOGIN">&#128081; Login</button>
 <p style="font-size:11px;color:var(--mut);margin-top:14px">Default: admin / admin@2026</p>
 </div>
 </div>
 
 <!-- ADMIN DASHBOARD -->
 <div class="wrap hide" id="V_ADASH">
-<div class="topbar"><a href="index.html" style="font-size:11px;color:var(--pri);font-weight:700;text-decoration:none">Student Portal</a><a href="faculty.html" style="font-size:11px;color:var(--pri);font-weight:700;text-decoration:none">Faculty</a><span id="DB_STAT" class="db-status db-offline" style="margin-right:auto">Local</span><span style="font-size:11px;color:var(--mut);padding:6px">Admin: <strong id="ANAM"></strong></span><button id="BTN_ALOGOUT">Logout</button><button onclick="document.body.classList.toggle('dark')">&#9790; Theme</button></div>
-<h2>&#128202; Admin Dashboard</h2>
+<div class="topbar"><a href="index.html" style="font-size:11px;color:var(--pri);font-weight:700;text-decoration:none">Student Portal</a><a href="faculty.html" style="font-size:11px;color:var(--teal);font-weight:700;text-decoration:none">Faculty Panel</a><span id="DB_STAT" class="db-status db-offline" style="margin-right:auto">Local</span><span style="font-size:11px;color:var(--mut);padding:6px">Admin: <strong id="ANAM"></strong></span><button id="BTN_ALOGOUT">Logout</button><button onclick="document.body.classList.toggle('dark')">&#9790; Theme</button></div>
+<h2>&#128081; Admin Dashboard</h2>
 <div class="tabs" id="ATABS">
 <button class="on" data-tab="T_OVERVIEW">Overview</button>
+<button data-tab="T_FACULTY">Faculty</button>
+<button data-tab="T_REVIEW">Review Qs</button>
 <button data-tab="T_USERS">Users</button>
 <button data-tab="T_VOUCHERS">Vouchers</button>
-<button data-tab="T_HISTORY">Results</button>
-<button data-tab="T_MANAGE">Questions</button>
+<button data-tab="T_HISTORY">History</button>
 <button data-tab="T_SETTINGS">Settings</button>
 <button data-tab="T_BACKUP">Backup</button>
 </div>
 
 <!-- OVERVIEW -->
 <div id="T_OVERVIEW">
+<div class="info-box info-teal">All data synced to cloud. Faculty questions require admin approval before appearing in student portal.</div>
 <div class="stats" id="ASTATS"></div>
-<h3>Exams by Category</h3>
-<table class="tbl"><thead><tr><th>Category</th><th>Exams</th><th>Papers</th><th>Questions</th></tr></thead><tbody id="ACATTB"></tbody></table>
+<h3>By Category</h3>
+<table class="tbl"><thead><tr><th>Category</th><th>Exams</th><th>Papers</th><th>MCQs</th></tr></thead><tbody id="ACATTB"></tbody></table>
+</div>
+
+<!-- FACULTY MANAGEMENT -->
+<div id="T_FACULTY" class="hide">
+<h3>Faculty Accounts <span id="F_COUNT" style="color:var(--mut);font-weight:400"></span></h3>
+<div class="info-box info-blue">Create faculty accounts. Share username/password with faculty. They login at faculty.html.</div>
+<table class="tbl"><thead><tr><th>#</th><th>Name</th><th>Username</th><th>Subjects</th><th>Status</th><th></th></tr></thead><tbody id="AFTB"></tbody></table>
+<h3 style="margin-top:24px">Create / Update Faculty Account</h3>
+<div class="three-col">
+<div><label>Name</label><input type="text" id="AF_NAME" placeholder="Dr. Sharma"></div>
+<div><label>Username</label><input type="text" id="AF_USER" placeholder="sharma_acc"></div>
+<div><label>Password</label><input type="password" id="AF_PASS" placeholder="Min 6 chars"></div>
+</div>
+<div class="two-col">
+<div><label>Subjects (optional)</label><input type="text" id="AF_SUBJ" placeholder="Accounts, Costing"></div>
+<div><label>Phone (optional)</label><input type="text" id="AF_PHONE" placeholder="+91..."></div>
+</div>
+<button class="btn btn-green" id="BTN_AF_ADD">&#10003; Create / Update Faculty</button>
+</div>
+
+<!-- REVIEW QUESTIONS -->
+<div id="T_REVIEW" class="hide">
+<h3>Faculty Questions Review</h3>
+<div class="info-box info-blue">Review, approve, or reject questions submitted by faculty. Approved questions appear in student portal.</div>
+<div class="stats" id="R_STATS"></div>
+<div style="display:flex;gap:10px;align-items:center;margin-bottom:14px">
+<label style="margin:0;white-space:nowrap">Filter:</label>
+<select id="AR_FILTER" style="width:auto;margin:0"><option value="all">All</option><option value="pending">Pending Only</option><option value="approved">Approved Only</option><option value="rejected">Rejected Only</option></select>
+</div>
+<table class="tbl"><thead><tr><th>Exam</th><th>Paper</th><th>Total</th><th>Pending</th><th>Approved</th><th>Rejected</th><th></th></tr></thead><tbody id="ARTB"></tbody></table>
+</div>
+
+<!-- REVIEW DETAIL MODAL -->
+<div class="modal-overlay hide" id="AR_MODAL">
+<div class="modal-box">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+<h3 id="AR_PTITLE" style="margin:0"></h3>
+<button class="btn btn-gray btn-sm" id="AR_CLOSE">&#10005; Close</button>
+</div>
+<div id="AR_DETAIL"></div>
+</div>
 </div>
 
 <!-- USERS -->
 <div id="T_USERS" class="hide">
-<h3>Registered Users <span id="U_COUNT" style="font-size:12px;color:var(--mut);font-weight:400"></span></h3>
-<div class="info-box info-blue">Users are created when students sign up or start an exam.</div>
-<div style="max-height:500px;overflow-y:auto">
+<h3>Registered Users <span id="U_COUNT" style="color:var(--mut);font-weight:400"></span></h3>
 <table class="tbl"><thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Roll</th><th>Tier</th><th>Joined</th></tr></thead><tbody id="AUSTB"></tbody></table>
-</div>
 </div>
 
 <!-- VOUCHERS -->
 <div id="T_VOUCHERS" class="hide">
 <h3>Voucher Codes</h3>
-<div class="three-col"><div><label>Code</label><input type="text" id="AV_CODE" placeholder="SUMMER2026"></div><div><label>Description</label><input type="text" id="AV_DESC" placeholder="Summer promo"></div><div><label>Max Uses</label><input type="text" id="AV_MAX" placeholder="100"></div></div>
-<div class="two-col" style="margin-bottom:14px"><div><label>Tier</label><select id="AV_TIER"><option value="starter">Starter</option><option value="professional">Professional</option><option value="ultimate">Ultimate</option></select></div><div style="display:flex;align-items:flex-end"><button class="btn btn-green" id="BTN_AV_ADD" style="width:100%;margin-bottom:10px">&#10003; Create Voucher</button></div></div>
+<div class="info-box info-blue">Vouchers give users access tiers. Share codes with students.</div>
 <table class="tbl"><thead><tr><th>Code</th><th>Description</th><th>Tier</th><th>Used</th><th>Max</th><th></th></tr></thead><tbody id="AVTB"></tbody></table>
+<h3 style="margin-top:24px">Create Voucher</h3>
+<div class="three-col">
+<div><label>Code</label><input type="text" id="AV_CODE" placeholder="STUDENT2026"></div>
+<div><label>Description</label><input type="text" id="AV_DESC" placeholder="Student promo"></div>
+<div><label>Max Uses</label><input type="number" id="AV_MAX" placeholder="100"></div>
+</div>
+<label>Tier</label><select id="AV_TIER"><option value="starter">Starter</option><option value="professional">Professional</option><option value="ultimate">Ultimate</option></select>
+<button class="btn btn-green" id="BTN_AV_ADD">&#10003; Create Voucher</button>
 </div>
 
-<!-- HISTORY / RESULTS -->
+<!-- HISTORY -->
 <div id="T_HISTORY" class="hide">
-<h3>Exam Results <span id="H_COUNT" style="font-size:12px;color:var(--mut);font-weight:400"></span></h3>
-<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
-<button class="btn btn-green btn-sm" id="BTN_AH_CSV">&#128229; Export CSV</button>
-<button class="btn btn-teal btn-sm" id="BTN_AH_JSON">&#128229; Export JSON</button>
-<button class="btn btn-red btn-sm" id="BTN_AH_CLEAR">Clear All</button>
-<input type="text" id="AH_SEARCH" placeholder="Search by name, email, exam..." style="flex:1;margin-bottom:0;min-width:180px">
+<h3>Exam Results <span id="H_COUNT" style="color:var(--mut);font-weight:400"></span></h3>
+<div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+<input type="text" id="AH_SEARCH" placeholder="Search name, email, exam..." style="flex:1;min-width:200px;margin:0">
+<button class="btn btn-green btn-sm" id="BTN_AH_CSV">Export CSV</button>
 </div>
-<div style="max-height:500px;overflow-y:auto">
 <table class="tbl"><thead><tr><th>#</th><th>Date</th><th>Name</th><th>Email</th><th>Exam</th><th>Paper</th><th>Score</th><th>%</th></tr></thead><tbody id="AHTB"></tbody></table>
-</div>
-</div>
-
-<!-- MANAGE QUESTIONS -->
-<div id="T_MANAGE" class="hide">
-<h3>Question Browser</h3>
-<div class="info-box info-teal">Browse auto-generated and faculty-added questions. Faculty questions are editable in the Faculty Panel.</div>
-<div class="three-col"><div><label>Exam</label><select id="AM_EXAM"></select></div><div><label>Paper</label><select id="AM_PAPER"></select></div><div><label>Search</label><input type="text" id="AM_SEARCH" placeholder="Filter..."></div></div>
-<div class="stats" id="AM_STATS"></div>
-<div style="max-height:500px;overflow-y:auto">
-<table class="tbl"><thead><tr><th>#</th><th style="width:50%">Question</th><th>Answer</th><th></th></tr></thead><tbody id="AMTB"></tbody></table>
-</div>
 </div>
 
 <!-- SETTINGS -->
 <div id="T_SETTINGS" class="hide">
 <h3>Admin Settings</h3>
-<div class="two-col"><div><label>New Username</label><input type="text" id="AS_USER" placeholder="admin"></div><div><label>New Password</label><input type="password" id="AS_PASS" placeholder="Min 6 chars"></div></div>
+<div class="two-col">
+<div><label>New Username</label><input type="text" id="AS_USER" placeholder="admin"></div>
+<div><label>New Password</label><input type="password" id="AS_PASS" placeholder="Min 6 chars"></div>
+</div>
 <label>Confirm Password</label><input type="password" id="AS_PASS2">
 <button class="btn" id="BTN_AS_SAVE">Save Credentials</button>
-<h3 style="margin-top:24px">Portal Info</h3>
-<div class="info-box info-green">Total Exams: <strong id="SI_EXAMS"></strong> | Papers: <strong id="SI_PAPERS"></strong> | MCQs: <strong id="SI_MCQS"></strong></div>
 </div>
 
 <!-- BACKUP -->
 <div id="T_BACKUP" class="hide">
-<h3>Data Backup &amp; Restore</h3>
-<div class="info-box info-green">Export all data as JSON for safekeeping. Restore from a backup file anytime.</div>
-<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
-<button class="btn btn-green" id="BTN_AB_EXP">&#128229; Export Full Backup</button>
-<button class="btn btn-purple" id="BTN_SYNC_UP" style="background:#7C3AED">&#11014; Sync All to Cloud</button>
-<button class="btn btn-teal" id="BTN_SYNC_DOWN">&#11015; Pull from Cloud</button>
+<h3>Backup &amp; Restore</h3>
+<div class="info-box info-green">Download full backup including users, results, vouchers, faculty questions, and faculty accounts.</div>
+<div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+<button class="btn btn-green" id="BTN_AB_EXP">&#128229; Full Backup</button>
 <button class="btn btn-orange" id="BTN_AB_IMP">&#128228; Restore Backup</button>
-<button class="btn btn-purple" id="BTN_AB_FACULTY">&#128229; Export Faculty Questions</button>
 </div>
-<div id="SYNC_STATUS" class="hide" style="margin-bottom:12px"></div>
-<label>Export Preview</label><textarea id="AB_OUT" rows="10" readonly placeholder="Export data appears here..."></textarea>
+<label>Backup Preview</label><textarea id="AB_OUT" rows="12" readonly placeholder="Backup data appears here..."></textarea>
 </div>
 
-<div class="footer">AIEP Admin Panel v1.0 &copy; 2026</div>
+<div class="footer">AIEP Admin Panel v12.0 &mdash; Cloud synced. &copy; 2026</div>
 </div>
 
 <script src="db.js"></script>
