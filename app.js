@@ -89,7 +89,7 @@ function updateAuthUI(){
     var status=document.getElementById("AUTH_STATUS");
     if(loggedInUser&&loggedInUser.email){
         var nm=loggedInUser.name||loggedInUser.email.split("@")[0];
-        btn.textContent=nm;btn.style.background="var(--grn)";btn.style.color="#fff";btn.style.borderColor="var(--grn)";btn.onclick=doLogout;
+        btn.textContent=nm;btn.style.background="var(--grn)";btn.style.color="#fff";btn.style.borderColor="var(--grn)";btn.onclick=function(){showV("V_PROFILE");showProfile()};
         if(status){status.innerHTML='<div class="info-box info-green">&#10003; Logged in as <strong>'+loggedInUser.email+'</strong> | '+getTierBadge(loggedInUser.tier||"free")+' | <span id="DO_LOGOUT" style="cursor:pointer;text-decoration:underline;color:var(--pri)">Logout</span></div>';status.classList.remove("hide");setTimeout(function(){var lo=document.getElementById("DO_LOGOUT");if(lo)lo.onclick=doLogout},50)}
         if(loggedInUser.name)document.getElementById("F_NAME").value=loggedInUser.name;
         if(loggedInUser.email)document.getElementById("F_EMAIL").value=loggedInUser.email;
@@ -249,7 +249,7 @@ document.addEventListener("visibilitychange",function(){if(document.hidden&&!doc
 function bindEvents(){
 document.getElementById("NAV_HOME").onclick=goHome;
 document.getElementById("NAV_PRICING").onclick=showPricing;
-document.getElementById("NAV_AUTH_BTN").onclick=function(){if(loggedInUser)doLogout();else showV("V_AUTH")};
+document.getElementById("NAV_AUTH_BTN").onclick=function(){if(loggedInUser){showV("V_PROFILE");showProfile();}else showV("V_AUTH");};
 document.getElementById("NAV_THEME").onclick=togTheme;
 document.getElementById("TAB_LOGIN").onclick=function(){authMode="login";document.getElementById("AUTH_TITLE").textContent="Login to Your Account";document.getElementById("AUTH_NAME_WRAP").classList.add("hide");document.getElementById("BTN_AUTH_SUBMIT").innerHTML="&#128274; Login";document.getElementById("TAB_LOGIN").className="btn btn-sm btn-outline";document.getElementById("TAB_SIGNUP").className="btn btn-sm btn-gray";document.getElementById("AUTH_ERR").classList.add("hide")};
 document.getElementById("TAB_SIGNUP").onclick=function(){authMode="signup";document.getElementById("AUTH_TITLE").textContent="Create Account";document.getElementById("AUTH_NAME_WRAP").classList.remove("hide");document.getElementById("BTN_AUTH_SUBMIT").innerHTML="&#10003; Create Account";document.getElementById("TAB_SIGNUP").className="btn btn-sm btn-outline";document.getElementById("TAB_LOGIN").className="btn btn-sm btn-gray";document.getElementById("AUTH_ERR").classList.add("hide")};
