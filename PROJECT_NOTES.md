@@ -1,4 +1,4 @@
-# AIEP Project Notes
+# IndiExam99 Project Notes
 
 ## Tech Stack
 - Client-side JavaScript (localStorage + cloud sync)

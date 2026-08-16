@@ -138,7 +138,7 @@ function importBulkQ(){
 }
 function downloadTemplate(){
     var template=[{question:"Which describes Revenue Recognition under Ind AS 115?",options:{A:"When cash received",B:"When performance obligation satisfied",C:"Cash basis only",D:"Never before delivery"},answer:"B",topic:"Revenue Recognition",difficulty:"medium",explanation:"Ind AS 115: 5-step model."},{question:"Minimum paid-up capital for public company?",options:{A:"Rs 1 lakh",B:"Rs 5 lakh",C:"Rs 10 lakh",D:"Rs 50 lakh"},answer:"B",topic:"Companies Act",difficulty:"easy",explanation:"Section 4(1)."}];
-    var blob=new Blob([JSON.stringify(template,null,2)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="AIEP_Question_Template.json";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Template downloaded!","ok");
+    var blob=new Blob([JSON.stringify(template,null,2)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="IndiExam99_Question_Template.json";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Template downloaded!","ok");
 }
 function setupDropZone(){
     var zone=document.getElementById("DROP_ZONE");if(!zone)return;
@@ -191,8 +191,8 @@ function loadPreview(){
 }
 
 // EXPORT
-function exportJSON(){if(!currentFaculty)return;var ek=document.getElementById("FE_EXAM").value,pk=document.getElementById("FE_PAPER").value,qs=getQsForPaper(ek,pk);if(!qs.length){toast("No questions","error");return}var out=JSON.stringify(qs,null,2);document.getElementById("FE_OUT").value=out;var blob=new Blob([out],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="AIEP_"+currentFaculty.username+"_"+ek+"_"+pk+".json";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("JSON exported!","ok")}
-function exportCSV(){if(!currentFaculty)return;var ek=document.getElementById("FE_EXAM").value,pk=document.getElementById("FE_PAPER").value,qs=getQsForPaper(ek,pk);if(!qs.length){toast("No questions","error");return}var csv="No,Question,A,B,C,D,Answer,Topic,Difficulty,Status\n";for(var i=0;i<qs.length;i++){var q=qs[i];csv+=(i+1)+',"'+q.q.replace(/"/g,'""')+'","'+(q.opts.A||"").replace(/"/g,'""')+'","'+(q.opts.B||"").replace(/"/g,'""')+'","'+(q.opts.C||"").replace(/"/g,'""')+'","'+(q.opts.D||"").replace(/"/g,'""')+'",'+q.ans+',"'+(q.topic||"")+'",'+(q.diff||"medium")+","+(q.status||"pending")+"\n"}var a=document.createElement("a");a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);a.download="AIEP_"+currentFaculty.username+"_"+ek+"_"+pk+".csv";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("CSV exported!","ok")}
+function exportJSON(){if(!currentFaculty)return;var ek=document.getElementById("FE_EXAM").value,pk=document.getElementById("FE_PAPER").value,qs=getQsForPaper(ek,pk);if(!qs.length){toast("No questions","error");return}var out=JSON.stringify(qs,null,2);document.getElementById("FE_OUT").value=out;var blob=new Blob([out],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="IndiExam99_"+currentFaculty.username+"_"+ek+"_"+pk+".json";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("JSON exported!","ok")}
+function exportCSV(){if(!currentFaculty)return;var ek=document.getElementById("FE_EXAM").value,pk=document.getElementById("FE_PAPER").value,qs=getQsForPaper(ek,pk);if(!qs.length){toast("No questions","error");return}var csv="No,Question,A,B,C,D,Answer,Topic,Difficulty,Status\n";for(var i=0;i<qs.length;i++){var q=qs[i];csv+=(i+1)+',"'+q.q.replace(/"/g,'""')+'","'+(q.opts.A||"").replace(/"/g,'""')+'","'+(q.opts.B||"").replace(/"/g,'""')+'","'+(q.opts.C||"").replace(/"/g,'""')+'","'+(q.opts.D||"").replace(/"/g,'""')+'",'+q.ans+',"'+(q.topic||"")+'",'+(q.diff||"medium")+","+(q.status||"pending")+"\n"}var a=document.createElement("a");a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);a.download="IndiExam99_"+currentFaculty.username+"_"+ek+"_"+pk+".csv";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("CSV exported!","ok")}
 
 // SETTINGS
 function saveFacultyCreds(){
@@ -246,6 +246,6 @@ window.onload=function(){
         document.getElementById("DB_STAT").className="db-status "+(ok?"db-online":"db-offline");
     });
     fillExamSelects();bindEvents();setupDropZone();
-    console.log("AIEP Faculty v12.0");
+    console.log("IndiExam99 Faculty v12.0");
 };
 })();

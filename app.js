@@ -235,7 +235,7 @@ showV("V_RESULT");document.getElementById("RN").textContent=sName;document.getEl
 
 function buildSols(){var tb=document.getElementById("STB");tb.innerHTML="";for(var i=0;i<bank.qs.length;i++){var q=bank.qs[i],ua=ans[q.id]||"Skipped",ca=dec(q.a),ok=(ua===ca);var tr=document.createElement("tr");tr.innerHTML="<td>"+(i+1)+"</td><td style='max-width:400px'>"+dec(q.t)+"</td><td class='"+(ok?"sol-correct":"sol-wrong")+"'>"+ua+"</td><td class='sol-correct'>"+ca+"</td>";tb.appendChild(tr)}}
 
-function dlCert(){if(sPct<40){toast("Need 40%+","error");return}var cv=document.getElementById("CCV"),ctx=cv.getContext("2d"),W=1056,H=816;cv.width=W;cv.height=H;ctx.fillStyle="#FFFDF7";ctx.fillRect(0,0,W,H);ctx.strokeStyle="#1D4ED8";ctx.lineWidth=6;ctx.strokeRect(15,15,W-30,H-30);ctx.strokeStyle="#3B82F6";ctx.lineWidth=2;ctx.strokeRect(25,25,W-50,H-50);ctx.textAlign="center";ctx.fillStyle="#1D4ED8";ctx.font="bold 13px sans-serif";ctx.fillText("ALL INDIA EXAMINATION AUTHORITY",W/2,68);ctx.fillStyle="#111827";ctx.font="bold 30px sans-serif";ctx.fillText("CERTIFICATE OF ACHIEVEMENT",W/2,140);ctx.fillStyle="#6B7280";ctx.font="italic 15px sans-serif";ctx.fillText("This is to certify that",W/2,210);ctx.fillStyle="#1D4ED8";ctx.font="bold 38px sans-serif";ctx.fillText(sName.toUpperCase(),W/2,280);ctx.fillStyle="#374151";ctx.font="15px sans-serif";ctx.fillText("has successfully completed",W/2,340);ctx.fillStyle="#1D4ED8";ctx.font="bold 20px sans-serif";ctx.fillText(catName,W/2,380);ctx.font="bold 16px sans-serif";ctx.fillText(paperTitle,W/2,410);ctx.fillStyle="#F0F7FF";ctx.fillRect(W/2-140,435,280,80);ctx.strokeStyle="#1D4ED8";ctx.lineWidth=2;ctx.strokeRect(W/2-140,435,280,80);ctx.fillStyle="#1D4ED8";ctx.font="bold 13px sans-serif";ctx.fillText("SCORE",W/2,460);ctx.font="bold 26px monospace";ctx.fillText(sScore+"/"+sTotal+" ("+sPct+"%)",W/2,498);var grade=sPct>=80?"DISTINCTION":sPct>=60?"FIRST CLASS":sPct>=40?"PASS":"NEEDS IMPROVEMENT";ctx.fillStyle=sPct>=80?"#059669":sPct>=60?"#1D4ED8":sPct>=40?"#D97706":"#DC2626";ctx.font="bold 18px sans-serif";ctx.fillText("Grade: "+grade,W/2,555);ctx.fillStyle="#6B7280";ctx.font="12px sans-serif";ctx.fillText("Roll: "+sRoll+" | Date: "+new Date().toLocaleDateString("en-IN"),W/2,595);cv.classList.remove("hide");var a=document.createElement("a");a.download="Certificate_"+sRoll+".png";a.href=cv.toDataURL("image/png");document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Certificate!","ok")}
+function dlCert(){if(sPct<40){toast("Need 40%+","error");return}var cv=document.getElementById("CCV"),ctx=cv.getContext("2d"),W=1056,H=816;cv.width=W;cv.height=H;ctx.fillStyle="#FFFDF7";ctx.fillRect(0,0,W,H);ctx.strokeStyle="#1D4ED8";ctx.lineWidth=6;ctx.strokeRect(15,15,W-30,H-30);ctx.strokeStyle="#3B82F6";ctx.lineWidth=2;ctx.strokeRect(25,25,W-50,H-50);ctx.textAlign="center";ctx.fillStyle="#1D4ED8";ctx.font="bold 13px sans-serif";ctx.fillText("IndiExam99",W/2,68);ctx.fillStyle="#111827";ctx.font="bold 30px sans-serif";ctx.fillText("CERTIFICATE OF ACHIEVEMENT",W/2,140);ctx.fillStyle="#6B7280";ctx.font="italic 15px sans-serif";ctx.fillText("This is to certify that",W/2,210);ctx.fillStyle="#1D4ED8";ctx.font="bold 38px sans-serif";ctx.fillText(sName.toUpperCase(),W/2,280);ctx.fillStyle="#374151";ctx.font="15px sans-serif";ctx.fillText("has successfully completed",W/2,340);ctx.fillStyle="#1D4ED8";ctx.font="bold 20px sans-serif";ctx.fillText(catName,W/2,380);ctx.font="bold 16px sans-serif";ctx.fillText(paperTitle,W/2,410);ctx.fillStyle="#F0F7FF";ctx.fillRect(W/2-140,435,280,80);ctx.strokeStyle="#1D4ED8";ctx.lineWidth=2;ctx.strokeRect(W/2-140,435,280,80);ctx.fillStyle="#1D4ED8";ctx.font="bold 13px sans-serif";ctx.fillText("SCORE",W/2,460);ctx.font="bold 26px monospace";ctx.fillText(sScore+"/"+sTotal+" ("+sPct+"%)",W/2,498);var grade=sPct>=80?"DISTINCTION":sPct>=60?"FIRST CLASS":sPct>=40?"PASS":"NEEDS IMPROVEMENT";ctx.fillStyle=sPct>=80?"#059669":sPct>=60?"#1D4ED8":sPct>=40?"#D97706":"#DC2626";ctx.font="bold 18px sans-serif";ctx.fillText("Grade: "+grade,W/2,555);ctx.fillStyle="#6B7280";ctx.font="12px sans-serif";ctx.fillText("Roll: "+sRoll+" | Date: "+new Date().toLocaleDateString("en-IN"),W/2,595);cv.classList.remove("hide");var a=document.createElement("a");a.download="Certificate_"+sRoll+".png";a.href=cv.toDataURL("image/png");document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Certificate!","ok")}
 
 function dlCSV(){var csv="Q.No,Question,Your Answer,Correct,Status\n";for(var i=0;i<bank.qs.length;i++){var ua=ans[bank.qs[i].id]||"Skipped",ca=dec(bank.qs[i].a);csv+=(i+1)+',"'+dec(bank.qs[i].t).replace(/"/g,'""')+'",'+ua+","+ca+","+(ua===ca?"Correct":"Incorrect")+"\n"}var a=document.createElement("a");a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);a.download="Results_"+sRoll+".csv";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("CSV","ok")}
 
@@ -309,7 +309,7 @@ document.getElementById("EXGRD").addEventListener("click",function(e){var card=e
         }
         var a=document.createElement("a");
         a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);
-        a.download="AIEP_My_Results.csv";
+        a.download="IndiExam99_My_Results.csv";
         document.body.appendChild(a);a.click();document.body.removeChild(a);
         toast("Exported!","ok");
     };
@@ -362,7 +362,7 @@ function injectAllFacultyQ(){
         }
         if(newQs.length > 0){
             EX[examKey].papers[paperKey].qs = newQs;
-            console.log("AIEP: Injected " + newQs.length + " Qs into " + examKey + "." + paperKey);
+            console.log("IndiExam99: Injected " + newQs.length + " Qs into " + examKey + "." + paperKey);
         }
     }
 }
@@ -390,6 +390,6 @@ window.onload = function(){
         }
     });
 
-    console.log("AIEP Student v11.0: "+Object.keys(EX).length+" exams");
+    console.log("IndiExam99 Student v12.0: "+Object.keys(EX).length+" exams");
 };
 })();

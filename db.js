@@ -55,10 +55,10 @@ window.AIEP = {
     _uid:uid, _local:localGet, _localSet:localSet,
 
     init:function(onReady){
-        console.log("AIEP: Init");
+        console.log("IndiExam99: Init");
         apiCall("query",{portalusers:{}},function(data){
-            if(data&&!data.error){dbReady=true;console.log("AIEP: Server connected");notify("connected",true);if(onReady)onReady(true)}
-            else{console.warn("AIEP: Server error");if(onReady)onReady(false)}
+            if(data&&!data.error){dbReady=true;console.log("IndiExam99: Server connected");notify("connected",true);if(onReady)onReady(true)}
+            else{console.warn("IndiExam99: Server error");if(onReady)onReady(false)}
         });
     },
     on:function(event,cb){listeners.push({event:event,cb:cb})},

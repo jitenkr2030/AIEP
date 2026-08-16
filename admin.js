@@ -175,13 +175,13 @@ function refreshHistory(){
     if(sch)sorted=sorted.filter(function(h){return(h.name||"").toLowerCase().indexOf(sch)!==-1||(h.email||"").toLowerCase().indexOf(sch)!==-1||(h.exam||"").toLowerCase().indexOf(sch)!==-1});
     for(var i=0;i<Math.min(sorted.length,300);i++){var h=sorted[i],tr=document.createElement("tr");tr.innerHTML='<td>'+(i+1)+'</td><td style="font-size:10px">'+h.date+'</td><td>'+h.name+'</td><td style="font-size:10px">'+(h.email||'-')+'</td><td>'+h.exam+'</td><td style="font-size:10px">'+h.paper+'</td><td style="font-family:monospace">'+h.score+'/'+h.total+'</td><td><span class="badge '+(h.pct>=50?"b-green":"b-red")+'">'+h.pct+'%</span></td>';tb.appendChild(tr)}
 }
-function exportHistCSV(){var h=AIEP.getResults();if(!h.length){toast("Empty","error");return}var csv="Date,Name,Roll,Email,Exam,Paper,Score,Total,Percentage\n";for(var i=0;i<h.length;i++){csv+='"'+h[i].date+'","'+h[i].name+'","'+(h[i].roll||"")+'","'+(h[i].email||"")+'","'+h[i].exam+'","'+h[i].paper+'",'+h[i].score+','+h[i].total+','+h[i].pct+'\n'}var a=document.createElement("a");a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);a.download="AIEP_Results.csv";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("CSV!","ok")}
+function exportHistCSV(){var h=AIEP.getResults();if(!h.length){toast("Empty","error");return}var csv="Date,Name,Roll,Email,Exam,Paper,Score,Total,Percentage\n";for(var i=0;i<h.length;i++){csv+='"'+h[i].date+'","'+h[i].name+'","'+(h[i].roll||"")+'","'+(h[i].email||"")+'","'+h[i].exam+'","'+h[i].paper+'",'+h[i].score+','+h[i].total+','+h[i].pct+'\n'}var a=document.createElement("a");a.href=encodeURI("data:text/csv;charset=utf-8,"+csv);a.download="IndiExam99_Results.csv";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("CSV!","ok")}
 
 // ========== SETTINGS ==========
 function saveAdminCreds(){var u=document.getElementById("AS_USER").value.trim(),p=document.getElementById("AS_PASS").value.trim(),p2=document.getElementById("AS_PASS2").value.trim();if(!u||!p){toast("Enter both","error");return}if(p!==p2){toast("Differ","error");return}if(p.length<6){toast("Min 6","error");return}AIEP.setAdminCreds(u,p);toast("Saved!","ok");document.getElementById("AS_USER").value="";document.getElementById("AS_PASS").value="";document.getElementById("AS_PASS2").value=""}
 
 // ========== BACKUP ==========
-function exportFullBackup(){var data=AIEP.exportAll();data.type="admin_backup";var out=JSON.stringify(data,null,2);document.getElementById("AB_OUT").value=out;var blob=new Blob([out],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="AIEP_Full_Backup.json";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Backup!","ok")}
+function exportFullBackup(){var data=AIEP.exportAll();data.type="admin_backup";var out=JSON.stringify(data,null,2);document.getElementById("AB_OUT").value=out;var blob=new Blob([out],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="IndiExam99_Full_Backup.json";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("Backup!","ok")}
 function restoreBackup(){var inp=document.createElement("input");inp.type="file";inp.accept=".json";inp.onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){try{var d=JSON.parse(ev.target.result);AIEP.importAll(d);refreshOverview();toast("Restored!","ok")}catch(err){toast("Invalid file","error")}};r.readAsText(f)};inp.click()}
 
 // ========== TABS ==========
@@ -223,6 +223,6 @@ window.onload=function(){
     AIEP.on("connected",function(){updateDBBadge()});
     AIEP.on("data",function(){if(loggedIn)refreshOverview()});
     bindEvents();
-    console.log("AIEP Admin v12.0");
+    console.log("IndiExam99 Admin v12.0");
 };
 })();
