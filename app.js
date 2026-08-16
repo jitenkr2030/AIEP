@@ -44,10 +44,10 @@ function doSignup(){
             err.textContent="Already registered. Try login.";err.classList.remove("hide");return;
         }
     }
-    var nu={id:AIEP._uid(),name:name,email:email,pass:pass,phone:"",roll:"",tier:"free"};
+    var nu={id:AIEP._uid(),name:AIEP_SEC.sanitize(name),email:AIEP_SEC.sanitize(email),pass:AIEP_SEC.sha256(pass),phone:"",roll:"",tier:"free"};
     AIEP.saveUser(nu);
     loggedInUser={name:name,email:email,tier:"free"};
-    AIEP.setCurrentUser(loggedInUser);
+    AIEP.setCurrentUser(loggedInUser);AIEP_SEC.clearAttempts(email);AIEP_SEC.startSession();AIEP_SEC.secLog("login",email);
     AIEP.log("Signup: "+name+" ("+email+")");
     toast("Welcome, "+name+"!","ok");
     goHome();
@@ -69,7 +69,7 @@ function doLogin(){
             goHome();return;
         }
     }
-    err.textContent="Invalid. Click Sign Up if new.";err.classList.remove("hide");
+    AIEP_SEC.recordAttempt(email);err.textContent="Invalid. Click Sign Up if new.";err.classList.remove("hide");
 }
 
 function doLogout(){
@@ -217,7 +217,7 @@ function doStartExam(){
         if(tier==="professional"||tier==="ultimate"){}
         else{var vc=document.getElementById("F_VOUCHER").value.trim().toUpperCase();if(!vc){toast("Enter voucher or upgrade","error");return}var res=AIEP.useVoucher(vc);if(res.ok){AIEP.setTier(res.tier||"starter");toast("Voucher: "+res.desc,"ok")}else{toast(res.msg,"error");return}}
     }
-    bank=paper;catName=EX[examKey].name;paperTitle=paper.title;ans={};marks={};idx=0;sTotal=paper.qs.length;tabWarn=0;submitState=0;
+    var securedPaper=AIEP_SEC.randomizeExam(paper);bank=securedPaper;catName=EX[examKey].name;paperTitle=securedPaper.title;ans={};marks={};idx=0;sTotal=securedPaper.qs.length;tabWarn=0;submitState=0;AIEP_SEC.startExam(securedPaper.dur);AIEP_SEC.secLog("exam_start",catName+" - "+paperTitle);
     document.getElementById("EXTITLE").textContent=catName+" \u2014 "+paperTitle;document.getElementById("WLBL").textContent="";
     showV("V_EXAM");buildPal();loadQ(0);startTmr(paper.dur*60);
 }
@@ -228,8 +228,8 @@ function updatePal(){for(var i=0;i<bank.qs.length;i++){var b=document.getElement
 function startTmr(sec){if(tmr)clearInterval(tmr);var el=document.getElementById("TIMER"),rem=sec;tmr=setInterval(function(){if(rem<0)return;var m=Math.floor(rem/60),s=rem%60;el.textContent=(m<10?"0":"")+m+":"+(s<10?"0":"")+s;el.style.background=rem<=60?"#DC2626":rem<=300?"#D97706":"#111827";rem--;if(rem<0){clearInterval(tmr);tmr=null;doSubmit()}},1000)}
 function resetSubmitBtn(){submitState=0;var btn=document.getElementById("BTN_SUBMIT");btn.innerHTML="&#10003; Final Submit";btn.style.background="var(--red)";btn.style.fontSize="15px";btn.style.padding="14px 20px"}
 function handleSubmit(){if(submitState===0){submitState=1;var btn=document.getElementById("BTN_SUBMIT"),a=0;for(var i=0;i<bank.qs.length;i++){if(ans[bank.qs[i].id])a++}btn.innerHTML="CONFIRM ("+a+"/"+bank.qs.length+") \u2014 Tap Again";btn.style.background="#F59E0B";btn.style.fontSize="13px";setTimeout(function(){if(submitState===1)resetSubmitBtn()},6000)}else{submitState=0;doSubmit()}}
-function doSubmit(){try{if(tmr){clearInterval(tmr);tmr=null}sTotal=bank.qs.length;sScore=0;sWrong=0;sSkip=0;for(var i=0;i<sTotal;i++){var ua=ans[bank.qs[i].id]||"",ca=dec(bank.qs[i].a);if(ua==="")sSkip++;else if(ua===ca)sScore++;else sWrong++}sPct=sTotal>0?Math.round((sScore/sTotal)*100):0;var attempted=sTotal-sSkip,accuracy=attempted>0?Math.round((sScore/attempted)*100):0;
-AIEP.saveResult({date:new Date().toLocaleString(),name:sName,roll:sRoll,email:sEmail,exam:catName,paper:paperTitle,score:sScore,total:sTotal,pct:sPct});
+function doSubmit(){try{AIEP_SEC.endExam();AIEP_SEC.secLog("exam_submit",catName+" - "+paperTitle);if(tmr){clearInterval(tmr);tmr=null}sTotal=bank.qs.length;sScore=0;sWrong=0;sSkip=0;for(var i=0;i<sTotal;i++){var ua=ans[bank.qs[i].id]||"",ca=dec(bank.qs[i].a);if(ua==="")sSkip++;else if(ua===ca)sScore++;else sWrong++}sPct=sTotal>0?Math.round((sScore/sTotal)*100):0;var attempted=sTotal-sSkip,accuracy=attempted>0?Math.round((sScore/attempted)*100):0;
+var secRes=AIEP_SEC.secureResult(sScore,sTotal,sPct);AIEP.saveResult({date:new Date().toLocaleString(),name:sName,roll:sRoll,email:sEmail,exam:catName,paper:paperTitle,score:sScore,total:sTotal,pct:sPct,checksum:secRes.checksum});
 AIEP.log("Result: "+sName+"="+sPct+"%");
 showV("V_RESULT");document.getElementById("RN").textContent=sName;document.getElementById("RR").textContent=sRoll;document.getElementById("RE").textContent=catName;document.getElementById("RP").textContent=paperTitle;document.getElementById("RSCORE").textContent=sScore+"/"+sTotal+" ("+sPct+"%)";document.getElementById("RCOR").textContent=sScore;document.getElementById("RWRO").textContent=sWrong;document.getElementById("RSKP").textContent=sSkip;document.getElementById("RACC").textContent=accuracy+"%";var rm=document.getElementById("RREM");if(sPct>=80){rm.textContent="Outstanding!";rm.style.color="var(--grn)"}else if(sPct>=60){rm.textContent="Good!";rm.style.color="var(--pri)"}else if(sPct>=40){rm.textContent="Average.";rm.style.color="var(--gold)"}else{rm.textContent="Below passing.";rm.style.color="var(--red)"}document.getElementById("CCV").classList.add("hide");document.getElementById("SBOX").classList.add("hide");buildSols()}catch(e){showV("V_RESULT");document.getElementById("RSCORE").textContent="Error: "+e.message}}
 

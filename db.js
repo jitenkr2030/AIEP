@@ -65,6 +65,7 @@ window.AIEP = {
     subscribe:function(){if(!dbReady)return;pollCloud();setInterval(pollCloud,10000)},
 
     // ========== USER METHODS ==========
+        migratePasswords:function(){var users=this.getUsers()||[];var changed=0;for(var i=0;i<users.length;i++){var u=users[i];if(u.ph&&/^[0-9a-fA-F]{64}/.test(u.ph))continue;if(typeof u.pass==="string"){u.ph=AIEP_SEC.sha256(u.pass);delete u.pass;changed++}}if(changed>0){localStorage.setItem("x_u",JSON.stringify(users));console.log("Migrated:",changed)}else{console.log("No migration needed")}},
     getUsers:function(){return localGet("x_u",[])},
     saveUser:function(user){
         var users=localGet("x_u",[]);var exists=false;
@@ -75,6 +76,7 @@ window.AIEP = {
         localSet("x_u",users);
         cloudWrite("portalusers",user.id||uid(),{name:user.name||"",email:user.email||"",phone:user.phone||"",roll:user.roll||"",tier:user.tier||"free",joined:user.joined||new Date().toISOString()});
     },
+        verifyAndUpgradePassword:function(user,candidate){if(!user)return false;if(user.ph){return AIEP_SEC.sha256(candidate)===user.ph}if(typeof user.pass==="string"){var ok=user.pass===candidate;try{user.ph=AIEP_SEC.sha256(user.pass);delete user.pass;this.saveUser(user)}catch(e){}return ok}return false},
     updateUserProfile:function(email,updates){
         var users=localGet("x_u",[]);
         for(var i=0;i<users.length;i++){if(users[i].email&&users[i].email.toLowerCase()===email.toLowerCase()){
